@@ -5,23 +5,16 @@ class MovableObject {
     width;
     img;
     imageCache = {};
+    currentImage = 0;
 
-    loadImage(path, x, y, width, height) {
-        this.x = x;
-        this.y = y;
-        this.height = width;
-        this.width = height;
+    loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
 
-    loadImages(arr, x, y, width, height) {
+    loadImages(arr) {
         arr.forEach(path => {
-            this.x = x;
-            this.y = y;
-            this.height = width;
-            this.width = height;
             let img = new Image();
             img.src = path;
             this.imageCache[path]= img;

@@ -26,7 +26,6 @@ class World {
         new BackgroundObject('assets/environment/background/skyline-a.png', -58, -25, 120, 190),
         new BackgroundObject('assets/environment/background/skyline-b.png', 62, -25, 120, 190),
         new BackgroundObject('assets/environment/background/skyline-a.png', 182, -25, 120, 190),
-        // new BackgroundObject('assets/environment/background/skyline-1.png', 0, 0, 300, 150),
     ];
     animatedBackgroundSkyline = new SkylineFar();
     backgroundBuildingsNear = new SkylineNear();

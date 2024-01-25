@@ -22,11 +22,11 @@ class Cop extends MovableObject {
     constructor() {
         super().loadImage('./assets/sprites/enemies/cop/idle/cop2.png');
         this.loadImages(this.IMAGES_RUN);
-        this.animate();
+        this.animateCop();
     }
 
 
-    animate() {
+    animateCop() {
 
         setInterval(() => {
             let i = this.currentImage % this.IMAGES_RUN.length;// Modulu Function let i = 0 % 8; 0 geteilt durch 8 = 0, Rest 0

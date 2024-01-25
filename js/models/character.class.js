@@ -21,16 +21,15 @@ class Character extends MovableObject {
         'assets/sprites/character/player_male/Idle/Idle3.png',
         'assets/sprites/character/player_male/Idle/Idle4.png',
     ];
-    currentImage = 0;
 
     constructor() {
-        super().loadImage('./assets/sprites/character/player_male/Idle/Idle1.png', this.x, this.y, this.width, this.height);
-        this.loadImages(this.IMAGES_RUN, this.x, this.y, this.width, this.height);
-        this.animate();
+        super().loadImage('assets/sprites/character/player_male/Idle/Idle1.png');
+        this.loadImages(this.IMAGES_RUN);
+        this.animateCharacter();
     }
 
 
-    animate() {
+    animateCharacter() {
 
         setInterval(() => {
             let i = this.currentImage % this.IMAGES_RUN.length;// Modulu Function let i = 0 % 8; 0 geteilt durch 8 = 0, Rest 0 ???

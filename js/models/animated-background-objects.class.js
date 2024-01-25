@@ -1,5 +1,7 @@
 class AnimatedBackground extends MovableObject {
 
+    currentImage = 0;
+
     animate(arr) {
         this.width = arr[this.currentImage].width;
         this.height = arr[this.currentImage].height;
@@ -13,10 +15,7 @@ class AnimatedBackground extends MovableObject {
     }
 
 
-    animateBackground(arr, speed) {
-        this.loadImage(arr[0].path);
-            setInterval(() => {
-                this.x -= speed;
-            }, 100);
+    animateBackground() {
+
     }
 }
