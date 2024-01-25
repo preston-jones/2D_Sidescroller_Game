@@ -8,11 +8,8 @@ class World {
     ];
     chickenboss = new ChickenBoss();
     vehiclesNear = [
-        new VehiclesNear('left', 20, 10, 100, 50),
-        new VehiclesNear('left', 15, 50, 100, 50),
-        new VehiclesNear('left', 30, 30, 100, 50),
-        new VehiclesNear('right', 15, 20, 100, 50),
-        new VehiclesNear('right', 30, 60, 100, 50)
+        new VehiclesNear(),
+        new VehiclesNear()
     ];
     vehiclesFar = [
         new VehiclesFar('right', 5, 80, 30, 10),
@@ -34,11 +31,19 @@ class World {
     ];
     canvas;
     ctx;
+    keyboard;
 
-    constructor(canvas) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
-        this.canvas = canvas
+        this.canvas = canvas;
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
+    }
+
+
+    setWorld() {
+        this.character.world = this;
     }
 
 
@@ -49,7 +54,7 @@ class World {
         this.addToMap(this.animatedBackgroundSkyline);
         // this.addObjectsToMap(this.vehiclesFar);
         this.addToMap(this.backgroundBuildingsNear);
-        // this.addObjectsToMap(this.vehiclesNear);
+        this.addObjectsToMap(this.vehiclesNear);
         // this.addObjectsToMap(this.playground);
         this.addToMap(this.character);
         // this.addToMap(this.chickenboss);
@@ -64,14 +69,12 @@ class World {
     }
 
     addObjectsToMap(objects) {
-        console.log(objects);
         objects.forEach(o => {
             this.addToMap(o);
         });
     }
 
     addToMap(movableObject) {
-        console.log(movableObject);
         this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
     }
 

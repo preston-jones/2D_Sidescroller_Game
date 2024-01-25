@@ -3,6 +3,7 @@ class MovableObject {
     y;
     height;
     width;
+    speed;
     img;
     imageCache = {};
     currentImage = 0;
@@ -28,7 +29,7 @@ class MovableObject {
             this.img = this.imageCache[path];
             this.x += speed;
             this.currentImage ++;
-        }, 100);
+        }, 1000 / 10);
     }
 
     moveLeft(arr, speed) {
@@ -38,6 +39,6 @@ class MovableObject {
             this.img = this.imageCache[path];
             this.x -= speed;
             this.currentImage ++;
-        }, 100);
+        }, 1000 / 10);
     }
 }

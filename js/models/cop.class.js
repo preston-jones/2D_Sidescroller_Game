@@ -1,10 +1,9 @@
 class Cop extends MovableObject {
 
-    x = 200 + Math.random() * 300; // Zahl zwischen 200 und 300
+    x ;
     y = 98;
     width = 50;
     height = 50;
-    speed = 4;
 
     IMAGES_RUN = [
         'assets/sprites/enemies/cop/run/cop1.png',
@@ -22,6 +21,8 @@ class Cop extends MovableObject {
 
     constructor() {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
+        this.speed = 4 + Math.random() * 7;
+        this.x = 200 + Math.random() * 300;
         this.loadImages(this.IMAGES_RUN);
         this.animateCop();
     }
