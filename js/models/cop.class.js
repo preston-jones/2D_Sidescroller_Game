@@ -1,9 +1,10 @@
 class Cop extends MovableObject {
 
-    x = 280 + Math.random() * 500; // Zahl zwischen 80 und 250
-    y = 390;
-    width = 140;
-    height = 160;
+    x = 200 + Math.random() * 300; // Zahl zwischen 200 und 300
+    y = 98;
+    width = 50;
+    height = 50;
+    speed = 4;
 
     IMAGES_RUN = [
         'assets/sprites/enemies/cop/run/cop1.png',
@@ -20,19 +21,13 @@ class Cop extends MovableObject {
     currentImage = 0;
 
     constructor() {
-        super().loadImage('./assets/sprites/enemies/cop/idle/cop2.png');
+        super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
         this.loadImages(this.IMAGES_RUN);
         this.animateCop();
     }
 
 
     animateCop() {
-
-        setInterval(() => {
-            let i = this.currentImage % this.IMAGES_RUN.length;// Modulu Function let i = 0 % 8; 0 geteilt durch 8 = 0, Rest 0
-            let path = this.IMAGES_RUN[i];
-            this.img = this.imageCache[path];
-            this.currentImage ++;
-        }, 100);
+        this.moveLeft(this.IMAGES_RUN, this.speed);
     }
 }

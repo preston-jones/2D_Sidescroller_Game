@@ -4,6 +4,7 @@ class Character extends MovableObject {
     height = 60;
     x = 60;
     y = 90;
+    speed = 5;
 
     IMAGES_RUN = [
         'assets/sprites/character/player_male/Run/Run1.png',
@@ -30,13 +31,7 @@ class Character extends MovableObject {
 
 
     animateCharacter() {
-
-        setInterval(() => {
-            let i = this.currentImage % this.IMAGES_RUN.length;// Modulu Function let i = 0 % 8; 0 geteilt durch 8 = 0, Rest 0 ???
-            let path = this.IMAGES_RUN[i];
-            this.img = this.imageCache[path];
-            this.currentImage ++;
-        }, 100);
+        this.moveRight(this.IMAGES_RUN, this.speed);
     }
 
 

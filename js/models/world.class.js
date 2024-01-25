@@ -53,7 +53,7 @@ class World {
         // this.addObjectsToMap(this.playground);
         this.addToMap(this.character);
         // this.addToMap(this.chickenboss);
-        // this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.enemies);
 
 
         // Draw wird immer wieder aufgerufen
