@@ -23,10 +23,11 @@ class Character extends MovableObject {
         'assets/sprites/character/player_male/Idle/Idle4.png',
     ];
     world;
-    constructor() {
+    constructor( event) {
         super().loadImage('assets/sprites/character/player_male/Idle/Idle1.png');
         this.loadImages(this.IMAGES_RUN);
-        this.animateCharacter();
+        // this.animateCharacter();
+        console.log(this.world);
     }
 
 
