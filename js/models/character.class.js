@@ -4,7 +4,7 @@ class Character extends MovableObject {
     height = 60;
     x = 60;
     y = 90;
-    speed = 5;
+    speed = 10;
 
     IMAGES_RUN = [
         'assets/sprites/character/player_male/Run/Run1.png',
@@ -23,19 +23,23 @@ class Character extends MovableObject {
         'assets/sprites/character/player_male/Idle/Idle4.png',
     ];
     world;
-    constructor( event) {
+    constructor() {
         super().loadImage('assets/sprites/character/player_male/Idle/Idle1.png');
         this.loadImages(this.IMAGES_RUN);
-        // this.animateCharacter();
-        console.log(this.world);
+        this.animateCharacter();
     }
 
 
     animateCharacter() {
-        console.log(this.world.keyboard.LEFT);
-        this.moveLeft(this.IMAGES_RUN, this.speed);
-        // if (this.world.keyboard.LEFT) { this.moveLeft(this.IMAGES_RUN, this.speed); }
-        // if (this.world.keyboard.RIGHT) { this.moveRight(this.IMAGES_RUN, this.speed); }
+        setInterval(() => {
+            
+            if (this.world.keyboard.RIGHT) {
+                this.moveRight(this.IMAGES_RUN, this.speed)
+            }
+            if (this.world.keyboard.LEFT) {
+                this.moveLeft(this.IMAGES_RUN, this.speed)
+            }
+        }, 100);
     }
 
 

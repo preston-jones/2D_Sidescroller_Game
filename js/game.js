@@ -9,21 +9,58 @@ function init() {
 }
 
 
+// Keyboard(classname).UP(Key of Variable in this class)
 window.addEventListener("keydown", (e) => {
     if (e.code == "ArrowUp") {
-        Keyboard.UP = false;
+        keyboard.UP = true;
     }
     if (e.code == "ArrowDown") {
-        Keyboard.DOWN = false;
+        keyboard.DOWN = true;
     }
     if (e.code == "ArrowLeft") {
-        Keyboard.LEFT = true;
+        keyboard.LEFT = true;
     }
     if (e.code == "ArrowRight") {
-        Keyboard.RIGHT = true;
+        keyboard.RIGHT = true;
     }
     if (e.code == "Space") {
-        Keyboard.SPACE = true;
+        keyboard.SPACE = true;
     }
     console.log(e);
 });
+
+window.addEventListener("keyup", (e) => {
+    if (e.code == "ArrowUp") {
+        keyboard.UP = false;
+    }
+    if (e.code == "ArrowDown") {
+        keyboard.DOWN = false;
+    }
+    if (e.code == "ArrowLeft") {
+        keyboard.LEFT = false;
+    }
+    if (e.code == "ArrowRight") {
+        keyboard.RIGHT = false;
+    }
+    if (e.code == "Space") {
+        keyboard.SPACE = false;
+    }
+    console.log(e);
+});
+
+
+function fullscreen() {
+    let fullscreen = document.getElementById('fullscreen');
+    enterFullscreen(fullscreen);
+}
+
+
+function enterFullscreen(element) {
+    if(element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if(element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+      element.msRequestFullscreen();
+    } else if(element.webkitRequestFullscreen) {  // iOS Safari
+      element.webkitRequestFullscreen();
+    }
+  }

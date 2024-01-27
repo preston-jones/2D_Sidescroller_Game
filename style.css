@@ -20,13 +20,14 @@ body {
 }
 
 canvas {
-    width: 384px;
-    height: 224px;
+    display: block;
+    /* width: 384px;
+    height: 224px; */
     background-color: black;
     width: 768px;
     height: 448px;
     image-rendering: pixelated;
-    aspect-ratio: auto 384 / 224;
+    aspect-ratio: auto 768 / 448;
     border: 8px ridge rgb(192, 192, 192);
     margin-bottom: 64px;
 }
@@ -53,6 +54,54 @@ h2 {
     text-shadow: -9px -7px 2px #505050;
 }
 
-p {
+#fullscreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* p {
     width: 720px;
+} */
+
+/* Smartphones ------------------------------ */
+@media only screen and (max-width: 768px){
+    canvas {
+        width: 100%;
+        margin-bottom: 0;
+        border: none;
+    }
+
+    #fullsreen {
+        width: 100%;
+    }
+
+    .header {
+        display: none;
+    }
+
+    p {
+        display: none;
+    }
+}
+
+/* Smartphones ------------------------------ */
+@media only screen and (max-height: 448px){
+    canvas {
+        height: 100vh;
+        margin-bottom: 0;
+        border: none;
+    }
+
+    #fullsreen {
+        height: 100vh;
+    }
+    
+    .header {
+        display: none;
+    }
+
+    p {
+        display: none;
+    }
 }

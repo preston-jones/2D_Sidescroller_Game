@@ -23,22 +23,18 @@ class MovableObject {
     }
 
     moveRight(arr, speed) {
-        setInterval(() => {
             let i = this.currentImage % arr.length;// Modulu Function let i = 0 % 8; 0 geteilt durch 8 = 0, Rest 0
             let path = arr[i];
             this.img = this.imageCache[path];
             this.x += speed;
             this.currentImage ++;
-        }, 1000 / 10);
     }
 
     moveLeft(arr, speed) {
-        setInterval(() => {
             let i = this.currentImage % arr.length;// Modulu Function let i = 0 % 8; 0 geteilt durch 8 = 0, Rest 0
             let path = arr[i];
             this.img = this.imageCache[path];
             this.x -= speed;
             this.currentImage ++;
-        }, 1000 / 10);
     }
 }
