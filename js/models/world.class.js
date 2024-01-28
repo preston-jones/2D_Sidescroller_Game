@@ -56,7 +56,6 @@ class World {
         this.addToMap(this.backgroundBuildingsNear);
         this.addObjectsToMap(this.vehiclesNear);
         // this.addObjectsToMap(this.playground);
-        this.addToMap(this.character);
         // this.addToMap(this.chickenboss);
         this.addObjectsToMap(this.enemies);
 
@@ -75,7 +74,14 @@ class World {
     }
 
     addToMap(movableObject) {
-        this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+        if (movableObject.otherDirection) { //checks, if the variable is true
+            this.ctx.save(); //saves current status of ctx (context)
+            this.ctx.translate(movableObject.img.width, 0)  //change methode how to draw images
+            this.ctx.scale(-1,1) //mirrors the image horizontal
+        }
+        if (movableObject.otherDirection) { //everytime we`ve set the variable to true
+        this.ctx.restore(); //resets the settings of ctx to default
+        }
     }
 
 }

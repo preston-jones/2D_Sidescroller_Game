@@ -4,7 +4,7 @@ class Character extends MovableObject {
     height = 60;
     x = 60;
     y = 90;
-    speed = 10;
+    speed = 3;
 
     IMAGES_RUN = [
         'assets/sprites/character/player_male/Run/Run1.png',
@@ -31,15 +31,23 @@ class Character extends MovableObject {
 
 
     animateCharacter() {
+
         setInterval(() => {
-            
             if (this.world.keyboard.RIGHT) {
-                this.moveRight(this.IMAGES_RUN, this.speed)
+                this.x += this.speed;
+                this.otherDirection = false;
             }
             if (this.world.keyboard.LEFT) {
-                this.moveLeft(this.IMAGES_RUN, this.speed)
+                this.x -= this.speed;
+                this.otherDirection = true;
             }
-        }, 100);
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.move(this.IMAGES_RUN);
+            }
+        }, 50);
     }
 
 

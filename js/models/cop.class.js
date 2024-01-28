@@ -4,6 +4,7 @@ class Cop extends MovableObject {
     y = 98;
     width = 50;
     height = 50;
+    speed = 0.5 + Math.random() * 0.8;
 
     IMAGES_RUN = [
         'assets/sprites/enemies/cop/run/cop1.png',
@@ -21,7 +22,6 @@ class Cop extends MovableObject {
 
     constructor() {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
-        this.speed = 4 + Math.random() * 7;
         this.x = 200;
         this.loadImages(this.IMAGES_RUN);
         this.animateCop();
@@ -30,7 +30,11 @@ class Cop extends MovableObject {
 
     animateCop() {
         setInterval(() => {
-            this.moveLeft(this.IMAGES_RUN, this.speed);
-        }, 1000 / 10);
+            this.x -= this.speed;
+        }, 1000 / 60);
+
+        setInterval(() => {
+            this.move(this.IMAGES_RUN);
+        }, 70);
     }
 }
