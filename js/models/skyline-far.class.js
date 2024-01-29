@@ -1,19 +1,17 @@
 class SkylineFar extends AnimatedBackground {
 
-    width = 300;
-    height = 150;
-    x = 0;
-    y = 0;
-    speed = 1;
-
     IMAGES_SKYLINE_FAR = [
         'assets/environment/background/skyline-1.png',
         'assets/environment/background/skyline-2.png'
     ];
 
-    constructor() {
-        super().loadImage(this.IMAGES_SKYLINE_FAR[0]);
+    constructor(imagePath,x, y, width, height) {
+        super().loadImage(imagePath);
         this.loadImages(this.IMAGES_SKYLINE_FAR);
+        this.width = width;
+        this.height = height;
+        this.x = x;
+        this.y = y;
         // this.animateBackground(this.IMAGES_SKYLINE_FAR);
     }
 }

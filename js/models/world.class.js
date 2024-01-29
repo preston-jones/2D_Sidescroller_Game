@@ -1,37 +1,20 @@
 class World {
 
     character = new Character();
-    enemies = [
-        new Cop(),
-        new Cop(),
-        new Cop()
-    ];
-    chickenboss = new ChickenBoss();
-    vehiclesNear = [
-        new VehiclesNear(),
-        new VehiclesNear()
-    ];
-    vehiclesFar = [
-        new VehiclesFar('right', 5, 80, 30, 10),
-        new VehiclesFar('left', 5, 100, 30, 10),
-        new VehiclesFar('right', 5, 120, 30, 10),
-        new VehiclesFar('left', 5, 140, 30, 10),
-        new VehiclesFar('right', 5, 130, 30, 10),
-        new VehiclesFar('left', 5, 110, 30, 10)
-    ];
-    backgroundBuildingsFar = [
-        new BackgroundObject('assets/environment/background/skyline-a.png', -58, -25, 120, 190),
-        new BackgroundObject('assets/environment/background/skyline-b.png', 62, -25, 120, 190),
-        new BackgroundObject('assets/environment/background/skyline-a.png', 182, -25, 120, 190),
-    ];
-    animatedBackgroundSkyline = new SkylineFar();
-    backgroundBuildingsNear = new SkylineNear();
-    playground = [
-        new BackgroundObject('assets/environment/floor.png', 0, -110, 450, 260)
-    ];
+    // ersetzen durch Level Variabel
+    enemies = level1.enemies;
+    vehiclesNear = level1.vehiclesNear;
+    vehiclesFar = level1.vehiclesFar;
+    backgroundBuildingsFar = level1.backgroundBuildingsFar;
+    animatedBackgroundSkyline = level1.animatedBackgroundSkyline;
+    backgroundBuildingsNear = level1.backgroundBuildingsNear;
+    playground = level1.playground;
+    // ---
     canvas;
     ctx;
     keyboard;
+    camera_x = 0;
+    camera_y = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -49,15 +32,19 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
-
         this.addObjectsToMap(this.backgroundBuildingsFar);
-        this.addToMap(this.animatedBackgroundSkyline);
-        // this.addObjectsToMap(this.vehiclesFar);
-        this.addToMap(this.backgroundBuildingsNear);
+        this.ctx.translate(this.camera_x, this.camera_y);
+
+        this.addObjectsToMap(this.animatedBackgroundSkyline);
+        this.addObjectsToMap(this.vehiclesFar);
+        this.addObjectsToMap(this.backgroundBuildingsNear);
         this.addObjectsToMap(this.vehiclesNear);
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);
+        this.addToMap(this.character);
         this.addObjectsToMap(this.enemies);
+
+        this.ctx.translate(-this.camera_x, this.camera_y);
 
 
         // Draw wird immer wieder aufgerufen
@@ -74,14 +61,29 @@ class World {
     }
 
     addToMap(movableObject) {
+        console.log(movableObject);
         if (movableObject.otherDirection) { //checks, if the variable is true
-            this.ctx.save(); //saves current status of ctx (context)
-            this.ctx.translate(movableObject.img.width, 0)  //change methode how to draw images
-            this.ctx.scale(-1,1) //mirrors the image horizontal
+            this.flipImage(movableObject);
         }
-        if (movableObject.otherDirection) { //everytime we`ve set the variable to true
+        this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+        if (movableObject.otherDirection) {
+            this.flipImageBack(movableObject);
+        }
+    }
+
+
+    flipImage(movableObject) {
+        this.ctx.save(); //saves current status of ctx (context)
+        this.ctx.translate(movableObject.width, 0)  //change methode how to draw images
+        this.ctx.scale(-1, 1) //mirrors the image horizontal
+        movableObject.x = movableObject.x * -1;
+    }
+
+
+    flipImageBack(movableObject) {
+        //everytime we`ve set the variable to true
+        movableObject.x = movableObject.x * -1;
         this.ctx.restore(); //resets the settings of ctx to default
-        }
     }
 
 }
