@@ -23,6 +23,7 @@ class Character extends MovableObject {
         'assets/sprites/character/player_male/Idle/Idle4.png',
     ];
     world;
+    jumping_sound = new Audio('assets/audio/run.mp3');
     constructor() {
         super().loadImage('assets/sprites/character/player_male/Idle/Idle1.png');
         this.loadImages(this.IMAGES_RUN);
@@ -33,15 +34,28 @@ class Character extends MovableObject {
     animateCharacter() {
 
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            this.jumping_sound.pause();
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.x += this.speed;
                 this.otherDirection = false;
+                this.jumping_sound.play();
             }
-            if (this.world.keyboard.LEFT) {
+            if (this.world.keyboard.LEFT && this.x > -1) {
                 this.x -= this.speed;
                 this.otherDirection = true;
+                this.jumping_sound.play();
             }
-            this.world.camera_x = -this.x;
+            if (this.world.keyboard.UP && this.y < 170) {
+                console.log(this.y);
+                this.y += this.speed;
+            }
+            if (this.world.keyboard.DOWN && this.y > 90) {
+                this.y -= this.speed;
+            }
+            this.world.camera_x = -this.x + 50;
+            this.world.camera_y = -this.y + 90;
+
+
         }, 1000 / 60);
 
         setInterval(() => {

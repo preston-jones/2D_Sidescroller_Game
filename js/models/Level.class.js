@@ -8,6 +8,8 @@ class Level {
     backgroundBuildingsNear;
     playground;
 
+    level_end_x = 1000;
+
 
     constructor(enemies, vehiclesNear, vehiclesFar, backgroundBuildingsFar, animatedBackgroundSkyline, backgroundBuildingsNear, playground) {
         this.enemies = enemies;

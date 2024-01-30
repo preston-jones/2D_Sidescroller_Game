@@ -1,23 +1,21 @@
 class VehiclesNear extends MovableObject {
 
-    x;
-    y = 0 + Math.round(Math.random() * 30);
+    // y = -30 + Math.round(Math.random() * 20);
+    y = 30;
     height = 60;
     width = 163;
-    speed = Math.round(1 + Math.random() * 2)
+    speed = Math.round(1 + Math.random() * 2);
     direction = this.chooseRandomeDirection();
-    indexOfVehicleImage = this.chooseVehicleImage();
-
-    IMAGE_VEHICLES = [
-        'assets/sprites/vehicles/v-police.png',
-        'assets/sprites/vehicles/v-red.png',
-        'assets/sprites/vehicles/v-yellow.png'
-    ];
+    CURRENT_VEHICLE_IMAGE = [this.chooseVehicleImage()];
+    IMAGE_VEHICLES = [];
 
     constructor() {
-        super().loadImage(this.IMAGE_VEHICLES[0]); 
-        this.loadImages(this.IMAGE_VEHICLES);
-        this.animateVehicle();
+        super().loadImage(this.CURRENT_VEHICLE_IMAGE);
+        this.x = 100;
+        this.loadImages(this.CURRENT_VEHICLE_IMAGE);
+        // this.chooseVehicleImage();
+        // this.loadImages(this.CURRENT_VEHICLE_IMAGE);
+        // this.animateVehicle();
     }
 
 
@@ -50,8 +48,10 @@ class VehiclesNear extends MovableObject {
 
 
     chooseVehicleImage() {
-        let imageArray = this.IMAGE_VEHICLES.length;
-        let image = 0 + Math.round(Math.random() * imageArray);
-        return image;
+        let index = Math.round(0 + Math.random() * 2);
+        console.log(index);
+        if (index === 0) {return 'assets/sprites/vehicles/v-police.png';}
+        if (index === 1) {return 'assets/sprites/vehicles/v-red.png';}
+        if (index === 2) {return 'assets/sprites/vehicles/v-yellow.png';}
     }
 }

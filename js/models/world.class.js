@@ -1,15 +1,7 @@
 class World {
 
     character = new Character();
-    // ersetzen durch Level Variabel
-    enemies = level1.enemies;
-    vehiclesNear = level1.vehiclesNear;
-    vehiclesFar = level1.vehiclesFar;
-    backgroundBuildingsFar = level1.backgroundBuildingsFar;
-    animatedBackgroundSkyline = level1.animatedBackgroundSkyline;
-    backgroundBuildingsNear = level1.backgroundBuildingsNear;
-    playground = level1.playground;
-    // ---
+    level = level1;
     canvas;
     ctx;
     keyboard;
@@ -27,22 +19,23 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.level.animatedBackgroundSkyline.world = this;
     }
 
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
-        this.addObjectsToMap(this.backgroundBuildingsFar);
-        this.ctx.translate(this.camera_x, this.camera_y);
+        this.addObjectsToMap(this.level.backgroundBuildingsFar);
+        this.addObjectsToMap(this.level.animatedBackgroundSkyline);
 
-        this.addObjectsToMap(this.animatedBackgroundSkyline);
-        this.addObjectsToMap(this.vehiclesFar);
-        this.addObjectsToMap(this.backgroundBuildingsNear);
-        this.addObjectsToMap(this.vehiclesNear);
+        this.ctx.translate(this.camera_x, -this.camera_y);
+        this.addObjectsToMap(this.level.vehiclesFar);
+        this.addObjectsToMap(this.level.backgroundBuildingsNear);
+        // this.addObjectsToMap(this.level.vehiclesNear);
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.enemies);
 
         this.ctx.translate(-this.camera_x, this.camera_y);
 
@@ -61,7 +54,6 @@ class World {
     }
 
     addToMap(movableObject) {
-        console.log(movableObject);
         if (movableObject.otherDirection) { //checks, if the variable is true
             this.flipImage(movableObject);
         }

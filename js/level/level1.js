@@ -9,12 +9,19 @@ const level1 = new Level(
         new VehiclesNear()
     ],
     [
-        new VehiclesFar('right', 5, 80, 30, 10),
-        new VehiclesFar('left', 5, 100, 30, 10),
+        new VehiclesFar('right', 0, 80, 30, 10),
+        new VehiclesFar('left', 400, 100, 30, 10),
         new VehiclesFar('right', 5, 120, 30, 10),
-        new VehiclesFar('left', 5, 140, 30, 10),
+        new VehiclesFar('left', 800, 140, 30, 10),
         new VehiclesFar('right', 5, 130, 30, 10),
-        new VehiclesFar('left', 5, 110, 30, 10)
+        new VehiclesFar('left', 1900, 110, 30, 10),
+
+        new VehiclesFar('right', 3500, 80, 30, 10),
+        new VehiclesFar('left', 1400, 100, 30, 10),
+        new VehiclesFar('right', -50, 120, 30, 10),
+        new VehiclesFar('left', 1800, 140, 30, 10),
+        new VehiclesFar('right', -100, 130, 30, 10),
+        new VehiclesFar('left', 1900, 110, 30, 10)
     ],
     [
         new BackgroundObject('assets/environment/background/skyline-a.png', -58, -25, 120, 190),
@@ -32,7 +39,14 @@ const level1 = new Level(
         new SkylineFar('assets/environment/background/skyline-2.png', 900, 0, 300, 150),
     ],
     [
-        new SkylineNear()
+        new SkylineNear('assets/environment/background/near-buildings-a-bg.png', -50, 10, 400, 150),
+        new SkylineNear('assets/environment/background/near-buildings-b-bg.png', 360, 10, 400, 150),
+
+        new SkylineNear('assets/environment/background/near-buildings-a-bg.png', 770, 10, 400, 150),
+        new SkylineNear('assets/environment/background/near-buildings-b-bg.png', 1180, 10, 400, 150),
+
+        new SkylineNear('assets/environment/background/near-buildings-a-bg.png', 1590, 10, 400, 150),
+        new SkylineNear('assets/environment/background/near-buildings-b-bg.png', 1900, 10, 400, 150),
     ],
 [
     new BackgroundObject('assets/environment/floor.png', 0, -110, 450, 260)
