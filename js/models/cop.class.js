@@ -34,7 +34,7 @@ class Cop extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            this.move(this.IMAGES_RUN);
+            this.playAnimation(this.IMAGES_RUN);
         }, 70);
     }
 }

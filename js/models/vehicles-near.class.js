@@ -1,4 +1,4 @@
-class VehiclesNear extends MovableObject {
+class VehiclesFront extends MovableObject {
 
     // y = -30 + Math.round(Math.random() * 20);
     y = 30;
@@ -33,7 +33,7 @@ class VehiclesNear extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.direction === 'left' || this.direction === 'right') {this.move(this.IMAGE_VEHICLES);}
+            if (this.direction === 'left' || this.direction === 'right') {this.playAnimation(this.IMAGE_VEHICLES);}
         }, 50);
     }
 
@@ -49,7 +49,6 @@ class VehiclesNear extends MovableObject {
 
     chooseVehicleImage() {
         let index = Math.round(0 + Math.random() * 2);
-        console.log(index);
         if (index === 0) {return 'assets/sprites/vehicles/v-police.png';}
         if (index === 1) {return 'assets/sprites/vehicles/v-red.png';}
         if (index === 2) {return 'assets/sprites/vehicles/v-yellow.png';}

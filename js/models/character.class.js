@@ -57,7 +57,6 @@ class Character extends MovableObject {
                 this.jumping_sound.play();
             }
             if (this.world.keyboard.UP && this.y < 170) {
-                console.log(this.y);
                 this.y += this.speed;
             }
             if (this.world.keyboard.DOWN && this.y > 90) {
@@ -71,25 +70,25 @@ class Character extends MovableObject {
 
         setInterval(() => {
             this.loadImages(this.IMAGES_STAY);
-            this.move(this.IMAGES_STAY);
+            this.playAnimation(this.IMAGES_STAY);
             
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.loadImages(this.IMAGES_RUN);
-                this.move(this.IMAGES_RUN);
+                this.playAnimation(this.IMAGES_RUN);
             }
             if (this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 if (this.y > 90) {
                     this.loadImages(this.IMAGES_CLIMB);
-                    this.move(this.IMAGES_CLIMB);
+                    this.playAnimation(this.IMAGES_CLIMB);
                 }
                 if (this.y <= 90) {
                     this.loadImages(this.IMAGES_CROUCH);
-                    this.move(this.IMAGES_CROUCH);
+                    this.playAnimation(this.IMAGES_CROUCH);
                 }
             }
             // if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT || !this.world.keyboard.UP || !this.world.keyboard.DOWN) {
             //     this.loadImages(this.IMAGES_STAY);
-            //     this.move(this.IMAGES_STAY);
+            //     this.playAnimation(this.IMAGES_STAY);
             // }
         }, 100);
     }

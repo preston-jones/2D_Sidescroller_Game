@@ -1,4 +1,4 @@
-class VehiclesFar extends MovableObject {
+class VehiclesBack extends MovableObject {
     
     x;
     y = 80 + Math.round(Math.random() * 120);
@@ -32,7 +32,7 @@ class VehiclesFar extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.direction === 'left' || this.direction === 'right') {this.move(this.IMAGE_VEHICLES);}
+            if (this.direction === 'left' || this.direction === 'right') {this.playAnimation(this.IMAGE_VEHICLES);}
         }, 50);
     }
 

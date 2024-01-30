@@ -19,28 +19,28 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.level.animatedBackgroundSkyline.world = this;
-        this.level.backgroundBuildingsNear.world = this;
     }
 
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
-        this.addObjectsToMap(this.level.backgroundBuildingsFar);
-        this.addObjectsToMap(this.level.animatedBackgroundSkyline);
-        this.addObjectsToMap(this.level.vehiclesFar);
-        this.addObjectsToMap(this.level.backgroundBuildingsNear);
+        this.addObjectsToMap(this.level.backgroundImageStatic);
+        this.addObjectsToMap(this.level.animatedBackgroundBack);
+        this.addObjectsToMap(this.level.animatedObjectBack);
+        this.addObjectsToMap(this.level.animatedBackgroundFront);
         this.addObjectsToMap(this.level.enemies);
-
+        // moves camera view
         this.ctx.translate(this.camera_x, this.camera_y);
+        // -----
 
-        // this.addObjectsToMap(this.level.vehiclesNear);
+        // this.addObjectsToMap(this.level.VehiclesFront);
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);
         this.addToMap(this.character);
 
+        // moves camera view back to default
         this.ctx.translate(-this.camera_x, -this.camera_y);
-
+        // -----
 
         // Draw wird immer wieder aufgerufen
         let self = this;
