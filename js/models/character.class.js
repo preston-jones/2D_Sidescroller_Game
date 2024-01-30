@@ -7,26 +7,37 @@ class Character extends MovableObject {
     speed = 2;
 
     IMAGES_RUN = [
-        'assets/sprites/character/player_male/Run/Run1.png',
-        'assets/sprites/character/player_male/Run/Run2.png',
-        'assets/sprites/character/player_male/Run/Run3.png',
-        'assets/sprites/character/player_male/Run/Run4.png',
-        'assets/sprites/character/player_male/Run/Run5.png',
-        'assets/sprites/character/player_male/Run/Run6.png',
-        'assets/sprites/character/player_male/Run/Run7.png',
-        'assets/sprites/character/player_male/Run/Run8.png',
+        'assets/sprites/character/player_female/run/run-1.png',
+        'assets/sprites/character/player_female/run/run-2.png',
+        'assets/sprites/character/player_female/run/run-3.png',
+        'assets/sprites/character/player_female/run/run-4.png',
+        'assets/sprites/character/player_female/run/run-5.png',
+        'assets/sprites/character/player_female/run/run-6.png',
+        'assets/sprites/character/player_female/run/run-7.png',
+        'assets/sprites/character/player_female/run/run-8.png',
     ];
     IMAGES_STAY = [
-        'assets/sprites/character/player_male/Idle/Idle1.png',
-        'assets/sprites/character/player_male/Idle/Idle2.png',
-        'assets/sprites/character/player_male/Idle/Idle3.png',
-        'assets/sprites/character/player_male/Idle/Idle4.png',
+        'assets/sprites/character/player_female/idle/idle-1.png',
+        'assets/sprites/character/player_female/idle/idle-2.png',
+        'assets/sprites/character/player_female/idle/idle-3.png',
+        'assets/sprites/character/player_female/idle/idle-4.png'
+    ];
+    IMAGES_CLIMB = [
+        'assets/sprites/character/player_female/climb/climb-1.png',
+        'assets/sprites/character/player_female/climb/climb-2.png',
+        'assets/sprites/character/player_female/climb/climb-3.png',
+        'assets/sprites/character/player_female/climb/climb-4.png',
+        'assets/sprites/character/player_female/climb/climb-5.png',
+        'assets/sprites/character/player_female/climb/climb-6.png'
+    ];
+    IMAGES_CROUCH = [
+        'assets/sprites/character/player_female/crouch/crouch.png'
     ];
     world;
     jumping_sound = new Audio('assets/audio/run.mp3');
     constructor() {
-        super().loadImage('assets/sprites/character/player_male/Idle/Idle1.png');
-        this.loadImages(this.IMAGES_RUN);
+        super().loadImage('assets/sprites/character/player_female/idle/idle-1.png');
+        // this.loadImages(this.IMAGES_STAY);
         this.animateCharacter();
     }
 
@@ -59,9 +70,27 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
+            this.loadImages(this.IMAGES_STAY);
+            this.move(this.IMAGES_STAY);
+            
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.loadImages(this.IMAGES_RUN);
                 this.move(this.IMAGES_RUN);
             }
+            if (this.world.keyboard.UP || this.world.keyboard.DOWN) {
+                if (this.y > 90) {
+                    this.loadImages(this.IMAGES_CLIMB);
+                    this.move(this.IMAGES_CLIMB);
+                }
+                if (this.y <= 90) {
+                    this.loadImages(this.IMAGES_CROUCH);
+                    this.move(this.IMAGES_CROUCH);
+                }
+            }
+            // if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT || !this.world.keyboard.UP || !this.world.keyboard.DOWN) {
+            //     this.loadImages(this.IMAGES_STAY);
+            //     this.move(this.IMAGES_STAY);
+            // }
         }, 100);
     }
 

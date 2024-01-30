@@ -20,6 +20,7 @@ class World {
     setWorld() {
         this.character.world = this;
         this.level.animatedBackgroundSkyline.world = this;
+        this.level.backgroundBuildingsNear.world = this;
     }
 
 
@@ -27,17 +28,18 @@ class World {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
         this.addObjectsToMap(this.level.backgroundBuildingsFar);
         this.addObjectsToMap(this.level.animatedBackgroundSkyline);
-
-        this.ctx.translate(this.camera_x, -this.camera_y);
         this.addObjectsToMap(this.level.vehiclesFar);
         this.addObjectsToMap(this.level.backgroundBuildingsNear);
+        this.addObjectsToMap(this.level.enemies);
+
+        this.ctx.translate(this.camera_x, this.camera_y);
+
         // this.addObjectsToMap(this.level.vehiclesNear);
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
 
-        this.ctx.translate(-this.camera_x, this.camera_y);
+        this.ctx.translate(-this.camera_x, -this.camera_y);
 
 
         // Draw wird immer wieder aufgerufen
