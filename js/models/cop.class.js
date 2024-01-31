@@ -1,8 +1,8 @@
 class Cop extends MovableObject {
 
     x;
-    y = 98;
-    width = 50;
+    y = 8;
+    width = 60;
     height = 50;
     speed = 0.5 + Math.random() * 0.8;
 
@@ -24,6 +24,7 @@ class Cop extends MovableObject {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
         this.x = 200;
         this.loadImages(this.IMAGES_RUN);
+        this.applyGravity();
         this.animateCop();
     }
 

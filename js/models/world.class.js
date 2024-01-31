@@ -28,7 +28,7 @@ class World {
         this.addObjectsToMap(this.level.animatedBackgroundBack);
         this.addObjectsToMap(this.level.animatedObjectBack);
         this.addObjectsToMap(this.level.animatedBackgroundFront);
-        this.addObjectsToMap(this.level.enemies);
+  
         // moves camera view
         this.ctx.translate(this.camera_x, this.camera_y);
         // -----
@@ -36,10 +36,11 @@ class World {
         // this.addObjectsToMap(this.level.VehiclesFront);
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
 
         // moves camera view back to default
-        this.ctx.translate(-this.camera_x, -this.camera_y);
+        this.ctx.translate(-this.camera_x, this.camera_y);
         // -----
 
         // Draw wird immer wieder aufgerufen
