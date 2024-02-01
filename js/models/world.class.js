@@ -13,6 +13,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
 
@@ -20,11 +21,23 @@ class World {
         this.character.world = this;
     }
 
+    checkCollisions() {
+        console.log(this.character);
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.hurt();
+                }
+            });
+        }, 20);
+    }
+
+
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
 
-  
+
         // moves camera view
         this.addObjectsToMap(this.level.backgroundImageStatic);
         this.addObjectsToMap(this.level.animatedBackgroundBack);

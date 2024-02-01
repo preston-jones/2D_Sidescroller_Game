@@ -33,18 +33,20 @@ class MovableObject {
 
 
     drawFrame(ctx) {
-        ctx.lineWidth = '1';
-        ctx.beginPath();
-        ctx.strokeStyle = 'white';
-        ctx.rect(this.x, this.y, this.width, this.height);
-        ctx.stroke();
+        if (this instanceof Character || this instanceof Cop || this instanceof Bootleg) {
+            ctx.lineWidth = '1';
+            ctx.beginPath();
+            ctx.strokeStyle = 'white';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
     }
 
 
     jump() {
-            if (this.y === world.level.level_end_bottom_y) {
-                this.speedY = 10;
-            }
+        if (this.y === world.level.level_end_bottom_y) {
+            this.speedY = 11;
+        }
     }
 
 
@@ -74,4 +76,21 @@ class MovableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
+
+
+    isColliding(obj) {
+        return (this.x + this.width > obj.x) &&
+            (this.y + this.height > obj.y) &&
+            (this.x < obj.x) &&
+            (this.y < obj.y + obj.height);
+    }
+
+
+    // isColliding(obj) {
+    //     console.log(this.offsetX);
+    //     return (this.x + this.width) >= obj.y && this.x <= (obj.x + obj.width) &&
+    //         (this.y + this.offsetY + this.height) >= obj.Y &&
+    //         (this.y + this.offsetY) <= (obj.y + obj.height) &&
+    //         obj.onCollisionCourse;
+    // }
 }

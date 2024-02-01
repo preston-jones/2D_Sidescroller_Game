@@ -68,11 +68,28 @@ class Character extends MovableObject {
         'assets/sprites/character/player_female/run-shoot/run-shoot-5.png',
         'assets/sprites/character/player_female/run-shoot/run-shoot-6.png',
         'assets/sprites/character/player_female/run-shoot/run-shoot-7.png',
-        'assets/sprites/character/player_female/run-shoot/run-shoot-8.png',
+        'assets/sprites/character/player_female/run-shoot/run-shoot-8.png'
     ];
+    IMAGES_PLAYER_SHOT = [
+        'assets/sprites/misc/shot/shot-1.png',
+        'assets/sprites/misc/shot/shot-2.png',
+        'assets/sprites/misc/shot/shot-3.png'
+    ];
+    IMAGES_SHOT_PLAYER_HIT = [
+        'assets/sprites/misc/shot-hit/shot-hit-1.png',
+        'assets/sprites/misc/shot-hit/shot-hit-2.png',
+        'assets/sprites/misc/shot-hit/shot-hit-3.png'
+    ];
+    IMAGES_HURT = [
+        'assets/sprites/character/player_female/hurt/hurt.png'
+    ];
+    playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
     world;
+    walk_sound = new Audio('assets/audio/run.mp3');
     run_sound = new Audio('assets/audio/run.mp3');
+    jump_sound = new Audio('assets/audio/run.mp3');
     shoot_sound = new Audio('assets/audio/shoot.mp3');
+    hurtcc_sound = new Audio('assets/audio/shoot.mp3');
     constructor() {
         super().loadImage('assets/sprites/character/player_female/idle/idle-1.png');
         this.applyGravity();
@@ -82,7 +99,6 @@ class Character extends MovableObject {
 
     animateCharacter() {
         setInterval(() => {
-            console.log(this.x);
             this.run_sound.pause();
             if (this.x < 60) {
                 this.world.camera_x = 0;
@@ -131,6 +147,8 @@ class Character extends MovableObject {
             }
             if (this.world.keyboard.C) {
                 this.shoot_sound.play();
+                world.addToMap(this.playerShot);
+                this.playAnimation(this.playerShot);
             }
             if (this.world.keyboard.UP && this.y < 170) {
                 this.y += this.speed;
@@ -145,6 +163,10 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_STAY);
 
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y) {
+                    this.loadImages(this.IMAGES_JUMP);
+                    this.playAnimation(this.IMAGES_JUMP);
+                }
                 if (!this.world.keyboard.SHIFTLEFT || !this.world.keyboard.SHIFTRIGHT) {
                     this.loadImages(this.IMAGES_WALK);
                     this.playAnimation(this.IMAGES_WALK);
@@ -157,6 +179,10 @@ class Character extends MovableObject {
             if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y) {
                 this.loadImages(this.IMAGES_JUMP);
                 this.playAnimation(this.IMAGES_JUMP);
+                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                    this.loadImages(this.IMAGES_JUMP);
+                    this.playAnimation(this.IMAGES_JUMP);
+                }
             }
             if (this.world.keyboard.C) {
                 this.loadImages(this.IMAGES_SHOOT);
@@ -176,6 +202,21 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_CROUCH);
                 }
             }
+        }, 130);
+    }
+
+
+    hurt() {
+        console.log('collision with enemy');
+
+        this.speedY = 11;
+        this.y -= 20;
+        setInterval(() => {
+            this.loadImages(this.IMAGES_HURT);
+            this.playAnimation(this.IMAGES_HURT);
+        }, 1000 / 60);
+
+        setInterval(() => {
         }, 130);
     }
 }
