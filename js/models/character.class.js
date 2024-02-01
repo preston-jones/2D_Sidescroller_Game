@@ -206,17 +206,11 @@ class Character extends MovableObject {
     }
 
 
-    hurt() {
+    isHurt() {
         console.log('collision with enemy');
-
-        this.speedY = 11;
-        this.y -= 20;
-        setInterval(() => {
-            this.loadImages(this.IMAGES_HURT);
-            this.playAnimation(this.IMAGES_HURT);
-        }, 1000 / 60);
-
-        setInterval(() => {
-        }, 130);
+        this.loadImages(this.IMAGES_HURT);
+        this.playAnimation(this.IMAGES_HURT);
+        this.energy -= 1;
+        console.log(this.energy);
     }
 }

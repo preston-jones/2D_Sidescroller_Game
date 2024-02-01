@@ -11,7 +11,6 @@ function init() {
 
 // Keyboard(classname).UP(Key of Variable in this class)
 window.addEventListener("keydown", (e) => {
-    console.log(e);
     if (e.code == "ArrowUp") {
         keyboard.UP = true;
     }

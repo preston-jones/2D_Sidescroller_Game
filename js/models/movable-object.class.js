@@ -11,6 +11,7 @@ class MovableObject {
     speedY = 0;
     acceleration = 1;
     levelGround = 99;
+    energy = 100;
     world;
 
 
