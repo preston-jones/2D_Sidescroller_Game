@@ -61,7 +61,10 @@ class World {
         if (movableObject.otherDirection) { //checks, if the variable is true
             this.flipImage(movableObject);
         }
-        this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+
+        movableObject.draw(this.ctx);
+        movableObject.drawFrame(this.ctx);
+
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
         }
@@ -81,5 +84,4 @@ class World {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore(); //resets the settings of ctx to default
     }
-
 }

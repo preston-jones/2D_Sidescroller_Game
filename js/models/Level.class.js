@@ -10,6 +10,7 @@ class Level {
 
     level_start_x = -1;
     level_end_x = 1130;
+    level_end_bottom_y = 99;
 
 
     constructor(enemies, animatedObjectFront, animatedObjectBack, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground) {

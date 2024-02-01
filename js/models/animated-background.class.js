@@ -1,7 +1,6 @@
 class AnimatedBackground extends MovableObject {
 
     animate(x, y) {
-        console.log(world.character.x);
             if (keyboard.RIGHT && world.character.x > 60 && world.character.x < 893) {
                 if (!keyboard.SHIFTLEFT || !keyboard.SHIFTRIGHT) {
                     this.x -= x;

@@ -135,7 +135,7 @@ class Character extends MovableObject {
             if (this.world.keyboard.UP && this.y < 170) {
                 this.y += this.speed;
             }
-            if (this.world.keyboard.DOWN && this.y > this.levelGround) {
+            if (this.world.keyboard.DOWN && this.y > world.level.level_end_bottom_y) {
                 this.y -= this.speed;
             }
         }, 1000 / 60);
@@ -154,7 +154,7 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_RUN);
                 }
             }
-            if (this.world.keyboard.SPACE && this.y < this.levelGround) {
+            if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y) {
                 this.loadImages(this.IMAGES_JUMP);
                 this.playAnimation(this.IMAGES_JUMP);
             }
@@ -167,11 +167,11 @@ class Character extends MovableObject {
                 }
             }
             if (this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                if (this.y > this.levelGround) {
+                if (this.y > world.level.level_end_bottom_y) {
                     this.loadImages(this.IMAGES_CLIMB);
                     this.playAnimation(this.IMAGES_CLIMB);
                 }
-                if (this.y <= this.levelGround) {
+                if (this.y <= world.level.level_end_bottom_y) {
                     this.loadImages(this.IMAGES_CROUCH);
                     this.playAnimation(this.IMAGES_CROUCH);
                 }
