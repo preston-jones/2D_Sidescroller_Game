@@ -3,9 +3,33 @@ class Character extends MovableObject {
     width = 60;
     height = 50;
     x = 0;
-    y = 40;
+    y = 10;
     speed = 2;
 
+    IMAGES_STAY = [
+        'assets/sprites/character/player_female/idle/idle-1.png',
+        'assets/sprites/character/player_female/idle/idle-2.png',
+        'assets/sprites/character/player_female/idle/idle-3.png',
+        'assets/sprites/character/player_female/idle/idle-4.png'
+    ];
+    IMAGES_WALK = [
+        'assets/sprites/character/player_female/walk/walk-1.png',
+        'assets/sprites/character/player_female/walk/walk-2.png',
+        'assets/sprites/character/player_female/walk/walk-3.png',
+        'assets/sprites/character/player_female/walk/walk-4.png',
+        'assets/sprites/character/player_female/walk/walk-5.png',
+        'assets/sprites/character/player_female/walk/walk-6.png',
+        'assets/sprites/character/player_female/walk/walk-7.png',
+        'assets/sprites/character/player_female/walk/walk-8.png',
+        'assets/sprites/character/player_female/walk/walk-9.png',
+        'assets/sprites/character/player_female/walk/walk-10.png',
+        'assets/sprites/character/player_female/walk/walk-11.png',
+        'assets/sprites/character/player_female/walk/walk-12.png',
+        'assets/sprites/character/player_female/walk/walk-13.png',
+        'assets/sprites/character/player_female/walk/walk-14.png',
+        'assets/sprites/character/player_female/walk/walk-15.png',
+        'assets/sprites/character/player_female/walk/walk-16.png',
+    ];
     IMAGES_RUN = [
         'assets/sprites/character/player_female/run/run-1.png',
         'assets/sprites/character/player_female/run/run-2.png',
@@ -15,12 +39,6 @@ class Character extends MovableObject {
         'assets/sprites/character/player_female/run/run-6.png',
         'assets/sprites/character/player_female/run/run-7.png',
         'assets/sprites/character/player_female/run/run-8.png'
-    ];
-    IMAGES_STAY = [
-        'assets/sprites/character/player_female/idle/idle-1.png',
-        'assets/sprites/character/player_female/idle/idle-2.png',
-        'assets/sprites/character/player_female/idle/idle-3.png',
-        'assets/sprites/character/player_female/idle/idle-4.png'
     ];
     IMAGES_CLIMB = [
         'assets/sprites/character/player_female/climb/climb-1.png',
@@ -39,8 +57,22 @@ class Character extends MovableObject {
         'assets/sprites/character/player_female/jump/jump-3.png',
         'assets/sprites/character/player_female/jump/jump-4.png'
     ];
+    IMAGES_SHOOT = [
+        'assets/sprites/character/player_female/shoot/shoot.png'
+    ];
+    IMAGES_RUN_SHOOT = [
+        'assets/sprites/character/player_female/run-shoot/run-shoot-1.png',
+        'assets/sprites/character/player_female/run-shoot/run-shoot-2.png',
+        'assets/sprites/character/player_female/run-shoot/run-shoot-3.png',
+        'assets/sprites/character/player_female/run-shoot/run-shoot-4.png',
+        'assets/sprites/character/player_female/run-shoot/run-shoot-5.png',
+        'assets/sprites/character/player_female/run-shoot/run-shoot-6.png',
+        'assets/sprites/character/player_female/run-shoot/run-shoot-7.png',
+        'assets/sprites/character/player_female/run-shoot/run-shoot-8.png',
+    ];
     world;
     run_sound = new Audio('assets/audio/run.mp3');
+    shoot_sound = new Audio('assets/audio/shoot.mp3');
     constructor() {
         super().loadImage('assets/sprites/character/player_female/idle/idle-1.png');
         this.applyGravity();
@@ -49,21 +81,56 @@ class Character extends MovableObject {
 
 
     animateCharacter() {
-
         setInterval(() => {
+            console.log(this.x);
             this.run_sound.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.x += this.speed;
-                this.otherDirection = false;
-                this.run_sound.play();
+            if (this.x < 60) {
+                this.world.camera_x = 0;
+                this.world.camera_y = 0;
             }
-            if (this.world.keyboard.LEFT && this.x > -1) {
-                this.x -= this.speed;
-                this.otherDirection = true;
-                this.run_sound.play();
+            if (this.x >= 60) {
+                this.world.camera_x = -this.x + 58;
+                this.world.camera_y = 0;
+            }
+            if (this.x >= 950) {
+                this.world.camera_x = -893;
+                this.world.camera_y = 0;
+            }
+
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                if (!this.world.keyboard.SHIFTRIGHT || !this.world.keyboard.SHIFTLEFT) {
+                    this.speed = 0.5;
+                    this.x += this.speed;
+                    this.otherDirection = false;
+                    this.run_sound.play();
+                }
+                if (this.world.keyboard.SHIFTRIGHT || this.world.keyboard.SHIFTLEFT) {
+                    this.speed = 1.5;
+                    this.x += this.speed;
+                    this.otherDirection = false;
+                    this.run_sound.play();
+                }
+            }
+            if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x) {
+
+                if (!this.world.keyboard.SHIFTRIGHT || !this.world.keyboard.SHIFTLEFT) {
+                    this.speed = 0.5;
+                    this.x -= this.speed;
+                    this.otherDirection = true;
+                    this.run_sound.play();
+                }
+                if (this.world.keyboard.SHIFTRIGHT || this.world.keyboard.SHIFTLEFT) {
+                    this.speed = 1.5;
+                    this.x -= this.speed;
+                    this.otherDirection = true;
+                    this.run_sound.play();
+                }
             }
             if (this.world.keyboard.SPACE) {
                 this.jump();
+            }
+            if (this.world.keyboard.C) {
+                this.shoot_sound.play();
             }
             if (this.world.keyboard.UP && this.y < 170) {
                 this.y += this.speed;
@@ -71,24 +138,33 @@ class Character extends MovableObject {
             if (this.world.keyboard.DOWN && this.y > this.levelGround) {
                 this.y -= this.speed;
             }
-            this.world.camera_x = -this.x + 50; 
-            this.world.camera_y = 0;
-
-
         }, 1000 / 60);
 
         setInterval(() => {
-            console.log(this.y);
             this.loadImages(this.IMAGES_STAY);
             this.playAnimation(this.IMAGES_STAY);
-            
+
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.loadImages(this.IMAGES_RUN);
-                this.playAnimation(this.IMAGES_RUN);
+                if (!this.world.keyboard.SHIFTLEFT || !this.world.keyboard.SHIFTRIGHT) {
+                    this.loadImages(this.IMAGES_WALK);
+                    this.playAnimation(this.IMAGES_WALK);
+                }
+                if (this.world.keyboard.SHIFTLEFT || this.world.keyboard.SHIFTRIGHT) {
+                    this.loadImages(this.IMAGES_RUN);
+                    this.playAnimation(this.IMAGES_RUN);
+                }
             }
             if (this.world.keyboard.SPACE && this.y < this.levelGround) {
                 this.loadImages(this.IMAGES_JUMP);
                 this.playAnimation(this.IMAGES_JUMP);
+            }
+            if (this.world.keyboard.C) {
+                this.loadImages(this.IMAGES_SHOOT);
+                this.playAnimation(this.IMAGES_SHOOT);
+                if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
+                    this.loadImages(this.IMAGES_RUN_SHOOT);
+                    this.playAnimation(this.IMAGES_RUN_SHOOT);
+                }
             }
             if (this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 if (this.y > this.levelGround) {
@@ -100,10 +176,6 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_CROUCH);
                 }
             }
-            // if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT || !this.world.keyboard.UP || !this.world.keyboard.DOWN) {
-            //     this.loadImages(this.IMAGES_STAY);
-            //     this.playAnimation(this.IMAGES_STAY);
-            // }
-        }, 120);
+        }, 130);
     }
 }

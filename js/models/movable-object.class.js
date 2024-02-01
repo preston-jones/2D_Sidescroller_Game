@@ -16,19 +16,21 @@ class MovableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGround()) {
+            if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
             else {
                 this.y = this.levelGround;
             }
-        }, 1000 / 60)
+        }, 1000 / 25)
     }
 
 
     jump() {
-        this.y = 40;
+            if (this.y === this.levelGround) {
+                this.speedY = 10;
+            }
     }
 
 

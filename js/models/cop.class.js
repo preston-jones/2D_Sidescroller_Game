@@ -1,11 +1,16 @@
 class Cop extends MovableObject {
 
     x;
-    y = 8;
+    y = 10;
     width = 60;
     height = 50;
-    speed = 0.5 + Math.random() * 0.8;
+    speed = 1.5;
 
+    IMAGES_STAY = [
+        'assets/sprites/enemies/cop/idle/cop1.png',
+        'assets/sprites/enemies/cop/idle/cop2.png',
+        'assets/sprites/enemies/cop/idle/cop3.png',
+    ];
     IMAGES_RUN = [
         'assets/sprites/enemies/cop/run/cop1.png',
         'assets/sprites/enemies/cop/run/cop2.png',
@@ -22,7 +27,7 @@ class Cop extends MovableObject {
 
     constructor() {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
-        this.x = 200;
+        this.x = 150 + Math.random() * 200;
         this.loadImages(this.IMAGES_RUN);
         this.applyGravity();
         this.animateCop();
@@ -36,6 +41,6 @@ class Cop extends MovableObject {
 
         setInterval(() => {
             this.playAnimation(this.IMAGES_RUN);
-        }, 70);
+        }, 130);
     }
 }

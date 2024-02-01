@@ -18,7 +18,7 @@ class SkylineBack extends AnimatedBackground {
 
     animateBackground() {
         setInterval(() => {
-            this.animate(0.3, 0.3);
+            this.animate(0.2, 0.2);
         }, 1000 / 60);
     }
 }

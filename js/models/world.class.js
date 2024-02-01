@@ -7,7 +7,6 @@ class World {
     keyboard;
     camera_x = 0;
     camera_y = 0;
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -24,15 +23,17 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
-        this.addObjectsToMap(this.level.backgroundImageStatic);
-        this.addObjectsToMap(this.level.animatedBackgroundBack);
-        this.addObjectsToMap(this.level.animatedObjectBack);
-        this.addObjectsToMap(this.level.animatedBackgroundFront);
+
   
         // moves camera view
+        this.addObjectsToMap(this.level.backgroundImageStatic);
+        this.addObjectsToMap(this.level.animatedBackgroundBack);
         this.ctx.translate(this.camera_x, this.camera_y);
         // -----
 
+
+        this.addObjectsToMap(this.level.animatedObjectBack);
+        this.addObjectsToMap(this.level.animatedBackgroundFront);
         // this.addObjectsToMap(this.level.VehiclesFront);
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);

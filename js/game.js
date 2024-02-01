@@ -11,6 +11,7 @@ function init() {
 
 // Keyboard(classname).UP(Key of Variable in this class)
 window.addEventListener("keydown", (e) => {
+    console.log(e);
     if (e.code == "ArrowUp") {
         keyboard.UP = true;
     }
@@ -25,6 +26,15 @@ window.addEventListener("keydown", (e) => {
     }
     if (e.code == "Space") {
         keyboard.SPACE = true;
+    }
+    if (e.code == "KeyC") {
+        keyboard.C = true;
+    }
+    if (e.code == "ShiftLeft") {
+        keyboard.SHIFTLEFT = true;
+    }
+    if (e.code == "ShiftRight") {
+        keyboard.SHIFTRIGHT = true;
     }
 });
 
@@ -43,6 +53,15 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.code == "Space") {
         keyboard.SPACE = false;
+    }
+    if (e.code == "KeyC") {
+        keyboard.C = false;
+    }
+    if (e.code == "ShiftLeft") {
+        keyboard.SHIFTLEFT = false;
+    }
+    if (e.code == "ShiftRight") {
+        keyboard.SHIFTRIGHT = false;
     }
 });
 
