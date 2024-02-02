@@ -83,15 +83,30 @@ class Character extends MovableObject {
     IMAGES_HURT = [
         'assets/sprites/character/player_female/hurt/hurt.png'
     ];
+    IMAGES_DEAD = [
+        'assets/sprites/character/player_female/dead/dead-1.png',
+        'assets/sprites/character/player_female/dead/dead-2.png',
+        'assets/sprites/character/player_female/dead/dead-3.png',
+        'assets/sprites/character/player_female/dead/dead-4.png'
+    ];
     playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
     world;
     walk_sound = new Audio('assets/audio/run.mp3');
     run_sound = new Audio('assets/audio/run.mp3');
-    jump_sound = new Audio('assets/audio/run.mp3');
+    jump_sound = new Audio('assets/audio/jump.mp3');
     shoot_sound = new Audio('assets/audio/shoot.mp3');
-    hurtcc_sound = new Audio('assets/audio/shoot.mp3');
+    hurt_sound = new Audio('assets/audio/shoot.mp3');
     constructor() {
         super().loadImage('assets/sprites/character/player_female/idle/idle-1.png');
+        this.loadImages(this.IMAGES_STAY);
+        this.loadImages(this.IMAGES_WALK);
+        this.loadImages(this.IMAGES_RUN);
+        this.loadImages(this.IMAGES_CLIMB);
+        this.loadImages(this.IMAGES_CROUCH);
+        this.loadImages(this.IMAGES_JUMP);
+        this.loadImages(this.IMAGES_SHOOT);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.applyGravity();
         this.animateCharacter();
     }
@@ -159,58 +174,48 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            this.loadImages(this.IMAGES_STAY);
             this.playAnimation(this.IMAGES_STAY);
+            if (this.isDead()) {
+                this.loadImages(this.IMAGES_DEAD);
+                this.playAnimation(this.IMAGES_DEAD);
+            }
 
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y) {
-                    this.loadImages(this.IMAGES_JUMP);
                     this.playAnimation(this.IMAGES_JUMP);
                 }
                 if (!this.world.keyboard.SHIFTLEFT || !this.world.keyboard.SHIFTRIGHT) {
-                    this.loadImages(this.IMAGES_WALK);
                     this.playAnimation(this.IMAGES_WALK);
                 }
                 if (this.world.keyboard.SHIFTLEFT || this.world.keyboard.SHIFTRIGHT) {
-                    this.loadImages(this.IMAGES_RUN);
                     this.playAnimation(this.IMAGES_RUN);
                 }
             }
             if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y) {
-                this.loadImages(this.IMAGES_JUMP);
+                this.jump_sound.play();
                 this.playAnimation(this.IMAGES_JUMP);
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.loadImages(this.IMAGES_JUMP);
                     this.playAnimation(this.IMAGES_JUMP);
                 }
             }
             if (this.world.keyboard.C) {
-                this.loadImages(this.IMAGES_SHOOT);
                 this.playAnimation(this.IMAGES_SHOOT);
                 if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
-                    this.loadImages(this.IMAGES_RUN_SHOOT);
                     this.playAnimation(this.IMAGES_RUN_SHOOT);
                 }
             }
             if (this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 if (this.y > world.level.level_end_bottom_y) {
-                    this.loadImages(this.IMAGES_CLIMB);
                     this.playAnimation(this.IMAGES_CLIMB);
                 }
                 if (this.y <= world.level.level_end_bottom_y) {
-                    this.loadImages(this.IMAGES_CROUCH);
                     this.playAnimation(this.IMAGES_CROUCH);
                 }
+            }
+            if (this.isDead()) {
+                
             }
         }, 130);
     }
 
-
-    isHurt() {
-        console.log('collision with enemy');
-        this.loadImages(this.IMAGES_HURT);
-        this.playAnimation(this.IMAGES_HURT);
-        this.energy -= 1;
-        console.log(this.energy);
-    }
 }

@@ -34,11 +34,22 @@ class MovableObject {
 
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Cop || this instanceof Bootleg) {
+        if (this instanceof Cop || this instanceof Bootleg) {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';
             ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+    }
+
+
+    drawCharacterFrame(ctx) {
+        if (this instanceof Character) {
+            ctx.lineWidth = '1';
+            ctx.beginPath();
+            ctx.strokeStyle = 'white';
+            ctx.rect(this.x + 15, this.y, this.width - 25, this.height);
             ctx.stroke();
         }
     }
@@ -84,6 +95,20 @@ class MovableObject {
             (this.y + this.height > obj.y) &&
             (this.x < obj.x) &&
             (this.y < obj.y + obj.height);
+    }
+
+
+    isHurt() {
+        this.energy -= 1;
+        if (this.energy < 0) {
+            this.energy = 0;
+        }
+        console.log('Energy: ', this.energy);
+    }
+
+
+    isDead() {
+        return this.energy == 0;
     }
 
 
