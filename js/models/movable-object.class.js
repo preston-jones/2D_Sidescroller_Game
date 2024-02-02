@@ -12,6 +12,9 @@ class MovableObject {
     acceleration = 1;
     levelGround = 99;
     energy = 100;
+    isHurt = false;
+    isDead = false;
+    lastHit = 0;
     world;
 
 
@@ -98,20 +101,6 @@ class MovableObject {
     }
 
 
-    isHurt() {
-        this.energy -= 1;
-        if (this.energy < 0) {
-            this.energy = 0;
-        }
-        console.log('Energy: ', this.energy);
-    }
-
-
-    isDead() {
-        return this.energy == 0;
-    }
-
-
     // isColliding(obj) {
     //     console.log(this.offsetX);
     //     return (this.x + this.width) >= obj.y && this.x <= (obj.x + obj.width) &&
@@ -119,4 +108,28 @@ class MovableObject {
     //         (this.y + this.offsetY) <= (obj.y + obj.height) &&
     //         obj.onCollisionCourse;
     // }
+
+
+    hit() {
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+        console.log('Energy: ', this.energy);
+    }
+
+
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit;  // Difference in ms
+        timepassed = timepassed / 1000; //Difference in s
+        return timepassed < 1; // wurden innerhalb der letzten 5 sec getroffen
+    }
+
+
+    isDead() {
+        this.isDead = true;
+        return this.energy == 0;
+    }
 }

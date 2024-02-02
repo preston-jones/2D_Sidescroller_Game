@@ -176,8 +176,10 @@ class Character extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_STAY);
             if (this.isDead()) {
-                this.loadImages(this.IMAGES_DEAD);
                 this.playAnimation(this.IMAGES_DEAD);
+            }
+            if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
             }
 
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
@@ -211,9 +213,6 @@ class Character extends MovableObject {
                 if (this.y <= world.level.level_end_bottom_y) {
                     this.playAnimation(this.IMAGES_CROUCH);
                 }
-            }
-            if (this.isDead()) {
-                
             }
         }, 130);
     }
