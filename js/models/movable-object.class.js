@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject{
     energy = 100;
     energy_MAX = 500;
     is_Hurt = false;
+    is_Dying = false;
     is_Dead = false;
     lastHit = 0;
     world;
@@ -67,7 +68,7 @@ class MovableObject extends DrawableObject{
         this.energy -= 1;
         if (this.energy < 0) {
             this.energy = 0;
-            this.is_Dead = true;
+            this.is_Dying = true;
         } else {
             this.lastHit = new Date().getTime();
         }
@@ -82,6 +83,7 @@ class MovableObject extends DrawableObject{
 
 
     isDead() {
-        return this.energy = 0;
+        this.is_Dead = true;
+        return this.energy == 0;
     }
 }

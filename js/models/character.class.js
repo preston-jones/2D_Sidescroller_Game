@@ -83,6 +83,12 @@ class Character extends MovableObject {
     IMAGES_HURT = [
         'assets/sprites/character/player_female/hurt/hurt.png'
     ];
+    IMAGES_DYING = [
+        'assets/sprites/character/player_female/dying/dying-1.png',
+        'assets/sprites/character/player_female/dying/dying-2.png',
+        'assets/sprites/character/player_female/dying/dying-3.png',
+        'assets/sprites/character/player_female/dying/dying-4.png'
+    ];
     IMAGES_DEAD = [
         'assets/sprites/character/player_female/dead/dead-1.png',
         'assets/sprites/character/player_female/dead/dead-2.png',
@@ -175,11 +181,19 @@ class Character extends MovableObject {
 
         setInterval(() => {
             this.playAnimation(this.IMAGES_STAY);
-            if (this.is_Dead) {
-                this.playAnimation(this.IMAGES_DEAD);
+            if (this.isDead()) {
+                if (this.is_Dying) {
+                    this.playAnimation(this.IMAGES_DYING);
+                    this.is_Dying = false;
+                    this.is_Dead = true;
+                }
+                if (!this.is_Dying && this.is_Dead) {
+                    this.playAnimation(this.IMAGES_DEAD);
+                }
+
             }
             if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
+                this.playAnimation(this.IMAGES_DYING);
             }
 
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
