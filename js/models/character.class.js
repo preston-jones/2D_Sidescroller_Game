@@ -85,6 +85,7 @@ class Character extends MovableObject {
         'assets/sprites/character/player_female/hurt/hurt-2.png',
         'assets/sprites/character/player_female/hurt/hurt-3.png',
         'assets/sprites/character/player_female/hurt/hurt-4.png',
+        'assets/sprites/character/player_female/hurt/hurt-5.png',
     ];
     IMAGES_DYING = [
         'assets/sprites/character/player_female/dying/dying-1.png',
