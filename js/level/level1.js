@@ -2,7 +2,8 @@ const level1 = new Level(
     [
         new Cop(),
         new Cop(),
-        new Bootleg()
+        new Bootleg(),
+        new Drone()
     ],
     [
         new VehiclesFront(),

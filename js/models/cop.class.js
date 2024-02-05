@@ -27,7 +27,7 @@ class Cop extends MovableObject {
 
     constructor() {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
-        this.x = 150 + Math.random() * 200;
+        this.x = 250 + Math.random() * 1000;
         this.loadImages(this.IMAGES_RUN);
         this.applyGravity();
         this.animateCop();

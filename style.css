@@ -29,7 +29,6 @@ canvas {
     image-rendering: pixelated;
     aspect-ratio: auto 768 / 448;
     border: 8px ridge rgb(192, 192, 192);
-    margin-bottom: 64px;
 }
 
 .header {
@@ -37,21 +36,21 @@ canvas {
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    margin: 32px 0 120px 0;
+    margin: 32px 0 32px 0;
 }
 
 h1 {
-    font-size: 132px;
+    font-size: 90px;
     font-family: 'Pixelify Sans', sans-serif;
     margin-bottom: 0;
     text-shadow: -9px -7px 2px #505050;
 }
 
 h2 {
-    font-size: 100px;
-    margin-bottom: 0;
+    font-size: 80px;
+    margin: 36px 0 0 0;
     color: #e7d63f;
-    text-shadow: -9px -7px 2px #505050;
+    text-shadow: -4px -3px 2px #505050;
 }
 
 #fullscreen {

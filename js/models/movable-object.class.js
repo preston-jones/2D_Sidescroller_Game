@@ -5,7 +5,8 @@ class MovableObject extends DrawableObject{
     speedY = 0;
     acceleration = 1;
     levelGround = 99;
-    energy = 500;
+    energy = 100;
+    energy_MAX = 500;
     is_Hurt = false;
     is_Dead = false;
     lastHit = 0;
@@ -66,10 +67,10 @@ class MovableObject extends DrawableObject{
         this.energy -= 1;
         if (this.energy < 0) {
             this.energy = 0;
+            this.is_Dead = true;
         } else {
             this.lastHit = new Date().getTime();
         }
-        console.log('Energy: ', this.energy);
     }
 
 
@@ -81,7 +82,6 @@ class MovableObject extends DrawableObject{
 
 
     isDead() {
-        this.is_Dead = true;
-        return this.energy == 0;
+        return this.energy = 0;
     }
 }

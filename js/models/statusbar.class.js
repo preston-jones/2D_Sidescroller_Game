@@ -12,13 +12,10 @@ class Statusbar extends DrawableObject {
 
     constructor(img, status, x, y, width, height) {
         super().loadImage(img);
-        this.health = `${status}`;
+        this.health = status;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
     }
-
-
-
 }

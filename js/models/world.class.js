@@ -38,9 +38,9 @@ class World {
 
 
     drawStatusValue(ctx) {
-        ctx.font = "14pt VT323";
+        ctx.font = "12pt VT323";
         ctx.fillStyle = "white";
-        ctx.fillText(this.character.energy, 30, 20);
+        ctx.fillText(this.character.energy + '/' + this.character.energy_MAX, 32, 18);
     }
 
 
@@ -51,9 +51,6 @@ class World {
         // moves camera view
         this.addObjectsToMap(this.level.backgroundImageStatic);
         this.addObjectsToMap(this.level.animatedBackgroundBack);
-        this.addObjectsToMap(this.statusbar);
-        // Draw text here
-        this.drawStatusValue(this.ctx);
         this.ctx.translate(this.camera_x, this.camera_y);
         // -----
 
@@ -69,7 +66,8 @@ class World {
         // moves camera view back to default
         this.ctx.translate(-this.camera_x, this.camera_y);
         // -----
-
+        this.addObjectsToMap(this.statusbar);
+        this.drawStatusValue(this.ctx);
         // Draw wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
