@@ -1,19 +1,13 @@
-class MovableObject {
-    x;
-    y;
-    height;
-    width;
+class MovableObject extends DrawableObject{
+
     speed;
-    img;
-    imageCache = {};
-    currentImage = 0;
     otherDirection = false;
     speedY = 0;
     acceleration = 1;
     levelGround = 99;
-    energy = 100;
-    isHurt = false;
-    isDead = false;
+    energy = 500;
+    is_Hurt = false;
+    is_Dead = false;
     lastHit = 0;
     world;
 
@@ -31,33 +25,6 @@ class MovableObject {
     }
 
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
-
-    drawFrame(ctx) {
-        if (this instanceof Cop || this instanceof Bootleg) {
-            ctx.lineWidth = '1';
-            ctx.beginPath();
-            ctx.strokeStyle = 'white';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
-
-    drawCharacterFrame(ctx) {
-        if (this instanceof Character) {
-            ctx.lineWidth = '1';
-            ctx.beginPath();
-            ctx.strokeStyle = 'white';
-            ctx.rect(this.x + 15, this.y, this.width - 25, this.height);
-            ctx.stroke();
-        }
-    }
-
-
     jump() {
         if (this.y === world.level.level_end_bottom_y) {
             this.speedY = 11;
@@ -67,21 +34,6 @@ class MovableObject {
 
     isAboveGround() {
         return this.y < world.level.level_end_bottom_y;
-    }
-
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-
-    loadImages(arr) {
-        arr.forEach(path => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
     }
 
 
@@ -111,7 +63,7 @@ class MovableObject {
 
 
     hit() {
-        this.energy -= 5;
+        this.energy -= 1;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -129,7 +81,7 @@ class MovableObject {
 
 
     isDead() {
-        this.isDead = true;
+        this.is_Dead = true;
         return this.energy == 0;
     }
 }

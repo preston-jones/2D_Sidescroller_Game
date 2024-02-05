@@ -7,6 +7,10 @@ class World {
     keyboard;
     camera_x = 0;
     camera_y = 0;
+    statusbar = [
+        new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 20, 20),
+        new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 24, 15, 15),
+    ];
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -33,6 +37,12 @@ class World {
     }
 
 
+    drawStatusValue(ctx) {
+        ctx.font = "14pt VT323";
+        ctx.fillStyle = "white";
+        ctx.fillText(this.character.energy, 30, 20);
+    }
+
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
@@ -41,6 +51,9 @@ class World {
         // moves camera view
         this.addObjectsToMap(this.level.backgroundImageStatic);
         this.addObjectsToMap(this.level.animatedBackgroundBack);
+        this.addObjectsToMap(this.statusbar);
+        // Draw text here
+        this.drawStatusValue(this.ctx);
         this.ctx.translate(this.camera_x, this.camera_y);
         // -----
 
@@ -77,7 +90,7 @@ class World {
 
         movableObject.draw(this.ctx);
         movableObject.drawFrame(this.ctx);
-        movableObject.drawCharacterFrame(this.ctx);
+        // movableObject.drawCharacterFrame(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
