@@ -81,13 +81,16 @@ class Character extends MovableObject {
         'assets/sprites/misc/shot-hit/shot-hit-3.png'
     ];
     IMAGES_HURT = [
-        'assets/sprites/character/player_female/hurt/hurt.png'
+        'assets/sprites/character/player_female/hurt/hurt-1.png',
+        'assets/sprites/character/player_female/hurt/hurt-2.png',
+        'assets/sprites/character/player_female/hurt/hurt-3.png',
+        'assets/sprites/character/player_female/hurt/hurt-4.png',
     ];
     IMAGES_DYING = [
         'assets/sprites/character/player_female/dying/dying-1.png',
         'assets/sprites/character/player_female/dying/dying-2.png',
         'assets/sprites/character/player_female/dying/dying-3.png',
-        'assets/sprites/character/player_female/dying/dying-4.png'
+        'assets/sprites/character/player_female/dying/dying-4.png',
     ];
     IMAGES_DEAD = [
         'assets/sprites/character/player_female/dead/dead-1.png',
@@ -193,7 +196,7 @@ class Character extends MovableObject {
 
             }
             if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_DYING);
+                this.playAnimation(this.IMAGES_HURT);
             }
 
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
