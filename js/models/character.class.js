@@ -245,7 +245,7 @@ class Character extends MovableObject {
 
     playAnimation_HURT() {
         if (this.isHurt()) {
-            this.walk_sound.play();
+            this.hurt_sound.play();
             this.playAnimation(this.IMAGES_HURT);
         }
     }
