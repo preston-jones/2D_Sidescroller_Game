@@ -37,7 +37,6 @@ class World {
 
     checkShooting() {
             if (this.keyboard.C) {
-                console.log(this.character.x, this.character.y);
                 let characterShot = new Shot(this.character.x, this.character.y);
                 this.shootingObjects.push(characterShot);
             }

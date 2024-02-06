@@ -72,6 +72,7 @@ function fullscreen() {
 
 
 function enterFullscreen(element) {
+    document.getElementById('canvas').classList.add('fullscreen');
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
@@ -79,4 +80,5 @@ function enterFullscreen(element) {
     } else if (element.webkitRequestFullscreen) {  // iOS Safari
         element.webkitRequestFullscreen();
     }
+
 }

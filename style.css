@@ -59,6 +59,12 @@ h2 {
     align-items: center;
 }
 
+.fullscreen {
+    width: 100%;
+    height: auto;
+    border: none;
+}
+
 #fullscreen_button {
     display: flex;
     justify-content: center;

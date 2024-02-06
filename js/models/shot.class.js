@@ -11,27 +11,22 @@ class Shot extends MovableObject {
         this.loadImages(this.IMAGES_SHOT);
         this.width = 10;
         this.height = 10;
-        this.speed = 1;
+        this.speed = 2;
         this.x = x + 50;
         this.y = y + 15;
-        // this.animateShot();
+        this.animateShot();
 
     }
 
 
     animateShot() {
-        world.character.energy -= 1;
-        if (world.character.energy <= 0) {
-            world.character.energy = 0;
-        }
-        if (world.character.energy > 0) {
+
             setInterval(() => {
-                this.x += 5;
+                    this.x += this.speed;
             }, 1000 / 60)
             setInterval(() => {
                 this.playAnimation(this.IMAGES_SHOT);
-            }, 130)
-        }
+            }, 25)
     }
 
 
