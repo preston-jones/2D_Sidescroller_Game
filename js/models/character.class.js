@@ -99,7 +99,7 @@ class Character extends MovableObject {
     run_sound = new Audio('assets/audio/run.mp3');
     jump_sound = new Audio('assets/audio/jump.mp3');
     shoot_sound = new Audio('assets/audio/shoot.mp3');
-    hurt_sound = new Audio('assets/audio/shoot.mp3');
+    hurt_sound = new Audio('assets/audio/hurt.mp3');
     constructor() {
         super().loadImage('assets/sprites/character/player_female/idle/idle-1.png');
         this.loadImages(this.IMAGES_STAY);
@@ -133,47 +133,51 @@ class Character extends MovableObject {
                 this.world.camera_y = 0;
             }
 
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.is_Dead) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.is_Dead && !this.is_Hurt) {
                 if (!this.world.keyboard.SHIFTRIGHT || !this.world.keyboard.SHIFTLEFT) {
                     this.speed = 0.5;
                     this.x += this.speed;
                     this.otherDirection = false;
                     this.walk_sound.play();
+                    this.run_sound.pause();
                 }
                 if (this.world.keyboard.SHIFTRIGHT || this.world.keyboard.SHIFTLEFT) {
                     this.speed = 1.5;
                     this.x += this.speed;
                     this.otherDirection = false;
                     this.run_sound.play();
+                    this.walk_sound.pause();
                 }
             }
-            if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x && !this.is_Dead) {
+            if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x && !this.is_Dead && !this.is_Hurt) {
 
                 if (!this.world.keyboard.SHIFTRIGHT || !this.world.keyboard.SHIFTLEFT) {
                     this.speed = 0.5;
                     this.x -= this.speed;
                     this.otherDirection = true;
                     this.walk_sound.play();
+                    this.run_sound.pause();
                 }
                 if (this.world.keyboard.SHIFTRIGHT || this.world.keyboard.SHIFTLEFT) {
                     this.speed = 1.5;
                     this.x -= this.speed;
                     this.otherDirection = true;
                     this.run_sound.play();
+                    this.walk_sound.pause();
                 }
             }
-            if (this.world.keyboard.SPACE && !this.is_Dead) {
+            if (this.world.keyboard.SPACE && !this.is_Dead && !this.is_Hurt) {
                 this.jump();
             }
-            if (this.world.keyboard.C && !this.is_Dead) {
+            if (this.world.keyboard.C && !this.is_Dead && !this.is_Hurt) {
                 this.shoot_sound.play();
                 world.addToMap(this.playerShot);
                 this.playAnimation(this.playerShot);
             }
-            if (this.world.keyboard.UP && this.y < 170 && !this.is_Dead) {
+            if (this.world.keyboard.UP && this.y < 170 && !this.is_Dead && !this.is_Hurt) {
                 this.y += this.speed;
             }
-            if (this.world.keyboard.DOWN && this.y > world.level.level_end_bottom_y && !this.is_Dead) {
+            if (this.world.keyboard.DOWN && this.y > world.level.level_end_bottom_y && !this.is_Dead && !this.is_Hurt) {
                 this.y -= this.speed;
             }
         }, 1000 / 60);
@@ -202,7 +206,7 @@ class Character extends MovableObject {
     }
 
     playAnimation_JUMP() {
-        if (this.world.keyboard.RIGHT && !this.is_Dead || this.world.keyboard.LEFT && !this.is_Dead) {
+        if (this.world.keyboard.RIGHT && !this.is_Dead || this.world.keyboard.LEFT && !this.is_Dead && !this.is_Hurt) {
             if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y) {
                 this.playAnimation(this.IMAGES_JUMP);
             }
@@ -210,7 +214,7 @@ class Character extends MovableObject {
 
             this.playAnimation_RUN();
         }
-        if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y && !this.is_Dead) {
+        if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y && !this.is_Dead && !this.is_Hurt) {
             this.jump_sound.play();
             this.playAnimation(this.IMAGES_JUMP);
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
@@ -220,7 +224,7 @@ class Character extends MovableObject {
     }
 
     playAnimation_DOWN() {
-        if (this.world.keyboard.UP && !this.is_Dead || this.world.keyboard.DOWN && !this.is_Dead) {
+        if (this.world.keyboard.UP && !this.is_Dead || this.world.keyboard.DOWN && !this.is_Dead && !this.is_Hurt) {
             if (this.y > world.level.level_end_bottom_y) {
                 this.playAnimation(this.IMAGES_CLIMB);
             }
@@ -231,7 +235,7 @@ class Character extends MovableObject {
     }
 
     playAnimation_SHOOT() {
-        if (this.world.keyboard.C && !this.is_Dead) {
+        if (this.world.keyboard.C && !this.is_Dead && !this.is_Hurt) {
             this.playAnimation(this.IMAGES_SHOOT);
             if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_RUN_SHOOT);
@@ -241,6 +245,7 @@ class Character extends MovableObject {
 
     playAnimation_HURT() {
         if (this.isHurt()) {
+            this.walk_sound.play();
             this.playAnimation(this.IMAGES_HURT);
         }
     }
