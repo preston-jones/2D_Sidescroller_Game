@@ -109,4 +109,7 @@ class World {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore(); //resets the settings of ctx to default
     }
+
+
+    
 }

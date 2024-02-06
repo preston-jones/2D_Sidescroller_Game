@@ -89,4 +89,26 @@ class MovableObject extends DrawableObject {
     isDead() {
         return this.energy == 0;
     }
+
+
+    moveToLeft(speed) {
+        this.x -= speed;
+        this.otherDirection = true;
+    }
+
+
+    moveToRight(speed) {
+        this.x += speed;
+        this.otherDirection = false;
+    }
+
+
+    moveUp(speed) {
+        this.y += speed;
+    }
+
+
+    moveDown(speed) {
+        this.y -= speed;
+    }
 }
