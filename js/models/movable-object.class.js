@@ -8,7 +8,6 @@ class MovableObject extends DrawableObject{
     energy = 100;
     energy_MAX = 500;
     is_Hurt = false;
-    is_Dying = false;
     is_Dead = false;
     lastHit = 0;
     world;
@@ -48,9 +47,9 @@ class MovableObject extends DrawableObject{
 
 
     isColliding(obj) {
-        return (this.x + this.width > obj.x) &&
+        return ((this.x + 18) + (this.width - 30) > obj.x) &&
             (this.y + this.height > obj.y) &&
-            (this.x < obj.x) &&
+            ((this.x + 18) < obj.x) &&
             (this.y < obj.y + obj.height);
     }
 
@@ -68,7 +67,6 @@ class MovableObject extends DrawableObject{
         this.energy -= 1;
         if (this.energy < 0) {
             this.energy = 0;
-            this.is_Dying = true;
         } else {
             this.lastHit = new Date().getTime();
         }
@@ -83,7 +81,6 @@ class MovableObject extends DrawableObject{
 
 
     isDead() {
-        this.is_Dead = true;
         return this.energy == 0;
     }
 }

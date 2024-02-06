@@ -14,7 +14,7 @@ class DrawableObject {
 
 
     drawFrame(ctx) {
-        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone || this instanceof Character) {
+        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone) {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';
@@ -24,15 +24,15 @@ class DrawableObject {
     }
 
 
-    // drawCharacterFrame(ctx) {
-    //     if (this instanceof Character) {
-    //         ctx.lineWidth = '1';
-    //         ctx.beginPath();
-    //         ctx.strokeStyle = 'white';
-    //         ctx.rect(this.x + 15, this.y, this.width - 25, this.height);
-    //         ctx.stroke();
-    //     }
-    // }
+    drawCharacterFrame(ctx) {
+        if (this instanceof Character) {
+            ctx.lineWidth = '1';
+            ctx.beginPath();
+            ctx.strokeStyle = 'white';
+            ctx.rect(this.x + 18, this.y, this.width - 30, this.height);
+            ctx.stroke();
+        }
+    }
 
 
     loadImage(path) {

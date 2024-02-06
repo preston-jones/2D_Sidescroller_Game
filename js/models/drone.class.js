@@ -28,14 +28,7 @@ class Drone extends MovableObject {
 
     animateDrone() {
         setInterval(() => {
-            if (this.x > 0) {
                 this.x -= this.speed
-                this.otherDirection = false;
-            }
-            if (this.x < 0) {
-                this.x += this.speed
-                this.otherDirection = true;
-            }
         }, 1000 / 60);
     }
 }
