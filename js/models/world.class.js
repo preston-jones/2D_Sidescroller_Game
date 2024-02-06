@@ -7,6 +7,7 @@ class World {
     keyboard;
     camera_x = 0;
     camera_y = 0;
+    shootingObjects = [];
     statusbar = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 20, 20),
         new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 24, 15, 15),
@@ -17,7 +18,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
 
@@ -25,22 +26,38 @@ class World {
         this.character.world = this;
     }
 
-    checkCollisions() {
-        console.log(this.character);
+
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                }
-            });
+            this.checkCollisions();
+            this.checkShooting();
         }, 20);
     }
 
 
+    checkShooting() {
+            if (this.keyboard.C) {
+                console.log(this.character.x, this.character.y);
+                let characterShot = new Shot(this.character.x, this.character.y);
+                this.shootingObjects.push(characterShot);
+            }
+    }
+
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+            }
+        });
+    }
+
+
     drawStatusValue(ctx) {
-        ctx.font = "12pt VT323";
+        ctx.font = "10pt VT323";
         ctx.fillStyle = "white";
-        ctx.fillText(this.character.energy + '/' + this.character.energy_MAX, 32, 18);
+        ctx.fillText(this.character.health + '/' + this.character.health_MAX, 32, 18);
+        ctx.fillText(this.character.energy + '/' + this.character.energy_MAX, 32, 35);
     }
 
 
@@ -61,8 +78,9 @@ class World {
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);
         this.addObjectsToMap(this.level.enemies);
-        this.addToMap(this.character);
 
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.shootingObjects);
         // moves camera view back to default
         this.ctx.translate(-this.camera_x, this.camera_y);
         // -----
@@ -110,6 +128,4 @@ class World {
         this.ctx.restore(); //resets the settings of ctx to default
     }
 
-
-    
 }

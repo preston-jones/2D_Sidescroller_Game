@@ -5,8 +5,10 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 1;
     levelGround = 99;
-    energy = 100;
-    energy_MAX = 500;
+    health = 100;
+    health_MAX = 500;
+    energy = 10;
+    energy_MAX = 10;
     is_Hurt = false;
     is_Dead = false;
     lastHit = 0;
@@ -64,13 +66,13 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
-        this.energy -= 1;
+        this.health -= 1;
         this.is_Hurt = true;
         if (this.x > 0 && !this.is_Dead) {
             // this.x -= 1;
         }
-        if (this.energy < 0) {
-            this.energy = 0;
+        if (this.health < 0) {
+            this.health = 0;
             this.is_Dead = true;
         } else {
             this.lastHit = new Date().getTime();
@@ -87,7 +89,7 @@ class MovableObject extends DrawableObject {
 
 
     isDead() {
-        return this.energy == 0;
+        return this.health == 0;
     }
 
 

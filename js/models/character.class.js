@@ -92,7 +92,12 @@ class Character extends MovableObject {
         'assets/sprites/character/player_female/dead/dead-2.png',
         'assets/sprites/character/player_female/dead/dead-3.png',
         'assets/sprites/character/player_female/dead/dead-4.png',
-        'assets/sprites/character/player_female/dead/dead-5.png'
+        'assets/sprites/character/player_female/dead/dead-5.png',
+        'assets/sprites/character/player_female/dead/dead-6.png',
+        'assets/sprites/character/player_female/dead/dead-7.png',
+        'assets/sprites/character/player_female/dead/dead-8.png',
+        'assets/sprites/character/player_female/dead/dead-9.png',
+        'assets/sprites/character/player_female/dead/dead-10.png',
     ];
     playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
     world;
@@ -154,8 +159,7 @@ class Character extends MovableObject {
             }
             if (this.world.keyboard.C && !this.is_Dead && !this.is_Hurt) {
                 this.shoot_sound.play();
-                world.addToMap(this.playerShot);
-                this.playAnimation(this.playerShot);
+                // this.animateShot();
             }
             if (this.world.keyboard.UP && this.y < 170 && !this.is_Dead && !this.is_Hurt) {
                 this.moveUp(this.speed);
@@ -264,5 +268,7 @@ class Character extends MovableObject {
             this.world.camera_y = 0;
         }
     }
+    
+
 
 }
