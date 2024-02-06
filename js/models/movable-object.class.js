@@ -1,4 +1,4 @@
-class MovableObject extends DrawableObject{
+class MovableObject extends DrawableObject {
 
     speed;
     otherDirection = false;
@@ -15,6 +15,7 @@ class MovableObject extends DrawableObject{
 
     applyGravity() {
         setInterval(() => {
+            console.log(this.world);
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
@@ -65,8 +66,12 @@ class MovableObject extends DrawableObject{
 
     hit() {
         this.energy -= 1;
+        if (this.x > 0 && !this.is_Dead) {
+            this.x -= 1;
+        }
         if (this.energy < 0) {
             this.energy = 0;
+            this.is_Dead = true;
         } else {
             this.lastHit = new Date().getTime();
         }

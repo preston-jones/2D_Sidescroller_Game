@@ -1,7 +1,7 @@
 class AnimatedBackground extends MovableObject {
 
     animate(x, y) {
-            if (keyboard.RIGHT && world.character.x > 60 && world.character.x < 893) {
+            if (keyboard.RIGHT && world.character.x > 60 && world.character.x < 893 && !world.character.is_Dead) {
                 if (!keyboard.SHIFTLEFT || !keyboard.SHIFTRIGHT) {
                     this.x -= x;
                 }
@@ -10,7 +10,7 @@ class AnimatedBackground extends MovableObject {
                     this.x -= x;
                 }
             }
-            if (keyboard.LEFT && world.character.x > 60 && world.character.x < 893) {
+            if (keyboard.LEFT && world.character.x > 60 && world.character.x < 893 && !world.character.is_Dead) {
                 if (!keyboard.SHIFTLEFT || !keyboard.SHIFTRIGHT) {
                     this.x += x;
                 }
