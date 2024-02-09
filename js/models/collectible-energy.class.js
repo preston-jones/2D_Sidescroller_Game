@@ -19,7 +19,12 @@ class CollectibleEnergy extends DrawableObject {
         'assets/collectibles/energy/energy-16.png',
         'assets/collectibles/energy/energy-17.png',
         'assets/collectibles/energy/energy-18.png',
-        'assets/collectibles/energy/energy-19.png'
+        'assets/collectibles/energy/energy-19.png',
+        'assets/collectibles/energy/energy-20.png',
+        'assets/collectibles/energy/energy-21.png',
+        'assets/collectibles/energy/energy-22.png',
+        'assets/collectibles/energy/energy-23.png',
+        'assets/collectibles/energy/energy-24.png'
     ];
 
 
