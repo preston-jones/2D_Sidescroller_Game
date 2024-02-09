@@ -1,5 +1,4 @@
 class World {
-
     character = new Character();
     level = level1;
     canvas;
@@ -7,7 +6,9 @@ class World {
     keyboard;
     camera_x = 0;
     camera_y = 0;
-    shootingObjects = [];
+    shots = [
+        new Shot()
+    ];
     statusbar = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 20, 20),
         new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 24, 15, 15),
@@ -24,6 +25,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.shots.world = this;
     }
 
 
@@ -31,22 +33,34 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkShooting();
-        }, 20);
+            this.checkifShot();
+        }, 200);
     }
 
 
     checkShooting() {
-            if (this.keyboard.C) {
-                let characterShot = new Shot(this.character.x, this.character.y);
-                this.shootingObjects.push(characterShot);
-            }
+        if (this.keyboard.C && this.character.energy > 0) {
+            let characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
+            this.shots.push(characterShot);
+            this.character.energy -= 1;
+        }
     }
 
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
+            console.log(this.level.enemies.health);
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
+            }
+        });
+    }
+
+
+    checkifShot() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.shots.isColliding(enemy)) {
+                this.level.enemies.hit();
             }
         });
     }
@@ -79,7 +93,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
 
         this.addToMap(this.character);
-        this.addObjectsToMap(this.shootingObjects);
+        this.addObjectsToMap(this.shots);
         // moves camera view back to default
         this.ctx.translate(-this.camera_x, this.camera_y);
         // -----

@@ -14,7 +14,7 @@ class DrawableObject {
 
 
     drawFrame(ctx) {
-        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone) {
+        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone || this instanceof Shot) {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';

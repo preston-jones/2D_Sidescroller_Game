@@ -6,7 +6,7 @@ class MovableObject extends DrawableObject {
     acceleration = 1;
     levelGround = 99;
     health = 100;
-    health_MAX = 500;
+    health_MAX = 100;
     energy = 10;
     energy_MAX = 10;
     is_Hurt = false;
@@ -66,7 +66,7 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
-        this.health -= 1;
+        this.health -= 5;
         this.is_Hurt = true;
         if (this.x > 0 && !this.is_Dead) {
             // this.x -= 1;

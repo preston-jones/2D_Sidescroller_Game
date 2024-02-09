@@ -15,7 +15,11 @@ body {
     align-items: center;
     margin: 0;
     background-color: #00003C;
-    background-image: url('assets/img/background_city.png');
+    /* background-image: url('assets/img/background_city.png'); */
+    background-image: url('assets/img/retro-2426631_1280.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     color: rgb(230, 230, 230);
 }
 
