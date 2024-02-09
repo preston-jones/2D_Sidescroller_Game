@@ -40,14 +40,6 @@ class MovableObject extends DrawableObject {
     }
 
 
-    playAnimation(arr) {
-        let i = this.currentImage % arr.length;// Modulu Function let i = 0 % 8; 0 geteilt durch 8 = 0, Rest 0
-        let path = arr[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-    }
-
-
     isColliding(obj) {
         return ((this.x + 18) + (this.width - 30) > obj.x) &&
             (this.y + this.height > obj.y) &&

@@ -157,10 +157,6 @@ class Character extends MovableObject {
             if (this.world.keyboard.SPACE && !this.is_Dead && !this.is_Hurt) {
                 this.jump();
             }
-            if (this.world.keyboard.C && !this.is_Dead && !this.is_Hurt) {
-                this.shoot_sound.play();
-                // this.animateShot();
-            }
             if (this.world.keyboard.UP && this.y < 170 && !this.is_Dead && !this.is_Hurt) {
                 this.moveUp(this.speed);
             }
@@ -226,10 +222,12 @@ class Character extends MovableObject {
 
 
     playAnimation_SHOOT() {
-        if (this.world.keyboard.C && !this.is_Dead && !this.is_Hurt) {
+        if (this.world.keyboard.C && !this.is_Dead && !this.is_Hurt && this.energy > 0) {
             this.playAnimation(this.IMAGES_SHOOT);
+            this.shoot_sound.play();
             if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_RUN_SHOOT);
+                this.shoot_sound.play();
             }
         }
     }

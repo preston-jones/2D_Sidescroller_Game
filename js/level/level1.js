@@ -49,8 +49,11 @@ const level1 = new Level(
         new SkylineFront('assets/environment/background/near-buildings-a-bg.png', 1590, 10, 400, 150),
         new SkylineFront('assets/environment/background/near-buildings-b-bg.png', 1900, 10, 400, 150),
     ],
-[
-    new BackgroundStatic('assets/environment/floor.png', 0, -110, 450, 260)
-]
+    [
+        new BackgroundStatic('assets/environment/floor.png', 0, -110, 450, 260)
+    ],
+    [
+        new CollectibleEnergy(200, 130, 15, 15)
+    ]
 
 );

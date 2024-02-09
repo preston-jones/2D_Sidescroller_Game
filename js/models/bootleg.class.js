@@ -25,7 +25,6 @@ class Bootleg extends MovableObject {
         this.loadImages(this.IMAGES_RUN);
         this.applyGravity();
         this.animateEnemie();
-        console.log(this.health);
     }
 
 

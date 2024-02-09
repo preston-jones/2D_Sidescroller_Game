@@ -1,4 +1,5 @@
 class World {
+    movableObjects = new MovableObject();
     character = new Character();
     level = level1;
     canvas;
@@ -10,8 +11,8 @@ class World {
         new Shot()
     ];
     statusbar = [
-        new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 20, 20),
-        new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 24, 15, 15),
+        new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
+        new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 24, 10, 10),
     ];
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -25,7 +26,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.shots.world = this;
+        this.movableObjects.world = this;
     }
 
 
@@ -33,8 +34,8 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkShooting();
-            this.checkifShot();
-        }, 200);
+            // this.checkifShot();
+        }, 100);
     }
 
 
@@ -49,7 +50,6 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            console.log(this.level.enemies.health);
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
             }
@@ -58,8 +58,9 @@ class World {
 
 
     checkifShot() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.shots.isColliding(enemy)) {
+        this.shots.forEach((enemy) => {
+            if (this.level.enemies.isColliding(enemy)) {
+                console.log('SHOT');
                 this.level.enemies.hit();
             }
         });
@@ -67,10 +68,10 @@ class World {
 
 
     drawStatusValue(ctx) {
-        ctx.font = "10pt VT323";
+        ctx.font = "8pt VT323";
         ctx.fillStyle = "white";
-        ctx.fillText(this.character.health + '/' + this.character.health_MAX, 32, 18);
-        ctx.fillText(this.character.energy + '/' + this.character.energy_MAX, 32, 35);
+        ctx.fillText(this.character.health + '/' + this.character.health_MAX, 30, 15);
+        ctx.fillText(this.character.energy + '/' + this.character.energy_MAX, 30, 32);
     }
 
 
@@ -91,6 +92,7 @@ class World {
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.collectibles);
 
         this.addToMap(this.character);
         this.addObjectsToMap(this.shots);
