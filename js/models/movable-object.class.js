@@ -12,7 +12,6 @@ class MovableObject extends DrawableObject {
     is_Hurt = false;
     is_Dead = false;
     lastHit = 0;
-    world;
 
 
     applyGravity() {

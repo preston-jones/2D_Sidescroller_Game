@@ -1,5 +1,4 @@
 class World {
-    movableObjects = new MovableObject();
     character = new Character();
     level = level1;
     canvas;
@@ -26,7 +25,6 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.movableObjects.world = this;
     }
 
 

@@ -1,5 +1,4 @@
 class Shot extends MovableObject {
-    world;
     IMAGES_SHOT = [
         'assets/sprites/misc/shot/shot-1.png',
         'assets/sprites/misc/shot/shot-2.png',
