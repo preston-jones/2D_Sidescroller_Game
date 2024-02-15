@@ -21,18 +21,25 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-    }
-
-
-    drawCharacterFrame(ctx) {
         if (this instanceof Character) {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';
-            ctx.rect(this.x + 18, this.y, this.width - 30, this.height);
+            ctx.rect(this.x + 18, this.y, this.width -30, this.height);
             ctx.stroke();
         }
     }
+
+
+    // drawCharacterFrame(ctx) {
+    //     if (this instanceof Character) {
+    //         ctx.lineWidth = '1';
+    //         ctx.beginPath();
+    //         ctx.strokeStyle = 'white';
+    //         ctx.rect(this.x + adjustmentX, this.y, this.width + adjustmentY, this.height);
+    //         ctx.stroke();
+    //     }
+    // }
 
 
     loadImage(path) {

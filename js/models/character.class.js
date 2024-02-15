@@ -5,6 +5,10 @@ class Character extends MovableObject {
     x = 0;
     y = 10;
     speed = 2;
+    health = 100;
+    health_MAX = 100;
+    energy = 10;
+    energy_MAX = 10;
 
     IMAGES_STAY = [
         'assets/sprites/character/player_female/idle/idle-1.png',

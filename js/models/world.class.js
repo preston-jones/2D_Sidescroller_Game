@@ -6,9 +6,7 @@ class World {
     keyboard;
     camera_x = 0;
     camera_y = 0;
-    shots = [
-        new Shot()
-    ];
+    shots = [];
     statusbar = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
         new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 24, 10, 10),
@@ -32,7 +30,6 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkShooting();
-            // this.checkifShot();
         }, 100);
     }
 
@@ -42,6 +39,7 @@ class World {
             let characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
             this.shots.push(characterShot);
             this.character.energy -= 1;
+            this.checkCollisionsShot(characterShot);
         }
     }
 
@@ -55,11 +53,10 @@ class World {
     }
 
 
-    checkifShot() {
-        this.shots.forEach((enemy) => {
-            if (this.level.enemies.isColliding(enemy)) {
-                console.log('SHOT');
-                this.level.enemies.hit();
+    checkCollisionsShot(characterShot) {
+        this.level.enemies.forEach((enemy) => {
+            if (characterShot.isColliding(enemy)) {
+                this.level.enemies.enemyIsHit();
             }
         });
     }
@@ -119,7 +116,6 @@ class World {
 
         movableObject.draw(this.ctx);
         movableObject.drawFrame(this.ctx);
-        movableObject.drawCharacterFrame(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

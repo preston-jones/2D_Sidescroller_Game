@@ -8,13 +8,17 @@ class Shot extends MovableObject {
     constructor(x, y, direction) {
         super().loadImage('assets/sprites/misc/shot/shot-1.png');
         this.loadImages(this.IMAGES_SHOT);
-        this.width = 10;
-        this.height = 10;
+        // this.width = 10;
+        // this.height = 10;
+        // this.x = x;
+        // this.y = y + 15;
+        this.width = 60;
+        this.height = 50;
+        this.x = 0;
+        this.y = 100;
         this.speed = 2;
-        this.x = x;
-        this.y = y + 15;
+        this.applyGravity();
         this.animateShot(direction);
-
     }
 
 

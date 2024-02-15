@@ -4,18 +4,24 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 1;
-    levelGround = 99;
-    health = 100;
-    health_MAX = 100;
-    energy = 10;
-    energy_MAX = 10;
+    levelGround = 100;
+    health;
+    health_MAX;
+    energy;
+    energy_MAX;
     is_Hurt = false;
     is_Dead = false;
     lastHit = 0;
 
 
+    isAboveGround() {
+        return this.y < world.level.level_end_bottom_y;
+    }
+
+
     applyGravity() {
         setInterval(() => {
+            console.log(this.isAboveGround());
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
@@ -34,16 +40,25 @@ class MovableObject extends DrawableObject {
     }
 
 
-    isAboveGround() {
-        return this.y < world.level.level_end_bottom_y;
-    }
-
-
     isColliding(obj) {
-        return ((this.x + 18) + (this.width - 30) > obj.x) &&
+        if (this instanceof Character) {
+            return ((this.x + 18) + (this.width - 30) > obj.x) &&
             (this.y + this.height > obj.y) &&
             ((this.x + 18) < obj.x) &&
             (this.y < obj.y + obj.height);
+        }
+        if (this instanceof Shot) {
+            return (this.x + this.width > obj.x) &&
+            (this.y + this.height > obj.y) &&
+            (this.x < obj.x) &&
+            (this.y < obj.y + obj.height);
+        }
+        else {
+            return (this.x + this.width > obj.x) &&
+            (this.y + this.height > obj.y) &&
+            (this.x < obj.x) &&
+            (this.y < obj.y + obj.height);
+        }
     }
 
 
@@ -69,6 +84,11 @@ class MovableObject extends DrawableObject {
             this.lastHit = new Date().getTime();
         }
         this.is_Hurt = false;
+    }
+
+
+    enemyIsHit() {
+        console.log('HIT ENEMIE');
     }
 
 
