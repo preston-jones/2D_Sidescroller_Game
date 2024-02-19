@@ -21,7 +21,6 @@ class MovableObject extends DrawableObject {
 
     applyGravity() {
         setInterval(() => {
-            console.log(this.isAboveGround());
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
@@ -47,12 +46,7 @@ class MovableObject extends DrawableObject {
             ((this.x + 18) < obj.x) &&
             (this.y < obj.y + obj.height);
         }
-        if (this instanceof Shot) {
-            return (this.x + this.width > obj.x) &&
-            (this.y + this.height > obj.y) &&
-            (this.x < obj.x) &&
-            (this.y < obj.y + obj.height);
-        }
+
         else {
             return (this.x + this.width > obj.x) &&
             (this.y + this.height > obj.y) &&
@@ -72,10 +66,9 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
-        this.health -= 5;
-        this.is_Hurt = true;
         if (this.x > 0 && !this.is_Dead) {
-            // this.x -= 1;
+            this.health -= 5;
+            this.is_Hurt = true;
         }
         if (this.health < 0) {
             this.health = 0;
@@ -84,11 +77,6 @@ class MovableObject extends DrawableObject {
             this.lastHit = new Date().getTime();
         }
         this.is_Hurt = false;
-    }
-
-
-    enemyIsHit() {
-        console.log('HIT ENEMIE');
     }
 
 

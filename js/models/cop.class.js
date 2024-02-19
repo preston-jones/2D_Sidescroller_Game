@@ -5,6 +5,7 @@ class Cop extends MovableObject {
     width = 60;
     height = 50;
     speed = 1.5;
+    health = 10;
 
     IMAGES_STAY = [
         'assets/sprites/enemies/cop/idle/cop1.png',

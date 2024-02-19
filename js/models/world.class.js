@@ -11,6 +11,8 @@ class World {
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
         new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 24, 10, 10),
     ];
+
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -36,18 +38,13 @@ class World {
 
     shoot() {
         setInterval(() => {
-            this.checkIfShooting();
-        }, 20);
-    }
-
-
-    checkIfShooting() {
-        if (this.keyboard.C && this.character.energy > 0) {
-            let characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
-            this.shots.push(characterShot);
-            this.character.energy -= 1;
-            this.checkCollisionsShot(characterShot);
-        }
+            if (this.keyboard.C && this.character.energy > 0) {
+                let characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
+                this.shots.push(characterShot);
+                this.character.energy -= 1;
+                this.checkCollisionOfShot(characterShot);
+            }
+        }, 100);
     }
 
 
@@ -60,11 +57,12 @@ class World {
     }
 
 
-    checkCollisionsShot(characterShot) {
+    checkCollisionOfShot(characterShot) {
         this.level.enemies.forEach((enemy) => {
             if (characterShot.isColliding(enemy)) {
-                console.log('Enemy hit!');
-                // this.level.enemies.enemyIsHit();
+                console.log(enemy, 'Enemy hit!');
+                this.is_Hurt = true;
+                enemy.hit();
             }
         });
     }

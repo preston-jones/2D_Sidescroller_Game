@@ -10,14 +10,11 @@ class Shot extends MovableObject {
         this.loadImages(this.IMAGES_SHOT);
         // this.width = 10;
         // this.height = 10;
-        // this.x = x;
-        // this.y = y + 15;
+        this.x = x;
+        this.y = y + 15;
         this.width = 60;
         this.height = 50;
-        this.x = 0;
-        this.y = 100;
         this.speed = 2;
-        this.applyGravity();
         this.animateShot(direction);
     }
 
@@ -40,8 +37,8 @@ class Shot extends MovableObject {
                 setInterval(() => {
                     this.playAnimation(this.IMAGES_SHOT);
                 }, 25)
+                console.log(this.is_Hurt);
             }
     }
-
 
 }
