@@ -18,6 +18,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        this.shoot();
     }
 
 
@@ -29,12 +30,18 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkShooting();
         }, 100);
     }
 
 
-    checkShooting() {
+    shoot() {
+        setInterval(() => {
+            this.checkIfShooting();
+        }, 20);
+    }
+
+
+    checkIfShooting() {
         if (this.keyboard.C && this.character.energy > 0) {
             let characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
             this.shots.push(characterShot);
@@ -56,7 +63,8 @@ class World {
     checkCollisionsShot(characterShot) {
         this.level.enemies.forEach((enemy) => {
             if (characterShot.isColliding(enemy)) {
-                this.level.enemies.enemyIsHit();
+                console.log('Enemy hit!');
+                // this.level.enemies.enemyIsHit();
             }
         });
     }
