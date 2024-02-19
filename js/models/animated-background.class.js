@@ -1,14 +1,13 @@
 class AnimatedBackground extends MovableObject {
-
     animate(x, y) {
-
+        setInterval(() => {
             if (world.character.x > 60 && world.character.x < 893 && !world.character.is_Dead && !world.character.is_Hurt) {
                 if (keyboard.RIGHT && !keyboard.LEFT) {
                     if (!keyboard.SHIFTLEFT || !keyboard.SHIFTRIGHT) {
                         this.x -= x;
                     }
                     if (keyboard.SHIFTLEFT || keyboard.SHIFTRIGHT) {
-                        x = 0.5;
+                        // x = 0.5;
                         this.x -= x;
                     }
                 }
@@ -19,7 +18,7 @@ class AnimatedBackground extends MovableObject {
                         this.x += x;
                     }
                     if (keyboard.SHIFTLEFT || keyboard.SHIFTRIGHT) {
-                        x = 0.5;
+                        // x = 0.5;
                         this.x += x;
                     }
                 }
@@ -30,6 +29,6 @@ class AnimatedBackground extends MovableObject {
             // if (keyboard.DOWN && world.character.y > 90) {
             //     this.y -= y;
             // }
-
+        }, 1000 / 60);
     }
 }

@@ -7,6 +7,7 @@ class World {
     camera_x = 0;
     camera_y = 0;
     shots = [];
+    characterShot = [];
     statusbar = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
         new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 24, 10, 10),
@@ -39,19 +40,24 @@ class World {
     shoot() {
         setInterval(() => {
             if (this.keyboard.C && this.character.energy > 0) {
-                let characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
-                this.shots.push(characterShot);
+                characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
+                this.shots.push(this.characterShot);
                 this.character.energy -= 1;
-                this.checkCollisionOfShot(characterShot);
+                this.checkCollisions();
             }
         }, 100);
     }
 
 
-    checkCollisions() {
+    checkCollisions(characterShot) {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
+            }
+            if (characterShot.isColliding(enemy)) {
+                console.log(enemy, 'Enemy hit!');
+                this.is_Hurt = true;
+                enemy.hit();
             }
         });
     }

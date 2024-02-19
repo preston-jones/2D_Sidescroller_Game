@@ -17,8 +17,8 @@ class SkylineFront extends AnimatedBackground {
 
 
     animateBackground() {
-        setInterval(() => {
+
             this.animate(2, 2);
-        }, 1000 / 60);
+
     }
 }
