@@ -12,6 +12,7 @@ class MovableObject extends DrawableObject {
     is_Hurt = false;
     is_Dead = false;
     lastHit = 0;
+    impact = false;
 
 
     isAboveGround() {
@@ -111,5 +112,11 @@ class MovableObject extends DrawableObject {
 
     moveDown(speed) {
         this.y -= speed;
+    }
+
+
+    shotImpact() {
+        console.log('BOOOOOM');
+        impact = true;
     }
 }

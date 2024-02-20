@@ -31,17 +31,6 @@ class DrawableObject {
     }
 
 
-    // drawCharacterFrame(ctx) {
-    //     if (this instanceof Character) {
-    //         ctx.lineWidth = '1';
-    //         ctx.beginPath();
-    //         ctx.strokeStyle = 'white';
-    //         ctx.rect(this.x + adjustmentX, this.y, this.width + adjustmentY, this.height);
-    //         ctx.stroke();
-    //     }
-    // }
-
-
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
