@@ -5,7 +5,7 @@ class Drone extends MovableObject {
     width = 40;
     height = 40;
     speed = 0.5;
-    health = 10;
+    health = 5;
 
     IMAGES_STAY = [
         'assets/sprites/enemies/drone/drone-1.png',

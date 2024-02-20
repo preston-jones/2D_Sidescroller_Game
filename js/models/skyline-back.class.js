@@ -12,14 +12,12 @@ class SkylineBack extends AnimatedBackground {
         this.height = height;
         this.x = x;
         this.y = y;
-        this.animateBackground();
+        this.animate();
     }
 
 
-    animateBackground() {
-
-            this.animate(0.2, 0.2);
-
+    animate() {
+            this.animateBackground(0.2, 0.2);
     }
     
 }

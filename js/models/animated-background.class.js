@@ -1,7 +1,7 @@
 class AnimatedBackground extends MovableObject {
-    animate(x, y) {
+    animateBackground(x, y) {
         setInterval(() => {
-            if (world.character.x > 60 && world.character.x < 893 && !world.character.is_Dead && !world.character.is_Hurt) {
+            if (world && world.character.x > 60 && world.character.x < 893 && !world.character.is_Dead && !world.character.is_Hurt) {
                 if (keyboard.RIGHT && !keyboard.LEFT) {
                     if (!keyboard.SHIFTLEFT || !keyboard.SHIFTRIGHT) {
                         this.x -= x;
@@ -12,7 +12,7 @@ class AnimatedBackground extends MovableObject {
                     }
                 }
             }
-            if (world.character.x > 60 && world.character.x < 893 && !world.character.is_Dead && !world.character.is_Hurt) {            
+            if (world && world.character.x > 60 && world.character.x < 893 && !world.character.is_Dead && !world.character.is_Hurt) {            
                 if (keyboard.LEFT && !keyboard.RIGHT) {
                     if (!keyboard.SHIFTLEFT || !keyboard.SHIFTRIGHT) {
                         this.x += x;

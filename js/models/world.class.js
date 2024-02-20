@@ -39,25 +39,20 @@ class World {
 
     shoot() {
         setInterval(() => {
-            if (this.keyboard.C && this.character.energy > 0) {
-                characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
+            if (this.keyboard.C && this.character.energy > 0 && !this.character.is_Dead) {
+                this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
                 this.shots.push(this.characterShot);
                 this.character.energy -= 1;
-                this.checkCollisions();
+                this.checkCollisionOfShot(this.characterShot);
             }
-        }, 100);
+        }, 120);
     }
 
 
-    checkCollisions(characterShot) {
+    checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-            }
-            if (characterShot.isColliding(enemy)) {
-                console.log(enemy, 'Enemy hit!');
-                this.is_Hurt = true;
-                enemy.hit();
             }
         });
     }

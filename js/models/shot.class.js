@@ -11,7 +11,7 @@ class Shot extends MovableObject {
         // this.width = 10;
         // this.height = 10;
         this.x = x;
-        this.y = y + 15;
+        this.y = y;
         this.width = 60;
         this.height = 50;
         this.speed = 2;
@@ -37,7 +37,6 @@ class Shot extends MovableObject {
                 setInterval(() => {
                     this.playAnimation(this.IMAGES_SHOT);
                 }, 25)
-                console.log(this.is_Hurt);
             }
     }
 
