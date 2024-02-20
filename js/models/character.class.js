@@ -9,6 +9,7 @@ class Character extends MovableObject {
     health_MAX = 100;
     energy = 10;
     energy_MAX = 10;
+    characterBottom = world.level.level_end_bottom_y;
 
     IMAGES_STAY = [
         'assets/sprites/character/player_female/idle/idle-1.png',

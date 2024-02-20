@@ -33,6 +33,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.isOnPlatform();
         }, 100);
     }
 
@@ -46,6 +47,18 @@ class World {
                 this.checkCollisionOfShot(this.characterShot);
             }
         }, 120);
+    }
+
+
+    isOnPlatform() {
+        if (this.level.playground[0].y > this.character.y + this.character.height && this.level.playground[0].y + this.level.playground[0].width > this.character.x + this.character.height) {
+            console.log('is above');
+            console.log(this.level.playground[0].y);
+            this.character.characterBottom = 39;
+        }
+        else {
+            this.level.level_end_bottom_y = 99;
+        }
     }
 
 
@@ -91,9 +104,11 @@ class World {
 
         this.addObjectsToMap(this.level.animatedObjectBack);
         this.addObjectsToMap(this.level.animatedBackgroundFront);
+
         // this.addObjectsToMap(this.level.VehiclesFront);
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);
+        this.addObjectsToMap(this.level.playground);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.collectibles);
 
