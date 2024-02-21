@@ -22,13 +22,26 @@ class MovableObject extends DrawableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) {
-                this.y -= this.speedY;
-                this.speedY -= this.acceleration;
+            if (!world.isOnPlatform) {
+                world.isOnPlatform = false;
+                if (this.isAboveGround() || this.speedY > 0) {
+                    this.y -= this.speedY;
+                    this.speedY -= this.acceleration;
+                }
+                else {
+                    this.y = world.level.level_end_bottom_y;
+                }
             }
-            else {
-                this.y = world.level.level_end_bottom_y;
+            if (world.isOnPlatform && this instanceof Character) {
+                if (this.isAboveGround() || this.speedY > 0) {
+                    this.y -= this.speedY;
+                    this.speedY -= this.acceleration;
+                }
+                else {
+                    this.y = 39;
+                }
             }
+
         }, 1000 / 25)
     }
 
@@ -46,6 +59,10 @@ class MovableObject extends DrawableObject {
                 (this.y + this.height > obj.y) &&
                 ((this.x + 18) < obj.x) &&
                 (this.y < obj.y + obj.height);
+        }
+        if (this instanceof Character && obj == world.level.playground[0]) {
+            return ((this.x + 18) + (this.width - 30) > obj.x) &&
+                ((this.x + 18) < obj.x)
         }
 
         else {

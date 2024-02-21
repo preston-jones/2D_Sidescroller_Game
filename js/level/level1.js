@@ -50,7 +50,8 @@ const level1 = new Level(
         new SkylineFront('assets/environment/background/near-buildings-b-bg.png', 1900, 10, 400, 150),
     ],
     [
-        new Playground('assets/environment/floor.png', 10, 90, 180, 10),
+        new Playground('assets/environment/floor.png', 100, 90, 180, 10),
+        new Playground('assets/environment/floor.png', 400, 90, 180, 10)
     ],
     [
         new CollectibleEnergy(200, 130, 15, 15)

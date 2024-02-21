@@ -6,6 +6,7 @@ class World {
     keyboard;
     camera_x = 0;
     camera_y = 0;
+    isOnPlatform = false;
     shots = [];
     characterShot = [];
     statusbar = [
@@ -33,7 +34,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.isOnPlatform();
+            this.checkIfOnPlatform();
         }, 100);
     }
 
@@ -50,15 +51,18 @@ class World {
     }
 
 
-    isOnPlatform() {
-        if (this.level.playground[0].y > this.character.y + this.character.height && this.level.playground[0].y + this.level.playground[0].width > this.character.x + this.character.height) {
-            console.log('is above');
-            console.log(this.level.playground[0].y);
-            this.character.characterBottom = 39;
-        }
-        else {
-            this.level.level_end_bottom_y = 99;
-        }
+    checkIfOnPlatform() {
+        this.level.playground.forEach((platform) => {
+            if (this.character.isColliding(platform)) {
+                console.log('is above');
+                console.log(this.level.playground[0].y);
+                this.isOnPlatform = true;
+            }
+            else {
+                console.log('is on Ground');
+                this.isOnPlatform = false;
+            }
+        });
     }
 
 
