@@ -22,7 +22,7 @@ class MovableObject extends DrawableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (!world.isOnPlatform) {
+            if (world && !world.isOnPlatform) {
                 world.isOnPlatform = false;
                 if (this.isAboveGround() || this.speedY > 0) {
                     this.y -= this.speedY;
@@ -32,7 +32,7 @@ class MovableObject extends DrawableObject {
                     this.y = world.level.level_end_bottom_y;
                 }
             }
-            if (world.isOnPlatform && this instanceof Character) {
+            if (world && world.isOnPlatform && this instanceof Character) {
                 if (this.isAboveGround() || this.speedY > 0) {
                     this.y -= this.speedY;
                     this.speedY -= this.acceleration;
