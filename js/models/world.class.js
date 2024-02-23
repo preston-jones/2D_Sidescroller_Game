@@ -54,12 +54,12 @@ class World {
     checkIfOnPlatform() {
         this.level.playground.forEach((platform) => {
             if (this.character.isColliding(platform)) {
-                console.log('is above');
+                // console.log('is above');
                 console.log(this.level.playground[0].y);
                 this.isOnPlatform = true;
             }
             else {
-                console.log('is on Ground');
+                // console.log('is on Ground');
                 this.isOnPlatform = false;
             }
         });

@@ -60,10 +60,14 @@ class MovableObject extends DrawableObject {
                 ((this.x + 18) < obj.x) &&
                 (this.y < obj.y + obj.height);
         }
-        if (this instanceof Character && obj == world.level.playground[0]) {
-            return ((this.x + 18) + (this.width - 30) > obj.x) &&
-                ((this.x + 18) < obj.x)
+        if (this instanceof Shot) {
+            return (this.x + this.width > obj.x) &&
+                (this.y + this.height > obj.y);
         }
+        // if (this instanceof Character && obj == world.level.playground[0]) {
+        //     return ((this.x + 18) + (this.width - 30) > obj.x) &&
+        //         ((this.x + 18) < obj.x)
+        // }
 
         else {
             return (this.x + this.width > obj.x) &&
