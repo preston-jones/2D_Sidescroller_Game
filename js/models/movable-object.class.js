@@ -14,6 +14,15 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     impact = false;
 
+    IMAGES_ENEMY_DEAD = [
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-1.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-2.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-3.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-4.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-5.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-6.png',
+    ];
+
 
     isAboveGround() {
         return this.y < world.level.level_end_bottom_y;
@@ -116,13 +125,25 @@ class MovableObject extends DrawableObject {
 
     moveToLeft(speed) {
         this.x -= speed;
-        this.otherDirection = true;
+        if (this instanceof Character) {
+            this.otherDirection = true;
+        }
     }
 
 
     moveToRight(speed) {
         this.x += speed;
-        this.otherDirection = false;
+        if (this instanceof Character) {
+            this.otherDirection = false;
+        }
+    }
+
+
+    stay() {
+        this.x += 0;
+        if (this instanceof Character) {
+            this.otherDirection = false;
+        }
     }
 
 
@@ -139,5 +160,10 @@ class MovableObject extends DrawableObject {
     shotImpact() {
         console.log('BOOOOOM');
         impact = true;
+    }
+
+
+    playAnimation_Enemy_DEAD() {
+        this.playAnimation(this.IMAGES_ENEMY_DEAD);
     }
 }
