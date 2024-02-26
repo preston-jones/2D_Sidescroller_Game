@@ -31,32 +31,12 @@ class Cop extends MovableObject {
         this.x = 250 + Math.random() * 1000;
         this.loadImages(this.IMAGES_RUN);
         this.applyGravity();
-        this.animateCop();
+        // this.animateCop();
     }
 
 
     animateCop() {
-        console.log(this.is_Dead);
-
-        setInterval(() => {
-            if (!this.is_Dead) {
-                this.moveToLeft(this.speed);
-            }
-            if (this.is_Dead) {
-                this.stay();
-            }
-        }, 1000 / 60);
-
-        setInterval(() => {
-            if (!this.is_Dead) {
-                this.playAnimation(this.IMAGES_RUN);
-            }
-            if (this.is_Dead) {
-                console.log('cop is dead');
-                this.playAnimation_Enemy_DEAD();
-            }
-
-        }, 130);
+        this.animateEnemie(this.IMAGES_RUN);
     }
 
 }

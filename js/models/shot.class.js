@@ -25,10 +25,11 @@ class Shot extends MovableObject {
 
     animateShot(direction) {
         if (this.impact) {
+            console.log('IMPACT');
             this.x = this.x;
             this.playAnimation(this.IMAGES_SHOT);
         }
-        if (direction) {
+        if (direction && !this.impact) {
             this.x = this.x;
             setInterval(() => {
                 this.x -= this.speed;
@@ -37,7 +38,7 @@ class Shot extends MovableObject {
                 this.playAnimation(this.IMAGES_SHOT);
             }, 25)
         }
-        if (!direction) {
+        if (!direction && !this.impact) {
             this.x = this.x + 50;
             setInterval(() => {
                 this.x += this.speed;

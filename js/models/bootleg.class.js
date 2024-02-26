@@ -25,18 +25,20 @@ class Bootleg extends MovableObject {
         this.x = 250 + Math.random() * 1000;
         this.loadImages(this.IMAGES_RUN);
         this.applyGravity();
-        this.animateEnemie();
+        this.animateBootleg(this.IMAGES_RUN);
     }
 
 
-    animateEnemie() {
+    animateBootleg(images_arr) {
         this.otherDirection = true;
-        setInterval(() => {
-            this.x -= this.speed;
-        }, 1000 / 60);
+        this.animateEnemie(images_arr);
+        this.checkIfHurt();
+    }
 
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_RUN);
-        }, 300);
+
+    checkIfHurt() {
+        if (this.isHurt() && !this.is_Dead) {
+            console.log('is hit');
+        }
     }
 }

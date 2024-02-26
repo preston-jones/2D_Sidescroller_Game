@@ -76,14 +76,15 @@ class World {
 
 
     checkCollisionOfShot(characterShot) {
+        setInterval(() => {
         this.level.enemies.forEach((enemy) => {
             if (characterShot.isColliding(enemy)) {
                 characterShot.impact = true;
-                console.log(enemy, 'Enemy hit!');
                 enemy.hit();
             }
         });
-        characterShot.impact = false;
+        // characterShot.impact = false;
+    }, 100);
     }
 
 

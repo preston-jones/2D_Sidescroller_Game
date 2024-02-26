@@ -14,7 +14,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     impact = false;
 
-    IMAGES_ENEMY_DEAD = [
+    IMAGES_ENEMY_EXPLOTION = [
         'assets/sprites/misc/enemy-explosion/enemy-explosion-1.png',
         'assets/sprites/misc/enemy-explosion/enemy-explosion-2.png',
         'assets/sprites/misc/enemy-explosion/enemy-explosion-3.png',
@@ -70,8 +70,10 @@ class MovableObject extends DrawableObject {
                 (this.y < obj.y + obj.height);
         }
         if (this instanceof Shot) {
-            return (this.x + this.width > obj.x) &&
-                (this.y + this.height > obj.y);
+            return (this.x < obj.x + obj.width) &&
+            (this.x + this.width > obj.x) &&
+            (this.y < obj.y + obj.height) &&
+            (this.y + this.height > obj.y);
         }
         // if (this instanceof Character && obj == world.level.playground[0]) {
         //     return ((this.x + 18) + (this.width - 30) > obj.x) &&
@@ -140,10 +142,7 @@ class MovableObject extends DrawableObject {
 
 
     stay() {
-        this.x += 0;
-        if (this instanceof Character) {
-            this.otherDirection = false;
-        }
+        this.x = this.x;
     }
 
 
@@ -164,6 +163,28 @@ class MovableObject extends DrawableObject {
 
 
     playAnimation_Enemy_DEAD() {
-        this.playAnimation(this.IMAGES_ENEMY_DEAD);
+        this.playAnimation(this.IMAGES_ENEMY_EXPLOTION);
     }
+
+    
+    animateEnemie(images_arr) {
+        setInterval(() => {
+            if (!this.is_Dead) {
+                this.moveToLeft(this.speed);
+            }
+            if (this.is_Dead) {
+                this.stay();
+            }
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if (!this.is_Dead) {
+                this.playAnimation(images_arr);
+            }
+            if (this.is_Dead) {
+                this.playAnimation_Enemy_DEAD();
+            }
+        }, 300);
+    }
+
 }

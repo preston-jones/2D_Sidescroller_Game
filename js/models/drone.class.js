@@ -23,7 +23,7 @@ class Drone extends MovableObject {
         this.x = Math.round(250 + Math.random() * 500);
         this.loadImages(this.IMAGES_FLY);
         this.applyGravity();
-        this.animateDrone();
+        // this.animateDrone();
     }
 
 

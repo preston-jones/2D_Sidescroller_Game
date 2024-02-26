@@ -6,10 +6,22 @@ class DrawableObject {
     y;
     height;
     width;
+    prevImageSrc;
 
 
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        if (!this.img) {
+            this.img = new Image();
+            if (this instanceof Character) {this.img.src = 'assets/sprites/character/player_female/shoot/shoot.png';}
+            if (this instanceof Cop) {this.img.src = 'assets/sprites/enemies/cop/idle/cop2.png';}
+            if (this instanceof Bootleg) {this.img.src = 'assets/sprites/enemies/Bootleg/bootleg-idle.png';}
+            if (this instanceof Drone) {this.img.src = 'assets/sprites/enemies/drone/drone-1.png';}
+            this.img.onload = () => {
+                ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+            };
+        } else {
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        }
     }
 
 
