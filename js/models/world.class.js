@@ -55,7 +55,6 @@ class World {
         this.level.playground.forEach((platform) => {
             if (this.character.isColliding(platform)) {
                 // console.log('is above');
-                console.log(this.level.playground[0].y);
                 this.isOnPlatform = true;
             }
             else {
@@ -143,7 +142,7 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
+        // movableObject.drawFrame(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
