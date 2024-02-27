@@ -14,7 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    background-color: #00003C;
+    background-color: rgb(3,27,112);
     background-image: url('assets/img/skyline.png');
     /* background-image: url('assets/img/retro-2426631_1280.png'); */
     background-repeat: no-repeat;
@@ -44,14 +44,14 @@ canvas {
 }
 
 h1 {
-    font-size: 90px;
+    font-size: 72px;
     font-family: 'Pixelify Sans', sans-serif;
-    margin-bottom: 0;
+    margin: 0;
     text-shadow: -9px -7px 2px #505050;
 }
 
 h2 {
-    font-size: 80px;
+    font-size: 62px;
     margin: 36px 0 0 0;
     color: #e7d63f;
     text-shadow: -4px -3px 2px #505050;
