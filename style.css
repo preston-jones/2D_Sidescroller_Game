@@ -25,13 +25,10 @@ body {
 
 canvas {
     display: block;
-    /* width: 384px;
-    height: 224px; */
-    background-color: black;
     width: 768px;
-    height: 448px;
-    image-rendering: pixelated;
-    aspect-ratio: auto 768 / 448;
+    /* height: 384px;
+    image-rendering: pixelated; */
+    /* aspect-ratio: auto 768 / 448; */
     /* display: none; */
 }
 
@@ -40,7 +37,7 @@ canvas {
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    margin: 32px 0 32px 0;
+    margin-top: 32px;
 }
 
 h1 {
@@ -95,9 +92,9 @@ h2 {
     z-index: 10;
     position: absolute;
     bottom: -30px;
-    left: 0;
-    width: 845px;
-    height: 566px;
+    left: -15px;
+    width: 854px;
+    height: 490px;
 }
 
 p {
