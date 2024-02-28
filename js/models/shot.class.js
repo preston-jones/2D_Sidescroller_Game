@@ -24,8 +24,9 @@ class Shot extends MovableObject {
 
 
     animateShot(direction) {
-        if (this.impact) {
-            console.log('IMPACT');
+        console.log(world);
+        if (world && this.impact) {
+            console.log('GETROFFEN');
             this.x = this.x;
             this.playAnimation(this.IMAGES_SHOT);
         }

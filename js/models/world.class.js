@@ -34,7 +34,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkIfOnPlatform();
+            // this.checkIfOnPlatform();
         }, 100);
     }
 
@@ -42,6 +42,7 @@ class World {
     shoot() {
         setInterval(() => {
             if (this.keyboard.C && this.character.energy > 0 && !this.character.is_Dead) {
+                this.characterShot = [];
                 this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
                 this.shots.push(this.characterShot);
                 this.character.energy -= 1;
@@ -142,7 +143,7 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        // movableObject.drawFrame(this.ctx);
+        movableObject.drawFrame(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
