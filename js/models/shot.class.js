@@ -14,6 +14,7 @@ class Shot extends MovableObject {
     constructor(x, y, direction) {
         super().loadImage('assets/sprites/misc/shot/shot-1.png');
         this.loadImages(this.IMAGES_SHOT);
+        this.loadImages(this.IMAGES_SHOT_HIT);
         this.width = 10;
         this.height = 10;
         this.x = x;
@@ -24,30 +25,43 @@ class Shot extends MovableObject {
 
 
     animateShot(direction) {
-        console.log(world);
-        if (world && this.impact) {
-            console.log('GETROFFEN');
-            this.x = this.x;
-            this.playAnimation(this.IMAGES_SHOT);
-        }
         if (direction && !this.impact) {
             this.x = this.x;
             setInterval(() => {
-                this.x -= this.speed;
+                if (this.impact) {
+                    this.x = this.x;
+                }
+                if (!this.impact) {
+                    this.x -= this.speed;
+                }
             }, 1000 / 60)
             setInterval(() => {
-                this.playAnimation(this.IMAGES_SHOT);
+                if (!this.impact) {
+                    this.playAnimation(this.IMAGES_SHOT);
+                }
             }, 25)
         }
         if (!direction && !this.impact) {
             this.x = this.x + 50;
             setInterval(() => {
-                this.x += this.speed;
+                if (this.impact) {
+                    this.x = this.x;
+                }
+                if (!this.impact) {
+                    this.x += this.speed;
+                }
             }, 1000 / 60)
             setInterval(() => {
-                this.playAnimation(this.IMAGES_SHOT);
+                if (!this.impact) {
+                    this.playAnimation(this.IMAGES_SHOT);
+                }
             }, 25)
         }
+    }
+
+
+    animateImpact() {
+        this.playAnimation(this.IMAGES_SHOT_HIT);
     }
 
 }

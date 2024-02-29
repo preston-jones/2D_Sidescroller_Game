@@ -46,7 +46,7 @@ class World {
                 this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
                 this.shots.push(this.characterShot);
                 this.character.energy -= 1;
-                this.checkCollisionOfShot(this.characterShot);
+                this.shotInterval(this.characterShot);
             }
         }, 120);
     }
@@ -75,16 +75,21 @@ class World {
     }
 
 
+    shotInterval(characterShot) {
+        let shot_Interrval = setInterval(this.checkCollisionOfShot(characterShot), 100);
+        clearInterval(shot_Interrval);
+    }
+
+
     checkCollisionOfShot(characterShot) {
-        setInterval(() => {
         this.level.enemies.forEach((enemy) => {
             if (characterShot.isColliding(enemy)) {
                 characterShot.impact = true;
+                characterShot.animateImpact();
+                console.log('GETROFFEN');
                 enemy.hit();
             }
         });
-        // characterShot.impact = false;
-    }, 100);
     }
 
 
