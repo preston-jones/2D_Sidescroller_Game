@@ -25,38 +25,38 @@ class Shot extends MovableObject {
 
 
     animateShot(direction) {
-        if (direction && !this.impact) {
+        let hit = false;
+        let animationInterval;
+    
+        const checkCollisionAndAnimate = () => {
+            if (hit) {
+                clearInterval(animationInterval);
+                this.animateImpact();
+                setTimeout(() => {
+                    const shotIndex = world.shots.indexOf(this);
+                    if (shotIndex > -1) {
+                        world.shots.splice(shotIndex, 1);
+                    }
+                }, 100); // Adjust timeout to match the hit animation duration
+            } else {
+                this.x += direction ? -this.speed : this.speed;
+                this.playAnimation(this.IMAGES_SHOT);
+                world.level.enemies.forEach(enemy => {
+                    if (this.isColliding(enemy)) {
+                        hit = true;
+                        enemy.hit();
+                    }
+                });
+            }
+        };
+    
+        if (direction) {
             this.x = this.x;
-            setInterval(() => {
-                if (this.impact) {
-                    this.x = this.x;
-                }
-                if (!this.impact) {
-                    this.x -= this.speed;
-                }
-            }, 1000 / 60)
-            setInterval(() => {
-                if (!this.impact) {
-                    this.playAnimation(this.IMAGES_SHOT);
-                }
-            }, 25)
-        }
-        if (!direction && !this.impact) {
+        } else {
             this.x = this.x + 50;
-            setInterval(() => {
-                if (this.impact) {
-                    this.x = this.x;
-                }
-                if (!this.impact) {
-                    this.x += this.speed;
-                }
-            }, 1000 / 60)
-            setInterval(() => {
-                if (!this.impact) {
-                    this.playAnimation(this.IMAGES_SHOT);
-                }
-            }, 25)
         }
+    
+        animationInterval = setInterval(checkCollisionAndAnimate, 1000 / 60);
     }
 
 

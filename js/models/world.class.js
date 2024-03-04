@@ -46,23 +46,9 @@ class World {
                 this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
                 this.shots.push(this.characterShot);
                 this.character.energy -= 1;
-                this.shotInterval(this.characterShot);
+                // this.checkShotCollision(this.characterShot);
             }
         }, 120);
-    }
-
-
-    checkIfOnPlatform() {
-        this.level.playground.forEach((platform) => {
-            if (this.character.isColliding(platform)) {
-                // console.log('is above');
-                this.isOnPlatform = true;
-            }
-            else {
-                // console.log('is on Ground');
-                this.isOnPlatform = false;
-            }
-        });
     }
 
 
@@ -75,13 +61,7 @@ class World {
     }
 
 
-    shotInterval(characterShot) {
-        let shot_Interrval = setInterval(this.checkCollisionOfShot(characterShot), 100);
-        clearInterval(shot_Interrval);
-    }
-
-
-    checkCollisionOfShot(characterShot) {
+    checkShotCollision(characterShot) {
         this.level.enemies.forEach((enemy) => {
             if (characterShot.isColliding(enemy)) {
                 characterShot.impact = true;

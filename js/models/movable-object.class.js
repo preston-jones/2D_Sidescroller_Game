@@ -99,6 +99,7 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
+        console.log('hit');
         if (this.x > 0 && !this.is_Dead) {
             this.health -= 5;
             this.is_Hurt = true;
@@ -168,21 +169,30 @@ class MovableObject extends DrawableObject {
 
     
     animateEnemie(images_arr) {
-        setInterval(() => {
+        let moveInterval = setInterval(() => {
             if (!this.is_Dead) {
                 this.moveToLeft(this.speed);
             }
             if (this.is_Dead) {
+                clearInterval(moveInterval);
                 this.stay();
+                this.playAnimation_Enemy_DEAD();
             }
         }, 1000 / 60);
-
-        setInterval(() => {
+    
+        let animateInterval = setInterval(() => {
             if (!this.is_Dead) {
                 this.playAnimation(images_arr);
             }
             if (this.is_Dead) {
-                this.playAnimation_Enemy_DEAD();
+                clearInterval(animateInterval);
+                setTimeout(() => {
+                    // Assuming world.enemies is the array holding all enemy objects
+                    let index = world.level.enemies.indexOf(this);
+                    if (index > -1) {
+                        world.level.enemies.splice(index, 1);
+                    }
+                }, 300); // Adjust the timeout to match the length of the death animation
             }
         }, 300);
     }
