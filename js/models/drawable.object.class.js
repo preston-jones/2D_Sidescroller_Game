@@ -12,21 +12,22 @@ class DrawableObject {
     draw(ctx) {
         if (!this.img) {
             this.img = new Image();
-            if (this instanceof Character) {this.img.src = 'assets/sprites/character/player_female/shoot/shoot.png';}
-            if (this instanceof Cop) {this.img.src = 'assets/sprites/enemies/cop/idle/cop2.png';}
-            if (this instanceof Bootleg) {this.img.src = 'assets/sprites/enemies/Bootleg/bootleg-idle.png';}
-            if (this instanceof Drone) {this.img.src = 'assets/sprites/enemies/drone/drone-1.png';}
+            if (this instanceof Character) { this.img.src = 'assets/sprites/character/player_female/shoot/shoot.png'; }
+            if (this instanceof Cop) { this.img.src = 'assets/sprites/enemies/cop/idle/cop2.png'; }
+            if (this instanceof Bootleg) { this.img.src = 'assets/sprites/enemies/Bootleg/bootleg-idle.png'; }
+            if (this instanceof Drone) { this.img.src = 'assets/sprites/enemies/drone/drone-1.png'; }
             this.img.onload = () => {
                 ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
             };
-        } else {
+        }
+        else {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         }
     }
 
 
     drawFrame(ctx) {
-        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone || this instanceof Shot || this instanceof  CollectibleEnergy || this instanceof  Playground) {
+        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone || this instanceof Shot || this instanceof CollectibleEnergy || this instanceof Playground) {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';
@@ -37,7 +38,7 @@ class DrawableObject {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';
-            ctx.rect(this.x + 18, this.y, this.width -30, this.height);
+            ctx.rect(this.x + 18, this.y, this.width - 30, this.height);
             ctx.stroke();
         }
     }
@@ -56,7 +57,7 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
-    
+
 
     playAnimation(arr) {
         let i = this.currentImage % arr.length;// Modulu Function let i = 0 % 8; 0 geteilt durch 8 = 0, Rest 0

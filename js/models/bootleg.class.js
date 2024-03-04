@@ -18,12 +18,22 @@ class Bootleg extends MovableObject {
         'assets/sprites/enemies/Bootleg Walk/bootleg-walk5.png',
         'assets/sprites/enemies/Bootleg Walk/bootleg-walk6.png',
     ];
+    IMAGES_ENEMY_EXPLOTION = [
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-1.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-2.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-3.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-4.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-5.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-6.png',
+    ];
+
     currentImage = 0;
 
     constructor() {
         super().loadImage('assets/sprites/enemies/Bootleg/bootleg-idle.png');
         this.x = 250 + Math.random() * 1000;
         this.loadImages(this.IMAGES_RUN);
+        this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();
         this.animateBootleg(this.IMAGES_RUN);
     }
@@ -31,7 +41,7 @@ class Bootleg extends MovableObject {
 
     animateBootleg(images_arr) {
         this.otherDirection = true;
-        this.animateEnemie(images_arr);
+        this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
         this.checkIfHurt();
     }
 

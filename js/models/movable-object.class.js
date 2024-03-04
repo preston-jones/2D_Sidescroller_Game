@@ -14,16 +14,6 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     impact = false;
 
-    IMAGES_ENEMY_EXPLOTION = [
-        'assets/sprites/misc/enemy-explosion/enemy-explosion-1.png',
-        'assets/sprites/misc/enemy-explosion/enemy-explosion-2.png',
-        'assets/sprites/misc/enemy-explosion/enemy-explosion-3.png',
-        'assets/sprites/misc/enemy-explosion/enemy-explosion-4.png',
-        'assets/sprites/misc/enemy-explosion/enemy-explosion-5.png',
-        'assets/sprites/misc/enemy-explosion/enemy-explosion-6.png',
-    ];
-
-
     isAboveGround() {
         return this.y < world.level.level_end_bottom_y;
     }
@@ -163,20 +153,19 @@ class MovableObject extends DrawableObject {
     }
 
 
-    playAnimation_Enemy_DEAD() {
-        this.playAnimation(this.IMAGES_ENEMY_EXPLOTION);
+    playAnimation_Enemy_DEAD(array) {
+        this.playAnimation(array);
     }
 
-    
-    animateEnemie(images_arr) {
+
+    animateEnemie(images_arr, array) {
         let moveInterval = setInterval(() => {
             if (!this.is_Dead) {
                 this.moveToLeft(this.speed);
             }
             if (this.is_Dead) {
-                clearInterval(moveInterval);
                 this.stay();
-                this.playAnimation_Enemy_DEAD();
+                clearInterval(moveInterval);
             }
         }, 1000 / 60);
     
@@ -185,6 +174,8 @@ class MovableObject extends DrawableObject {
                 this.playAnimation(images_arr);
             }
             if (this.is_Dead) {
+                console.log('Enemy is dead, playing death animation');
+                this.playAnimation_Enemy_DEAD(array);
                 clearInterval(animateInterval);
                 setTimeout(() => {
                     // Assuming world.enemies is the array holding all enemy objects
