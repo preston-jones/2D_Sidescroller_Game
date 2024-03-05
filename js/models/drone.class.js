@@ -16,20 +16,28 @@ class Drone extends MovableObject {
         'assets/sprites/enemies/drone/drone-3.png',
         'assets/sprites/enemies/drone/drone-4.png'
     ];
+    IMAGES_ENEMY_EXPLOTION = [
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-1.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-2.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-3.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-4.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-5.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-6.png',
+    ];
     currentImage = 0;
 
     constructor() {
         super().loadImage('assets/sprites/enemies/drone/drone-1.png');
         this.x = Math.round(250 + Math.random() * 500);
         this.loadImages(this.IMAGES_FLY);
+        this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();
-        // this.animateDrone();
+        this.animateDrone(this.IMAGES_FLY);
     }
 
 
-    animateDrone() {
-        setInterval(() => {
-                this.x -= this.speed
-        }, 1000 / 60);
+    animateDrone(images_arr) {
+        this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
+        this.checkIfHurt();
     }
 }

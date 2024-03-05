@@ -57,6 +57,12 @@ class World {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
             }
+            if (this.characterShot[0].isColliding(enemy)) {
+                this.characterShot.impact = true;
+                this.characterShot.animateImpact();
+                console.log('GETROFFEN');
+                enemy.hit();
+            }
         });
     }
 

@@ -53,29 +53,27 @@ class MovableObject extends DrawableObject {
 
 
     isColliding(obj) {
-        if (this instanceof Character) {
-            return ((this.x + 18) + (this.width - 30) > obj.x) &&
-                (this.y + this.height > obj.y) &&
-                ((this.x + 18) < obj.x) &&
-                (this.y < obj.y + obj.height);
-        }
-        if (this instanceof Shot) {
+        // if (this instanceof Character) {
+        //     return (this.x + 18 + (this.width - 30) > obj.x + 18) &&
+        //         (this.y + this.height > obj.y) &&
+        //         (this.x + 18 < obj.x + 18) &&
+        //         (this.y < obj.y + obj.height);
+        // }
             return (this.x < obj.x + obj.width) &&
             (this.x + this.width > obj.x) &&
             (this.y < obj.y + obj.height) &&
             (this.y + this.height > obj.y);
-        }
         // if (this instanceof Character && obj == world.level.playground[0]) {
         //     return ((this.x + 18) + (this.width - 30) > obj.x) &&
         //         ((this.x + 18) < obj.x)
         // }
 
-        else {
-            return (this.x + this.width > obj.x) &&
-                (this.y + this.height > obj.y) &&
-                (this.x < obj.x) &&
-                (this.y < obj.y + obj.height);
-        }
+        // else {
+        //     return (this.x + this.width > obj.x) &&
+        //         (this.y + this.height > obj.y) &&
+        //         (this.x < obj.x) &&
+        //         (this.y < obj.y + obj.height);
+        // }
     }
 
 
@@ -183,9 +181,16 @@ class MovableObject extends DrawableObject {
                     if (index > -1) {
                         world.level.enemies.splice(index, 1);
                     }
-                }, 300); // Adjust the timeout to match the length of the death animation
+                }, 100); // Adjust the timeout to match the length of the death animation
             }
-        }, 300);
+        }, 150);
+    }
+
+
+    checkIfHurt() {
+        if (this.isHurt() && !this.is_Dead) {
+            console.log('is hit');
+        }
     }
 
 }

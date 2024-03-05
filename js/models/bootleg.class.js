@@ -45,10 +45,4 @@ class Bootleg extends MovableObject {
         this.checkIfHurt();
     }
 
-
-    checkIfHurt() {
-        if (this.isHurt() && !this.is_Dead) {
-            console.log('is hit');
-        }
-    }
 }

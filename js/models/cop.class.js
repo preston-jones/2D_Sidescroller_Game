@@ -24,19 +24,29 @@ class Cop extends MovableObject {
         'assets/sprites/enemies/cop/run/cop9.png',
         'assets/sprites/enemies/cop/run/cop10.png',
     ];
+    IMAGES_ENEMY_EXPLOTION = [
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-1.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-2.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-3.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-4.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-5.png',
+        'assets/sprites/misc/enemy-explosion/enemy-explosion-6.png',
+    ];
     currentImage = 0;
 
     constructor() {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
         this.x = 250 + Math.random() * 1000;
         this.loadImages(this.IMAGES_RUN);
+        this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();
-        // this.animateCop();
+        this.animateCop(this.IMAGES_RUN);
     }
 
 
-    animateCop() {
-        this.animateEnemie(this.IMAGES_RUN);
+    animateCop(images_arr) {
+        this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
+        this.checkIfHurt();
     }
 
 }
