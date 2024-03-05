@@ -7,7 +7,7 @@ class World {
     camera_x = 0;
     camera_y = 0;
     isOnPlatform = false;
-    shots = [];
+    shots = [new Shot()];
     characterShot = [];
     statusbar = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
@@ -46,7 +46,7 @@ class World {
                 this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
                 this.shots.push(this.characterShot);
                 this.character.energy -= 1;
-                // this.checkShotCollision(this.characterShot);
+                this.checkCollisions();
             }
         }, 120);
     }
@@ -57,7 +57,7 @@ class World {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
             }
-            if (this.characterShot[0].isColliding(enemy)) {
+            if (this.characterShot.isColliding(enemy)) {
                 this.characterShot.impact = true;
                 this.characterShot.animateImpact();
                 console.log('GETROFFEN');
