@@ -34,14 +34,14 @@ class DrawableObject {
             ctx.rect(this.x + 18, this.y, this.width - 30, this.height);
             ctx.stroke();
         }
-        if (this instanceof Shot) {
+        if (this instanceof Shot || this instanceof CollectibleEnergy) {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-        if (this instanceof CollectibleEnergy || this instanceof Drone || this instanceof Cop || this instanceof Bootleg) {
+        if (this instanceof Drone || this instanceof Cop || this instanceof Bootleg) {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';

@@ -46,9 +46,9 @@ class World {
                 this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
                 this.shots.push(this.characterShot);
                 this.character.energy -= 1;
-                this.checkCollisions();
+                this.checkShotCollision(characterShot);
             }
-        }, 120);
+        }, 100);
     }
 
 
@@ -56,12 +56,6 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-            }
-            if (this.characterShot.isColliding(enemy)) {
-                this.characterShot.impact = true;
-                this.characterShot.animateImpact();
-                console.log('GETROFFEN');
-                enemy.hit();
             }
         });
     }
