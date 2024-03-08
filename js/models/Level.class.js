@@ -7,7 +7,7 @@ class Level {
     animatedBackgroundBack;
     animatedBackgroundFront;
     playground;
-    collectibles;
+    collectibles_energy;
 
     level_start_x = -1;
     level_end_x = 1130;
@@ -15,7 +15,7 @@ class Level {
     // level_end_bottom_y = 99;
 
 
-    constructor(enemies, animatedObjectFront, animatedObjectBack, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles) {
+    constructor(enemies, animatedObjectFront, animatedObjectBack, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy) {
         this.enemies = enemies;
         this.animatedObjectFront = animatedObjectFront;
         this.animatedObjectBack = animatedObjectBack;
@@ -23,6 +23,6 @@ class Level {
         this.animatedBackgroundBack = animatedBackgroundBack;
         this.animatedBackgroundFront = animatedBackgroundFront;
         this.playground = playground;
-        this.collectibles = collectibles;
+        this.collectibles_energy = collectibles_energy;
     }
 }

@@ -53,37 +53,11 @@ class MovableObject extends DrawableObject {
 
 
     isColliding(obj) {
-        // if (this instanceof Character) {
-        //     return (this.x + 18 + (this.width - 30) > obj.x + 18) &&
-        //         (this.y + this.height > obj.y) &&
-        //         (this.x + 18 < obj.x + 18) &&
-        //         (this.y < obj.y + obj.height);
-        // }
-            return (this.x < obj.x + obj.width) &&
+        return (this.x < obj.x + obj.width) &&
             (this.x + this.width > obj.x) &&
             (this.y < obj.y + obj.height) &&
             (this.y + this.height > obj.y);
-        // if (this instanceof Character && obj == world.level.playground[0]) {
-        //     return ((this.x + 18) + (this.width - 30) > obj.x) &&
-        //         ((this.x + 18) < obj.x)
-        // }
-
-        // else {
-        //     return (this.x + this.width > obj.x) &&
-        //         (this.y + this.height > obj.y) &&
-        //         (this.x < obj.x) &&
-        //         (this.y < obj.y + obj.height);
-        // }
     }
-
-
-    // isColliding(obj) {
-    //     console.log(this.offsetX);
-    //     return (this.x + this.width) >= obj.y && this.x <= (obj.x + obj.width) &&
-    //         (this.y + this.offsetY + this.height) >= obj.Y &&
-    //         (this.y + this.offsetY) <= (obj.y + obj.height) &&
-    //         obj.onCollisionCourse;
-    // }
 
 
     hit() {
@@ -166,7 +140,7 @@ class MovableObject extends DrawableObject {
                 clearInterval(moveInterval);
             }
         }, 1000 / 60);
-    
+
         let animateInterval = setInterval(() => {
             if (!this.is_Dead) {
                 this.playAnimation(images_arr);

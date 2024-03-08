@@ -58,6 +58,16 @@ class World {
                 this.character.hit();
             }
         });
+        this.level.collectibles_energy.forEach((energy) => {
+            if (this.character.isColliding(energy)) {
+                console.log('Energy!!!');
+                this.character.energy = 10;
+                let index = this.level.collectibles_energy.indexOf(this);
+                if (index > -1) {
+                    this.level.collectibles_energy.splice(index, 1);
+                }
+            }
+        });
     }
 
 
@@ -100,7 +110,7 @@ class World {
         // this.addToMap(this.chickenboss);
         this.addObjectsToMap(this.level.playground);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.collectibles);
+        this.addObjectsToMap(this.level.collectibles_energy);
 
         this.addToMap(this.character);
         this.addObjectsToMap(this.shots);
