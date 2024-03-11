@@ -14,8 +14,8 @@ class Level {
     level_end_bottom_y = 77;
     // level_end_bottom_y = 99;
 
-
     constructor(enemies, animatedObjectFront, animatedObjectBack, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy) {
+
         this.enemies = enemies;
         this.animatedObjectFront = animatedObjectFront;
         this.animatedObjectBack = animatedObjectBack;

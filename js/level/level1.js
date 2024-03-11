@@ -54,7 +54,8 @@ const level1 = new Level(
         new Playground('assets/environment/floor2.png', 598, 120, 600, 50),
     ],
     [
-        new CollectibleEnergy(200, 112, 15, 15)
+        new CollectibleEnergy(200, 112, 15, 15),
+        new CollectibleEnergy(600, 112, 15, 15)
     ]
 
 );

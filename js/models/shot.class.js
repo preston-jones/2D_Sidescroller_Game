@@ -51,7 +51,7 @@ class Shot extends MovableObject {
         };
     
         this.y += world && world.keyboard.DOWN ? 30 : 15;
-        this.x = direction ? this.x : +50;
+        this.x = direction ? this.x : this.x +50;
     
         animationInterval = setInterval(checkCollisionAndAnimate, 1000 / 60);
     }

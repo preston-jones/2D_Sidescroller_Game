@@ -62,7 +62,7 @@ class World {
             if (this.character.isColliding(energy)) {
                 console.log('Energy!!!');
                 this.character.energy = 10;
-                let index = this.level.collectibles_energy.indexOf(this);
+                let index = this.level.collectibles_energy.indexOf(energy);
                 if (index > -1) {
                     this.level.collectibles_energy.splice(index, 1);
                 }
