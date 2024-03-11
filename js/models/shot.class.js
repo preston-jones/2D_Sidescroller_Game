@@ -18,7 +18,7 @@ class Shot extends MovableObject {
         this.width = 10;
         this.height = 10;
         this.x = x;
-        this.y = y + 15;
+        this.y = y;
         this.speed = 2;
         this.animateShot(direction);
     }
@@ -50,11 +50,8 @@ class Shot extends MovableObject {
             }
         };
     
-        if (direction) {
-            this.x = this.x;
-        } else {
-            this.x = this.x + 50;
-        }
+        this.y += world && world.keyboard.DOWN ? 30 : 15;
+        this.x = direction ? this.x : +50;
     
         animationInterval = setInterval(checkCollisionAndAnimate, 1000 / 60);
     }
