@@ -38,6 +38,5 @@ class Drone extends MovableObject {
 
     animateDrone(images_arr) {
         this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
-        this.checkIfHurt();
     }
 }

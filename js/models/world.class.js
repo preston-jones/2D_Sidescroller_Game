@@ -43,8 +43,9 @@ class World {
 
     run() {
         setInterval(() => {
+            console.log(this.character.health);
             this.checkCollisions();
-            this.checkHealthStatus();
+            // this.checkHealthStatus();
             // this.checkIfOnPlatform();
         }, 200);
     }
@@ -74,20 +75,23 @@ class World {
 
 
     checkHealthStatus() {
-        if (this.character.health == 8) { this.statusbar_HEALTH.splice(-1); }
-        if (this.character.health == 6) { this.statusbar_HEALTH.splice(-1); }
-        if (this.character.health == 4) { this.statusbar_HEALTH.splice(-1); }
-        if (this.character.health == 2) { this.statusbar_HEALTH.splice(-1); }
-        if (this.character.health == 0) { this.statusbar_HEALTH = []; }
+        if (this.character.health === 8) { this.statusbar_HEALTH.splice(-1); }
+        if (this.character.health === 6) { this.statusbar_HEALTH.splice(-1); }
+        if (this.character.health === 4) { this.statusbar_HEALTH.splice(-1); }
+        if (this.character.health === 2) { this.statusbar_HEALTH.splice(-1); }
+        if (this.character.health === 0) { this.statusbar_HEALTH = []; }
     }
 
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit(enemy);
-            } else if (this.character.lastCollidedWith === enemy) {
-                this.character.lastCollidedWith = null;
+                if (!this.character.inCollision) {
+                    this.character.hit(enemy);
+                    this.character.inCollision = true;
+                }
+            } else {
+                this.character.inCollision = false; // Reset inCollision when the collision ends
             }
         });
         this.level.collectibles_energy.forEach((energy) => {

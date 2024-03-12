@@ -14,6 +14,9 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     impact = false;
     lastCollidedWith = null;
+    inCollision = false;
+    lastHitTime = 0; // Add this line
+    hitCooldown = 1000; // Cooldown period in milliseconds
 
     isAboveGround() {
         return this.y < world.level.level_end_bottom_y;
@@ -61,13 +64,15 @@ class MovableObject extends DrawableObject {
     }
 
 
-    hit(enemy) {
-        console.log(this.health);
+    hit() {
         console.log('hit');
-        if (this.x > 0 && !this.is_Dead && this.lastCollidedWith !== enemy) {
+        let currentTime = new Date().getTime();
+        if (!this.is_Dead && !this.inCollision && currentTime - this.lastHitTime > this.hitCooldown) {
             this.health -= 1;
             this.is_Hurt = true;
-            this.lastCollidedWith = enemy;
+            this.inCollision = true;
+            this.lastHitTime = currentTime; // Update lastHitTime
+            world.checkHealthStatus();
         }
         if (this.health < 0) {
             this.health = 0;
@@ -76,13 +81,6 @@ class MovableObject extends DrawableObject {
             this.lastHit = new Date().getTime();
         }
         this.is_Hurt = false;
-    }
-
-
-    isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit;  // Difference in ms
-        timepassed = timepassed / 1000; //Difference in s
-        return timepassed < 1; // wurden innerhalb der letzten 5 sec getroffen
     }
 
 
@@ -161,13 +159,6 @@ class MovableObject extends DrawableObject {
                 }, 100); // Adjust the timeout to match the length of the death animation
             }
         }, 150);
-    }
-
-
-    checkIfHurt() {
-        if (this.isHurt() && !this.is_Dead) {
-            console.log('is hit');
-        }
     }
 
 }

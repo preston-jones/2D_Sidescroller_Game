@@ -46,7 +46,6 @@ class Cop extends MovableObject {
 
     animateCop(images_arr) {
         this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
-        this.checkIfHurt();
     }
 
 }

@@ -42,7 +42,6 @@ class Bootleg extends MovableObject {
     animateBootleg(images_arr) {
         this.otherDirection = true;
         this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
-        this.checkIfHurt();
     }
 
 }
