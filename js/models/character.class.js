@@ -5,8 +5,8 @@ class Character extends MovableObject {
     x = 0;
     y = 10;
     speed = 2;
-    health = 1000;
-    health_MAX = 1000;
+    health = 10;
+    health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
 

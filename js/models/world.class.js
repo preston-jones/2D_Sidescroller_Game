@@ -8,10 +8,20 @@ class World {
     camera_y = 0;
     isOnPlatform = false;
     shots = [];
-    characterShot = [];
-    statusbar = [
+    characterShot = [new Shot()];
+    statusbar_HEALTH = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
-        new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 24, 10, 10),
+        new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
+        new Statusbar('assets/statusbar/heart.png', this.character.energy, 30, 4, 15, 15),
+        new Statusbar('assets/statusbar/heart.png', this.character.energy, 40, 4, 15, 15),
+        new Statusbar('assets/statusbar/heart.png', this.character.energy, 50, 4, 15, 15)
+    ];
+    statusbar_ENERGY = [
+        new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 20, 10, 10),
+        new Statusbar('assets/statusbar/energy.png', this.character.energy, 22, 20, 10, 10),
+        new Statusbar('assets/statusbar/energy.png', this.character.energy, 32, 20, 10, 10),
+        new Statusbar('assets/statusbar/energy.png', this.character.energy, 42, 20, 10, 10),
+        new Statusbar('assets/statusbar/energy.png', this.character.energy, 52, 20, 10, 10)
     ];
 
 
@@ -34,8 +44,9 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkHealthStatus();
             // this.checkIfOnPlatform();
-        }, 100);
+        }, 200);
     }
 
 
@@ -46,22 +57,44 @@ class World {
                 this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
                 this.shots.push(this.characterShot);
                 this.character.energy -= 1;
+                this.checkEnergyStatus();
                 this.checkShotCollision();
             }
         }, 100);
     }
 
 
+    checkEnergyStatus() {
+        if (this.character.energy == 8) { this.statusbar_ENERGY.splice(-1); }
+        if (this.character.energy == 6) { this.statusbar_ENERGY.splice(-1); }
+        if (this.character.energy == 4) { this.statusbar_ENERGY.splice(-1); }
+        if (this.character.energy == 2) { this.statusbar_ENERGY.splice(-1); }
+        if (this.character.energy == 0) { this.statusbar_ENERGY = []; }
+    }
+
+
+    checkHealthStatus() {
+        if (this.character.health == 8) { this.statusbar_HEALTH.splice(-1); }
+        if (this.character.health == 6) { this.statusbar_HEALTH.splice(-1); }
+        if (this.character.health == 4) { this.statusbar_HEALTH.splice(-1); }
+        if (this.character.health == 2) { this.statusbar_HEALTH.splice(-1); }
+        if (this.character.health == 0) { this.statusbar_HEALTH = []; }
+    }
+
+
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
+                this.character.hit(enemy);
+            } else if (this.character.lastCollidedWith === enemy) {
+                this.character.lastCollidedWith = null;
             }
         });
         this.level.collectibles_energy.forEach((energy) => {
             if (this.character.isColliding(energy)) {
                 console.log('Energy!!!');
                 this.character.energy = 10;
+                this.refillEnergyStatus();
                 let index = this.level.collectibles_energy.indexOf(energy);
                 if (index > -1) {
                     this.level.collectibles_energy.splice(index, 1);
@@ -71,7 +104,7 @@ class World {
     }
 
 
-    checkShotCollision(characterShot) {
+    checkShotCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.characterShot.isColliding(enemy)) {
                 this.characterShot.impact = true;
@@ -83,12 +116,34 @@ class World {
     }
 
 
-    drawStatusValue(ctx) {
-        ctx.font = "8pt VT323";
-        ctx.fillStyle = "white";
-        ctx.fillText(this.character.health + '/' + this.character.health_MAX, 30, 15);
-        ctx.fillText(this.character.energy + '/' + this.character.energy_MAX, 30, 32);
+    refillEnergyStatus() {
+        this.statusbar_ENERGY = [
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 20, 10, 10),
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 22, 20, 10, 10),
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 32, 20, 10, 10),
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 42, 20, 10, 10),
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 52, 20, 10, 10)
+        ];
     }
+
+
+    refillHealthStatus() {
+        statusbar_HEALTH = [
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 30, 4, 15, 15),
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 40, 4, 15, 15),
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 50, 4, 15, 15)
+        ];
+    }
+
+
+    // drawStatusValue(ctx) {
+    //     ctx.font = "8pt VT323";
+    //     ctx.fillStyle = "white";
+    //     ctx.fillText(this.character.health + '/' + this.character.health_MAX, 30, 15);
+    //     ctx.fillText(this.character.energy + '/' + this.character.energy_MAX, 30, 32);
+    // }
 
 
     draw() {
@@ -117,8 +172,9 @@ class World {
         // moves camera view back to default
         this.ctx.translate(-this.camera_x, this.camera_y);
         // -----
-        this.addObjectsToMap(this.statusbar);
-        this.drawStatusValue(this.ctx);
+        this.addObjectsToMap(this.statusbar_HEALTH);
+        this.addObjectsToMap(this.statusbar_ENERGY);
+        // this.drawStatusValue(this.ctx);
         // Draw wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded

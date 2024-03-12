@@ -13,6 +13,7 @@ class MovableObject extends DrawableObject {
     is_Dead = false;
     lastHit = 0;
     impact = false;
+    lastCollidedWith = null;
 
     isAboveGround() {
         return this.y < world.level.level_end_bottom_y;
@@ -60,11 +61,13 @@ class MovableObject extends DrawableObject {
     }
 
 
-    hit() {
+    hit(enemy) {
+        console.log(this.health);
         console.log('hit');
-        if (this.x > 0 && !this.is_Dead) {
-            this.health -= 5;
+        if (this.x > 0 && !this.is_Dead && this.lastCollidedWith !== enemy) {
+            this.health -= 1;
             this.is_Hurt = true;
+            this.lastCollidedWith = enemy;
         }
         if (this.health < 0) {
             this.health = 0;
