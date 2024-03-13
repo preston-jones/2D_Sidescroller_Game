@@ -5,7 +5,7 @@ class Bootleg extends MovableObject {
     width = 60;
     height = 50;
     speed = 0.3;
-    health = 10;
+    health = 2;
 
     IMAGES_STAY = [
         'assets/sprites/enemies/Bootleg/bootleg-idle.png'

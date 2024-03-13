@@ -65,22 +65,32 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
-        console.log('hit');
-        let currentTime = new Date().getTime();
-        if (!this.is_Dead && !this.inCollision && currentTime - this.lastHitTime > this.hitCooldown) {
+        if (this instanceof Character) {
+            console.log('Character is Hit');
+            let currentTime = new Date().getTime();
+            if (!this.is_Dead && !this.inCollision && currentTime - this.lastHitTime > this.hitCooldown) {
+                this.health -= 1;
+                this.is_Hurt = true;
+                this.inCollision = true;
+                this.lastHitTime = currentTime; // Update lastHitTime
+                world.checkHealthStatus();
+            }
+            if (this.health < 0) {
+                this.health = 0;
+                this.is_Dead = true;
+            } else {
+                this.lastHit = new Date().getTime();
+            }
+            this.is_Hurt = false;
+        }
+        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone) {
             this.health -= 1;
-            this.is_Hurt = true;
-            this.inCollision = true;
-            this.lastHitTime = currentTime; // Update lastHitTime
-            world.checkHealthStatus();
+            if (this.health < 0) {
+                this.health = 0;
+                this.is_Dead = true;
+            }
+
         }
-        if (this.health < 0) {
-            this.health = 0;
-            this.is_Dead = true;
-        } else {
-            this.lastHit = new Date().getTime();
-        }
-        this.is_Hurt = false;
     }
 
 

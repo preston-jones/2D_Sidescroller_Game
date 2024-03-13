@@ -56,6 +56,10 @@ const level1 = new Level(
     [
         new CollectibleEnergy(200, 112, 15, 15),
         new CollectibleEnergy(600, 112, 15, 15)
+    ],
+    [
+        new CollectibleHealth(400, 112, 15, 15),
+        new CollectibleHealth(800, 112, 15, 15)
     ]
 
 );

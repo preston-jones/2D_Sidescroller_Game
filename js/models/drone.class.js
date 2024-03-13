@@ -5,7 +5,7 @@ class Drone extends MovableObject {
     width = 40;
     height = 40;
     speed = 0.5;
-    health = 5;
+    health = 1;
 
     IMAGES_STAY = [
         'assets/sprites/enemies/drone/drone-1.png',
@@ -28,7 +28,7 @@ class Drone extends MovableObject {
 
     constructor() {
         super().loadImage('assets/sprites/enemies/drone/drone-1.png');
-        this.x = Math.round(250 + Math.random() * 500);
+        this.x = Math.round(550 + Math.random() * 500);
         this.loadImages(this.IMAGES_FLY);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();

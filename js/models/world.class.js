@@ -8,7 +8,7 @@ class World {
     camera_y = 0;
     isOnPlatform = false;
     shots = [];
-    characterShot = [new Shot()];
+    characterShot = [];
     statusbar_HEALTH = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
@@ -47,19 +47,20 @@ class World {
             this.checkCollisions();
             // this.checkHealthStatus();
             // this.checkIfOnPlatform();
-        }, 200);
+        }, 100);
     }
 
 
     shoot() {
         setInterval(() => {
-            if (this.keyboard.C && this.character.energy > 0 && !this.character.is_Dead) {
+            if (this.keyboard.C && this.character.energy > 0 && !this.is_Hurt && !this.character.is_Dead) {
+                this.character.playAnimation_SHOOT();
                 this.characterShot = [];
                 this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
                 this.shots.push(this.characterShot);
                 this.character.energy -= 1;
                 this.checkEnergyStatus();
-                this.checkShotCollision();
+                this.checkCollisions();
             }
         }, 100);
     }
@@ -87,16 +88,28 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 if (!this.character.inCollision) {
-                    this.character.hit(enemy);
+                    this.character.hit();
                     this.character.inCollision = true;
                 }
-            } else {
+            }
+            else {
                 this.character.inCollision = false; // Reset inCollision when the collision ends
             }
         });
+        if (this.characterShot instanceof MovableObject) {
+            this.level.enemies.forEach((enemy) => {
+                if (this.characterShot && this.characterShot.isColliding(enemy)) {
+                    this.characterShot.impact = true;
+                    this.characterShot.animateImpact();
+                    console.log('Enemy is Hit');
+                    enemy.hit();
+                    this.characterShot = null;
+                }
+            });
+        }
         this.level.collectibles_energy.forEach((energy) => {
             if (this.character.isColliding(energy)) {
-                console.log('Energy!!!');
+                console.log('Energy Recharge!');
                 this.character.energy = 10;
                 this.refillEnergyStatus();
                 let index = this.level.collectibles_energy.indexOf(energy);
@@ -105,19 +118,30 @@ class World {
                 }
             }
         });
-    }
-
-
-    checkShotCollision() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.characterShot.isColliding(enemy)) {
-                this.characterShot.impact = true;
-                this.characterShot.animateImpact();
-                console.log('GETROFFEN');
-                enemy.hit();
+        this.level.collectibles_health.forEach((health) => {
+            if (this.character.isColliding(health)) {
+                console.log('Health Recharge!');
+                this.character.health = 10;
+                this.refillHealthStatus();
+                let index = this.level.collectibles_health.indexOf(health);
+                if (index > -1) {
+                    this.level.collectibles_health.splice(index, 1);
+                }
             }
         });
     }
+
+
+    // checkShotCollision() {
+    //     this.level.enemies.forEach((enemy) => {
+    //         if (this.characterShot.isColliding(enemy)) {
+    //             this.characterShot.impact = true;
+    //             this.characterShot.animateImpact();
+    //             console.log('GETROFFEN');
+    //             enemy.hit();
+    //         }
+    //     });
+    // }
 
 
     refillEnergyStatus() {
@@ -132,7 +156,7 @@ class World {
 
 
     refillHealthStatus() {
-        statusbar_HEALTH = [
+        this.statusbar_HEALTH = [
             new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
             new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
             new Statusbar('assets/statusbar/heart.png', this.character.energy, 30, 4, 15, 15),
@@ -170,6 +194,7 @@ class World {
         this.addObjectsToMap(this.level.playground);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.collectibles_energy);
+        this.addObjectsToMap(this.level.collectibles_health);
 
         this.addToMap(this.character);
         this.addObjectsToMap(this.shots);
@@ -198,7 +223,7 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
+        // movableObject.drawFrame(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

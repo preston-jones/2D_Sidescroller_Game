@@ -5,7 +5,7 @@ class Cop extends MovableObject {
     width = 60;
     height = 50;
     speed = 1.5;
-    health = 5;
+    health = 1;
 
     IMAGES_STAY = [
         'assets/sprites/enemies/cop/idle/cop1.png',
@@ -36,7 +36,7 @@ class Cop extends MovableObject {
 
     constructor() {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
-        this.x = 250 + Math.random() * 1000;
+        this.x = 850 + Math.random() * 1000;
         this.loadImages(this.IMAGES_RUN);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();

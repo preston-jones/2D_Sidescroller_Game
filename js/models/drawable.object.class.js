@@ -34,7 +34,7 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-        if (this instanceof Shot || this instanceof CollectibleEnergy) {
+        if (this instanceof Shot || this instanceof CollectibleEnergy || this instanceof CollectibleHealth) {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';
