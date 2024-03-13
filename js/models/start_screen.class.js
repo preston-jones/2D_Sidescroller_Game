@@ -14,9 +14,9 @@ class StartScreen {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        ctx.font = "8pt VT323";
+        this.ctx.font = "12pt VT323";
         this.ctx.fillStyle = "white";
-        this.ctx.fillText("Press Enter to Start", 100, 100);
+        this.ctx.fillText("Press Enter to Start", 90, 80);
     }
 
 }

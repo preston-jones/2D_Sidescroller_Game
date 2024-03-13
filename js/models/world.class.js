@@ -99,10 +99,10 @@ class World {
             if (this.character.isColliding(enemy)) {
                 if (!this.character.inCollision) {
                     this.character.hit();
-                    this.character.inCollision = true;
                 }
             }
             else {
+                this.character.is_Hurt = false;
                 this.character.inCollision = false; // Reset inCollision when the collision ends
             }
         });
