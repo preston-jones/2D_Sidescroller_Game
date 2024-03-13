@@ -102,7 +102,6 @@ class World {
                 }
             }
             else {
-                this.character.is_Hurt = false;
                 this.character.inCollision = false; // Reset inCollision when the collision ends
             }
         });

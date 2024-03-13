@@ -235,7 +235,7 @@ class Character extends MovableObject {
         }
         if (this.character_Selection === 'male') {
             return [
-                'assets/sprites/character/player_male/dead-1.png'
+                'assets/sprites/character/player_male/dead/dead-1.png'
             ];
         }
     }

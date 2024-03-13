@@ -75,6 +75,7 @@ class MovableObject extends DrawableObject {
                 this.lastHitTime = currentTime; // Update lastHitTime
                 world.checkHealthStatus();
                 this.playAnimation_HURT();
+                this.is_Hurt = false;
             }
             if (this.health < 0) {
                 this.health = 0;
