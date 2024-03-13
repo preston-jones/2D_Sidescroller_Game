@@ -36,6 +36,16 @@ class World {
     }
 
 
+    drawScreen() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.font = "20px Verdana"; // Change the font to Arial
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText("Press Enter to Start", 0, 0);
+    }
+
+
     setWorld() {
         this.character.world = this;
     }
@@ -132,18 +142,6 @@ class World {
     }
 
 
-    // checkShotCollision() {
-    //     this.level.enemies.forEach((enemy) => {
-    //         if (this.characterShot.isColliding(enemy)) {
-    //             this.characterShot.impact = true;
-    //             this.characterShot.animateImpact();
-    //             console.log('GETROFFEN');
-    //             enemy.hit();
-    //         }
-    //     });
-    // }
-
-
     refillEnergyStatus() {
         this.statusbar_ENERGY = [
             new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 20, 10, 10),
@@ -166,12 +164,11 @@ class World {
     }
 
 
-    // drawStatusValue(ctx) {
-    //     ctx.font = "8pt VT323";
-    //     ctx.fillStyle = "white";
-    //     ctx.fillText(this.character.health + '/' + this.character.health_MAX, 30, 15);
-    //     ctx.fillText(this.character.energy + '/' + this.character.energy_MAX, 30, 32);
-    // }
+    drawStatusValue(ctx) {
+        ctx.font = "8pt VT323";
+        ctx.fillStyle = "white";
+        ctx.fillText("Press Enter to Start", 100, 100);
+    }
 
 
     draw() {
@@ -203,7 +200,7 @@ class World {
         // -----
         this.addObjectsToMap(this.statusbar_HEALTH);
         this.addObjectsToMap(this.statusbar_ENERGY);
-        // this.drawStatusValue(this.ctx);
+        this.drawStatusValue(this.ctx);
         // Draw wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
@@ -223,7 +220,7 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        // movableObject.drawFrame(this.ctx);
+        movableObject.drawFrame(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

@@ -6,6 +6,7 @@ let keyboard = new Keyboard();
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    // world = new StartScreen(canvas, keyboard);
 }
 
 
@@ -35,6 +36,9 @@ window.addEventListener("keydown", (e) => {
     if (e.code == "ShiftRight") {
         keyboard.SHIFTRIGHT = true;
     }
+    if (e.code == "Enter") {
+        keyboard.ENTER = true;
+    }
 });
 
 window.addEventListener("keyup", (e) => {
@@ -61,6 +65,9 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.code == "ShiftRight") {
         keyboard.SHIFTRIGHT = false;
+    }
+    if (e.code == "Enter") {
+        keyboard.ENTER = false;
     }
 });
 

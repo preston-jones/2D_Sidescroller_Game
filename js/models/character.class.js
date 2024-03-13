@@ -9,13 +9,28 @@ class Character extends MovableObject {
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
+    character_Selection = 'male';
 
-    IMAGES_STAY = [
-        'assets/sprites/character/player_female/idle/idle-1.png',
-        'assets/sprites/character/player_female/idle/idle-2.png',
-        'assets/sprites/character/player_female/idle/idle-3.png',
-        'assets/sprites/character/player_female/idle/idle-4.png'
-    ];
+    IMAGES_STAY = this.CharacterStay();
+    CharacterStay() {
+        if (this.character_Selection === 'female') {
+            return [
+                'assets/sprites/character/player_female/idle/idle-1.png',
+                'assets/sprites/character/player_female/idle/idle-2.png',
+                'assets/sprites/character/player_female/idle/idle-3.png',
+                'assets/sprites/character/player_female/idle/idle-4.png'
+            ];
+        }
+        if (this.character_Selection === 'male') {
+            return [
+                'assets/sprites/character/player_male/Idle/Idle1.png',
+                'assets/sprites/character/player_male/Idle/Idle2.png',
+                'assets/sprites/character/player_male/Idle/Idle3.png',
+                'assets/sprites/character/player_male/Idle/Idle4.png'
+            ];
+        }
+    }
+
     IMAGES_WALK = [
         'assets/sprites/character/player_female/walk/walk-1.png',
         'assets/sprites/character/player_female/walk/walk-2.png',
@@ -226,12 +241,12 @@ class Character extends MovableObject {
 
 
     playAnimation_SHOOT() {
-            this.playAnimation(this.IMAGES_SHOOT);
+        this.playAnimation(this.IMAGES_SHOOT);
+        this.shoot_sound.play();
+        if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGES_RUN_SHOOT);
             this.shoot_sound.play();
-            if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_RUN_SHOOT);
-                this.shoot_sound.play();
-            }
+        }
     }
 
 
@@ -268,7 +283,7 @@ class Character extends MovableObject {
             this.world.camera_y = 0;
         }
     }
-    
+
 
 
 }

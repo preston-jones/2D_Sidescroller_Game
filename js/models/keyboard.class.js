@@ -8,4 +8,5 @@ class Keyboard {
     C = false;
     SHIFTLEFT = false;
     SHIFTRIGHT = false;
+    ENTER = false;
 }
