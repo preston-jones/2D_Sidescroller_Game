@@ -235,7 +235,16 @@ class Character extends MovableObject {
         }
         if (this.character_Selection === 'male') {
             return [
-                'assets/sprites/character/player_male/dead/dead-1.png'
+                'assets/sprites/character/player_male/dead/dead-1.png',
+                'assets/sprites/character/player_male/dead/dead-2.png',
+                'assets/sprites/character/player_male/dead/dead-3.png',
+                'assets/sprites/character/player_male/dead/dead-4.png',
+                'assets/sprites/character/player_male/dead/dead-5.png',
+                'assets/sprites/character/player_male/dead/dead-6.png',
+                'assets/sprites/character/player_male/dead/dead-7.png',
+                'assets/sprites/character/player_male/dead/dead-8.png',
+                'assets/sprites/character/player_male/dead/dead-9.png',
+                'assets/sprites/character/player_male/dead/dead-10.png',
             ];
         }
     }
@@ -246,8 +255,8 @@ class Character extends MovableObject {
     walk_sound = new Audio('assets/audio/walk.mp3');
     run_sound = new Audio('assets/audio/run.mp3');
     jump_sound = new Audio('assets/audio/jump.mp3');
-    shoot_sound = new Audio('assets/audio/shoot.mp3');
-    hurt_sound = new Audio('assets/audio/hurt.mp3');
+    shoot_sound = new Audio('assets/audio/shoot.ogg');
+    hurt_sound = new Audio('assets/audio/hurt.ogg');
     music_sound = new Audio('assets/audio/city_theme.mp3');
     constructor() {
         super().loadImage(this.IMAGES_STAY[0]);
@@ -282,7 +291,7 @@ class Character extends MovableObject {
                     this.walk_sound.pause();
                 }
             }
-            if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x && !this.is_Dead && !this.is_Hurt) {
+            if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x && this.x > this.world.level.level_boss_arena_border_left_x && !this.is_Dead && !this.is_Hurt) {
 
                 if (!this.world.keyboard.SHIFTRIGHT || !this.world.keyboard.SHIFTLEFT) {
                     this.moveToLeft(0.5);
@@ -310,6 +319,7 @@ class Character extends MovableObject {
             this.playAnimation_JUMP();
             // this.playAnimation_SHOOT();
             this.playAnimation_DOWN();
+            console.log(this.x);
         }, 150);
     }
 
@@ -370,7 +380,9 @@ class Character extends MovableObject {
 
 
     playAnimation_HURT() {
+        this.hurt_sound.pause();
             if (!this.is_Dead) {
+                this.hurt_sound.play();
                 this.playAnimation(this.IMAGES_HURT);
             }
     }
@@ -397,8 +409,13 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 58;
             this.world.camera_y = 0;
         }
-        if (this.x >= 950) {
-            this.world.camera_x = -893;
+        if (this.x >= 1950) {
+            this.world.camera_x = -1893;
+            this.world.camera_y = 0;
+        }
+        ///
+        if (this.x >= 1960) {
+            this.world.camera_x = -1903;
             this.world.camera_y = 0;
         }
     }

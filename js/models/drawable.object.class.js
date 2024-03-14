@@ -16,6 +16,7 @@ class DrawableObject {
             if (this instanceof Cop) { this.img.src = 'assets/sprites/enemies/cop/idle/cop2.png'; }
             if (this instanceof Bootleg) { this.img.src = 'assets/sprites/enemies/Bootleg/bootleg-idle.png'; }
             if (this instanceof Drone) { this.img.src = 'assets/sprites/enemies/drone/drone-1.png'; }
+            if (this instanceof BossEnemy) { this.img.src = 'assets/sprites/enemies/Wasp/wasp1.png'; }
             this.img.onload = () => {
                 ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
             };
@@ -41,7 +42,7 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-        if (this instanceof Drone || this instanceof Cop || this instanceof Bootleg) {
+        if (this instanceof Drone || this instanceof Cop || this instanceof Bootleg || this instanceof BossEnemy) {
             ctx.lineWidth = '1';
             ctx.beginPath();
             ctx.strokeStyle = 'white';

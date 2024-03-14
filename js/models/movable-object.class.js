@@ -17,6 +17,7 @@ class MovableObject extends DrawableObject {
     inCollision = false;
     lastHitTime = 0; // Add this line
     hitCooldown = 1000; // Cooldown period in milliseconds
+    explosion_sound = new Audio('assets/audio/explosion.ogg');
 
     isAboveGround() {
         return this.y < world.level.level_end_bottom_y;
@@ -84,7 +85,7 @@ class MovableObject extends DrawableObject {
                 this.lastHit = new Date().getTime();
             }
         }
-        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone) {
+        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone || this instanceof BossEnemy) {
             this.health -= 1;
             if (this.health < 0) {
                 this.health = 0;
@@ -155,6 +156,7 @@ class MovableObject extends DrawableObject {
             if (this.is_Dead) {
                 console.log('Enemy is dead, playing death animation');
                 this.playAnimation_Enemy_DEAD(array);
+                this.explosion_sound.play();
                 clearInterval(animateInterval);
                 setTimeout(() => {
                     // Assuming world.enemies is the array holding all enemy objects

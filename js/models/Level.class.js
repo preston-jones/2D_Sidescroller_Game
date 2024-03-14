@@ -11,7 +11,9 @@ class Level {
     collectibles_health;
 
     level_start_x = -1;
-    level_end_x = 1130;
+    // level_end_x = 1130;
+    level_boss_arena_border_left_x = 1880;
+    level_end_x = 2130;
     level_end_bottom_y = 77;
     // level_end_bottom_y = 99;
 

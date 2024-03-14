@@ -3,7 +3,8 @@ const level1 = new Level(
         new Cop(),
         new Cop(),
         new Bootleg(),
-        new Drone()
+        new Drone(),
+        new BossEnemy()
     ],
     [
         new VehiclesFront(),
@@ -52,6 +53,8 @@ const level1 = new Level(
     [
         new Playground('assets/environment/floor2.png', 0, 120, 600, 50),
         new Playground('assets/environment/floor2.png', 598, 120, 600, 50),
+        new Playground('assets/environment/floor2.png', 1189, 120, 600, 50),
+        new Playground('assets/environment/floor2.png', 1789, 120, 600, 50),
     ],
     [
         new CollectibleEnergy(200, 112, 15, 15),
