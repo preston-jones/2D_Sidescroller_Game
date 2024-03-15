@@ -409,15 +409,15 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 58;
             this.world.camera_y = 0;
         }
-        if (this.x >= 1950) {
+        if (this.x >= 60 && this.x >= 1950) {
             this.world.camera_x = -1893;
             this.world.camera_y = 0;
         }
         ///
-        if (this.x >= 1960) {
-            this.world.camera_x = -1903;
-            this.world.camera_y = 0;
-        }
+        // if (this.x >= 1960) {
+        //     this.world.camera_x = -1893;
+        //     this.world.camera_y = 0;
+        // }
     }
 
 

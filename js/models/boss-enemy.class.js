@@ -41,4 +41,9 @@ class BossEnemy extends MovableObject {
         this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
     }
 
+
+    function () {
+        
+    }
+
 }

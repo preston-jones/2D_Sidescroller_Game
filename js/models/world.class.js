@@ -199,7 +199,7 @@ class World {
         // -----
         this.addObjectsToMap(this.statusbar_HEALTH);
         this.addObjectsToMap(this.statusbar_ENERGY);
-        this.drawStatusValue(this.ctx);
+        // this.drawStatusValue(this.ctx);
         // Draw wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
