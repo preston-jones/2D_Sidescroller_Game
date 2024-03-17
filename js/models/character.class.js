@@ -2,14 +2,15 @@ class Character extends MovableObject {
 
     width = 60;
     height = 50;
-    x = 0;
+    // x = 0;
+    x = 1950;
     y = 10;
     speed = 2;
     health = 10;
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
-    character_Selection = 'male';
+    character_Selection = 'female';
 
 
     IMAGES_STAY = this.characterStay();
@@ -319,7 +320,6 @@ class Character extends MovableObject {
             this.playAnimation_JUMP();
             // this.playAnimation_SHOOT();
             this.playAnimation_DOWN();
-            console.log(this.x);
         }, 150);
     }
 

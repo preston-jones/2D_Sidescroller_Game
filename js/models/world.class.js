@@ -53,7 +53,6 @@ class World {
 
     run() {
         setInterval(() => {
-            console.log(this.character.health);
             this.checkCollisions();
             // this.checkHealthStatus();
             // this.checkIfOnPlatform();
@@ -219,7 +218,7 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
+        // movableObject.drawFrame(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

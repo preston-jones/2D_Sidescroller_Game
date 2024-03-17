@@ -28,22 +28,70 @@ class BossEnemy extends MovableObject {
 
     constructor() {
         super().loadImage(this.IMAGES_FLY[0]);
-        this.x = 1880;
-        // this.x = 2130;
+        // this.x = 1880; // left corner
+        this.x = 2110;
+        this.otherDirection = true;
         this.loadImages(this.IMAGES_FLY);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
-        // this.animateBossEnemy(this.IMAGES_FLY);
+        this.animateBossEnemy(this.IMAGES_FLY);
     }
+
+
+    // animateBossEnemy(images_arr) {
+    //     this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
+    // }
 
 
     animateBossEnemy(images_arr) {
-        this.otherDirection = true;
-        this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
+        let moveInterval = setInterval(() => {
+            if (!this.is_Dead) {
+                this.StayAnimation();
+            }
+            if (this.is_Dead) {
+                this.stay();
+                
+            }
+        }, 1000 / 60);
+
+        let animateInterval = setInterval(() => {
+            if (!this.is_Dead) {
+                this.playAnimation(images_arr);
+            }
+            if (this.is_Dead) {
+            }
+            clearInterval(moveInterval);
+        }, 150);
     }
 
 
-    function () {
-        
+    StayAnimation() {
+        let moveRight = false;
+        setInterval(() => {
+            if (!moveRight) {
+                this.x -= this.speed;
+                if (this.x <= 2100) {
+                    moveRight = true;
+                }
+            } else {
+                this.x += this.speed;
+                if (this.x >= 2110) { // replace 2200 with the desired right boundary
+                    moveRight = false;
+                }
+            }
+        }, 150);
+        let moveUp = false;
+        setInterval(() => {
+            if (!moveUp) {
+                this.y -= this.speed;
+                if (this.y <= 0) {
+                    moveUp = true;
+                }
+            } else {
+                this.y += this.speed;
+                if (this.y >= 5) { // replace 2200 with the desired right boundary
+                    moveUp = false;
+                }
+            }
+        }, 200);
     }
-
 }
