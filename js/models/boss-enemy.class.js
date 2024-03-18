@@ -6,6 +6,11 @@ class BossEnemy extends MovableObject {
     height = 70;
     speed = 0.3;
     health = 8;
+    moveRight = false;
+    moveUp = false;
+    isOnRight = true;
+    isOnLeft = false;
+    isUp = true;
 
     IMAGES_FLY = [
         'assets/sprites/enemies/Wasp/wasp1.png',
@@ -30,30 +35,77 @@ class BossEnemy extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_FLY[0]);
         // this.x = 1880; // left corner
-        this.x;
+        this.x = 2200;
+        // this.y = 65;
         this.otherDirection = true;
         this.loadImages(this.IMAGES_FLY);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
-        this.animateBossEnemy(this.IMAGES_FLY);
+        this.boss();
+        // this.animateBossEnemy(this.IMAGES_FLY);
+
     }
 
 
-    // animateBossEnemy(images_arr) {
-    //     this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
-    // }
+    boss() {
+        let startInterval = setInterval(() => {
+            if (world && world.character.x >= 1900) {
+                this.animateBossEnemy(this.IMAGES_FLY);
+                clearInterval(startInterval);
+            }
+        }, 100);
+    }
 
 
     animateBossEnemy(images_arr) {
-        this.x = 2200;
-        let moveInterval = setInterval(() => {
+        this.StayRightAnimation();
+        setInterval(() => {
             if (!this.is_Dead) {
-                this.StayAnimation();
+                if (this.isOnRight) {
+                    setTimeout(() => {
+                        this.StayLeftAnimation();
+                    }, 4000);
+                }
+                if (!this.isOnRight) {
+                    setTimeout(() => {
+                        if (!this.isUp && this.isOnRight || !this.isUp && this.isOnLeft) {
+                            this.isUp = true;
+                            this.speed = 0.3;
+                        }
+                        else {
+                            this.isUp = false;
+                        }
+                        this.StayRightAnimation();
+                        if (!this.isUp && this.isOnRight || !this.isUp && this.isOnLeft) {
+                            this.isUp = false;
+                            this.speed = 2;
+                        }
+                        else {
+                            this.isUp = true;
+                        }
+                    }, 4000);
+                }
+                // if (this.isUp) {
+                //     setTimeout(() => {
+                //         this.isUp = false;
+                //         this.speed = 2;
+                //         setTimeout(() => {
+                //             this.isUp = true;
+                //             this.speed = 0.3;
+                //         }, 5000);
+                //     }, 15000);
+                // }
+                // if (!this.isUp) {
+                //     setTimeout(() => {
+                //         this.isUp = true;
+                //         this.speed = 0.3;
+                //     }, 4000);
+                // }
             }
             if (this.is_Dead) {
                 this.stay();
-                
+
             }
-        }, 1000 / 60);
+        }, 1000 / 50);
 
         let animateInterval = setInterval(() => {
             if (!this.is_Dead) {
@@ -61,40 +113,109 @@ class BossEnemy extends MovableObject {
             }
             if (this.is_Dead) {
             }
-            clearInterval(moveInterval);
         }, 150);
     }
 
 
-    StayAnimation() {
-        let moveRight = false;
-        setInterval(() => {
-            if (world && world.character.x >= 1880 && !moveRight) {
-                this.boss_fight.play();
+    StayRightAnimation() {
+        this.boss_fight.play();
+        let moveInterval_x = setInterval(() => {
+            console.log(this.isUp);
+            if (!this.moveRight) {
                 this.x -= this.speed;
                 if (this.x <= 2100) {
-                    moveRight = true;
+                    this.moveRight = true;
                 }
             } else {
                 this.x += this.speed;
-                if (this.x >= 2110) { // replace 2200 with the desired right boundary
-                    moveRight = false;
+                if (this.x >= 2120) { // replace 2200 with the desired right boundary
+                    this.moveRight = false;
+                    this.isOnRight = true;
+                    this.isOnLeft = false;
+                    this.otherDirection = true;
                 }
             }
-        }, 150);
-        let moveUp = false;
-        setInterval(() => {
-            if (!moveUp) {
-                this.y -= this.speed;
-                if (this.y <= 0) {
-                    moveUp = true;
+            clearInterval(moveInterval_x);
+        }, 200);
+        let moveInterval_y = setInterval(() => {
+            if (this.isUp) {
+                if (!this.moveUp) {
+                    this.y -= 0.3;
+                    if (this.y <= 0) {
+                        this.moveUp = true;
+                    }
+                } else {
+                    this.y += 0.3;
+                    if (this.y >= 10) {
+                        this.moveUp = false;
+                    }
+                }
+            }
+            if (!this.isUp) {
+                if (!this.moveUp) {
+                    this.y -= 0.3;
+                    if (this.y <= 60) {
+                        this.moveUp = true;
+                    }
+                } else {
+                    this.y += this.speed;
+                    if (this.y >= 70) {
+                        this.moveUp = false;
+                    }
+                }
+            }
+            clearInterval(moveInterval_y);
+        }, 125);
+    }
+    StayLeftAnimation() {
+        this.boss_fight.play();
+        let moveInterval_x = setInterval(() => {
+            console.log(this.isUp);
+            if (!this.moveRight) {
+                this.x -= this.speed;
+                if (this.x <= 1880) {
+                    this.moveRight = true;
+                    this.isOnRight = false;
+                    this.isOnLeft = true;
+                    this.otherDirection = false;
                 }
             } else {
-                this.y += this.speed;
-                if (this.y >= 5) { // replace 2200 with the desired right boundary
-                    moveUp = false;
+                this.x += this.speed;
+                if (this.x >= 1900) { // replace 2200 with the desired right boundary
+                    this.moveRight = false;
                 }
             }
+            clearInterval(moveInterval_x);
         }, 200);
+        let moveInterval_y = setInterval(() => {
+            if (this.isUp) {
+                if (!this.moveUp) {
+                    this.y -= 0.3;
+                    if (this.y <= 0) {
+                        this.moveUp = true;
+                    }
+                } else {
+                    this.y += this.speed;
+                    if (this.y >= 10) {
+                        this.moveUp = false;
+                    }
+                }
+            }
+            if (!this.isUp) {
+                if (!this.moveUp) {
+                    this.y -= 0.3;
+                    if (this.y <= 60) {
+                        this.moveUp = true;
+                    }
+                } else {
+                    this.y += this.speed;
+                    if (this.y >= 70) {
+                        this.moveUp = false;
+                    }
+                }
+            }
+            clearInterval(moveInterval_y);
+        }, 125);
     }
+
 }

@@ -6,7 +6,7 @@ class Character extends MovableObject {
     x = 1950;
     y = 10;
     speed = 2;
-    health = 10;
+    health = 1000;
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
@@ -276,7 +276,6 @@ class Character extends MovableObject {
 
     animateCharacter() {
         setInterval(() => {
-            console.log(this.x);
             this.run_sound.pause();
             this.walk_sound.pause();
             this.moveCamera();
