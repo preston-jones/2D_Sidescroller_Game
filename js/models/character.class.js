@@ -10,7 +10,7 @@ class Character extends MovableObject {
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
-    character_Selection = 'female';
+    character_Selection = 'male';
 
 
     IMAGES_STAY = this.characterStay();
@@ -276,6 +276,7 @@ class Character extends MovableObject {
 
     animateCharacter() {
         setInterval(() => {
+            console.log(this.x);
             this.run_sound.pause();
             this.walk_sound.pause();
             this.moveCamera();
