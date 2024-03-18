@@ -140,12 +140,15 @@ class MovableObject extends DrawableObject {
 
     animateEnemie(images_arr, array) {
         let moveInterval = setInterval(() => {
-            if (!this.is_Dead) {
-                this.moveToLeft(this.speed);
-            }
-            if (this.is_Dead) {
-                this.stay();
-                clearInterval(moveInterval);
+            if (world && world.character.x >= 0) {
+                console.log('Enemys start moving');
+                if (!this.is_Dead) {
+                    this.moveToLeft(this.speed);
+                }
+                if (this.is_Dead) {
+                    this.stay();
+                    clearInterval(moveInterval);
+                }
             }
         }, 1000 / 60);
 
@@ -166,6 +169,7 @@ class MovableObject extends DrawableObject {
                     }
                 }, 100); // Adjust the timeout to match the length of the death animation
             }
+
         }, 150);
     }
 

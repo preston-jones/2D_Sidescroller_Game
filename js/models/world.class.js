@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    control = true;
     level = level1;
     canvas;
     ctx;
@@ -162,14 +163,15 @@ class World {
     }
 
 
-    drawStatusValue(ctx) {
-        ctx.font = "8pt VT323";
-        ctx.fillStyle = "white";
-        ctx.fillText("Press Enter to Start", 100, 100);
-    }
+    // drawStatusValue(ctx) {
+    //     // ctx.globalAlpha = 0.5;
+    //     ctx.fillStyle = "white";
+    //     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // }
 
 
     draw() {
+        if (!this.isFlickering) {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
 
 
@@ -187,23 +189,22 @@ class World {
         // this.addObjectsToMap(this.playground);
         // this.addToMap(this.chickenboss);
         this.addObjectsToMap(this.level.playground);
-        this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.collectibles_energy);
         this.addObjectsToMap(this.level.collectibles_health);
-
         this.addToMap(this.character);
+        this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.shots);
         // moves camera view back to default
         this.ctx.translate(-this.camera_x, this.camera_y);
         // -----
         this.addObjectsToMap(this.statusbar_HEALTH);
         this.addObjectsToMap(this.statusbar_ENERGY);
-        // this.drawStatusValue(this.ctx);
         // Draw wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
             self.draw();
         });
+    }
     }
 
     addObjectsToMap(objects) {

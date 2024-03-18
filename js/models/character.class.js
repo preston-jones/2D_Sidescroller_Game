@@ -2,8 +2,8 @@ class Character extends MovableObject {
 
     width = 60;
     height = 50;
-    // x = 0;
-    x = 1950;
+    x = -1;
+    // x = 1800;
     y = 10;
     speed = 2;
     health = 1000;
@@ -11,6 +11,7 @@ class Character extends MovableObject {
     energy = 10;
     energy_MAX = 10;
     character_Selection = 'male';
+    isInBattleArena = false;
 
 
     IMAGES_STAY = this.characterStay();
@@ -29,43 +30,6 @@ class Character extends MovableObject {
                 'assets/sprites/character/player_male/Idle/Idle2.png',
                 'assets/sprites/character/player_male/Idle/Idle3.png',
                 'assets/sprites/character/player_male/Idle/Idle4.png'
-            ];
-        }
-    }
-
-
-    IMAGES_WALK = this.characterWalk();
-    characterWalk() {
-        if (this.character_Selection === 'female') {
-            return [
-                'assets/sprites/character/player_female/walk/walk-1.png',
-                'assets/sprites/character/player_female/walk/walk-2.png',
-                'assets/sprites/character/player_female/walk/walk-3.png',
-                'assets/sprites/character/player_female/walk/walk-4.png',
-                'assets/sprites/character/player_female/walk/walk-5.png',
-                'assets/sprites/character/player_female/walk/walk-6.png',
-                'assets/sprites/character/player_female/walk/walk-7.png',
-                'assets/sprites/character/player_female/walk/walk-8.png',
-                'assets/sprites/character/player_female/walk/walk-9.png',
-                'assets/sprites/character/player_female/walk/walk-10.png',
-                'assets/sprites/character/player_female/walk/walk-11.png',
-                'assets/sprites/character/player_female/walk/walk-12.png',
-                'assets/sprites/character/player_female/walk/walk-13.png',
-                'assets/sprites/character/player_female/walk/walk-14.png',
-                'assets/sprites/character/player_female/walk/walk-15.png',
-                'assets/sprites/character/player_female/walk/walk-16.png',
-            ];
-        }
-        if (this.character_Selection === 'male') {
-            return [
-                'assets/sprites/character/player_male/Run/Run1.png',
-                'assets/sprites/character/player_male/Run/Run2.png',
-                'assets/sprites/character/player_male/Run/Run3.png',
-                'assets/sprites/character/player_male/Run/Run4.png',
-                'assets/sprites/character/player_male/Run/Run5.png',
-                'assets/sprites/character/player_male/Run/Run6.png',
-                'assets/sprites/character/player_male/Run/Run7.png',
-                'assets/sprites/character/player_male/Run/Run8.png',
             ];
         }
     }
@@ -258,11 +222,10 @@ class Character extends MovableObject {
     jump_sound = new Audio('assets/audio/jump.mp3');
     shoot_sound = new Audio('assets/audio/shoot.ogg');
     hurt_sound = new Audio('assets/audio/hurt.ogg');
-    music_sound = new Audio('assets/audio/city_theme.mp3');
+    music_sound = new Audio('assets/audio/city_theme_2.mp3');
     constructor() {
         super().loadImage(this.IMAGES_STAY[0]);
         this.loadImages(this.IMAGES_STAY);
-        this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_RUN);
         this.loadImages(this.IMAGES_CROUCH);
         this.loadImages(this.IMAGES_JUMP);
@@ -278,32 +241,16 @@ class Character extends MovableObject {
         setInterval(() => {
             this.run_sound.pause();
             this.walk_sound.pause();
+            if (!this.isInBattleArena) {
+                this.music_sound.play();
+            }
             this.moveCamera();
 
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.is_Dead && !this.is_Hurt) {
-                if (!this.world.keyboard.SHIFTRIGHT || !this.world.keyboard.SHIFTLEFT) {
-                    this.moveToRight(0.5);
-                    this.walk_sound.play();
-                    this.run_sound.pause();
-                }
-                if (this.world.keyboard.SHIFTRIGHT || this.world.keyboard.SHIFTLEFT) {
-                    this.moveToRight(1.5);
-                    this.run_sound.play();
-                    this.walk_sound.pause();
-                }
+                this.moveToRight(1.5);
             }
-            if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x && this.x > this.world.level.level_boss_arena_border_left_x && !this.is_Dead && !this.is_Hurt) {
-
-                if (!this.world.keyboard.SHIFTRIGHT || !this.world.keyboard.SHIFTLEFT) {
-                    this.moveToLeft(0.5);
-                    this.walk_sound.play();
-                    this.run_sound.pause();
-                }
-                if (this.world.keyboard.SHIFTRIGHT || this.world.keyboard.SHIFTLEFT) {
-                    this.moveToLeft(1.5);
-                    this.run_sound.play();
-                    this.walk_sound.pause();
-                }
+            if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x && !this.is_Dead && !this.is_Hurt) {
+                this.moveToLeft(1.5);
             }
             if (this.world.keyboard.SPACE && !this.is_Dead && !this.is_Hurt) {
                 this.jump();
@@ -314,6 +261,8 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
+            console.log(this.world.camera_x);
+            console.log('CHARACTER: ' + this.x);
             this.playAnimation_STAY();
             this.playAnimation_DEAD();
             // this.playAnimation_HURT();
@@ -324,17 +273,8 @@ class Character extends MovableObject {
     }
 
 
-    playAnimation_WALK() {
-        if (!this.world.keyboard.SHIFTLEFT || !this.world.keyboard.SHIFTRIGHT) {
-            this.playAnimation(this.IMAGES_WALK);
-        }
-    }
-
-
     playAnimation_RUN() {
-        if (this.world.keyboard.SHIFTLEFT || this.world.keyboard.SHIFTRIGHT) {
-            this.playAnimation(this.IMAGES_RUN);
-        }
+        this.playAnimation(this.IMAGES_RUN);
     }
 
 
@@ -343,8 +283,6 @@ class Character extends MovableObject {
             if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y) {
                 this.playAnimation(this.IMAGES_JUMP);
             }
-            this.playAnimation_WALK();
-
             this.playAnimation_RUN();
         }
         if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y && !this.is_Dead && !this.is_Hurt) {
@@ -381,10 +319,10 @@ class Character extends MovableObject {
 
     playAnimation_HURT() {
         this.hurt_sound.pause();
-            if (!this.is_Dead) {
-                this.hurt_sound.play();
-                this.playAnimation(this.IMAGES_HURT);
-            }
+        if (!this.is_Dead) {
+            this.hurt_sound.play();
+            this.playAnimation(this.IMAGES_HURT);
+        }
     }
 
 
@@ -405,21 +343,14 @@ class Character extends MovableObject {
             this.world.camera_x = 0;
             this.world.camera_y = 0;
         }
-        if (this.x >= 60) {
+        if (this.x >= 60 && this.x <= 1949 && !this.isInBattleArena) {
             this.world.camera_x = -this.x + 58;
             this.world.camera_y = 0;
         }
-        if (this.x >= 60 && this.x >= 1950) {
+        if (this.x >= 60 && this.x >= 1949 && this.world.camera_x >= -1893) {
             this.world.camera_x = -1893;
             this.world.camera_y = 0;
+            this.world.level.level_start_x = 1890;
         }
-        ///
-        // if (this.x >= 1960) {
-        //     this.world.camera_x = -1893;
-        //     this.world.camera_y = 0;
-        // }
     }
-
-
-
 }

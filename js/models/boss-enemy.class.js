@@ -48,7 +48,9 @@ class BossEnemy extends MovableObject {
 
     boss() {
         let startInterval = setInterval(() => {
-            if (world && world.character.x >= 1900) {
+            if (world && world.character.x >= 1949) {
+                world.character.music_sound.pause();
+                world.character.isInBattleArena = true;
                 this.animateBossEnemy(this.IMAGES_FLY);
                 clearInterval(startInterval);
             }
@@ -67,39 +69,9 @@ class BossEnemy extends MovableObject {
                 }
                 if (!this.isOnRight) {
                     setTimeout(() => {
-                        if (!this.isUp && this.isOnRight || !this.isUp && this.isOnLeft) {
-                            this.isUp = true;
-                            this.speed = 0.3;
-                        }
-                        else {
-                            this.isUp = false;
-                        }
                         this.StayRightAnimation();
-                        if (!this.isUp && this.isOnRight || !this.isUp && this.isOnLeft) {
-                            this.isUp = false;
-                            this.speed = 2;
-                        }
-                        else {
-                            this.isUp = true;
-                        }
                     }, 4000);
                 }
-                // if (this.isUp) {
-                //     setTimeout(() => {
-                //         this.isUp = false;
-                //         this.speed = 2;
-                //         setTimeout(() => {
-                //             this.isUp = true;
-                //             this.speed = 0.3;
-                //         }, 5000);
-                //     }, 15000);
-                // }
-                // if (!this.isUp) {
-                //     setTimeout(() => {
-                //         this.isUp = true;
-                //         this.speed = 0.3;
-                //     }, 4000);
-                // }
             }
             if (this.is_Dead) {
                 this.stay();
@@ -120,7 +92,6 @@ class BossEnemy extends MovableObject {
     StayRightAnimation() {
         this.boss_fight.play();
         let moveInterval_x = setInterval(() => {
-            console.log(this.isUp);
             if (!this.moveRight) {
                 this.x -= this.speed;
                 if (this.x <= 2100) {
@@ -128,7 +99,7 @@ class BossEnemy extends MovableObject {
                 }
             } else {
                 this.x += this.speed;
-                if (this.x >= 2120) { // replace 2200 with the desired right boundary
+                if (this.x >= 2110) { // replace 2200 with the desired right boundary
                     this.moveRight = false;
                     this.isOnRight = true;
                     this.isOnLeft = false;
@@ -138,6 +109,9 @@ class BossEnemy extends MovableObject {
             clearInterval(moveInterval_x);
         }, 200);
         let moveInterval_y = setInterval(() => {
+            if (world && this.x == world.character.x) {
+                console.log('ATTACKE!!!');
+            }
             if (this.isUp) {
                 if (!this.moveUp) {
                     this.y -= 0.3;
@@ -146,7 +120,7 @@ class BossEnemy extends MovableObject {
                     }
                 } else {
                     this.y += 0.3;
-                    if (this.y >= 10) {
+                    if (this.y >= 6) {
                         this.moveUp = false;
                     }
                 }
@@ -170,7 +144,6 @@ class BossEnemy extends MovableObject {
     StayLeftAnimation() {
         this.boss_fight.play();
         let moveInterval_x = setInterval(() => {
-            console.log(this.isUp);
             if (!this.moveRight) {
                 this.x -= this.speed;
                 if (this.x <= 1880) {
@@ -181,13 +154,16 @@ class BossEnemy extends MovableObject {
                 }
             } else {
                 this.x += this.speed;
-                if (this.x >= 1900) { // replace 2200 with the desired right boundary
+                if (this.x >= 1890) { // replace 2200 with the desired right boundary
                     this.moveRight = false;
                 }
             }
             clearInterval(moveInterval_x);
         }, 200);
         let moveInterval_y = setInterval(() => {
+            if (world && this.x == world.character.x) {
+                console.log('ATTACKE!!!');
+            }
             if (this.isUp) {
                 if (!this.moveUp) {
                     this.y -= 0.3;
@@ -196,7 +172,7 @@ class BossEnemy extends MovableObject {
                     }
                 } else {
                     this.y += this.speed;
-                    if (this.y >= 10) {
+                    if (this.y >= 6) {
                         this.moveUp = false;
                     }
                 }
