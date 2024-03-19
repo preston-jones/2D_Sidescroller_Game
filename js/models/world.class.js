@@ -10,6 +10,7 @@ class World {
     isOnPlatform = false;
     shots = [];
     characterShot = [];
+    game_over = new Game_over(0, 0, 100, 100);
     statusbar_HEALTH = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
@@ -170,6 +171,11 @@ class World {
     // }
 
 
+    drawGameOver() {
+        this.addToMap(this.game_over);
+    }
+
+
     draw() {
         if (!this.isFlickering) {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
@@ -199,6 +205,7 @@ class World {
         // -----
         this.addObjectsToMap(this.statusbar_HEALTH);
         this.addObjectsToMap(this.statusbar_ENERGY);
+        this.addObjectsToMap(this.game_over);
         // Draw wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded

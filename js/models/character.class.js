@@ -2,16 +2,17 @@ class Character extends MovableObject {
 
     width = 60;
     height = 50;
-    x = -1;
-    // x = 1800;
+    // x = -1;
+    x = 1800;
     y = 10;
     speed = 2;
-    health = 1000;
+    health = 1;
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
     character_Selection = 'male';
     isInBattleArena = false;
+    isDeadCounter = true;
 
 
     IMAGES_STAY = this.characterStay();
@@ -214,14 +215,13 @@ class Character extends MovableObject {
         }
     }
 
-
-    playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
+    
     world;
-    walk_sound = new Audio('assets/audio/walk.mp3');
-    run_sound = new Audio('assets/audio/run.mp3');
+    playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
     jump_sound = new Audio('assets/audio/jump.mp3');
     shoot_sound = new Audio('assets/audio/shoot.ogg');
     hurt_sound = new Audio('assets/audio/hurt.ogg');
+    death_sound = new Audio('assets/audio/death.mp3');
     music_sound = new Audio('assets/audio/city_theme_2.mp3');
     constructor() {
         super().loadImage(this.IMAGES_STAY[0]);
@@ -239,10 +239,11 @@ class Character extends MovableObject {
 
     animateCharacter() {
         setInterval(() => {
-            this.run_sound.pause();
-            this.walk_sound.pause();
-            if (!this.isInBattleArena) {
+            if (!this.is_Dead && !this.isInBattleArena) {
                 this.music_sound.play();
+            }
+            else {
+                this.music_sound.pause();
             }
             this.moveCamera();
 
@@ -265,9 +266,7 @@ class Character extends MovableObject {
             console.log('CHARACTER: ' + this.x);
             this.playAnimation_STAY();
             this.playAnimation_DEAD();
-            // this.playAnimation_HURT();
             this.playAnimation_JUMP();
-            // this.playAnimation_SHOOT();
             this.playAnimation_DOWN();
         }, 150);
     }
@@ -327,8 +326,13 @@ class Character extends MovableObject {
 
 
     playAnimation_DEAD() {
-        if (this.isDead()) {
+        if (this.is_Dead) {
+            this.world.level.enemies[4].boss_fight.pause();
             this.playAnimation(this.IMAGES_DEAD);
+            if (this.isDeadCounter) {
+                this.death_sound.play();
+                this.isDeadCounter = false;
+            }
         }
     }
 

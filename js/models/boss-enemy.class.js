@@ -8,7 +8,7 @@ class BossEnemy extends MovableObject {
     health = 8;
     moveRight = false;
     moveUp = false;
-    isOnRight = true;
+    isOnRight = false;
     isOnLeft = false;
     isUp = true;
 
@@ -90,7 +90,9 @@ class BossEnemy extends MovableObject {
 
 
     StayRightAnimation() {
-        this.boss_fight.play();
+        if (world && !world.character.is_Dead) {
+            this.boss_fight.play();
+        }
         let moveInterval_x = setInterval(() => {
             if (!this.moveRight) {
                 this.x -= this.speed;
@@ -142,7 +144,9 @@ class BossEnemy extends MovableObject {
         }, 125);
     }
     StayLeftAnimation() {
-        this.boss_fight.play();
+        if (world && !world.character.is_Dead) {
+            this.boss_fight.play();
+        }
         let moveInterval_x = setInterval(() => {
             if (!this.moveRight) {
                 this.x -= this.speed;
