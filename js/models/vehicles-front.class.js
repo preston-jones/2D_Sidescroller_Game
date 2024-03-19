@@ -7,15 +7,17 @@ class VehiclesFront extends MovableObject {
     speed = Math.round(1 + Math.random() * 2);
     direction = this.chooseRandomeDirection();
     CURRENT_VEHICLE_IMAGE = [this.chooseVehicleImage()];
-    IMAGE_VEHICLES = [];
+    IMAGE_VEHICLES = [
+        'assets/sprites/vehicles/v-police.png'
+    ];
 
     constructor() {
         super().loadImage(this.CURRENT_VEHICLE_IMAGE);
         this.x = 100;
         this.loadImages(this.CURRENT_VEHICLE_IMAGE);
-        // this.chooseVehicleImage();
-        // this.loadImages(this.CURRENT_VEHICLE_IMAGE);
-        // this.animateVehicle();
+        this.chooseVehicleImage();
+        this.loadImages(this.CURRENT_VEHICLE_IMAGE);
+        this.animateVehicle();
     }
 
 

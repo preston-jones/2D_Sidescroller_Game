@@ -7,8 +7,8 @@ const level1 = new Level(
         new BossEnemy()
     ],
     [
-        new VehiclesFront(),
-        new VehiclesFront()
+        new VehiclesFront('right', 0, 80, 30, 10),
+        new VehiclesFront('left', 400, 100, 30, 10)
     ],
     [
         new VehiclesBack('right', 0, 80, 30, 10),
