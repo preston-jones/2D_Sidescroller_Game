@@ -48,7 +48,7 @@ const level1 = new Level(
         new SkylineFront('assets/environment/background/near-buildings-b-bg.png', 1180, 10, 400, 150),
 
         new SkylineFront('assets/environment/background/near-buildings-a-bg.png', 1590, 10, 400, 150),
-        new SkylineFront('assets/environment/background/near-buildings-b-bg.png', 1900, 10, 400, 150),
+        new SkylineFront('assets/environment/background/near-buildings-b-bg.png', 2000, 10, 400, 150),
     ],
     [
         new Playground('assets/environment/floor2.png', 0, 120, 600, 50),

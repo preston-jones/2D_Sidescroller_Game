@@ -14,9 +14,9 @@ class SkylineFront extends AnimatedBackground {
         this.y = y;
         this.animate();
     }
-    
+
 
     animate() {
-        this.animateBackground(0.1, 0.1);
-}
+        this.animateBackground(0.1);
+    }
 }

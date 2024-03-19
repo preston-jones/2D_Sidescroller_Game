@@ -17,7 +17,7 @@ class SkylineBack extends AnimatedBackground {
 
 
     animate() {
-            this.animateBackground(0.2, 0.2);
+        this.animateBackground(0.2);
     }
-    
+
 }
