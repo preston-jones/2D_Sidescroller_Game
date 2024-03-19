@@ -63,6 +63,8 @@ const level1 = new Level(
     [
         new CollectibleHealth(400, 112, 15, 15),
         new CollectibleHealth(800, 112, 15, 15)
+    ],
+    [
+        new Game_over(0, -20, 300, 200)
     ]
-
 );
