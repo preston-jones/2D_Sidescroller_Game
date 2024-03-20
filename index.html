@@ -21,7 +21,6 @@
     <script src="js/models/drone.class.js"></script>
     <script src="js/models/boss-enemy.class.js"></script>
     <script src="js/models/shot.class.js"></script>
-    <script src="js/models/vehicles.class.js"></script>
     <script src="js/models/vehicles-back.class.js"></script>
     <script src="js/models/vehicles-front.class.js"></script>
     <script src="js/models/animated-background.class.js"></script>
@@ -38,17 +37,53 @@
 </head>
 
 <body onload="init()">
-    <div class="header">
-        <h1>Cyber City</h1>
-        <h2>2070</h2>
-    </div>
-    <div id="frame">
-        <img src="assets/img/frame.png" alt="">
-        <div id="fullscreen">
-            <canvas id="canvas"></canvas>
+    <div class="container">
+        <div class="header">
+            <h1>Cyber City</h1>
+            <h2>2070</h2>
+        </div>
+        <div id="frame">
+            <img class="frame_img" src="assets/img/frame.png" alt="">
+            <div id="fullscreen">
+                <div id="gamepad_overlay">
+                    <div class="gamepad_overlay_left">
+                        <div>
+                            <img class="gamepad_img" src="assets/img/gamepad_overlay/dpad_up.png" alt="">
+                        </div>
+                        <div class="gamepad_cross_container">
+                            <div>
+                                <img class="gamepad_img" id="arrow_left" src="assets/img/gamepad_overlay/dpad_left.png" alt="">
+                            </div>
+                            <div>
+                                <img class="gamepad_img" src="assets/img/gamepad_overlay/dpad_center.png" alt="">
+                            </div>
+                            <div>
+                                <img class="gamepad_img" id="arrow_right" src="assets/img/gamepad_overlay/dpad_right.png" alt="">
+                            </div>
+                        </div>
+                        <div>
+                            <img class="gamepad_img" src="assets/img/gamepad_overlay/dpad_down.png" alt="">
+                        </div>
+                    </div>
+                    <div class="gamepad_overlay_middle">
+                    </div>
+                    <div class="gamepad_overlay_right">
+                        <div class="gamepad_button_a_container">
+                            <img class="gamepad_img" id="shoot" src="assets/img/gamepad_overlay/button_a.png" alt="">
+                        </div>
+                        <div class="gamepad_button_b_container">
+                            <img class="gamepad_img" id="jump" src="assets/img/gamepad_overlay/button_b.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+        <div class="settings_container">
+            <button onclick="fullscreen()" id="fullscreen_button">FULLSCREEN</button>
+            <button onclick="sound()" id="fullscreen_button">MUSIC: On/Off</button>
         </div>
     </div>
-    <button onclick="fullscreen()" id="fullscreen_button">FULLSCREEN</button>
 </body>
 
 </html>

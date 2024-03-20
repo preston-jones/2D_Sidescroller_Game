@@ -2,8 +2,8 @@ class Character extends MovableObject {
 
     width = 60;
     height = 50;
-    // x = -1;
-    x = 1800;
+    x = -1;
+    // x = 1800;
     y = 10;
     speed = 2;
     health = 1;
@@ -239,7 +239,8 @@ class Character extends MovableObject {
 
     animateCharacter() {
         setInterval(() => {
-            if (!this.is_Dead && !this.isInBattleArena) {
+            console.log(this.musicOff);
+            if (!this.musicOff && !this.is_Dead && !this.isInBattleArena) {
                 this.music_sound.play();
             }
             else {
@@ -326,8 +327,9 @@ class Character extends MovableObject {
 
 
     playAnimation_DEAD() {
+        let index = world.level.enemies.findIndex(enemy => enemy instanceof BossEnemy); // MERKEN und LERNEN!!!
         if (this.is_Dead) {
-            this.world.level.enemies[4].boss_fight.pause();
+            this.world.level.enemies[index].boss_fight.pause();
             this.playAnimation(this.IMAGES_DEAD);
             if (this.isDeadCounter) {
                 this.death_sound.play();

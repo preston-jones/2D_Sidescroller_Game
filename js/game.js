@@ -2,19 +2,19 @@ let canvas;
 let world;
 let ctx;
 let keyboard = new Keyboard();
+let musicOff = false;
+let soundEffectsOff = false;
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    pressMobileButtons()
     // world = new StartScreen(canvas, keyboard);
 }
 
 
 // Keyboard(classname).UP(Key of Variable in this class)
 window.addEventListener("keydown", (e) => {
-    if (e.code == "ArrowUp") {
-        keyboard.UP = true;
-    }
     if (e.code == "ArrowDown") {
         keyboard.DOWN = true;
     }
@@ -30,21 +30,12 @@ window.addEventListener("keydown", (e) => {
     if (e.code == "KeyC") {
         keyboard.C = true;
     }
-    if (e.code == "ShiftLeft") {
-        keyboard.SHIFTLEFT = true;
-    }
-    if (e.code == "ShiftRight") {
-        keyboard.SHIFTRIGHT = true;
-    }
     if (e.code == "Enter") {
         keyboard.ENTER = true;
     }
 });
 
 window.addEventListener("keyup", (e) => {
-    if (e.code == "ArrowUp") {
-        keyboard.UP = false;
-    }
     if (e.code == "ArrowDown") {
         keyboard.DOWN = false;
     }
@@ -60,16 +51,47 @@ window.addEventListener("keyup", (e) => {
     if (e.code == "KeyC") {
         keyboard.C = false;
     }
-    if (e.code == "ShiftLeft") {
-        keyboard.SHIFTLEFT = false;
-    }
-    if (e.code == "ShiftRight") {
-        keyboard.SHIFTRIGHT = false;
-    }
     if (e.code == "Enter") {
         keyboard.ENTER = false;
     }
 });
+
+
+function pressMobileButtons(){
+    document.getElementById('arrow_left').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+    document.getElementById('arrow_left').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+    document.getElementById('arrow_right').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+    document.getElementById('arrow_right').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+    document.getElementById('jump').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    });
+    document.getElementById('jump').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    });
+    document.getElementById('shoot').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.C = true;
+    });
+    document.getElementById('shoot').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.C = false;
+    });
+
+}
 
 
 function fullscreen() {
@@ -88,4 +110,10 @@ function enterFullscreen(element) {
         element.webkitRequestFullscreen();
     }
 
+}
+
+
+function sound() {
+    musicOff = true;
+    console.log(world.level.enemies);
 }

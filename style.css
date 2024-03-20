@@ -3,24 +3,30 @@
 }
 
 body {
-    font-family: 'VT323', monospace;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
-    /* position: relative; */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin: 0;
-    background-color: rgb(3,27,112);
+    background-color: rgb(3, 27, 112);
     background-image: url('assets/img/skyline.png');
     /* background-image: url('assets/img/retro-2426631_1280.png'); */
     background-repeat: no-repeat;
     background-position: top;
     background-size: inherit;
     color: rgb(230, 230, 230);
+}
+
+.container {
+    width: 768px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'VT323', monospace;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
 }
 
 canvas {
@@ -49,7 +55,7 @@ h1 {
 
 h2 {
     font-size: 62px;
-    margin: 36px 0 0 0;
+    margin: 0;
     color: #e7d63f;
     text-shadow: -4px -3px 2px #505050;
 }
@@ -69,13 +75,20 @@ h2 {
     border: none;
 }
 
+.settings_container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-top: 64px;
+}
+
 #fullscreen_button {
     display: flex;
     justify-content: center;
     align-items: center;
     width: auto;
     height: 32px;
-    margin-top: 64px;
     font-family: inherit;
     font-size: 28px;
     color: #0f0f0f;
@@ -90,6 +103,77 @@ h2 {
     border: 1px inset gray;
 }
 
+#gamepad_overlay {
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.gamepad_overlay_left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    height: 100%;
+    width: 20%;
+}
+
+.gamepad_overlay_middle {
+    height: 100%;
+    width: 60%;
+}
+
+.gamepad_overlay_right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    gap: 18px;
+    height: 100%;
+    width: 20%;
+    padding: 0 8px 0 8px;
+}
+
+.gamepad_cross_container {
+    display: flex;
+}
+
+.gamepad_button_a_container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+#shoot {
+    width: 50px;
+    height: 50px;
+}
+
+.gamepad_button_b_container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+#jump {
+    width: 50px;
+    height: 50px;
+}
+
+.gamepad_img {
+    display: none;
+    object-fit: contain;
+    width: 45px;
+    height: 45px;
+}
+
 #frame {
     position: relative;
     display: flex;
@@ -100,7 +184,7 @@ h2 {
     /* border: 4PX SOLID yellow; */
 }
 
-#frame img{
+.frame_img {
     z-index: 10;
     position: absolute;
     bottom: -30px;
@@ -111,9 +195,16 @@ h2 {
 
 /* Smartphones ------------------------------ */
 @media only screen and (max-width: 768px) {
+    body {
+        /* overflow: hidden; */
+        background-color: black;
+        background-image: none;
+    }
+
     canvas {
         width: 100%;
         margin-bottom: 0;
+        padding-left: 20%;
         border: none;
     }
 
@@ -122,10 +213,19 @@ h2 {
         width: 100vw;
         display: flex;
         justify-content: center;
+        overflow: hidden;
     }
 
-    #frame img{
+    .frame_img {
         display: none;
+    }
+
+    #gamepad_overlay {
+        display: flex;
+    }
+
+    .gamepad_img {
+        display: flex;
     }
 
     #fullscreen {
@@ -143,13 +243,24 @@ h2 {
     .header {
         display: none;
     }
+
+    .container {
+        width: 100vh;
+    }
 }
 
 /* Smartphones ------------------------------ */
 @media only screen and (max-height: 448px) {
+    body {
+        /* overflow: hidden; */
+        background-color: black;
+        background-image: none;
+    }
+    
     canvas {
         height: 100vh;
         margin-bottom: 0;
+        padding-left: 20%;
         border: none;
     }
 
@@ -158,10 +269,19 @@ h2 {
         width: 100vw;
         display: flex;
         justify-content: center;
+        overflow: hidden;
     }
 
-    #frame img{
+    .frame_img {
         display: none;
+    }
+
+    #gamepad_overlay {
+        display: flex;
+    }
+
+    .gamepad_img {
+        display: flex;
     }
 
     #fullscreen {
@@ -174,5 +294,9 @@ h2 {
 
     .header {
         display: none;
+    }
+
+    .container {
+        width: 100vh;
     }
 }

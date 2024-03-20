@@ -190,7 +190,7 @@ class World {
         this.addObjectsToMap(this.level.animatedObjectBack);
         this.addObjectsToMap(this.level.animatedBackgroundFront);
 
-        this.addObjectsToMap(this.level.VehiclesFront);
+        // this.addObjectsToMap(this.level.VehiclesFront);
         this.addObjectsToMap(this.level.playground);
         this.addObjectsToMap(this.level.collectibles_energy);
         this.addObjectsToMap(this.level.collectibles_health);
