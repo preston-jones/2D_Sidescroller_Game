@@ -8,7 +8,7 @@ let soundEffectsOff = false;
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    pressMobileButtons()
+    pressMobileButtons();
     // world = new StartScreen(canvas, keyboard);
 }
 

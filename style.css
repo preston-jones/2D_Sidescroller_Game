@@ -196,7 +196,6 @@ h2 {
 /* Smartphones ------------------------------ */
 @media only screen and (max-width: 768px) {
     body {
-        /* overflow: hidden; */
         background-color: black;
         background-image: none;
     }
@@ -236,7 +235,7 @@ h2 {
         justify-content: center;
     }
 
-    #fullscreen_button {
+    .settings_container {
         display: none;
     }
 
@@ -252,7 +251,6 @@ h2 {
 /* Smartphones ------------------------------ */
 @media only screen and (max-height: 448px) {
     body {
-        /* overflow: hidden; */
         background-color: black;
         background-image: none;
     }
