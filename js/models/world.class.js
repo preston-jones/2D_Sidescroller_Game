@@ -10,6 +10,7 @@ class World {
     isOnPlatform = false;
     shots = [];
     characterShot = [];
+    isGameOver = false;
     statusbar_HEALTH = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
@@ -173,42 +174,55 @@ class World {
     drawGameOver() {
         if (this.character.is_Dead) {
             this.addObjectsToMap(this.level.gameOver);
+            // setTimeout(() => {
+            //     this.isGameOver = true;
+            //     // init();
+            // }, 4000);
+            console.log(this.isGameOver);
+        }
+    }
+
+
+    newGame() {
+        if (this.isGameOver) {
+            this.addObjectsToMap(this.level.gameOver);
         }
     }
 
 
     draw() {
         if (!this.isFlickering) {
-        this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
+            this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
 
 
-        // moves camera view
-        this.addObjectsToMap(this.level.backgroundImageStatic);
-        this.addObjectsToMap(this.level.animatedBackgroundBack);
-        this.ctx.translate(this.camera_x, this.camera_y);
-        // -----
-        this.addObjectsToMap(this.level.animatedObjectBack);
-        this.addObjectsToMap(this.level.animatedBackgroundFront);
+            // moves camera view
+            this.addObjectsToMap(this.level.backgroundImageStatic);
+            this.addObjectsToMap(this.level.animatedBackgroundBack);
+            this.ctx.translate(this.camera_x, this.camera_y);
+            // -----
+            this.addObjectsToMap(this.level.animatedObjectBack);
+            this.addObjectsToMap(this.level.animatedBackgroundFront);
 
-        // this.addObjectsToMap(this.level.VehiclesFront);
-        this.addObjectsToMap(this.level.playground);
-        this.addObjectsToMap(this.level.collectibles_energy);
-        this.addObjectsToMap(this.level.collectibles_health);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.shots);
-        // moves camera view back to default
-        this.ctx.translate(-this.camera_x, this.camera_y);
-        // -----
-        this.addObjectsToMap(this.statusbar_HEALTH);
-        this.addObjectsToMap(this.statusbar_ENERGY);
-        this.drawGameOver();
-        // Draw wird immer wieder aufgerufen
-        let self = this;
-        requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
-            self.draw();
-        });
-    }
+            // this.addObjectsToMap(this.level.VehiclesFront);
+            this.addObjectsToMap(this.level.playground);
+            this.addObjectsToMap(this.level.collectibles_energy);
+            this.addObjectsToMap(this.level.collectibles_health);
+            this.addToMap(this.character);
+            this.addObjectsToMap(this.level.enemies);
+            this.addObjectsToMap(this.shots);
+            // moves camera view back to default
+            this.ctx.translate(-this.camera_x, this.camera_y);
+            // -----
+            this.addObjectsToMap(this.statusbar_HEALTH);
+            this.addObjectsToMap(this.statusbar_ENERGY);
+            this.drawGameOver();
+            this.newGame();
+            // Draw wird immer wieder aufgerufen
+            let self = this;
+            requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
+                self.draw();
+            });
+        }
     }
 
     addObjectsToMap(objects) {

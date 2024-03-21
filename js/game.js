@@ -4,12 +4,12 @@ let ctx;
 let keyboard = new Keyboard();
 let musicOff = false;
 let soundEffectsOff = false;
+let isGameOver = false;
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     pressMobileButtons();
-    // world = new StartScreen(canvas, keyboard);
 }
 
 
@@ -57,7 +57,7 @@ window.addEventListener("keyup", (e) => {
 });
 
 
-function pressMobileButtons(){
+function pressMobileButtons() {
     document.getElementById('arrow_left').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.LEFT = true;
