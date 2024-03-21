@@ -140,7 +140,7 @@ class MovableObject extends DrawableObject {
 
     animateEnemie(images_arr, array) {
         let moveInterval = setInterval(() => {
-            if (world && world.character.x >= 0) {
+            if (world && world.character.x >= 60) {
                 console.log('Enemys start moving');
                 if (!this.is_Dead) {
                     this.moveToLeft(this.speed);

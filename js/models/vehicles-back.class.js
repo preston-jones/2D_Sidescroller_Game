@@ -1,7 +1,7 @@
 class VehiclesBack extends MovableObject {
     
     x;
-    y = 80 + Math.round(Math.random() * 120);
+    y = 60 + Math.round(Math.random() * 100);
     height = 10;
     width = 30;
     speed = Math.round(1 + Math.random() * 2)

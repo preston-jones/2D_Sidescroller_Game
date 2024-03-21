@@ -23,7 +23,21 @@ const level1 = new Level(
         new VehiclesBack('right', -50, 120, 30, 10),
         new VehiclesBack('left', 1800, 140, 30, 10),
         new VehiclesBack('right', -100, 130, 30, 10),
-        new VehiclesBack('left', 1900, 110, 30, 10)
+        new VehiclesBack('left', 1900, 110, 30, 10),
+
+        new VehiclesBack('right', 0, 80, 30, 10),
+        new VehiclesBack('left', 450, 90, 30, 10),
+        new VehiclesBack('right', 55, 30, 30, 10),
+        new VehiclesBack('left', 850, 40, 30, 10),
+        new VehiclesBack('right', 5, 13, 30, 10),
+        new VehiclesBack('left', 1900, 110, 30, 10),
+
+        new VehiclesBack('right', 3700, 80, 30, 10),
+        new VehiclesBack('left', 1300, 100, 30, 10),
+        new VehiclesBack('right', -59, 120, 30, 10),
+        new VehiclesBack('left', 1700, 140, 30, 10),
+        new VehiclesBack('right', -100, 130, 30, 10),
+        new VehiclesBack('left', 1400, 110, 30, 10)
     ],
     [
         new BackgroundStatic('assets/environment/background/skyline-a.png', -58, -25, 120, 190),

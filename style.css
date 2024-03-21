@@ -9,11 +9,11 @@ body {
     align-items: center;
     margin: 0;
     background-color: rgb(3, 27, 112);
-    background-image: url('assets/img/skyline.png');
-    /* background-image: url('assets/img/retro-2426631_1280.png'); */
+    /* background-image: url('assets/img/skyline.png'); */
+    background-image: url('assets/img/retro-2426631_1280.jpg');
     background-repeat: no-repeat;
-    background-position: top;
-    background-size: inherit;
+    background-position: center;
+    background-size: cover;
     color: rgb(230, 230, 230);
 }
 
@@ -43,22 +43,17 @@ canvas {
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    margin-top: 32px;
+    margin-top: 64px;
 }
 
 h1 {
-    font-size: 72px;
-    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 100px;
+    font-family: 'Vermin Vibes 1989 Regular', sans-serif;
+    color: #e7d63f;
     margin: 0;
-    text-shadow: -9px -7px 2px #505050;
+    text-shadow: -9px -7px 2px #3b3b3b;
 }
 
-h2 {
-    font-size: 62px;
-    margin: 0;
-    color: #e7d63f;
-    text-shadow: -4px -3px 2px #505050;
-}
 
 #fullscreen {
     display: flex;
@@ -118,10 +113,10 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: black;
+    justify-content: flex-end;
     height: 100%;
     width: 20%;
+    padding: 100px 8px 30px 30px;
 }
 
 .gamepad_overlay_middle {
@@ -133,12 +128,11 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: black;
+    justify-content: flex-end;
     gap: 18px;
     height: 100%;
-    width: 20%;
-    padding: 0 8px 0 8px;
+    width: 15%;
+    padding: 100px 20px 30px 8px;
 }
 
 .gamepad_cross_container {
@@ -170,8 +164,9 @@ h2 {
 .gamepad_img {
     display: none;
     object-fit: contain;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
+    opacity: 0.7;
 }
 
 #frame {
@@ -196,14 +191,14 @@ h2 {
 /* Smartphones ------------------------------ */
 @media only screen and (max-width: 768px) {
     body {
-        background-color: black;
+        background-color: rgb(20, 20, 20);
         background-image: none;
     }
 
     canvas {
-        width: 100%;
+        /* width: 70%; */
         margin-bottom: 0;
-        padding-left: 20%;
+        padding-left: 0;
         border: none;
     }
 
@@ -251,15 +246,16 @@ h2 {
 /* Smartphones ------------------------------ */
 @media only screen and (max-height: 448px) {
     body {
-        background-color: black;
+        background-color: rgb(20, 20, 20);
         background-image: none;
     }
     
     canvas {
-        height: 100vh;
+        /* height: 95%; */
         margin-bottom: 0;
-        padding-left: 20%;
-        border: none;
+        /* padding-left: 4%; */
+        border-top: 8px solid rgb(20, 20, 20);
+        border-bottom: 8px solid rgb(20, 20, 20);
     }
 
     #frame {
