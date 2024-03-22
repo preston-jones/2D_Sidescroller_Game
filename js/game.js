@@ -7,6 +7,8 @@ let soundEffectsOff = false;
 let isGameOver = false;
 
 function init() {
+    document.getElementById('startscreen').classList.add('close_startscreen');
+    document.getElementById('canvas').classList.add('show_canvas');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     pressMobileButtons();
@@ -101,6 +103,7 @@ function fullscreen() {
 
 
 function enterFullscreen(element) {
+    document.getElementById('startscreen').classList.add('fullscreen_startscreen');
     document.getElementById('canvas').classList.add('fullscreen');
     if (element.requestFullscreen) {
         element.requestFullscreen();

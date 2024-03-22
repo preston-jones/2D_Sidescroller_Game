@@ -36,7 +36,7 @@
     <script src="js/game.js"></script>
 </head>
 
-<body onload="init()">
+<body>
     <div class="container">
         <div class="header">
             <img class="headline" src="assets/img/cybercity.png" alt="">
@@ -44,6 +44,14 @@
         <div id="frame">
             <img class="frame_img" src="assets/img/frame.png" alt="">
             <div id="fullscreen">
+                <div id="startscreen">
+                    <img class="headline" id="headline_startscreen" src="assets/img/cybercity.png" alt="">
+                    <div class="startscreen_buttons_container">
+                        <div class="startscreen_button" onclick="init()">START GAME</div>
+                        <div class="startscreen_button">CONTROLL</div>
+                        <div class="startscreen_button">CREDITS</div>
+                    </div>
+                </div>
                 <div id="gamepad_overlay">
                     <div class="gamepad_overlay_left">
                         <div>
@@ -51,13 +59,15 @@
                         </div>
                         <div class="gamepad_cross_container">
                             <div>
-                                <img class="gamepad_img" id="arrow_left" src="assets/img/gamepad_overlay/dpad_left.png" alt="">
+                                <img class="gamepad_img" id="arrow_left" src="assets/img/gamepad_overlay/dpad_left.png"
+                                    alt="">
                             </div>
                             <div>
                                 <img class="gamepad_img" src="assets/img/gamepad_overlay/dpad_center.png" alt="">
                             </div>
                             <div>
-                                <img class="gamepad_img" id="arrow_right" src="assets/img/gamepad_overlay/dpad_right.png" alt="">
+                                <img class="gamepad_img" id="arrow_right"
+                                    src="assets/img/gamepad_overlay/dpad_right.png" alt="">
                             </div>
                         </div>
                         <div>
