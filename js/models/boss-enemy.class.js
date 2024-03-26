@@ -1,7 +1,8 @@
 class BossEnemy extends MovableObject {
 
     x;
-    y = 6;
+    y = 16;
+    offsetY = 0;
     width = 80;
     height = 70;
     speed = 0.3;
@@ -122,7 +123,7 @@ class BossEnemy extends MovableObject {
                     }
                 } else {
                     this.y += 0.3;
-                    if (this.y >= 6) {
+                    if (this.y >= 20) {
                         this.moveUp = false;
                     }
                 }
@@ -176,7 +177,7 @@ class BossEnemy extends MovableObject {
                     }
                 } else {
                     this.y += this.speed;
-                    if (this.y >= 6) {
+                    if (this.y >= 20) {
                         this.moveUp = false;
                     }
                 }

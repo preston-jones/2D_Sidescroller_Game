@@ -2,15 +2,17 @@ class Character extends MovableObject {
 
     width = 60;
     height = 50;
-    x = 58;
-    // x = 1800;
+    // x = 58;
+    x = 1800;
     y = 10;
+    offsetX = -20;
+    offsetY = -15;
     speed = 2;
-    health = 1;
+    health = 100;
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
-    character_Selection = 'male';
+    character_Selection = 'female';
     isInBattleArena = false;
     isDeadCounter = true;
 
@@ -215,7 +217,7 @@ class Character extends MovableObject {
         }
     }
 
-    
+
     world;
     playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
     jump_sound = new Audio('assets/audio/jump.mp3');
@@ -238,8 +240,8 @@ class Character extends MovableObject {
 
 
     animateCharacter() {
+        console.log('character: ' + this.offsetY);
         setInterval(() => {
-            console.log(this.musicOff);
             if (!this.musicOff && !this.is_Dead && !this.isInBattleArena) {
                 this.music_sound.play();
             }
@@ -263,8 +265,6 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            console.log(this.world.camera_x);
-            console.log('CHARACTER: ' + this.x);
             this.playAnimation_STAY();
             this.playAnimation_DEAD();
             this.playAnimation_JUMP();
@@ -296,13 +296,10 @@ class Character extends MovableObject {
 
 
     playAnimation_DOWN() {
-        if (this.world.keyboard.UP && !this.is_Dead || this.world.keyboard.DOWN && !this.is_Dead && !this.is_Hurt) {
-            if (this.y > world.level.level_end_bottom_y) {
-                this.playAnimation(this.IMAGES_CLIMB);
-            }
-            if (this.y <= world.level.level_end_bottom_y) {
-                this.playAnimation(this.IMAGES_CROUCH);
-            }
+        this.offsetY = 0;
+        if (this.world.keyboard.DOWN && !this.is_Dead && !this.is_Hurt) {
+            this.offsetY = 20;
+            this.playAnimation(this.IMAGES_CROUCH);
         }
     }
 

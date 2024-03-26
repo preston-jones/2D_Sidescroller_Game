@@ -1,5 +1,7 @@
 class MovableObject extends DrawableObject {
 
+    offsetY = 0;
+    offsetX = 0;
     speed;
     otherDirection = false;
     speedY = 0;
@@ -18,6 +20,7 @@ class MovableObject extends DrawableObject {
     lastHitTime = 0; // Add this line
     hitCooldown = 1000; // Cooldown period in milliseconds
     explosion_sound = new Audio('assets/audio/explosion.ogg');
+
 
     isAboveGround() {
         return this.y < world.level.level_end_bottom_y;
@@ -57,11 +60,21 @@ class MovableObject extends DrawableObject {
     }
 
 
+    // isColliding(obj) {
+    //     return (this.x < obj.x + obj.width) &&
+    //         (this.x + this.width > obj.x) &&
+    //         (this.y < obj.y + obj.height) &&
+    //         (this.y + this.height > obj.y);
+    // }
+
+
     isColliding(obj) {
-        return (this.x < obj.x + obj.width) &&
-            (this.x + this.width > obj.x) &&
-            (this.y < obj.y + obj.height) &&
-            (this.y + this.height > obj.y);
+        return (this.x + this.offsetX + this.width) >= obj.x &&
+            (this.x + this.offsetX) <= (obj.x + obj.width) &&
+            (this.y + this.offsetY + this.height) >= obj.y &&
+            (this.y + this.offsetY) <= (obj.y + obj.height);
+        // && 
+        // obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
     }
 
 

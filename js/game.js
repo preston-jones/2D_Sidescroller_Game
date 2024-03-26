@@ -9,6 +9,7 @@ let isGameOver = false;
 function init() {
     document.getElementById('startscreen').classList.add('close_startscreen');
     document.getElementById('canvas').classList.add('show_canvas');
+    // document.getElementById('canvas').classList.add('show_gamepad');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     pressMobileButtons();
@@ -112,11 +113,12 @@ function enterFullscreen(element) {
     } else if (element.webkitRequestFullscreen) {  // iOS Safari
         element.webkitRequestFullscreen();
     }
-
-}
-
-
-function sound() {
-    musicOff = true;
-    console.log(world.level.enemies);
+    // Listen for fullscreen changes
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+            // Fullscreen mode has been exited
+            document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
+            document.getElementById('canvas').classList.remove('fullscreen');
+        }
+    });
 }

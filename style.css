@@ -42,6 +42,15 @@ body {
     width: 640px;
 }
 
+canvas {
+    display: none;
+    /* display: block; */
+    width: 768px;
+    height: 384px;
+    image-rendering: pixelated;
+    /* aspect-ratio: auto 768 / 384; */
+}
+
 #startscreen {
     z-index: 50;
     display: flex;
@@ -52,6 +61,7 @@ body {
     height: 384px;
     background-image: url("assets/img/startscreen_bgr.png");
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
@@ -59,6 +69,7 @@ body {
     width: 280px;
     margin-bottom: 72px;
 }
+
 .startscreen_buttons_container {
     display: flex;
     flex-direction: column;
@@ -67,23 +78,13 @@ body {
     gap: 12px;
 }
 
-.startscreen_button {
-}
+.startscreen_button {}
 
 .startscreen_button:hover {
-    transform: scale(1.1);
-    cursor: pointer;
+    transform: scale(1.15);
+    cursor: crosshair;
     text-shadow: #FC0 1px 0 10px;
-}
-
-canvas {
-    display: none;
-    /* display: block; */
-    width: 768px;
-    height: 384px;
-    /* image-rendering: pixelated; */
-    /* aspect-ratio: auto 768 / 448; */
-    /* display: none; */
+    font-weight: 700;
 }
 
 .header {
@@ -235,8 +236,9 @@ h1 {
 }
 
 .fullscreen_startscreen {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
+    background-size: contain !important;
     border: none;
 }
 
@@ -302,7 +304,7 @@ h1 {
         background-color: rgb(20, 20, 20);
         background-image: none;
     }
-    
+
     canvas {
         /* height: 95%; */
         margin-bottom: 0;
