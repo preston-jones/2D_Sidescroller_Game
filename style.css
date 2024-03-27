@@ -65,6 +65,17 @@ canvas {
     background-position: center;
 }
 
+.navbar {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    width: 100%;
+    gap: 16px;
+}
+
 #headline_startscreen {
     width: 280px;
     margin-bottom: 72px;
@@ -78,10 +89,24 @@ canvas {
     gap: 12px;
 }
 
-.startscreen_button {}
+.startscreen_button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.startscreen_button_arrow {
+    visibility: hidden;
+}
+
+.startscreen_button:hover .startscreen_button_arrow {
+    visibility: visible;
+}
 
 .startscreen_button:hover {
-    transform: scale(1.15);
+    transform: scale(1.1);
     cursor: crosshair;
     text-shadow: #FC0 1px 0 10px;
     font-weight: 700;
@@ -119,14 +144,6 @@ h1 {
     position: absolute;
     width: 854px;
     height: 524px;
-}
-
-.settings_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 16px;
 }
 
 #fullscreen_button {

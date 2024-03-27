@@ -45,11 +45,21 @@
             <img class="frame_img" src="assets/img/frame.png" alt="">
             <div id="fullscreen">
                 <div id="startscreen">
+                    <div class="navbar">
+                            <button onclick="fullscreen()" id="fullscreen_button">FULLSCREEN</button>
+                            <button onclick="sound()" id="fullscreen_button">MUSIC: On/Off</button>
+                    </div>
                     <img class="headline" id="headline_startscreen" src="assets/img/cybercity.png" alt="">
                     <div class="startscreen_buttons_container">
-                        <div class="startscreen_button" onclick="init()">START GAME</div>
-                        <div class="startscreen_button">CONTROLL</div>
-                        <div class="startscreen_button">CREDITS</div>
+                        <div class="startscreen_button" onclick="init()">
+                            <div class="startscreen_button_arrow">>></div>START GAME
+                        </div>
+                        <div class="startscreen_button">
+                            <div class="startscreen_button_arrow">>></div>CONTROLL
+                        </div>
+                        <div class="startscreen_button">
+                            <div class="startscreen_button_arrow">>></div>CREDITS
+                        </div>
                     </div>
                 </div>
                 <div id="gamepad_overlay">
@@ -87,10 +97,6 @@
                 </div>
                 <canvas id="canvas"></canvas>
             </div>
-        </div>
-        <div class="settings_container">
-            <button onclick="fullscreen()" id="fullscreen_button">FULLSCREEN</button>
-            <button onclick="sound()" id="fullscreen_button">MUSIC: On/Off</button>
         </div>
     </div>
 </body>
