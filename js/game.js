@@ -3,8 +3,8 @@ let world;
 let ctx;
 let keyboard = new Keyboard();
 let musicOff = false;
-let soundEffectsOff = false;
 let isGameOver = false;
+let isInFullscreen = false;
 
 function init() {
     document.getElementById('startscreen').classList.add('close_startscreen');
@@ -60,6 +60,11 @@ window.addEventListener("keyup", (e) => {
 });
 
 
+function mobileController() {
+    document.getElementById('gamepad_overlay').classList.toggle('showMobileController');
+}
+
+
 function pressMobileButtons() {
     document.getElementById('arrow_left').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -106,6 +111,9 @@ function fullscreen() {
 function enterFullscreen(element) {
     document.getElementById('startscreen').classList.add('fullscreen_startscreen');
     document.getElementById('canvas').classList.add('fullscreen');
+    let fullscreen_icon = document.getElementById('fullscreen_button');
+    fullscreen_icon.src = 'assets/img/icons/collapse.png';
+
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
@@ -113,12 +121,18 @@ function enterFullscreen(element) {
     } else if (element.webkitRequestFullscreen) {  // iOS Safari
         element.webkitRequestFullscreen();
     }
+
     // Listen for fullscreen changes
     document.addEventListener('fullscreenchange', () => {
         if (!document.fullscreenElement) {
             // Fullscreen mode has been exited
-            document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
-            document.getElementById('canvas').classList.remove('fullscreen');
+            closeFullscreen();
         }
     });
+}
+
+
+function closeFullscreen() {
+    document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
+    document.getElementById('canvas').classList.remove('fullscreen');
 }
