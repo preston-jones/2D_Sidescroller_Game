@@ -46,19 +46,23 @@
             <div id="fullscreen">
                 <div id="startscreen">
                     <div class="navbar">
-                            <button onclick="fullscreen()" id="fullscreen_button">FULLSCREEN</button>
-                            <button onclick="sound()" id="fullscreen_button">MUSIC: On/Off</button>
+                        <img src="assets/img/icons/expand.png" onclick="fullscreen()" class="nav_button" id="fullscreen_button">
+                        <img src="assets/img/icons/audio_on.png" onclick="sound()" class="nav_button" id="audio_button">
+                        <img src="assets/img/icons/controller_mobile.png" onclick="controllerMobile()" class="nav_button" id="controller_button">
                     </div>
                     <img class="headline" id="headline_startscreen" src="assets/img/cybercity.png" alt="">
                     <div class="startscreen_buttons_container">
                         <div class="startscreen_button" onclick="init()">
                             <div class="startscreen_button_arrow">>></div>START GAME
+                            <div class="startscreen_button_arrow"><<</div>
                         </div>
                         <div class="startscreen_button">
                             <div class="startscreen_button_arrow">>></div>CONTROLL
+                            <div class="startscreen_button_arrow"><<</div>
                         </div>
                         <div class="startscreen_button">
                             <div class="startscreen_button_arrow">>></div>CREDITS
+                            <div class="startscreen_button_arrow"><<</div>
                         </div>
                     </div>
                 </div>
