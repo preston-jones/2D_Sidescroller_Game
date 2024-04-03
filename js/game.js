@@ -9,7 +9,6 @@ let isInFullscreen = false;
 function init() {
     document.getElementById('startscreen').classList.add('close_startscreen');
     document.getElementById('canvas').classList.add('show_canvas');
-    // document.getElementById('canvas').classList.add('show_gamepad');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     pressMobileButtons();
@@ -111,8 +110,7 @@ function fullscreen() {
 function enterFullscreen(element) {
     document.getElementById('startscreen').classList.add('fullscreen_startscreen');
     document.getElementById('canvas').classList.add('fullscreen');
-    let fullscreen_icon = document.getElementById('fullscreen_button');
-    fullscreen_icon.src = 'assets/img/icons/collapse.png';
+    document.getElementById('fullscreen_button').src = 'assets/img/icons/collapse.png';
 
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -135,4 +133,5 @@ function enterFullscreen(element) {
 function closeFullscreen() {
     document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
     document.getElementById('canvas').classList.remove('fullscreen');
+    document.getElementById('fullscreen_button').src = 'assets/img/icons/expand.png';
 }
