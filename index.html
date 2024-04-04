@@ -36,7 +36,7 @@
     <script src="js/game.js"></script>
 </head>
 
-<body>
+<body onload="init()">
     <div class="container">
         <div class="header">
             <img class="headline" src="assets/img/cybercity.png" alt="">
@@ -45,64 +45,73 @@
             <img class="frame_img" src="assets/img/frame.png" alt="">
             <div id="fullscreen">
                 <div class="navbar">
-                    <img src="assets/img/icons/expand.png" onclick="fullscreen()" class="nav_button" id="fullscreen_button">
+                    <img src="assets/img/icons/expand.png" class="nav_button"
+                        id="fullscreen_button">
                     <img src="assets/img/icons/audio_on.png" onclick="sound()" class="nav_button" id="audio_button">
-                    <img src="assets/img/icons/controller_mobile.png" onclick="mobileController()" class="nav_button" id="controller_button">
+                    <img src="assets/img/icons/controller_mobile.png" onclick="mobileController()" class="nav_button"
+                        id="controller_button">
                 </div>
                 <div id="startscreen">
                     <img class="headline" id="headline_startscreen" src="assets/img/cybercity.png" alt="">
                     <div class="startscreen_buttons_container">
-                        <div class="startscreen_button" onclick="init()">
+                        <div class="startscreen_button" onclick="loadGame()">
                             <div class="startscreen_button_arrow">>></div>START GAME
-                            <div class="startscreen_button_arrow"><<</div>
-                        </div>
-                        <div class="startscreen_button">
-                            <div class="startscreen_button_arrow">>></div>CONTROLL
-                            <div class="startscreen_button_arrow"><<</div>
-                        </div>
-                        <div class="startscreen_button">
-                            <div class="startscreen_button_arrow">>></div>CREDITS
-                            <div class="startscreen_button_arrow"><<</div>
+                            <div class="startscreen_button_arrow">
+                                <<</div>
+                            </div>
+                            <div class="startscreen_button">
+                                <div class="startscreen_button_arrow">>></div>CONTROLL
+                                <div class="startscreen_button_arrow">
+                                    <<</div>
+                                </div>
+                                <div class="startscreen_button">
+                                    <div class="startscreen_button_arrow">>></div>CREDITS
+                                    <div class="startscreen_button_arrow">
+                                        <<</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="gamepad_overlay">
+                                <div class="gamepad_overlay_left">
+                                    <div>
+                                        <img class="gamepad_img" src="assets/img/gamepad_overlay/dpad_up.png" alt="">
+                                    </div>
+                                    <div class="gamepad_cross_container">
+                                        <div>
+                                            <img class="gamepad_img" id="arrow_left"
+                                                src="assets/img/gamepad_overlay/dpad_left.png" alt="">
+                                        </div>
+                                        <div>
+                                            <img class="gamepad_img" src="assets/img/gamepad_overlay/dpad_center.png"
+                                                alt="">
+                                        </div>
+                                        <div>
+                                            <img class="gamepad_img" id="arrow_right"
+                                                src="assets/img/gamepad_overlay/dpad_right.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <img class="gamepad_img" id="arrow_down"
+                                            src="assets/img/gamepad_overlay/dpad_down.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="gamepad_overlay_middle">
+                                </div>
+                                <div class="gamepad_overlay_right">
+                                    <div class="gamepad_button_a_container">
+                                        <img class="gamepad_img" id="shoot"
+                                            src="assets/img/gamepad_overlay/button_a.png" alt="">
+                                    </div>
+                                    <div class="gamepad_button_b_container">
+                                        <img class="gamepad_img" id="jump" src="assets/img/gamepad_overlay/button_b.png"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <canvas id="canvas"></canvas>
                         </div>
                     </div>
                 </div>
-                <div id="gamepad_overlay">
-                    <div class="gamepad_overlay_left">
-                        <div>
-                            <img class="gamepad_img" src="assets/img/gamepad_overlay/dpad_up.png" alt="">
-                        </div>
-                        <div class="gamepad_cross_container">
-                            <div>
-                                <img class="gamepad_img" id="arrow_left" src="assets/img/gamepad_overlay/dpad_left.png"
-                                    alt="">
-                            </div>
-                            <div>
-                                <img class="gamepad_img" src="assets/img/gamepad_overlay/dpad_center.png" alt="">
-                            </div>
-                            <div>
-                                <img class="gamepad_img" id="arrow_right"
-                                    src="assets/img/gamepad_overlay/dpad_right.png" alt="">
-                            </div>
-                        </div>
-                        <div>
-                            <img class="gamepad_img" src="assets/img/gamepad_overlay/dpad_down.png" alt="">
-                        </div>
-                    </div>
-                    <div class="gamepad_overlay_middle">
-                    </div>
-                    <div class="gamepad_overlay_right">
-                        <div class="gamepad_button_a_container">
-                            <img class="gamepad_img" id="shoot" src="assets/img/gamepad_overlay/button_a.png" alt="">
-                        </div>
-                        <div class="gamepad_button_b_container">
-                            <img class="gamepad_img" id="jump" src="assets/img/gamepad_overlay/button_b.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <canvas id="canvas"></canvas>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>

@@ -7,12 +7,18 @@ let isGameOver = false;
 let isInFullscreen = false;
 
 function init() {
+    // document.getElementById('canvas').classList.add('show_gamepad');
+    pressMobileButtons();
+    let fullscreen_btn = document.getElementById('fullscreen_button');
+    fullscreen_btn.addEventListener('click', toggleFullScreen);
+}
+
+
+function loadGame() {
     document.getElementById('startscreen').classList.add('close_startscreen');
     document.getElementById('canvas').classList.add('show_canvas');
-    // document.getElementById('canvas').classList.add('show_gamepad');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    pressMobileButtons();
 }
 
 
@@ -82,6 +88,14 @@ function pressMobileButtons() {
         e.preventDefault();
         keyboard.RIGHT = false;
     });
+    document.getElementById('arrow_down').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.DOWN = true;
+    });
+    document.getElementById('arrow_down').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.DOWN = true;
+    });
     document.getElementById('jump').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.SPACE = true;
@@ -102,9 +116,14 @@ function pressMobileButtons() {
 }
 
 
-function fullscreen() {
+function toggleFullScreen() {
     let fullscreen = document.getElementById('fullscreen');
-    enterFullscreen(fullscreen);
+    if (!document.fullscreenElement) {
+        enterFullscreen(fullscreen);
+    }
+    if (document.exitFullscreen) {
+        closeFullscreen(fullscreen);
+    }
 }
 
 
@@ -118,21 +137,21 @@ function enterFullscreen(element) {
         element.requestFullscreen();
     } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
         element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) {  // iOS Safari
+    } else if (element.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
         element.webkitRequestFullscreen();
     }
-
-    // Listen for fullscreen changes
-    document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement) {
-            // Fullscreen mode has been exited
-            closeFullscreen();
-        }
-    });
 }
 
 
-function closeFullscreen() {
+function closeFullscreen(element) {
     document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
     document.getElementById('canvas').classList.remove('fullscreen');
+
+    if (element.exitFullscreen) {
+        element.exitFullscreen();
+    } else if (element.msExitFullscreen) {      // for IE11 (remove June 15, 2022)
+        element.msExitFullscreen();
+    } else if (element.webkitExitFullscreen) { /* Chrome, Safari & Opera */
+        element.webkitExitFullscreen();
+    }
 }
