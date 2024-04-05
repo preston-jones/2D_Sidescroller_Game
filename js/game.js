@@ -7,8 +7,6 @@ let isGameOver = false;
 let isInFullscreen = false;
 
 function init() {
-    // document.getElementById('canvas').classList.add('show_gamepad');
-    pressMobileButtons();
     let fullscreen_btn = document.getElementById('fullscreen_button');
     fullscreen_btn.addEventListener('click', toggleFullScreen);
 }
@@ -17,8 +15,14 @@ function init() {
 function loadGame() {
     document.getElementById('startscreen').classList.add('close_startscreen');
     document.getElementById('canvas').classList.add('show_canvas');
+    pressMobileButtons();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+}
+
+
+function loadSound() {
+    
 }
 
 
@@ -120,8 +124,7 @@ function toggleFullScreen() {
     let fullscreen = document.getElementById('fullscreen');
     if (!document.fullscreenElement) {
         enterFullscreen(fullscreen);
-    }
-    if (document.exitFullscreen) {
+    } else if (document.fullscreenElement) {
         closeFullscreen(fullscreen);
     }
 }
@@ -147,11 +150,11 @@ function closeFullscreen(element) {
     document.getElementById('canvas').classList.remove('fullscreen');
     document.getElementById('fullscreen_button').src = 'assets/img/icons/expand.png';
 
-    if (element.exitFullscreen) {
-        element.exitFullscreen();
-    } else if (element.msExitFullscreen) {      // for IE11 (remove June 15, 2022)
-        element.msExitFullscreen();
-    } else if (element.webkitExitFullscreen) { /* Chrome, Safari & Opera */
-        element.webkitExitFullscreen();
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.msExitFullscreen) {      // for IE11 (remove June 15, 2022)
+        document.msExitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Chrome, Safari & Opera */
+        document.webkitExitFullscreen();
     }
 }
