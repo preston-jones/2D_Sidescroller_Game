@@ -56,8 +56,6 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            // this.checkHealthStatus();
-            // this.checkIfOnPlatform();
         }, 100);
     }
 
