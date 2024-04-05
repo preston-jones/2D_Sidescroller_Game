@@ -21,8 +21,8 @@ function loadGame() {
 }
 
 
-function loadSound() {
-    
+function toggleSound() {
+
 }
 
 
