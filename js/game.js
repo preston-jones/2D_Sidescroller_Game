@@ -7,6 +7,7 @@ let isGameOver = false;
 let isInFullscreen = false;
 
 let bgr_music = new Audio('assets/audio/city_theme_2.mp3');
+let boss_fight = new Audio('assets/audio/Boss_fight.mp3');
 
 function init() {
     loadTemplates();
@@ -46,7 +47,8 @@ function loadGame() {
 
 
 function loadSounds() {
-    bgr_music.pause();
+    bgr_music.pause ();
+    boss_fight.pause();
 }
 
 
@@ -54,9 +56,11 @@ function toggleSound() {
     if (bgr_music.paused) {
         document.getElementById('audio_button').src = 'assets/img/icons/audio_on.png';
         bgr_music.play();
+        boss_fight.pause();
     } else {
         document.getElementById('audio_button').src = 'assets/img/icons/audio_off.png';
         bgr_music.pause();
+        
     }
 }
 

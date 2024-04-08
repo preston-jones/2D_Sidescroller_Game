@@ -31,7 +31,6 @@ class BossEnemy extends MovableObject {
     ];
 
     currentImage = 0;
-    boss_fight = new Audio('assets/audio/Boss_fight.mp3');
 
     constructor() {
         super().loadImage(this.IMAGES_FLY[0]);
@@ -92,7 +91,8 @@ class BossEnemy extends MovableObject {
 
     StayRightAnimation() {
         if (world && !world.character.is_Dead) {
-            this.boss_fight.play();
+            boss_fight.play();
+            bgr_music.pause();
         }
         let moveInterval_x = setInterval(() => {
             if (!this.moveRight) {
