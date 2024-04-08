@@ -242,12 +242,6 @@ class Character extends MovableObject {
     animateCharacter() {
         console.log('character: ' + this.offsetY);
         setInterval(() => {
-            if (!this.musicOff && !this.is_Dead && !this.isInBattleArena) {
-                this.music_sound.play();
-            }
-            else {
-                this.music_sound.pause();
-            }
             this.moveCamera();
 
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.is_Dead && !this.is_Hurt) {

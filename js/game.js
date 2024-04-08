@@ -6,10 +6,34 @@ let musicOff = false;
 let isGameOver = false;
 let isInFullscreen = false;
 
+let bgr_music = new Audio('assets/audio/city_theme_2.mp3');
+
 function init() {
+    loadTemplates();
+    loadSounds();
+}
+
+
+async function loadTemplates() {
+    await includeHTML();
     let fullscreen_btn = document.getElementById('fullscreen_button');
     fullscreen_btn.addEventListener('click', toggleFullScreen);
-}
+  }
+
+
+async function includeHTML() {
+    let includeElements = document.querySelectorAll("[w3-include-html]");
+    for (let i = 0; i < includeElements.length; i++) {
+      const element = includeElements[i];
+      file = element.getAttribute("w3-include-html");
+      let resp = await fetch(file);
+      if (resp.ok) {
+        element.innerHTML = await resp.text();
+      } else {
+        element.innerHTML = "Page not found";
+      }
+    }
+  }
 
 
 function loadGame() {
@@ -21,8 +45,19 @@ function loadGame() {
 }
 
 
-function toggleSound() {
+function loadSounds() {
+    bgr_music.pause();
+}
 
+
+function toggleSound() {
+    if (bgr_music.paused) {
+        document.getElementById('audio_button').src = 'assets/img/icons/audio_on.png';
+        bgr_music.play();
+    } else {
+        document.getElementById('audio_button').src = 'assets/img/icons/audio_off.png';
+        bgr_music.pause();
+    }
 }
 
 
