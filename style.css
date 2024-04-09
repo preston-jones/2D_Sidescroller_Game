@@ -272,6 +272,8 @@ h1 {
         margin-bottom: 0;
         padding-left: 0;
         border: none;
+        width: auto;
+        object-fit: contain;
     }
 
     #frame {
@@ -312,14 +314,15 @@ h1 {
 }
 
 /* Smartphones ------------------------------ */
-@media only screen and (max-height: 448px) {
+@media only screen and (max-height: 620px) {
     body {
         background-color: rgb(20, 20, 20);
         background-image: none;
     }
 
     canvas {
-        /* height: 95%; */
+        height: 100%;
+        width: auto;
         margin-bottom: 0;
         /* padding-left: 4%; */
         border-top: 8px solid rgb(20, 20, 20);
@@ -345,9 +348,12 @@ h1 {
     #fullscreen {
         position: relative;
         height: 100%;
-        width: 100%;
+        width: auto;
         display: flex;
         justify-content: center;
+        background-image: url('assets/img/retro-2426631_1280.png');
+        background-size: cover;
+        background-position: top;
     }
 
     .header {
