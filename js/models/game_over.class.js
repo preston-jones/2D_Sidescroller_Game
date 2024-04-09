@@ -34,8 +34,6 @@ class Game_over extends DrawableObject {
         'assets/gameover/frame_30_delay-0.1s.png'
     ];
 
-    game_over_sound = new Audio('assets/audio/gameover.mp3');
-
 
     constructor(x, y, width, height) {
         super().loadImage('assets/gameover/frame_00_delay-0.1s.png');
@@ -51,7 +49,7 @@ class Game_over extends DrawableObject {
         setInterval(() => {
             this.playAnimation(this.GAME_OVER)
             if (world && world.character.is_Dead) {
-                this.game_over_sound.play();
+                game_over_sound.play();
             }
         }, 100);
     }

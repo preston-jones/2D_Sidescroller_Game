@@ -19,7 +19,6 @@ class MovableObject extends DrawableObject {
     inCollision = false;
     lastHitTime = 0; // Add this line
     hitCooldown = 1000; // Cooldown period in milliseconds
-    explosion_sound = new Audio('assets/audio/explosion.ogg');
 
 
     isAboveGround() {
@@ -172,7 +171,7 @@ class MovableObject extends DrawableObject {
             if (this.is_Dead) {
                 console.log('Enemy is dead, playing death animation');
                 this.playAnimation_Enemy_DEAD(array);
-                this.explosion_sound.play();
+                explosion_sound.play();
                 clearInterval(animateInterval);
                 setTimeout(() => {
                     // Assuming world.enemies is the array holding all enemy objects

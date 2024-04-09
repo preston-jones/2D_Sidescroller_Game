@@ -5,20 +5,36 @@ let keyboard = new Keyboard();
 let musicOff = false;
 let isGameOver = false;
 let isInFullscreen = false;
+let soundMuted = true;
+let mobileController = false
 
-let bgr_music = new Audio('assets/audio/city_theme_2.mp3');
-let boss_fight = new Audio('assets/audio/Boss_fight.mp3');
+// SOUND FILES
+let level_bgr_music = new Audio('assets/audio/city_theme_2.mp3');
+level_bgr_music.loop = true;
+let boss_fight_music = new Audio('assets/audio/Boss_fight.mp3');
+boss_fight_music.muted = false;
+let jump_sound = new Audio('assets/audio/jump.mp3');        
+jump_sound.muted = false;
+let shoot_sound = new Audio('assets/audio/shoot.ogg');
+shoot_sound.muted = false;
+let hurt_sound = new Audio('assets/audio/hurt.ogg');
+hurt_sound.muted = false;
+let death_sound = new Audio('assets/audio/death.mp3');
+death_sound.muted = false;
+let explosion_sound = new Audio('assets/audio/explosion.ogg');
+explosion_sound.muted = false;
+let game_over_sound = new Audio('assets/audio/gameover.mp3');
+game_over_sound.muted = false;
+
 
 function init() {
     loadTemplates();
-    loadSounds();
 }
 
 
 async function loadTemplates() {
     await includeHTML();
-    let fullscreen_btn = document.getElementById('fullscreen_button');
-    fullscreen_btn.addEventListener('click', toggleFullScreen);
+    startFullscreenEvent();
   }
 
 
@@ -38,29 +54,52 @@ async function includeHTML() {
 
 
 function loadGame() {
-    document.getElementById('startscreen').classList.add('close_startscreen');
-    document.getElementById('canvas').classList.add('show_canvas');
+    closeStartscreen();
+    loadCanvas();
     pressMobileButtons();
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    loadBackgroundMusic();
 }
 
 
-function loadSounds() {
-    bgr_music.pause ();
-    boss_fight.pause();
+function closeStartscreen() {
+    document.getElementById('startscreen').classList.add('close_startscreen');
+}
+
+
+function loadCanvas() {
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
+    document.getElementById('canvas').classList.add('show_canvas');
+}
+
+
+function loadBackgroundMusic() {
+    level_bgr_music.play();
 }
 
 
 function toggleSound() {
-    if (bgr_music.paused) {
+    if (!soundMuted) {
         document.getElementById('audio_button').src = 'assets/img/icons/audio_on.png';
-        bgr_music.play();
-        boss_fight.pause();
-    } else {
+        level_bgr_music.muted = false;
+        jump_sound.muted = false;
+        shoot_sound.muted = false;
+        hurt_sound.muted = false;
+        death_sound.muted = false;
+        explosion_sound.muted = false;
+        game_over_sound.muted = false;
+        soundMuted = true;
+    }
+    else {
         document.getElementById('audio_button').src = 'assets/img/icons/audio_off.png';
-        bgr_music.pause();
-        
+        level_bgr_music.muted = true;
+        jump_sound.muted = true;
+        shoot_sound.muted = true;
+        hurt_sound.muted = true;
+        death_sound.muted = true;
+        explosion_sound.muted = true;
+        game_over_sound.muted = true;
+        soundMuted = false;
     }
 }
 
@@ -87,6 +126,7 @@ window.addEventListener("keydown", (e) => {
     }
 });
 
+
 window.addEventListener("keyup", (e) => {
     if (e.code == "ArrowDown") {
         keyboard.DOWN = false;
@@ -109,8 +149,17 @@ window.addEventListener("keyup", (e) => {
 });
 
 
-function mobileController() {
-    document.getElementById('gamepad_overlay').classList.toggle('showMobileController');
+function toggleMobileController() {
+    if (!mobileController) {
+        document.getElementById('gamepad_overlay').classList.add('showMobileController');
+        document.getElementById('controller_button').src = 'assets/img/icons/keyboard.png';
+        mobileController = true;
+    }
+    else {
+        document.getElementById('gamepad_overlay').classList.remove('showMobileController');
+        document.getElementById('controller_button').src = 'assets/img/icons/controller_mobile.png';
+        mobileController = false;
+    }
 }
 
 
@@ -157,6 +206,12 @@ function pressMobileButtons() {
     });
 
 }
+
+
+function startFullscreenEvent() {
+    let fullscreen_btn = document.getElementById('fullscreen_button');
+    fullscreen_btn.addEventListener('click', toggleFullScreen);
+  }
 
 
 function toggleFullScreen() {

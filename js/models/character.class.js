@@ -220,11 +220,6 @@ class Character extends MovableObject {
 
     world;
     playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
-    jump_sound = new Audio('assets/audio/jump.mp3');
-    shoot_sound = new Audio('assets/audio/shoot.ogg');
-    hurt_sound = new Audio('assets/audio/hurt.ogg');
-    death_sound = new Audio('assets/audio/death.mp3');
-    music_sound = new Audio('assets/audio/city_theme_2.mp3');
     constructor() {
         super().loadImage(this.IMAGES_STAY[0]);
         this.loadImages(this.IMAGES_STAY);
@@ -280,7 +275,7 @@ class Character extends MovableObject {
             this.playAnimation_RUN();
         }
         if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y && !this.is_Dead && !this.is_Hurt) {
-            this.jump_sound.play();
+            jump_sound.play();
             this.playAnimation(this.IMAGES_JUMP);
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_JUMP);
@@ -300,18 +295,18 @@ class Character extends MovableObject {
 
     playAnimation_SHOOT() {
         this.playAnimation(this.IMAGES_SHOOT);
-        this.shoot_sound.play();
+        shoot_sound.play();
         if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
             this.playAnimation(this.IMAGES_RUN_SHOOT);
-            this.shoot_sound.play();
+            shoot_sound.play();
         }
     }
 
 
     playAnimation_HURT() {
-        this.hurt_sound.pause();
+        hurt_sound.pause();
         if (!this.is_Dead) {
-            this.hurt_sound.play();
+            hurt_sound.play();
             this.playAnimation(this.IMAGES_HURT);
         }
     }
@@ -320,10 +315,10 @@ class Character extends MovableObject {
     playAnimation_DEAD() {
         let index = world.level.enemies.findIndex(enemy => enemy instanceof BossEnemy); // MERKEN und LERNEN!!!
         if (this.is_Dead) {
-            this.world.level.enemies[index].boss_fight.pause();
+            level_bgr_music.pause();
             this.playAnimation(this.IMAGES_DEAD);
             if (this.isDeadCounter) {
-                this.death_sound.play();
+                death_sound.play();
                 this.isDeadCounter = false;
             }
         }
