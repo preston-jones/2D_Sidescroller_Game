@@ -63,6 +63,12 @@ function loadGame() {
 }
 
 
+function loadCharacterSelect() {
+    document.getElementById('startscreen').classList.add('d-none');
+    document.getElementById('character-select').classList.remove('d-none');
+}
+
+
 function closeStartscreen() {
     document.getElementById('startscreen').classList.add('d-none');
 }
