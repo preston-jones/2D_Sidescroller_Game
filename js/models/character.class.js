@@ -12,7 +12,7 @@ class Character extends MovableObject {
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
-    character_Selection = 'female';
+    character_Selection = character_selected;
     isInBattleArena = false;
     isDeadCounter = true;
 

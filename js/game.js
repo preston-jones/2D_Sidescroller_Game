@@ -7,6 +7,7 @@ let isGameOver = false;
 let isInFullscreen = false;
 let soundMuted = true;
 let mobileController = false
+let character_selected;
 
 // SOUND FILES
 let level_bgr_music = new Audio('assets/audio/cyber_runner.mp3');
@@ -55,7 +56,19 @@ async function includeHTML() {
   }
 
 
+ function selectCharacter(selected_character) {
+    if (selected_character === 0) {
+        character_selected = 'female';
+    }
+    if (selected_character === 1) {
+        character_selected = 'male';
+    }
+    loadGame();
+ } 
+
+
 function loadGame() {
+    document.getElementById('character-select').classList.add('d-none');
     closeStartscreen();
     loadCanvas();
     pressMobileButtons();

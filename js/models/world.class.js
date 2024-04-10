@@ -27,7 +27,7 @@ class World {
     ];
 
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, character_selection) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
