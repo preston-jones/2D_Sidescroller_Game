@@ -117,7 +117,7 @@ class World {
         }
         this.level.collectibles_energy.forEach((energy) => {
             if (this.character.isColliding(energy)) {
-                console.log('Energy Recharge!');
+                collecting_sound.play();
                 this.character.energy = 10;
                 this.refillEnergyStatus();
                 let index = this.level.collectibles_energy.indexOf(energy);
@@ -128,7 +128,7 @@ class World {
         });
         this.level.collectibles_health.forEach((health) => {
             if (this.character.isColliding(health)) {
-                console.log('Health Recharge!');
+                collecting_sound.play();
                 this.character.health = 10;
                 this.refillHealthStatus();
                 let index = this.level.collectibles_health.indexOf(health);

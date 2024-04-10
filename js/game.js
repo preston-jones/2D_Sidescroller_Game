@@ -9,20 +9,22 @@ let soundMuted = true;
 let mobileController = false
 
 // SOUND FILES
-let level_bgr_music = new Audio('assets/audio/city_theme_2.mp3');
+let level_bgr_music = new Audio('assets/audio/cyber_runner.mp3');
 level_bgr_music.loop = true;
 let boss_fight_music = new Audio('assets/audio/Boss_fight.mp3');
 boss_fight_music.muted = false;
 let jump_sound = new Audio('assets/audio/jump.mp3');        
 jump_sound.muted = false;
-let shoot_sound = new Audio('assets/audio/shoot.ogg');
+let shoot_sound = new Audio('assets/audio/shoot.mp3');
 shoot_sound.muted = false;
-let hurt_sound = new Audio('assets/audio/hurt.ogg');
+let hurt_sound = new Audio('assets/audio/hurt.mp3');
 hurt_sound.muted = false;
 let death_sound = new Audio('assets/audio/death.mp3');
 death_sound.muted = false;
-let explosion_sound = new Audio('assets/audio/explosion.ogg');
+let explosion_sound = new Audio('assets/audio/explosion.mp3');
 explosion_sound.muted = false;
+let collecting_sound = new Audio('assets/audio/collecting.mp3');
+collecting_sound.muted = false;
 let game_over_sound = new Audio('assets/audio/gameover.mp3');
 game_over_sound.muted = false;
 
@@ -62,14 +64,14 @@ function loadGame() {
 
 
 function closeStartscreen() {
-    document.getElementById('startscreen').classList.add('close_startscreen');
+    document.getElementById('startscreen').classList.add('d-none');
 }
 
 
 function loadCanvas() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    document.getElementById('canvas').classList.add('show_canvas');
+    document.getElementById('canvas').classList.add('d-block');
 }
 
 
@@ -186,7 +188,7 @@ function pressMobileButtons() {
     });
     document.getElementById('arrow_down').addEventListener('touchend', (e) => {
         e.preventDefault();
-        keyboard.DOWN = true;
+        keyboard.DOWN = false;
     });
     document.getElementById('jump').addEventListener('touchstart', (e) => {
         e.preventDefault();

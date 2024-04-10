@@ -30,25 +30,14 @@ body {
     font-weight: 400;
 }
 
-.close_startscreen {
-    display: none !important;
-}
-
-.show_canvas {
-    display: block !important;
-}
-
 .headline {
     width: 640px;
 }
 
 canvas {
-    display: none;
-    /* display: block; */
     width: 768px;
     height: 384px;
     image-rendering: pixelated;
-    /* aspect-ratio: auto 768 / 384; */
 }
 
 #startscreen {
@@ -130,6 +119,19 @@ h1 {
 }
 
 
+.d-none {
+    display: none !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+
 #frame {
     position: relative;
     display: flex;
@@ -166,7 +168,6 @@ h1 {
     position: absolute;
     top: 0;
     z-index: 20;
-    display: none;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -226,7 +227,6 @@ h1 {
 }
 
 .gamepad_img {
-    display: none;
     object-fit: contain;
     width: 50px;
     height: 50px;
