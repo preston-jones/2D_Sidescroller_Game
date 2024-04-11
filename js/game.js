@@ -30,6 +30,30 @@ let game_over_sound = new Audio('assets/audio/gameover.mp3');
 game_over_sound.muted = false;
 
 
+let female_character_animation_array = [
+    'assets/sprites/character/player_female/run/run-1.png',
+    'assets/sprites/character/player_female/run/run-2.png',
+    'assets/sprites/character/player_female/run/run-3.png',
+    'assets/sprites/character/player_female/run/run-4.png',
+    'assets/sprites/character/player_female/run/run-5.png',
+    'assets/sprites/character/player_female/run/run-6.png',
+    'assets/sprites/character/player_female/run/run-7.png',
+    'assets/sprites/character/player_female/run/run-8.png'
+];
+
+
+let male_character_animation_array = [
+    'assets/sprites/character/player_male/Run/Run1.png',
+    'assets/sprites/character/player_male/Run/Run2.png',
+    'assets/sprites/character/player_male/Run/Run3.png',
+    'assets/sprites/character/player_male/Run/Run4.png',
+    'assets/sprites/character/player_male/Run/Run5.png',
+    'assets/sprites/character/player_male/Run/Run6.png',
+    'assets/sprites/character/player_male/Run/Run7.png',
+    'assets/sprites/character/player_male/Run/Run8.png',
+];
+
+
 function init() {
     loadTemplates();
 }
@@ -38,6 +62,11 @@ function init() {
 async function loadTemplates() {
     await includeHTML();
     startFullscreenEvent();
+}
+
+
+function reloadPage() {
+    location.reload();
 }
 
 
@@ -57,15 +86,47 @@ async function includeHTML() {
 
 
 function selectCharacterEvent() {
-    let character_female = document.getElementById('female');
-    let character_male = document.getElementById('male');
-    character_female.addEventListener('mouseover', function() { character_female.src = 'assets/sprites/character/player_female/shoot/shoot.png'; });
-    character_female.addEventListener('mouseout', function() { character_female.src = 'assets/sprites/character/player_female/idle/idle-2.png'; });
-    character_female.addEventListener('click', function() { selectCharacter(0); });
-    character_male.addEventListener('mouseover', function() { character_male.src = 'assets/sprites/character/player_male/Shoot/Shoot1.png'; });
-    character_male.addEventListener('mouseout', function() { character_male.src = 'assets/sprites/character/player_male/Idle/Idle2.png'; });
-    character_male.addEventListener('click', function() { selectCharacter(1); });
+    let animationIndex = 0;
+    let animationInterval;
+
+    animatecharacterSelectionFemale(animationIndex, animationInterval);
+    animatecharacterSelectionMale(animationIndex, animationInterval);
 }
+
+
+function animatecharacterSelectionFemale(animationIndex, animationInterval) {
+    let character_female = document.getElementById('female');
+    document.getElementById('female').addEventListener('mouseover', function () {
+        animationInterval = setInterval(function () {
+            character_female.src = female_character_animation_array[animationIndex];
+            animationIndex = (animationIndex + 1) % female_character_animation_array.length;
+        }, 100); // change interval as needed
+    });
+
+    document.getElementById('female').addEventListener('mouseout', function () {
+        clearInterval(animationInterval);
+        character_female.src = 'assets/sprites/character/player_female/idle/idle-2.png';
+    });
+    character_female.addEventListener('click', function () { selectCharacter(0); });
+}
+
+
+function animatecharacterSelectionMale(animationIndex, animationInterval) {
+    let character_male = document.getElementById('male');
+    document.getElementById('male').addEventListener('mouseover', function () {
+        animationInterval = setInterval(function () {
+            character_male.src = male_character_animation_array[animationIndex];
+            animationIndex = (animationIndex + 1) % male_character_animation_array.length;
+        }, 100); // change interval as needed
+    });
+
+    document.getElementById('male').addEventListener('mouseout', function () {
+        clearInterval(animationInterval);
+        character_male.src = 'assets/sprites/character/player_male/Idle/Idle2.png';
+    });
+    character_male.addEventListener('click', function () { selectCharacter(1); });
+}
+
 
 function selectCharacter(selected_character) {
     if (selected_character === 0) {
