@@ -14,7 +14,7 @@ let level_bgr_music = new Audio('assets/audio/cyber_runner.mp3');
 level_bgr_music.loop = true;
 let boss_fight_music = new Audio('assets/audio/Boss_fight.mp3');
 boss_fight_music.muted = false;
-let jump_sound = new Audio('assets/audio/jump.mp3');        
+let jump_sound = new Audio('assets/audio/jump.mp3');
 jump_sound.muted = false;
 let shoot_sound = new Audio('assets/audio/shoot.mp3');
 shoot_sound.muted = false;
@@ -38,25 +38,36 @@ function init() {
 async function loadTemplates() {
     await includeHTML();
     startFullscreenEvent();
-  }
+}
 
 
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
     for (let i = 0; i < includeElements.length; i++) {
-      const element = includeElements[i];
-      file = element.getAttribute("w3-include-html");
-      let resp = await fetch(file);
-      if (resp.ok) {
-        element.innerHTML = await resp.text();
-      } else {
-        element.innerHTML = "Page not found";
-      }
+        const element = includeElements[i];
+        file = element.getAttribute("w3-include-html");
+        let resp = await fetch(file);
+        if (resp.ok) {
+            element.innerHTML = await resp.text();
+        } else {
+            element.innerHTML = "Page not found";
+        }
     }
-  }
+}
 
 
- function selectCharacter(selected_character) {
+function selectCharacterEvent() {
+    let character_female = document.getElementById('female');
+    let character_male = document.getElementById('male');
+    character_female.addEventListener('mouseover', function() { character_female.src = 'assets/sprites/character/player_female/shoot/shoot.png'; });
+    character_female.addEventListener('mouseout', function() { character_female.src = 'assets/sprites/character/player_female/idle/idle-2.png'; });
+    character_female.addEventListener('click', function() { selectCharacter(0); });
+    character_male.addEventListener('mouseover', function() { character_male.src = 'assets/sprites/character/player_male/Shoot/Shoot1.png'; });
+    character_male.addEventListener('mouseout', function() { character_male.src = 'assets/sprites/character/player_male/Idle/Idle2.png'; });
+    character_male.addEventListener('click', function() { selectCharacter(1); });
+}
+
+function selectCharacter(selected_character) {
     if (selected_character === 0) {
         character_selected = 'female';
     }
@@ -64,7 +75,7 @@ async function includeHTML() {
         character_selected = 'male';
     }
     loadGame();
- } 
+}
 
 
 function loadGame() {
@@ -79,6 +90,7 @@ function loadGame() {
 function loadCharacterSelect() {
     document.getElementById('startscreen').classList.add('d-none');
     document.getElementById('character-select').classList.remove('d-none');
+    selectCharacterEvent();
 }
 
 
@@ -232,7 +244,7 @@ function pressMobileButtons() {
 function startFullscreenEvent() {
     let fullscreen_btn = document.getElementById('fullscreen_button');
     fullscreen_btn.addEventListener('click', toggleFullScreen);
-  }
+}
 
 
 function toggleFullScreen() {
