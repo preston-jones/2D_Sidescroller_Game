@@ -155,6 +155,23 @@ function loadCharacterSelect() {
 }
 
 
+function loadSettings() {
+    document.getElementById('startscreen').classList.add('d-none');
+    document.getElementById('settings').classList.remove('d-none');
+}
+
+
+function backToStartScreen(current_page) {
+    document.getElementById(current_page).classList.add('d-none');
+    loadStartScreen();
+}
+
+
+function loadStartScreen() {
+    document.getElementById('startscreen').classList.remove('d-none');
+}
+
+
 function closeStartscreen() {
     document.getElementById('startscreen').classList.add('d-none');
 }

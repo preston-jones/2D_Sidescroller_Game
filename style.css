@@ -10,7 +10,8 @@ body {
     margin: 0;
     background-color: rgb(0, 0, 0);
     /* background-image: url('assets/img/skyline.png'); */
-    background-image: url('assets/img/retro-2426631_1280.png');
+    /* background-image: url('assets/img/retro-2426631_1280.png'); */
+    background-image: url('assets/img/main_bgr.gif');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -32,7 +33,7 @@ body {
 }
 
 .headline {
-    width: 640px;
+    width: 400px;
     text-align: center;
 }
 
@@ -55,7 +56,8 @@ body {
 }
 
 canvas {
-    width: 768px;
+    /* width: 768px; */
+    width: 720px;
     height: 384px;
     image-rendering: pixelated;
 }
@@ -63,13 +65,9 @@ canvas {
 .menu_container {
     width: 768px;
     height: 384px;
-}
-
-#character-select {
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* background-color: #26044cc2; */
 }
 
 .character_select_container {
@@ -109,12 +107,12 @@ canvas {
     position: absolute;
     z-index: 99;
     top: 16px;
-    right: 16px;
     display: flex;
     justify-content: flex-end;
     align-content: center;
     width: 100%;
     gap: 16px;
+    padding-right: 16px;
 }
 
 #headline_startscreen {
@@ -187,7 +185,7 @@ h1 {
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 854px;
     height: 524px;
     /* border: 4PX SOLID yellow; */
@@ -317,9 +315,15 @@ h1 {
 
 /* Smartphones ------------------------------ */
 @media only screen and (max-width: 768px) {
-    body {
+    /* body {
         background-color: rgb(20, 20, 20);
         background-image: none;
+    } */
+
+
+    .headline {
+        width: 320px;
+        text-align: center;
     }
 
     canvas {
@@ -355,25 +359,27 @@ h1 {
         justify-content: center;
     }
 
-    .settings_container {
-        display: none;
+    #startscreen {
+        justify-content: flex-start;
+        margin-top: 16px;
     }
 
-    .header {
+    .settings_container {
         display: none;
     }
 
     .container {
         width: 100vw;
+        margin-top: 16px;
     }
 }
 
 /* Smartphones ------------------------------ */
 @media only screen and (max-height: 620px) {
-    body {
+    /* body {
         background-color: rgb(20, 20, 20);
         background-image: none;
-    }
+    } */
 
     canvas {
         height: 100%;
@@ -406,13 +412,6 @@ h1 {
         width: auto;
         display: flex;
         justify-content: center;
-        background-image: url('assets/img/retro-2426631_1280.png');
-        background-size: cover;
-        background-position: top;
-    }
-
-    .header {
-        display: none;
     }
 
     .container {
