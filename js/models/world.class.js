@@ -11,6 +11,7 @@ class World {
     shots = [];
     characterShot = [];
     isGameOver = false;
+    check;
     statusbar_HEALTH = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
@@ -210,7 +211,11 @@ class World {
             this.newGame();
             // Draw wird immer wieder aufgerufen
             let self = this;
-            if (check === pause) {
+            if (this.check === 'pause') {
+                this.self = '';
+            }
+            else {
+                this.self = this;
                 requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
                     self.draw();
                 });   
