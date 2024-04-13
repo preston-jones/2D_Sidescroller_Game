@@ -27,7 +27,7 @@ class World {
     ];
 
 
-    constructor(canvas, keyboard, character_selection) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
@@ -162,13 +162,6 @@ class World {
     }
 
 
-    // drawStatusValue(ctx) {
-    //     // ctx.globalAlpha = 0.5;
-    //     ctx.fillStyle = "white";
-    //     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    // }
-
-
     drawGameOver() {
         if (this.character.is_Dead) {
             this.addObjectsToMap(this.level.gameOver);
@@ -217,9 +210,12 @@ class World {
             this.newGame();
             // Draw wird immer wieder aufgerufen
             let self = this;
-            requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
-                self.draw();
-            });
+            if (check === pause) {
+                requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
+                    self.draw();
+                });   
+            }
+
         }
     }
 
