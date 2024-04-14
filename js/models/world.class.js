@@ -211,18 +211,26 @@ class World {
             this.newGame();
             // Draw wird immer wieder aufgerufen
             let self = this;
-            if (this.check === 'pause') {
-                this.self = '';
-            }
-            else {
-                this.self = this;
-                requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
-                    self.draw();
-                });   
-            }
-
+            requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
+                self.draw();
+            });
         }
     }
+
+
+    pauseGame() {
+        let self = this;
+        if (this.check === 'pause') {
+            this.self = '';
+        }
+        else {
+            this.self = this;
+            requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
+                self.draw();
+            });
+        }
+    }
+
 
     addObjectsToMap(objects) {
         objects.forEach(o => {

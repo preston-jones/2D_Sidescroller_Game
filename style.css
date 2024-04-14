@@ -19,11 +19,12 @@ body {
 
 .container {
     width: 854px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 64px;
+    /* gap: 64px; */
 }
 
 .headline {
@@ -55,6 +56,7 @@ canvas {
     width: 720px;
     height: 384px;
     image-rendering: pixelated;
+    border: 4px solid #E7D63F;
 }
 
 .menu_container {
