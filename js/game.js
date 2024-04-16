@@ -204,28 +204,40 @@ function loadBackgroundMusic() {
 
 
 function toggleSound() {
-    if (!soundMuted) {
+    if (soundMuted) {
         document.getElementById('audio_button').src = 'assets/img/icons/audio_on.png';
-        level_bgr_music.muted = false;
-        jump_sound.muted = false;
-        shoot_sound.muted = false;
-        hurt_sound.muted = false;
-        death_sound.muted = false;
-        explosion_sound.muted = false;
-        game_over_sound.muted = false;
-        soundMuted = true;
+        enableSound();
     }
     else {
         document.getElementById('audio_button').src = 'assets/img/icons/audio_off.png';
-        level_bgr_music.muted = true;
-        jump_sound.muted = true;
-        shoot_sound.muted = true;
-        hurt_sound.muted = true;
-        death_sound.muted = true;
-        explosion_sound.muted = true;
-        game_over_sound.muted = true;
-        soundMuted = false;
+        disableSound();
     }
+}
+
+
+function disableSound() {
+    level_bgr_music.muted = true;
+    jump_sound.muted = true;
+    shoot_sound.muted = true;
+    hurt_sound.muted = true;
+    death_sound.muted = true;
+    explosion_sound.muted = true;
+    game_over_sound.muted = true;
+    boss_fight_music.muted = true;
+    soundMuted = true;
+}
+
+
+function enableSound() {
+    level_bgr_music.muted = false;
+    jump_sound.muted = false;
+    shoot_sound.muted = false;
+    hurt_sound.muted = false;
+    death_sound.muted = false;
+    explosion_sound.muted = false;
+    game_over_sound.muted = false;
+    boss_fight_music.muted = false;
+    soundMuted = false;
 }
 
 

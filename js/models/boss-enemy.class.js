@@ -5,13 +5,15 @@ class BossEnemy extends MovableObject {
     offsetY = 0;
     width = 80;
     height = 70;
-    speed = 0.3;
+    speed = 0.5;
     health = 8;
     moveRight = false;
     moveUp = false;
     isOnRight = false;
     isOnLeft = false;
     isUp = true;
+    isAttacking = false; // Initialize isAttacking to false
+    hasAttacked = false; // Initialize hasAttacked to false
 
     IMAGES_FLY = [
         'assets/sprites/enemies/Wasp/wasp1.png',
@@ -51,7 +53,7 @@ class BossEnemy extends MovableObject {
             if (world && world.character.x >= 1949) {
                 this.playBossFightMusic();
                 world.character.isInBattleArena = true;
-                this.animateBossEnemy(this.IMAGES_FLY);
+                this.animateBossEnemy(this.IMAGES_FLY, this.IMAGES_ENEMY_EXPLOTION);
                 clearInterval(startInterval);
             }
         }, 100);
@@ -60,18 +62,21 @@ class BossEnemy extends MovableObject {
 
     playBossFightMusic() {
         level_bgr_music.pause();
+        level_bgr_music.currentTime = 0;
         level_bgr_music = boss_fight_music;
+        level_bgr_music.loop = true;
         level_bgr_music.play();
     }
 
 
-    animateBossEnemy(images_arr) {
+    animateBossEnemy(images_arr, array) {
         this.StayRightAnimation();
-        setInterval(() => {
+        let moveInterval = setInterval(() => {
             if (!this.is_Dead) {
                 if (this.isOnRight) {
                     setTimeout(() => {
                         this.StayLeftAnimation();
+
                     }, 4000);
                 }
                 if (!this.isOnRight) {
@@ -82,7 +87,6 @@ class BossEnemy extends MovableObject {
             }
             if (this.is_Dead) {
                 this.stay();
-
             }
         }, 1000 / 50);
 
@@ -91,118 +95,147 @@ class BossEnemy extends MovableObject {
                 this.playAnimation(images_arr);
             }
             if (this.is_Dead) {
+                console.log('Enemy is dead, playing death animation');
+                this.playAnimation_Enemy_DEAD(array);
+                explosion_sound.play();
+                clearInterval(animateInterval);
+                setTimeout(() => {
+                    // Assuming world.enemies is the array holding all enemy objects
+                    let index = world.level.enemies.indexOf(this);
+                    if (index > -1) {
+                        world.level.enemies.splice(index, 1);
+                    }
+                }, 100); // Adjust the timeout to match the length of the death animation
             }
+
         }, 150);
     }
 
 
-    StayRightAnimation() {
-        // if (world && !world.character.is_Dead) {
-        //     boss_fight_music.play();
-        // }
-        let moveInterval_x = setInterval(() => {
-            if (!this.moveRight) {
-                this.x -= this.speed;
-                if (this.x <= 2100) {
-                    this.moveRight = true;
-                }
-            } else {
-                this.x += this.speed;
-                if (this.x >= 2110) { // replace 2200 with the desired right boundary
-                    this.moveRight = false;
-                    this.isOnRight = true;
-                    this.isOnLeft = false;
-                    this.otherDirection = true;
-                }
+    attackCharacter() {
+        console.log('ATTACK!!!');
+        if (world && world.character) {
+            let characterX = world.character.x;
+            let characterY = world.character.y;
+
+            // Move quickly to the character's position
+            if (this.x < characterX) {
+                this.otherDirection = false;
+                this.x += 2 * this.speed; // Move twice as fast
+            } else if (this.x > characterX) {
+                this.otherDirection = true;
+                this.x -= 2 * this.speed; // Move twice as fast
             }
-            clearInterval(moveInterval_x);
-        }, 200);
-        let moveInterval_y = setInterval(() => {
-            if (world && this.x == world.character.x) {
-                console.log('ATTACKE!!!');
+            // Move down towards the character's position
+            if (this.y < characterY) {
+                this.y += 2 * this.speed; // Move twice as fast
+                // this.moveUp = true;
             }
-            if (this.isUp) {
-                if (!this.moveUp) {
-                    this.y -= 0.3;
-                    if (this.y <= 0) {
-                        this.moveUp = true;
-                    }
-                } else {
-                    this.y += 0.3;
-                    if (this.y >= 20) {
-                        this.moveUp = false;
-                    }
-                }
-            }
-            if (!this.isUp) {
-                if (!this.moveUp) {
-                    this.y -= 0.3;
-                    if (this.y <= 60) {
-                        this.moveUp = true;
-                    }
-                } else {
-                    this.y += this.speed;
-                    if (this.y >= 70) {
-                        this.moveUp = false;
-                    }
-                }
-            }
-            clearInterval(moveInterval_y);
-        }, 125);
-    }
-    StayLeftAnimation() {
-        // if (world && !world.character.is_Dead) {
-        //     this.boss_fight_music.play();
-        // }
-        let moveInterval_x = setInterval(() => {
-            if (!this.moveRight) {
-                this.x -= this.speed;
-                if (this.x <= 1880) {
-                    this.moveRight = true;
-                    this.isOnRight = false;
-                    this.isOnLeft = true;
-                    this.otherDirection = false;
-                }
-            } else {
-                this.x += this.speed;
-                if (this.x >= 1890) { // replace 2200 with the desired right boundary
-                    this.moveRight = false;
-                }
-            }
-            clearInterval(moveInterval_x);
-        }, 200);
-        let moveInterval_y = setInterval(() => {
-            if (world && this.x == world.character.x) {
-                console.log('ATTACKE!!!');
-            }
-            if (this.isUp) {
-                if (!this.moveUp) {
-                    this.y -= 0.3;
-                    if (this.y <= 0) {
-                        this.moveUp = true;
-                    }
-                } else {
-                    this.y += this.speed;
-                    if (this.y >= 20) {
-                        this.moveUp = false;
-                    }
-                }
-            }
-            if (!this.isUp) {
-                if (!this.moveUp) {
-                    this.y -= 0.3;
-                    if (this.y <= 60) {
-                        this.moveUp = true;
-                    }
-                } else {
-                    this.y += this.speed;
-                    if (this.y >= 70) {
-                        this.moveUp = false;
-                    }
-                }
-            }
-            clearInterval(moveInterval_y);
-        }, 125);
+        }
+        setTimeout(() => {
+            this.hasAttacked = true;
+        }, 1000);
     }
 
+
+    StayRightAnimation() {
+        if (!this.hasAttacked) {
+            setTimeout(() => {
+                this.attackCharacter();
+            }, 4000);
+        }
+        if (!this.moveRight) {
+            this.x -= this.speed;
+            if (this.x <= 2100) {
+                this.moveRight = true;
+            }
+        } else {
+            this.x += this.speed;
+            if (this.x >= 2110) { // replace 2200 with the desired right boundary
+                this.moveRight = false;
+                this.isOnRight = true;
+                this.isOnLeft = false;
+                this.otherDirection = true;
+            }
+        }
+
+        if (this.isUp) {
+            if (!this.moveUp) {
+                this.y -= 0.3;
+                if (this.y <= 0) {
+                    this.moveUp = true;
+                }
+            } else {
+                this.y += 0.3;
+                if (this.y >= 20) {
+                    this.moveUp = false;
+                }
+            }
+        }
+        if (!this.isUp) {
+            if (!this.moveUp) {
+                this.y -= 0.3;
+                if (this.y <= 60) {
+                    this.moveUp = true;
+                }
+            } else {
+                this.y += this.speed;
+                if (this.y >= 70) {
+                    this.moveUp = false;
+                }
+            }
+        }
+        this.hasAttacked = false;
+    }
+
+
+    StayLeftAnimation() {
+        if (!this.hasAttacked) {
+            setTimeout(() => {
+                this.attackCharacter();
+            }, 4000);
+        }
+        if (!this.moveRight) {
+            this.x -= this.speed;
+            if (this.x <= 1880) {
+                this.moveRight = true;
+                this.isOnRight = false;
+                this.isOnLeft = true;
+                this.otherDirection = false;
+            }
+        } else {
+            this.x += this.speed;
+            if (this.x >= 1890) { // replace 2200 with the desired right boundary
+                this.moveRight = false;
+            }
+        }
+
+        if (this.isUp) {
+            if (!this.moveUp) {
+                this.y -= 0.3;
+                if (this.y <= 0) {
+                    this.moveUp = true;
+                }
+            } else {
+                this.y += this.speed;
+                if (this.y >= 20) {
+                    this.moveUp = false;
+                }
+            }
+        }
+        if (!this.isUp) {
+            if (!this.moveUp) {
+                this.y -= 0.3;
+                if (this.y <= 60) {
+                    this.moveUp = true;
+                }
+            } else {
+                this.y += this.speed;
+                if (this.y >= 70) {
+                    this.moveUp = false;
+                }
+            }
+        }
+        this.hasAttacked = false;
+    }
 }
