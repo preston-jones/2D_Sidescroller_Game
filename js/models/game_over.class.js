@@ -42,10 +42,10 @@ class Game_over extends DrawableObject {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.animateCollectible();
+        this.animateGameOver();
     }
 
-    animateCollectible() {
+    animateGameOver() {
         setInterval(() => {
             this.playAnimation(this.GAME_OVER)
             if (world && world.character.is_Dead) {

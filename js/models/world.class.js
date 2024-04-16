@@ -166,11 +166,15 @@ class World {
     drawGameOver() {
         if (this.character.is_Dead) {
             this.addObjectsToMap(this.level.gameOver);
-            // setTimeout(() => {
-            //     this.isGameOver = true;
-            //     // init();
-            // }, 4000);
-            console.log(this.isGameOver);
+        }
+    }
+
+
+    drawYouWin() {
+        if (this.level.boss_dead) {
+            console.log(this.level.boss_dead);
+            console.log(this.level.youWin);
+            this.addObjectsToMap(this.level.youWin);
         }
     }
 
@@ -208,6 +212,7 @@ class World {
             this.addObjectsToMap(this.statusbar_HEALTH);
             this.addObjectsToMap(this.statusbar_ENERGY);
             this.drawGameOver();
+            this.drawYouWin();
             this.newGame();
             // Draw wird immer wieder aufgerufen
             let self = this;

@@ -80,5 +80,8 @@ const level1 = new Level(
     ],
     [
         new Game_over(0, -20, 300, 200)
+    ],
+    [
+        new You_win(45, 10, 200, 100)
     ]
 );

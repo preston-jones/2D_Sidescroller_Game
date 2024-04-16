@@ -106,6 +106,7 @@ class BossEnemy extends MovableObject {
                         world.level.enemies.splice(index, 1);
                     }
                 }, 100); // Adjust the timeout to match the length of the death animation
+                world.level.boss_dead = true;
             }
 
         }, 150);
