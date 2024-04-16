@@ -11,6 +11,7 @@ let character_selected;
 
 // SOUND FILES
 let level_bgr_music = new Audio('assets/audio/cyber_runner.mp3');
+level_bgr_music.muted = false;
 level_bgr_music.loop = true;
 let boss_fight_music = new Audio('assets/audio/Boss_fight.mp3');
 boss_fight_music.muted = false;
@@ -145,6 +146,12 @@ function loadGame() {
     loadCanvas();
     pressMobileButtons();
     loadBackgroundMusic();
+    loadNavbar();
+}
+
+
+function loadNavbar() {
+    document.getElementById('navbar').classList.remove('d-none');
 }
 
 
@@ -167,6 +174,12 @@ function backToStartScreen(current_page) {
 }
 
 
+function loadCredits() {
+    document.getElementById('startscreen').classList.add('d-none');
+    document.getElementById('credits').classList.remove('d-none');
+}
+
+
 function loadStartScreen() {
     document.getElementById('startscreen').classList.remove('d-none');
 }
@@ -185,6 +198,7 @@ function loadCanvas() {
 
 
 function loadBackgroundMusic() {
+    soundMuted = false;
     level_bgr_music.play();
 }
 
