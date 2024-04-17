@@ -348,10 +348,15 @@ h1 {
         background-image: none;
     } */
 
-
     .headline {
         width: 320px;
         text-align: center;
+        margin-top: 0;
+    }
+
+    .header {
+        margin: 24px 0 0 0;
+        display: none;
     }
 
     canvas {
@@ -388,8 +393,7 @@ h1 {
     }
 
     #startscreen {
-        justify-content: flex-start;
-        margin-top: 16px;
+        margin-top: 0;
     }
 
     .settings_container {
@@ -398,7 +402,30 @@ h1 {
 
     .container {
         width: 100vw;
-        margin-top: 16px;
+        margin-top: 0;
+    }
+
+    .startscreen_button {
+        font-size: 42px;
+    }
+
+    .menu_container {
+        height: 100%;
+        font-size: 24px;
+        padding-top: 8px;
+    }
+
+    .headline_submenu {
+        width: 640px;
+        text-align: center;
+        margin-top: 0px;
+        display: flex;
+        justify-content: center;
+        font-size: 36px;
+    }
+
+    .character_select_img {
+        height: 160px;
     }
 }
 
@@ -413,9 +440,6 @@ h1 {
         height: 100%;
         width: auto;
         margin-bottom: 0;
-        /* padding-left: 4%; */
-        border-top: 8px solid rgb(20, 20, 20);
-        border-bottom: 8px solid rgb(20, 20, 20);
     }
 
     #frame {
