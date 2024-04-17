@@ -21,7 +21,11 @@ class You_win extends DrawableObject {
         setInterval(() => {
             this.playAnimation(this.YOU_WIN)
             if (world && world.level.boss_dead) {
-                game_over_sound.play();
+                level_bgr_music.pause();
+                victory_music.play();
+                fireworks_sound.play();
+                victory_music.loop = true;
+                fireworks_sound.loop = true;
             }
         }, 100);
     }
