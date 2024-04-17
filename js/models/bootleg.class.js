@@ -4,8 +4,8 @@ class Bootleg extends MovableObject {
     y = 10;
     width = 60;
     height = 50;
-    speed = 0.3;
-    health = 2;
+    speed = 0.15;
+    health = 3;
 
     IMAGES_STAY = [
         'assets/sprites/enemies/Bootleg/bootleg-idle.png'
@@ -41,7 +41,7 @@ class Bootleg extends MovableObject {
 
     animateBootleg(images_arr) {
         this.otherDirection = true;
-        this.animateEnemie(images_arr, this.IMAGES_ENEMY_EXPLOTION);
+        this.animateEnemy(images_arr, this.IMAGES_ENEMY_EXPLOTION);
     }
 
 }

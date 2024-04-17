@@ -150,39 +150,61 @@ class MovableObject extends DrawableObject {
     }
 
 
-    animateEnemie(images_arr, array) {
+    animateEnemy(images_arr, array) {
         let moveInterval = setInterval(() => {
-            if (world && world.character.x >= 60) {
-                console.log('Enemys start moving');
-                if (!this.is_Dead) {
-                    this.moveToLeft(this.speed);
-                }
-                if (this.is_Dead) {
-                    this.stay();
-                    clearInterval(moveInterval);
-                }
-            }
+            this.moveEnemy(moveInterval);
         }, 1000 / 60);
 
-        let animateInterval = setInterval(() => {
+        let animateInterval;
+        if (this instanceof Bootleg) {
+            animateInterval = setInterval(() => {
+                this.enemyAnimation(images_arr, array, animateInterval);
+            }, 225);
+        }
+        else {
+            animateInterval = setInterval(() => {
+                this.enemyAnimation(images_arr, array, animateInterval);
+            }, 100);
+        }
+    }
+
+
+    enemyAnimation(images_arr, array, animateInterval) {
+        if (!this.is_Dead) {
+            this.playAnimation(images_arr);
+        }
+        if (this.is_Dead) {
+            console.log('Enemy is dead, playing death animation');
+            this.playAnimation_Enemy_DEAD(array);
+            explosion_sound.play();
+            clearInterval(animateInterval);
+            setTimeout(() => {
+                this.eraseEnemy();
+            }, 100); // Adjust the timeout to match the length of the death animation
+        }
+    }
+
+
+    eraseEnemy() {
+        // Assuming world.enemies is the array holding all enemy objects
+        let index = world.level.enemies.indexOf(this);
+        if (index > -1) {
+            world.level.enemies.splice(index, 1);
+        }
+    }
+
+
+    moveEnemy(moveInterval) {
+        if (world && world.character.x >= 60) {
+            console.log('Enemys start moving');
             if (!this.is_Dead) {
-                this.playAnimation(images_arr);
+                this.moveToLeft(this.speed);
             }
             if (this.is_Dead) {
-                console.log('Enemy is dead, playing death animation');
-                this.playAnimation_Enemy_DEAD(array);
-                explosion_sound.play();
-                clearInterval(animateInterval);
-                setTimeout(() => {
-                    // Assuming world.enemies is the array holding all enemy objects
-                    let index = world.level.enemies.indexOf(this);
-                    if (index > -1) {
-                        world.level.enemies.splice(index, 1);
-                    }
-                }, 100); // Adjust the timeout to match the length of the death animation
+                this.stay();
+                clearInterval(moveInterval);
             }
-
-        }, 150);
+        }
     }
 
 }

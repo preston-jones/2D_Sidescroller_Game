@@ -12,6 +12,7 @@ class World {
     characterShot = [];
     isGameOver = false;
     check;
+    GAME_INTERVALS = [];
     statusbar_HEALTH = [
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
         new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
@@ -43,7 +44,7 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.font = "20px Verdana"; // Change the font to Arial
+        this.ctx.font = "20px Verdana";
         this.ctx.fillStyle = "white";
         this.ctx.fillText("Press Enter to Start", 0, 0);
     }
@@ -186,49 +187,50 @@ class World {
     }
 
 
-    newGame() {
-        if (this.isGameOver) {
-            this.addObjectsToMap(this.level.gameOver);
+    exitGame() {
+        if (exit_Game) {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Reset the canvas, world, and ctx variables
+            canvas = null;
+            world = null;
+            ctx = null;
         }
     }
 
 
     draw() {
-        if (!this.isFlickering) {
-            this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
+        this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
+        // moves camera view
+        this.addObjectsToMap(this.level.backgroundImageStatic);
+        this.addObjectsToMap(this.level.animatedBackgroundBack);
+        this.drawFireworks();
+        this.ctx.translate(this.camera_x, this.camera_y);
+        // -----
+        this.addObjectsToMap(this.level.animatedObjectBack);
+        this.addObjectsToMap(this.level.animatedBackgroundFront);
 
+        // this.addObjectsToMap(this.level.VehiclesFront);
+        this.addObjectsToMap(this.level.playground);
+        this.addObjectsToMap(this.level.collectibles_energy);
+        this.addObjectsToMap(this.level.collectibles_health);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.enemies);
 
-            // moves camera view
-            this.addObjectsToMap(this.level.backgroundImageStatic);
-            this.addObjectsToMap(this.level.animatedBackgroundBack);
-            this.drawFireworks();
-            this.ctx.translate(this.camera_x, this.camera_y);
-            // -----
-            this.addObjectsToMap(this.level.animatedObjectBack);
-            this.addObjectsToMap(this.level.animatedBackgroundFront);
-
-            // this.addObjectsToMap(this.level.VehiclesFront);
-            this.addObjectsToMap(this.level.playground);
-            this.addObjectsToMap(this.level.collectibles_energy);
-            this.addObjectsToMap(this.level.collectibles_health);
-            this.addToMap(this.character);
-            this.addObjectsToMap(this.level.enemies);
-
-            this.addObjectsToMap(this.shots);
-            // moves camera view back to default
-            this.ctx.translate(-this.camera_x, this.camera_y);
-            // -----
-            this.addObjectsToMap(this.statusbar_HEALTH);
-            this.addObjectsToMap(this.statusbar_ENERGY);
-            this.drawGameOver();
-            this.drawYouWin();
-            this.newGame();
-            // Draw wird immer wieder aufgerufen
-            let self = this;
-            requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
-                self.draw();
-            });
-        }
+        this.addObjectsToMap(this.shots);
+        // moves camera view back to default
+        this.ctx.translate(-this.camera_x, this.camera_y);
+        // -----
+        this.addObjectsToMap(this.statusbar_HEALTH);
+        this.addObjectsToMap(this.statusbar_ENERGY);
+        this.drawGameOver();
+        this.drawYouWin();
+        // Draw wird immer wieder aufgerufen
+        let self = this;
+        requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
+            self.draw();
+        });
     }
 
 

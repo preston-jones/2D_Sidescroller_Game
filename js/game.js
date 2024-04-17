@@ -8,6 +8,7 @@ let isInFullscreen = false;
 let soundMuted = true;
 let mobileController = false
 let character_selected;
+let exit_Game = false;
 
 // SOUND FILES
 let level_bgr_music = new Audio('assets/audio/cyber_runner.mp3');
@@ -63,11 +64,6 @@ function init() {
 async function loadTemplates() {
     await includeHTML();
     startFullscreenEvent();
-}
-
-
-function reloadPage() {
-    location.reload();
 }
 
 
@@ -141,7 +137,8 @@ function selectCharacter(selected_character) {
 
 
 function loadGame() {
-    document.getElementById('character-select').classList.add('d-none');
+    exit_Game = false;
+    hideCharacterSelect();
     closeStartscreen();
     loadCanvas();
     pressMobileButtons();
@@ -150,9 +147,32 @@ function loadGame() {
 }
 
 
+function hideCharacterSelect() {
+    document.getElementById('character-select').classList.add('d-none');
+}
+
+
 function loadNavbar() {
     document.getElementById('navbar').classList.remove('d-none');
 }
+
+
+function hideNavbar() {
+    document.getElementById('navbar').classList.add('d-none');
+}
+
+
+function resetGame() {
+    exit_Game = true;
+    canvas = null;
+    ctx = null;
+    // Reset other game settings
+    hideCanvas();
+    hideNavbar();
+    loadStartScreen();
+    disableSound();
+}
+
 
 
 function loadCharacterSelect() {
@@ -194,6 +214,11 @@ function loadCanvas() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     document.getElementById('canvas').classList.add('d-block');
+}
+
+
+function hideCanvas() {
+    document.getElementById('canvas').classList.remove('d-block');
 }
 
 

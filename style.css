@@ -113,12 +113,12 @@ canvas {
 .navbar {
     position: absolute;
     z-index: 99;
-    top: 16px;
+    top: 21px;
     display: flex;
     justify-content: flex-end;
     align-content: center;
     width: 100%;
-    gap: 16px;
+    gap: 21px;
     padding-right: 16px;
 }
 
