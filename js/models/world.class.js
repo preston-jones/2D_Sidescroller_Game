@@ -179,6 +179,13 @@ class World {
     }
 
 
+    drawFireworks() {
+        if (this.level.boss_dead) {
+            this.addObjectsToMap(this.level.fireworks);
+        }
+    }
+
+
     newGame() {
         if (this.isGameOver) {
             this.addObjectsToMap(this.level.gameOver);
@@ -194,6 +201,7 @@ class World {
             // moves camera view
             this.addObjectsToMap(this.level.backgroundImageStatic);
             this.addObjectsToMap(this.level.animatedBackgroundBack);
+            this.drawFireworks();
             this.ctx.translate(this.camera_x, this.camera_y);
             // -----
             this.addObjectsToMap(this.level.animatedObjectBack);
@@ -205,6 +213,7 @@ class World {
             this.addObjectsToMap(this.level.collectibles_health);
             this.addToMap(this.character);
             this.addObjectsToMap(this.level.enemies);
+
             this.addObjectsToMap(this.shots);
             // moves camera view back to default
             this.ctx.translate(-this.camera_x, this.camera_y);

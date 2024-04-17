@@ -2,13 +2,13 @@ class Character extends MovableObject {
 
     width = 60;
     height = 50;
-    // x = 58;
-    x = 1800;
+    x = 58;
+    // x = 1800;
     y = 10;
     offsetX = -20;
     offsetY = -15;
     speed = 2;
-    health = 100;
+    health = 10;
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
@@ -235,15 +235,14 @@ class Character extends MovableObject {
 
 
     animateCharacter() {
-        console.log('character: ' + this.offsetY);
         setInterval(() => {
             this.moveCamera();
 
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.is_Dead && !this.is_Hurt) {
-                this.moveToRight(1.5);
+                this.moveToRight(1.7);
             }
             if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x && !this.is_Dead && !this.is_Hurt) {
-                this.moveToLeft(1.5);
+                this.moveToLeft(1.7);
             }
             if (this.world.keyboard.SPACE && !this.is_Dead && !this.is_Hurt) {
                 jump_sound.play();

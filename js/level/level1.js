@@ -83,5 +83,9 @@ const level1 = new Level(
     ],
     [
         new You_win(45, 10, 200, 100)
+    ],
+    [
+        new Fireworks(-30, -25, 250, 200),
+        new Fireworks(150, 0, 250, 200)
     ]
 );

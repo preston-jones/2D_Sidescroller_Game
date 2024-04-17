@@ -37,7 +37,7 @@ class BossEnemy extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_FLY[0]);
         // this.x = 1880; // left corner
-        this.x = 2200;
+        this.x = 2150;
         // this.y = 65;
         this.otherDirection = true;
         this.loadImages(this.IMAGES_FLY);
@@ -135,7 +135,7 @@ class BossEnemy extends MovableObject {
         }
         setTimeout(() => {
             this.hasAttacked = true;
-        }, 1000);
+        }, 2000);
     }
 
 
@@ -143,7 +143,7 @@ class BossEnemy extends MovableObject {
         if (!this.hasAttacked) {
             setTimeout(() => {
                 this.attackCharacter();
-            }, 4000);
+            }, 5000);
         }
         if (!this.moveRight) {
             this.x -= this.speed;
