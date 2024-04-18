@@ -60,14 +60,11 @@ let male_character_animation_array = [
 ];
 
 
-function init() {
-    loadTemplates();
-}
-
-
-async function loadTemplates() {
+async function init() {
     await includeHTML();
     startFullscreenEvent();
+    startSoundEvent();
+    loadBackgroundMusic();
 }
 
 
@@ -146,8 +143,14 @@ function loadGame() {
     closeStartscreen();
     loadCanvas();
     pressMobileButtons();
-    loadBackgroundMusic();
     loadNavbar();
+}
+
+
+function loadCanvas() {
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
+    document.getElementById('canvas').classList.add('d-block');
 }
 
 
@@ -214,59 +217,30 @@ function closeStartscreen() {
 }
 
 
-function loadCanvas() {
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-    document.getElementById('canvas').classList.add('d-block');
+function enableAnimatedFullscreenBackground() {
+    document.body.classList.remove('animated_background');
+    document.getElementById('fullscreen').classList.add('animated_background');
+}
+
+
+function disableAnimatedFullscreenBackground() {
+    document.body.classList.add('animated_background');
+    document.getElementById('fullscreen').classList.remove('animated_background');
+}
+
+
+function hideHeader() {
+    document.getElementById('header').classList.add('d-none');
+}
+
+
+function showHeader() {
+    document.getElementById('header').classList.remove('d-none');
 }
 
 
 function hideCanvas() {
     document.getElementById('canvas').classList.remove('d-block');
-}
-
-
-function loadBackgroundMusic() {
-    soundMuted = false;
-    level_bgr_music.play();
-}
-
-
-function toggleSound() {
-    if (soundMuted) {
-        document.getElementById('audio_button').src = 'assets/img/icons/audio_on.png';
-        enableSound();
-    }
-    else {
-        document.getElementById('audio_button').src = 'assets/img/icons/audio_off.png';
-        disableSound();
-    }
-}
-
-
-function disableSound() {
-    level_bgr_music.muted = true;
-    jump_sound.muted = true;
-    shoot_sound.muted = true;
-    hurt_sound.muted = true;
-    death_sound.muted = true;
-    explosion_sound.muted = true;
-    game_over_sound.muted = true;
-    boss_fight_music.muted = true;
-    soundMuted = true;
-}
-
-
-function enableSound() {
-    level_bgr_music.muted = false;
-    jump_sound.muted = false;
-    shoot_sound.muted = false;
-    hurt_sound.muted = false;
-    death_sound.muted = false;
-    explosion_sound.muted = false;
-    game_over_sound.muted = false;
-    boss_fight_music.muted = false;
-    soundMuted = false;
 }
 
 
@@ -371,50 +345,4 @@ function pressMobileButtons() {
         keyboard.C = false;
     });
 
-}
-
-
-function startFullscreenEvent() {
-    let fullscreen_btn = document.getElementById('fullscreen_button');
-    fullscreen_btn.addEventListener('click', toggleFullScreen);
-}
-
-
-function toggleFullScreen() {
-    let fullscreen = document.getElementById('fullscreen');
-    if (!document.fullscreenElement) {
-        enterFullscreen(fullscreen);
-    } else if (document.fullscreenElement) {
-        closeFullscreen(fullscreen);
-    }
-}
-
-
-function enterFullscreen(element) {
-    document.getElementById('startscreen').classList.add('fullscreen_startscreen');
-    document.getElementById('canvas').classList.add('fullscreen');
-    document.getElementById('fullscreen_button').src = 'assets/img/icons/collapse.png';
-
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-        element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-        element.webkitRequestFullscreen();
-    }
-}
-
-
-function closeFullscreen(element) {
-    document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
-    document.getElementById('canvas').classList.remove('fullscreen');
-    document.getElementById('fullscreen_button').src = 'assets/img/icons/expand.png';
-
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.msExitFullscreen) {      // for IE11 (remove June 15, 2022)
-        document.msExitFullscreen();
-    } else if (document.webkitExitFullscreen) { /* Chrome, Safari & Opera */
-        document.webkitExitFullscreen();
-    }
 }

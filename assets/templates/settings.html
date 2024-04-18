@@ -1,19 +1,14 @@
 <div class="headline_submenu">SETTINGS<div class="cursor">_</div></div>
 <div class="menu_container">
-    <div class="settings_button_container">
-        <img src="assets/img/icons/expand.png" class="nav_button" id="fullscreen_button">
+    <div class="settings_button_container" id="menu_fullscreen_button_container">
+        <img src="assets/img/icons/expand.png" class="settings_icon" id="menu_fullscreen_icon">
         <div class="settings_title">Fullscreen:</div>
-        <div class="settings_button" onclick="toggleFullscreen()">ON</div>
+        <div id="settings_button_menu_fullscreen">OFF</div>
     </div>
-    <div class="settings_button_container">
-        <img src="assets/img/icons/audio_on.png" onclick="toggleSound()" class="nav_button" id="audio_button">
+    <div class="settings_button_container" id="menu_audio_icon_container">
+        <img src="assets/img/icons/audio_off.png" class="settings_icon" id="menu_audio_icon">
         <div class="settings_title">Music & Sound:</div>
-        <div class="settings_button" onclick="toggleFullscreen()">OFF</div>
+        <div id="settings_button_menu_audio">OFF</div>
     </div>
-    <div class="settings_button_container">
-        <img src="assets/img/icons/keyboard.png" onclick="toggleMobileController()" class="nav_button">
-        <div class="settings_title">Controll Mode:</div>
-        <div class="settings_button" onclick="toggleFullscreen()">Keyboard</div>
-    </div>
-    <div class="back_button" onclick="backToStartScreen('settings')"></div>
 </div>
+<div class="back_button" onclick="backToStartScreen('settings')"></div>

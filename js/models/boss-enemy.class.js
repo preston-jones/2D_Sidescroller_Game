@@ -37,20 +37,25 @@ class BossEnemy extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_FLY[0]);
         // this.x = 1880; // left corner
-        this.x = 2200;
+        this.x = 2120;
         // this.y = 65;
         this.otherDirection = true;
         this.loadImages(this.IMAGES_FLY);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
-        this.boss();
+        this.boss(this.IMAGES_FLY);
         // this.animateBossEnemy(this.IMAGES_FLY);
 
     }
 
 
-    boss() {
+    boss(images_arr) {
+        let flyInterval = setInterval(() => {
+                this.playAnimation(images_arr);
+            }, 150);
+
         let startInterval = setInterval(() => {
             if (world && world.character.x >= 1949) {
+                clearInterval(flyInterval);
                 this.playBossFightMusic();
                 world.character.isInBattleArena = true;
                 world.character.enteredBattleArena = true;
@@ -141,7 +146,7 @@ class BossEnemy extends MovableObject {
 
 
     StayRightAnimation() {
-        if (!this.hasAttacked) {
+        if (!this.hasAttacked && !world.character.is_Dead) {
             setTimeout(() => {
                 this.attackCharacter();
             }, 5000);
@@ -192,7 +197,7 @@ class BossEnemy extends MovableObject {
 
 
     StayLeftAnimation() {
-        if (!this.hasAttacked) {
+        if (!this.hasAttacked && !world.character.is_Dead) {
             setTimeout(() => {
                 this.attackCharacter();
             }, 4000);

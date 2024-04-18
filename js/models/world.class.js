@@ -57,7 +57,7 @@ class World {
                 clearInterval(intervalId);
                 this.ctx.filter = 'invert(0)'; // Reset the filter after the flickering ends
                 this.character.enteredBattleArena = false;
-            }, 700); // Stop the flickering after 1 second
+            }, 1000); // Stop the flickering after 1 second
         }
     }
 

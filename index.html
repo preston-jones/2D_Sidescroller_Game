@@ -7,7 +7,8 @@
     <title>Cyber City</title>
     <link rel="icon" type="image/png" href="assets/img/icons/favicon.png">
     <link rel="stylesheet" href="assets/fonts/fonts.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/responsive.css">
 
     <script src="js/models/drawable.object.class.js"></script>
     <script src="js/models/movable-object.class.js"></script>
@@ -15,8 +16,8 @@
     <script src="js/models/statusbar.class.js"></script>
     <script src="js/models/collectible-energy.class.js"></script>
     <script src="js/models/collectible-health.class.js"></script>
-    <script src="js/models/game_over.class.js"></script>
-    <script src="js/models/you_win.class.js"></script>
+    <script src="js/models/game-over.class.js"></script>
+    <script src="js/models/you-win.class.js"></script>
     <script src="js/models/fireworks.class.js"></script>
     <script src="js/models/cop.class.js"></script>
     <script src="js/models/bootleg.class.js"></script>
@@ -31,21 +32,21 @@
     <script src="js/models/backgroundStatic.class.js"></script>
     <script src="js/models/playground.class.js"></script>
     <script src="js/models/keyboard.class.js"></script>
-    <script src="js/models/start_screen.class.js"></script>
+    <script src="js/models/start-screen.class.js"></script>
     <script src="js/models/world.class.js"></script>
     <script src="js/models/Level.class.js"></script>
     <script src="js/level/level1.js"></script>
+    <script src="js/events/fullscreen.js"></script>
+    <script src="js/events/sound.js"></script>
     <script src="js/game.js"></script>
 </head>
 
-<body onload="init()">
+<body class="animated_background" onload="init()">
     <div class="container">
-        <div class="header">
-            <img class="headline" src="assets/img/cybercity.png" alt="">
-        </div>
-        <div id="frame">
-            <img id="frame_img" class="frame_img d-none" src="assets/img/frame.png" alt="">
             <div id="fullscreen">
+                <div id="header">
+                    <img id="headline_logo" src="assets/img/cybercity.png" alt="">
+                </div>
                 <div id="navbar" class="navbar d-none" w3-include-html="assets/templates/navbar.html"></div>
                 <div id="startscreen" class="menu_container" w3-include-html="assets/templates/startscreen.html"></div>
                 <div id="character-select" class="d-none menu_container" w3-include-html="assets/templates/character-select.html"></div>
@@ -55,7 +56,6 @@
                 <div id="gamepad_overlay" class="d-none" w3-include-html="assets/templates/gamepad-overlay.html"></div>
                 <canvas id="canvas" class="d-none"></canvas>
             </div>
-        </div>
     </div>
 </body>
 
