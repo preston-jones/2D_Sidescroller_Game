@@ -40,13 +40,25 @@ class World {
     }
 
 
-    drawScreen() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.fillStyle = 'black';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.font = "20px Verdana";
-        this.ctx.fillStyle = "white";
-        this.ctx.fillText("Press Enter to Start", 0, 0);
+    enterBossArenaEffect() {
+        if (this.character.isInBattleArena && this.character.enteredBattleArena) {
+            let invert = false;
+            const intervalId = setInterval(() => {
+                if (invert) {
+                    this.ctx.filter = 'hue-rotate(90deg)';
+                }
+                else {
+                    this.ctx.filter = 'hue-rotate(-0.25turn)';
+                }
+                invert = !invert;
+            }, 1000 / 60); // Change this value to adjust the speed of the flickering
+    
+            setTimeout(() => {
+                clearInterval(intervalId);
+                this.ctx.filter = 'invert(0)'; // Reset the filter after the flickering ends
+                this.character.enteredBattleArena = false;
+            }, 700); // Stop the flickering after 1 second
+        }
     }
 
 
@@ -201,6 +213,7 @@ class World {
 
 
     draw() {
+        this.enterBossArenaEffect();
         this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
         // moves camera view
         this.addObjectsToMap(this.level.backgroundImageStatic);

@@ -2,8 +2,8 @@ class Character extends MovableObject {
 
     width = 60;
     height = 50;
-    x = 58;
-    // x = 1800;
+    // x = 58;
+    x = 1800;
     y = 10;
     offsetX = -20;
     offsetY = -15;
@@ -14,6 +14,7 @@ class Character extends MovableObject {
     energy_MAX = 10;
     character_Selection = character_selected;
     isInBattleArena = false;
+    enteredBattleArena = false;
     isDeadCounter = true;
 
 

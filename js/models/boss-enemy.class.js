@@ -53,6 +53,7 @@ class BossEnemy extends MovableObject {
             if (world && world.character.x >= 1949) {
                 this.playBossFightMusic();
                 world.character.isInBattleArena = true;
+                world.character.enteredBattleArena = true;
                 this.animateBossEnemy(this.IMAGES_FLY, this.IMAGES_ENEMY_EXPLOTION);
                 clearInterval(startInterval);
             }
@@ -65,6 +66,7 @@ class BossEnemy extends MovableObject {
         level_bgr_music.currentTime = 0;
         level_bgr_music = boss_fight_music;
         level_bgr_music.loop = true;
+        boss_fight_music.loop = true;
         level_bgr_music.play();
     }
 
@@ -76,7 +78,6 @@ class BossEnemy extends MovableObject {
                 if (this.isOnRight) {
                     setTimeout(() => {
                         this.StayLeftAnimation();
-
                     }, 4000);
                 }
                 if (!this.isOnRight) {
