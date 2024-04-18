@@ -1,10 +1,18 @@
 // --- SOUND EVENT ---
 function loadBackgroundMusic() {
-    document.body.addEventListener('click', function() {
+    document.body.addEventListener('click', function () {
         level_bgr_music.play();
         level_bgr_music.muted = true;
         soundMuted = true;
     }, { once: true });
+}
+
+
+function startMusicByGamestart() {
+    level_bgr_music.currentTime = 0;
+    level_bgr_music.play();
+    soundMuted = true;
+    toggleSound();
 }
 
 
@@ -13,12 +21,6 @@ function startSoundEvent() {
     let audio_btn = document.getElementById('audio_button');
     menu_audio_button.addEventListener('click', toggleSound);
     audio_btn.addEventListener('click', toggleSound);
-}
-
-
-function playBackgroundMusic() {
-    soundMuted = false;
-    level_bgr_music.play();
 }
 
 

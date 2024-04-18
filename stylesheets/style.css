@@ -14,7 +14,7 @@ body {
 }
 
 .animated_background {
-    background-image: url('assets/img/main_bgr.gif');
+    background-image: url('../assets/img/main_bgr.gif');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

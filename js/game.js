@@ -151,6 +151,7 @@ function loadCanvas() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     document.getElementById('canvas').classList.add('d-block');
+    startMusicByGamestart();
 }
 
 
