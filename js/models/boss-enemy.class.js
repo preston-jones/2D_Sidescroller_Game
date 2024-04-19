@@ -6,7 +6,7 @@ class BossEnemy extends MovableObject {
     width = 80;
     height = 70;
     speed = 0.5;
-    health = 8;
+    health = 10;
     moveRight = false;
     moveUp = false;
     isOnRight = false;

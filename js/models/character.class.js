@@ -4,7 +4,7 @@ class Character extends MovableObject {
     height = 50;
     x = 58;
     // x = 1800;
-    y = 10;
+    y = 75;
     offsetX = -20;
     offsetY = -15;
     speed = 2;
@@ -237,6 +237,7 @@ class Character extends MovableObject {
 
     animateCharacter() {
         setInterval(() => {
+            console.log("Character-position:" + this.x);
             this.moveCamera();
 
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.is_Dead && !this.is_Hurt) {

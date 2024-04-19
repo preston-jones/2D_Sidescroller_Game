@@ -138,7 +138,6 @@ function selectCharacter(selected_character) {
 
 
 function loadGame() {
-    exit_Game = false;
     hideCharacterSelect();
     closeStartscreen();
     loadCanvas();
@@ -150,8 +149,12 @@ function loadGame() {
 function loadCanvas() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    canvas_is_loaded = true;
     document.getElementById('canvas').classList.add('d-block');
     startMusicByGamestart();
+    if (document.fullscreenElement) {
+        hideHeader();
+    }
 }
 
 
@@ -218,15 +221,15 @@ function closeStartscreen() {
 }
 
 
-function enableAnimatedFullscreenBackground() {
+function disableAnimatedFullscreenBackground() {
     document.body.classList.remove('animated_background');
-    document.getElementById('fullscreen').classList.add('animated_background');
+    document.getElementById('fullscreen').classList.add('static_background');
 }
 
 
-function disableAnimatedFullscreenBackground() {
+function enableAnimatedFullscreenBackground() {
     document.body.classList.add('animated_background');
-    document.getElementById('fullscreen').classList.remove('animated_background');
+    document.getElementById('fullscreen').classList.remove('static_background');
 }
 
 

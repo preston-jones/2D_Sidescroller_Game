@@ -1,4 +1,6 @@
 // --- FULLSCREEN EVENT ---
+let canvas_is_loaded = false;
+
 function startFullscreenEvent() {
     let menu_fullscreen_button = document.getElementById('menu_fullscreen_button_container');
     let fullscreen_btn = document.getElementById('fullscreen_button');
@@ -11,17 +13,24 @@ function toggleFullScreen() {
     let fullscreen = document.getElementById('fullscreen');
     if (!document.fullscreenElement) {
         enterFullscreen(fullscreen);
-        hideHeader();
-        enableAnimatedFullscreenBackground();
         document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
         document.getElementById('settings_button_menu_fullscreen').innerHTML = `ON`;
-        
-    } else if (document.fullscreenElement) {
-        showHeader();
+
+        if (canvas_is_loaded) {
+            hideHeader();
+            disableAnimatedFullscreenBackground();
+        }
+    }
+    else if (document.fullscreenElement) {
         disableAnimatedFullscreenBackground();
         closeFullscreen(fullscreen);
         document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
         document.getElementById('settings_button_menu_fullscreen').innerHTML = `OFF`;
+
+        if (canvas_is_loaded) {
+            showHeader();
+            enableAnimatedFullscreenBackground();
+        }
     }
 }
 

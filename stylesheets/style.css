@@ -20,6 +20,10 @@ body {
     background-size: cover;
 }
 
+.static_background {
+    background-color: rgb(15, 15, 15);
+}
+
 .container {
     width: 854px;
     height: 100%;
@@ -110,12 +114,12 @@ canvas {
 .navbar {
     position: absolute;
     z-index: 99;
-    top: 21px;
+    top: 24px;
     display: flex;
     justify-content: flex-end;
     align-content: center;
     width: 100%;
-    gap: 21px;
+    gap: 24px;
     padding-right: 16px;
 }
 

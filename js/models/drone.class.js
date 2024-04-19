@@ -1,7 +1,7 @@
 class Drone extends MovableObject {
 
     x;
-    y = 10;
+    y = 51;
     width = 40;
     height = 40;
     speed = 0.5;
@@ -26,13 +26,12 @@ class Drone extends MovableObject {
     ];
     currentImage = 0;
 
-    constructor() {
+    constructor(random_x_min, random_x_max) {
         super().loadImage('assets/sprites/enemies/drone/drone-1.png');
-        this.x = Math.round(550 + Math.random() * 500);
-        this.loadImages(this.IMAGES_FLY);
+        this.x = Math.round(random_x_min + Math.random() * random_x_max);
+        this.loadImages(this.IMAGES_STAY);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
-        this.applyGravity();
-        this.animateDrone(this.IMAGES_FLY);
+        this.animateDrone(this.IMAGES_STAY);
     }
 
 

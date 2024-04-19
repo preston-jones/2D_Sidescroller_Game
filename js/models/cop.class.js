@@ -36,7 +36,8 @@ class Cop extends MovableObject {
 
     constructor() {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
-        this.x = 850 + Math.random() * 1000;
+        this.x = 850 + Math.random() * 2000;
+        this.speed = (1.1 + Math.random() * 1).toFixed(2);
         this.loadImages(this.IMAGES_RUN);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();
@@ -45,6 +46,7 @@ class Cop extends MovableObject {
 
 
     animateCop(images_arr) {
+        console.log(this.speed);
         this.animateEnemy(images_arr, this.IMAGES_ENEMY_EXPLOTION);
     }
 

@@ -7,7 +7,6 @@ class Playground extends DrawableObject {
 
     constructor(imagePath, x, y, width, height) {
         super().loadImage(imagePath);
-        this.loadImages(this.IMAGE_PLATFORM);
         this.width = width;
         this.height = height;
         this.x = x;

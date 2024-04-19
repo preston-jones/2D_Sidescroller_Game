@@ -2,8 +2,17 @@ const level1 = new Level(
     [
         new Cop(),
         new Cop(),
+        new Cop(),
+        new Cop(),
+        new Cop(),
+        new Cop(),
+        new Cop(),
+        new Cop(),
         new Bootleg(),
-        new Drone(),
+        new Bootleg(),
+        new Bootleg(),
+        new Drone(300, 800),
+        new Drone(1000, 1800),
         new BossEnemy()
     ],
     [
@@ -69,14 +78,18 @@ const level1 = new Level(
         new Playground('assets/environment/floor2.png', 598, 120, 600, 50),
         new Playground('assets/environment/floor2.png', 1189, 120, 600, 50),
         new Playground('assets/environment/floor2.png', 1789, 120, 600, 50),
+        new Playground('assets/sprites/vehicles/v-red-reversed.png', -20, 70, 95, 60)
     ],
     [
-        new CollectibleEnergy(200, 112, 15, 15),
-        new CollectibleEnergy(600, 112, 15, 15)
+        new CollectibleEnergy(600, 40, 15, 15),
+        new CollectibleEnergy(900, 40, 15, 15),
+        new CollectibleEnergy(1500, 40, 15, 15),
+        new CollectibleEnergy(1800, 40, 15, 15)
     ],
     [
-        new CollectibleHealth(400, 112, 15, 15),
-        new CollectibleHealth(800, 112, 15, 15)
+        new CollectibleHealth(1000, 112, 15, 15),
+        new CollectibleHealth(1400, 112, 15, 15),
+        new CollectibleHealth(1800, 112, 15, 15)
     ],
     [
         new Game_over(0, -20, 300, 200)
