@@ -5,24 +5,6 @@
         background-image: none;
     } */
 
-    #headline_logo {
-        width: 320px;
-        text-align: center;
-        margin-top: 0;
-    }
-
-    #header {
-        margin: 24px 0 0 0;
-    }
-
-    canvas {
-        /* width: 70%; */
-        margin-bottom: 0;
-        padding-left: 0;
-        width: auto;
-        object-fit: contain;
-    }
-
     #frame {
         height: 100vh;
         width: 100vw;
@@ -37,13 +19,6 @@
 
     .gamepad_img {
         display: flex;
-    }
-
-    #fullscreen {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
     }
 
     #startscreen {
@@ -59,67 +34,66 @@
         margin-top: 0;
     }
 
+    .submenu_container {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 600px) {
+    #header {
+        margin: 24px 0 0 0;
+    }
+
+    #headline_logo {
+        margin-top: 0;
+    }
+}
+
+/* Smartphones ------------------------------ */
+@media only screen and (max-height: 360px) {
+    #header {
+        margin: 24px 0 0 0;
+    }
+
+    #headline_logo {
+        width: 320px;
+        text-align: center;
+        margin-top: 0;
+    }
+
     .startscreen_button {
         font-size: 42px;
     }
 
-    .menu_container {
+    .submenu_container {
         height: 100%;
         font-size: 24px;
-        padding-top: 8px;
     }
 
     .headline_submenu {
-        width: 640px;
         text-align: center;
         margin-top: 0px;
-        display: flex;
-        justify-content: center;
-        font-size: 28px;
-    }
-
-    .character_select_img {
-        height: 160px;
+        font-size: 32px;
     }
 
     .back_button {
         font-size: 24px;
     }
-}
 
-/* Smartphones ------------------------------ */
-@media only screen and (max-height: 620px) {
+    .character_select_img {
+        width: auto;
+        height: 124px;
+        object-fit: contain;
+        margin-top: -20px;
+    }
 
     canvas {
         height: 100%;
         width: auto;
         margin-bottom: 0;
-    }
-
-    #frame {
-        height: 100vh;
-        width: 100vw;
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    .frame_img {
-        display: none;
-    }
-
-    .gamepad_img {
-        display: flex;
-    }
-
-    #fullscreen {
-        height: 100%;
-        width: auto;
-        display: flex;
-        justify-content: center;
-    }
-
-    .container {
-        width: 100vw;
+        margin-bottom: 0;
+        padding-left: 0;
+        object-fit: contain;
+        border: none;
     }
 }

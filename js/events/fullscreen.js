@@ -22,7 +22,6 @@ function toggleFullScreen() {
         }
     }
     else if (document.fullscreenElement) {
-        disableAnimatedFullscreenBackground();
         closeFullscreen(fullscreen);
         document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
         document.getElementById('settings_button_menu_fullscreen').innerHTML = `OFF`;

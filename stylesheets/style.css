@@ -21,7 +21,7 @@ body {
 }
 
 .static_background {
-    background-color: rgb(15, 15, 15);
+    background-color: rgba(15, 15, 15, 0.156);
 }
 
 .container {
@@ -67,7 +67,8 @@ canvas {
     border: 2px solid #E7D63F;
 }
 
-.menu_container {
+.submenu_container {
+    z-index: 50;
     width: 768px;
     height: 384px;
     display: flex;
@@ -101,14 +102,6 @@ canvas {
     filter: drop-shadow(0 0 0.75rem #FC0);
     transform: scale(1.1);
     cursor: crosshair;
-}
-
-#startscreen {
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .navbar {
@@ -213,24 +206,6 @@ h1 {
     display: block !important;
 }
 
-
-#frame {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 854px;
-    height: 524px;
-    /* border: 4PX SOLID yellow; */
-}
-
-.frame_img {
-    /* z-index: 10; */
-    position: absolute;
-    width: 854px;
-    height: 524px;
-}
-
 .nav_button {
     display: flex;
     justify-content: center;
@@ -262,8 +237,8 @@ h1 {
     align-items: center;
     justify-content: flex-end;
     height: 100%;
-    width: 20%;
-    padding: 100px 8px 30px 30px;
+    /* width: 20%; */
+    padding: 100px 8px 20px 15px;
 }
 
 .gamepad_overlay_middle {
@@ -278,7 +253,7 @@ h1 {
     justify-content: flex-end;
     gap: 18px;
     height: 100%;
-    width: 15%;
+    width: 18%;
     padding: 100px 20px 30px 8px;
 }
 
@@ -292,26 +267,16 @@ h1 {
     width: 100%;
 }
 
-#shoot {
-    width: 50px;
-    height: 50px;
-}
-
 .gamepad_button_b_container {
     display: flex;
     justify-content: flex-end;
     width: 100%;
 }
 
-#jump {
-    width: 50px;
-    height: 50px;
-}
-
 .gamepad_img {
     object-fit: contain;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     opacity: 0.7;
 }
 
@@ -353,12 +318,8 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.fullscreen {
+    height: 100%;
     width: 100%;
-    height: auto;
-    border: none;
 }
 
 .fullscreen_startscreen {
