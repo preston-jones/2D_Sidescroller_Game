@@ -1,7 +1,7 @@
 class Drone extends MovableObject {
 
     x;
-    y = 51;
+    y = 35;
     width = 40;
     height = 40;
     speed = 0.5;

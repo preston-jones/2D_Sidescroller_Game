@@ -31,7 +31,7 @@ class Bootleg extends MovableObject {
 
     constructor() {
         super().loadImage('assets/sprites/enemies/Bootleg/bootleg-idle.png');
-        this.x = 800 + Math.random() * 1800;
+        this.x = 800 + Math.random() * 1700;
         this.loadImages(this.IMAGES_RUN);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();
