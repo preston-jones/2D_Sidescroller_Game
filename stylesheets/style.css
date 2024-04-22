@@ -89,7 +89,7 @@ canvas {
     /* width: 768px; */
     width: 720px;
     height: 384px;
-    image-rendering: pixelated;
+    /* image-rendering: pixelated; */
     border: 2px solid #E7D63F;
 }
 
@@ -340,9 +340,10 @@ h1 {
 /* FULLSCREEN */
 
 .fullscreen {
-    height: auto;
-    width: 100%;
+    height: 100vh;
+    width: auto;
     border: none;
+    aspect-ratio: 16/9;
 }
 
 #fullscreen {

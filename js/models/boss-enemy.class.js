@@ -83,12 +83,12 @@ class BossEnemy extends MovableObject {
                 if (this.isOnRight) {
                     setTimeout(() => {
                         this.StayLeftAnimation();
-                    }, 4000);
+                    }, 3000);
                 }
                 if (!this.isOnRight) {
                     setTimeout(() => {
                         this.StayRightAnimation();
-                    }, 4000);
+                    }, 3000);
                 }
             }
             if (this.is_Dead) {
@@ -141,7 +141,7 @@ class BossEnemy extends MovableObject {
         }
         setTimeout(() => {
             this.hasAttacked = true;
-        }, 2000);
+        }, 500);
     }
 
 
