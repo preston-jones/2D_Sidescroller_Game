@@ -37,6 +37,7 @@ function toggleFullScreen() {
 function enterFullscreen(element) {
     document.getElementById('startscreen').classList.add('fullscreen_startscreen');
     document.getElementById('canvas').classList.add('fullscreen');
+    document.getElementById('fullscreen').classList.add('center');
     document.getElementById('menu_fullscreen_icon').src = 'assets/img/icons/collapse.png';
     document.getElementById('fullscreen_button').src = 'assets/img/icons/collapse.png';
 
@@ -53,6 +54,7 @@ function enterFullscreen(element) {
 function closeFullscreen(element) {
     document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
     document.getElementById('canvas').classList.remove('fullscreen');
+    document.getElementById('fullscreen').classList.remove('center');
     document.getElementById('menu_fullscreen_icon').src = 'assets/img/icons/expand.png';
     document.getElementById('fullscreen_button').src = 'assets/img/icons/expand.png';
 

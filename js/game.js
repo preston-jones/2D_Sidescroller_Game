@@ -199,6 +199,12 @@ function loadSettings() {
 }
 
 
+function loadControl() {
+    document.getElementById('startscreen').classList.add('d-none');
+    document.getElementById('control').classList.remove('d-none');
+}
+
+
 function backToStartScreen(current_page) {
     document.getElementById(current_page).classList.add('d-none');
     loadStartScreen();
@@ -297,11 +303,21 @@ function toggleMobileController() {
     if (!mobileController) {
         document.getElementById('gamepad_overlay').classList.add('showMobileController');
         document.getElementById('controller_button').src = 'assets/img/icons/keyboard.png';
+
+        document.getElementById('menu_control_icon').src = 'assets/img/icons/controller_mobile.png';
+        document.getElementById('settings_button_menu_control_mode').innerHTML = ``;
+        document.getElementById('settings_button_menu_control_mode').innerHTML = `GAMEPAD`;
+
         mobileController = true;
     }
     else {
         document.getElementById('gamepad_overlay').classList.remove('showMobileController');
         document.getElementById('controller_button').src = 'assets/img/icons/controller_mobile.png';
+
+        document.getElementById('menu_control_icon').src = 'assets/img/icons/keyboard.png';
+        document.getElementById('settings_button_menu_control_mode').innerHTML = ``;
+        document.getElementById('settings_button_menu_control_mode').innerHTML = `KEYBOARD`;
+
         mobileController = false;
     }
 }
