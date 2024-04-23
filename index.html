@@ -14,6 +14,8 @@
     <script src="js/models/keyboard.class.js"></script>
     <script src="js/events/fullscreen.js"></script>
     <script src="js/events/sound.js"></script>
+    <script src="js/events/keyboard.js"></script>
+    <script src="js/events/hd-rendering.js"></script>
     <script src="js/models/world.class.js"></script>
 
     <script src="js/game.js"></script>
@@ -46,20 +48,26 @@
 </head>
 
 <body class="animated_background" onload="init()">
+    <div id="rotate_device" w3-include-html="assets/templates/rotate-device.html"></div>
     <div class="container">
-            <div id="fullscreen">
-                <div id="header">
-                    <img id="headline_logo" src="assets/img/cybercity.png" alt="">
-                </div>
-                <div id="navbar" class="navbar d-none" w3-include-html="assets/templates/navbar.html"></div>
-                <div id="startscreen" class="submenu_container" w3-include-html="assets/templates/startscreen.html"></div>
-                <div id="character-select" class="d-none submenu_container" w3-include-html="assets/templates/character-select.html"></div>
-                <div id="control" class="d-none submenu_container" w3-include-html="assets/templates/control.html"></div>
-                <div id="settings" class="d-none submenu_container" w3-include-html="assets/templates/settings.html"></div>
-                <div id="credits" class="d-none submenu_container" w3-include-html="assets/templates/credits.html"></div>
-                <div id="gamepad_overlay" class="d-none" w3-include-html="assets/templates/gamepad-overlay.html"></div>
-                <canvas id="canvas" class="d-none"></canvas>
+        <div id="fullscreen">
+            <div id="header">
+                <img id="headline_logo" src="assets/img/cybercity.png" alt="">
             </div>
+            <div id="navbar" class="navbar d-none" w3-include-html="assets/templates/navbar.html"></div>
+            <div id="startscreen" class="submenu_container" w3-include-html="assets/templates/startscreen.html">
+            </div>
+            <div id="character-select" class="d-none submenu_container"
+                w3-include-html="assets/templates/character-select.html"></div>
+            <div id="control" class="d-none submenu_container" w3-include-html="assets/templates/control.html">
+            </div>
+            <div id="settings" class="d-none submenu_container" w3-include-html="assets/templates/settings.html">
+            </div>
+            <div id="credits" class="d-none submenu_container" w3-include-html="assets/templates/credits.html">
+            </div>
+            <div id="gamepad_overlay" class="d-none" w3-include-html="assets/templates/gamepad-overlay.html"></div>
+            <canvas id="canvas" class="d-none"></canvas>
+        </div>
     </div>
 </body>
 

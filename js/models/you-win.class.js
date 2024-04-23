@@ -20,7 +20,7 @@ class You_win extends DrawableObject {
     animateYouWin() {
         setInterval(() => {
             this.playAnimation(this.YOU_WIN)
-            if (world && world.level.boss_dead) {
+            if (world && world.level.boss_dead && !world.character.is_Dead) {
                 level_bgr_music.pause();
                 victory_music.play();
                 fireworks_sound.play();
