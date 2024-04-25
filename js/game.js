@@ -155,9 +155,6 @@ function loadCanvas() {
     canvas_is_loaded = true;
     document.getElementById('canvas').classList.add('d-block');
     startMusicByGamestart();
-    if (document.fullscreenElement) {
-        hideHeader();
-    }
 }
 
 
@@ -178,8 +175,42 @@ function hideNavbar() {
 
 function resetGame() {
     exit_Game = true;
+    canvas_is_loaded = false;
+    // Stop all ongoing game loops or intervals
+    clearAllIntervals();
+
+    // Clear the canvas if it exists
+    if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // Reset game-related variables and states
+    exit_Game = false;
     canvas = null;
     ctx = null;
+    world = null;
+    canvas_is_loaded = false;
+    isGameOver = false;
+    musicOff = false;
+    soundMuted = true;
+    mobileController = false;
+    HD_Rendering = false;
+    character_selected = null;
+    level = null;
+
+    // Stop all sounds
+    level_bgr_music.pause();
+    boss_fight_music.pause();
+    victory_music.pause();
+    fireworks_sound.pause();
+    jump_sound.pause();
+    shoot_sound.pause();
+    hurt_sound.pause();
+    death_sound.pause();
+    explosion_sound.pause();
+    collecting_sound.pause();
+    game_over_sound.pause();
+
     // Reset other game settings
     hideCanvas();
     hideNavbar();
@@ -187,6 +218,11 @@ function resetGame() {
     disableSound();
 }
 
+
+function clearAllIntervals() {
+    // location.reload(true);
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  }
 
 
 function loadCharacterSelect() {

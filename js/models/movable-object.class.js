@@ -99,12 +99,26 @@ class MovableObject extends DrawableObject {
         }
         if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone || this instanceof BossEnemy) {
             this.health -= 1;
+            this.enemyHitAnimation();
             if (this.health < 0) {
                 this.health = 0;
                 this.is_Dead = true;
             }
-
         }
+    }
+
+
+    enemyHitAnimation() {
+        let blinkTimes = 0;
+        this.isInverted = false; // Add this line
+        const blinkInterval = setInterval(() => {
+            this.isInverted = blinkTimes % 2 === 0;
+            blinkTimes++;
+            if (blinkTimes >= 5) { // Blink for 1 second (50ms * 20)
+                clearInterval(blinkInterval);
+                this.isInverted = false; // Ensure the image is not inverted after blinking
+            }
+        }, 50); // Blink every 50ms
     }
 
 

@@ -18,10 +18,22 @@ class DrawableObject {
             if (this instanceof Drone) { this.img.src = 'assets/sprites/enemies/drone/drone-1.png'; }
             if (this instanceof BossEnemy) { this.img.src = 'assets/sprites/enemies/Wasp/wasp1.png'; }
             this.img.onload = () => {
-                ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+                this.drawImageWithFilter(ctx);
             };
         }
         else {
+            this.drawImageWithFilter(ctx);
+        }
+    }
+
+
+    drawImageWithFilter(ctx) {
+        const previousFilter = ctx.filter;
+        if (this.isInverted && !this.is_Dead) {
+            ctx.filter = 'invert(1)';
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+            ctx.filter = previousFilter; // Restore the previous filter only if the object is inverted
+        } else {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         }
     }

@@ -199,61 +199,49 @@ class World {
     }
 
 
-    exitGame() {
-        if (exit_Game) {
-            // Clear the canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // exitGame() {
+    //     if (exit_Game) {
+    //         // Clear the canvas
+    //         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Reset the canvas, world, and ctx variables
-            canvas = null;
-            world = null;
-            ctx = null;
-        }
-    }
+    //         // Reset the canvas, world, and ctx variables
+    //         canvas = null;
+    //         world = null;
+    //         ctx = null;
+    //     }
+    // }
 
 
     draw() {
-        this.enterBossArenaEffect();
-        this.ctx.clearRect(0, 0, canvas.width, canvas.height) // Clears the canvas
-        // moves camera view
-        this.addObjectsToMap(this.level.backgroundImageStatic);
-        this.addObjectsToMap(this.level.animatedBackgroundBack);
-        this.drawFireworks();
-        this.ctx.translate(this.camera_x, this.camera_y);
-        // -----
-        this.addObjectsToMap(this.level.animatedObjectBack);
-        this.addObjectsToMap(this.level.animatedBackgroundFront);
-
-        // this.addObjectsToMap(this.level.VehiclesFront);
-        this.addObjectsToMap(this.level.playground);
-        this.addObjectsToMap(this.level.collectibles_energy);
-        this.addObjectsToMap(this.level.collectibles_health);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
-
-        this.addObjectsToMap(this.shots);
-        // moves camera view back to default
-        this.ctx.translate(-this.camera_x, this.camera_y);
-        // -----
-        this.addObjectsToMap(this.statusbar_HEALTH);
-        this.addObjectsToMap(this.statusbar_ENERGY);
-        this.drawGameOver();
-        this.drawYouWin();
-        // Draw wird immer wieder aufgerufen
-        let self = this;
-        requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
-            self.draw();
-        });
-    }
-
-
-    pauseGame() {
-        let self = this;
-        if (this.check === 'pause') {
-            this.self = '';
-        }
-        else {
-            this.self = this;
+        if (!exit_Game && canvas) {
+            this.enterBossArenaEffect();
+            this.ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears the canvas
+            // moves camera view
+            this.addObjectsToMap(this.level.backgroundImageStatic);
+            this.addObjectsToMap(this.level.animatedBackgroundBack);
+            this.drawFireworks();
+            this.ctx.translate(this.camera_x, this.camera_y);
+            // -----
+            this.addObjectsToMap(this.level.animatedObjectBack);
+            this.addObjectsToMap(this.level.animatedBackgroundFront);
+    
+            // this.addObjectsToMap(this.level.VehiclesFront);
+            this.addObjectsToMap(this.level.playground);
+            this.addObjectsToMap(this.level.collectibles_energy);
+            this.addObjectsToMap(this.level.collectibles_health);
+            this.addToMap(this.character);
+            this.addObjectsToMap(this.level.enemies);
+    
+            this.addObjectsToMap(this.shots);
+            // moves camera view back to default
+            this.ctx.translate(-this.camera_x, this.camera_y);
+            // -----
+            this.addObjectsToMap(this.statusbar_HEALTH);
+            this.addObjectsToMap(this.statusbar_ENERGY);
+            this.drawGameOver();
+            this.drawYouWin();
+            // Draw wird immer wieder aufgerufen
+            let self = this;
             requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
                 self.draw();
             });

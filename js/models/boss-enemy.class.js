@@ -83,12 +83,12 @@ class BossEnemy extends MovableObject {
                 if (this.isOnRight) {
                     setTimeout(() => {
                         this.StayLeftAnimation();
-                    }, 3000);
+                    }, 2000);
                 }
                 if (!this.isOnRight) {
                     setTimeout(() => {
                         this.StayRightAnimation();
-                    }, 3000);
+                    }, 2000);
                 }
             }
             if (this.is_Dead) {
@@ -141,7 +141,7 @@ class BossEnemy extends MovableObject {
         }
         setTimeout(() => {
             this.hasAttacked = true;
-        }, 500);
+        }, 250);
     }
 
 
@@ -149,7 +149,7 @@ class BossEnemy extends MovableObject {
         if (!this.hasAttacked && !world.character.is_Dead) {
             setTimeout(() => {
                 this.attackCharacter();
-            }, 5000);
+            }, 3000);
         }
         if (!this.moveRight) {
             this.x -= this.speed;
@@ -200,7 +200,7 @@ class BossEnemy extends MovableObject {
         if (!this.hasAttacked && !world.character.is_Dead) {
             setTimeout(() => {
                 this.attackCharacter();
-            }, 4000);
+            }, 3000);
         }
         if (!this.moveRight) {
             this.x -= this.speed;
