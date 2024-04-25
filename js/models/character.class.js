@@ -8,8 +8,8 @@ class Character extends MovableObject {
     offsetX = -20;
     offsetY = -15;
     speed = 2;
-    health = 10000;
-    health_MAX = 100;
+    health = 10;
+    health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
     character_Selection = character_selected;

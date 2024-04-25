@@ -13,30 +13,37 @@ class World {
     isGameOver = false;
     check;
     GAME_INTERVALS = [];
-    statusbar_HEALTH = [
-        new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
-        new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
-        new Statusbar('assets/statusbar/heart.png', this.character.energy, 30, 4, 15, 15),
-        new Statusbar('assets/statusbar/heart.png', this.character.energy, 40, 4, 15, 15),
-        new Statusbar('assets/statusbar/heart.png', this.character.energy, 50, 4, 15, 15)
-    ];
-    statusbar_ENERGY = [
-        new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 20, 10, 10),
-        new Statusbar('assets/statusbar/energy.png', this.character.energy, 22, 20, 10, 10),
-        new Statusbar('assets/statusbar/energy.png', this.character.energy, 32, 20, 10, 10),
-        new Statusbar('assets/statusbar/energy.png', this.character.energy, 42, 20, 10, 10),
-        new Statusbar('assets/statusbar/energy.png', this.character.energy, 52, 20, 10, 10)
-    ];
+    statusbar_HEALTH;
+    statusbar_ENERGY;
 
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.initStatusbar();
         this.draw();
         this.setWorld();
         this.run();
         this.shoot();
+    }
+
+
+    initStatusbar() {
+        this.statusbar_HEALTH = [
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 30, 4, 15, 15),
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 40, 4, 15, 15),
+            new Statusbar('assets/statusbar/heart.png', this.character.energy, 50, 4, 15, 15)
+        ];
+        this.statusbar_ENERGY = [
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 20, 10, 10),
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 22, 20, 10, 10),
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 32, 20, 10, 10),
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 42, 20, 10, 10),
+            new Statusbar('assets/statusbar/energy.png', this.character.energy, 52, 20, 10, 10)
+        ];
     }
 
 
@@ -52,7 +59,7 @@ class World {
                 }
                 invert = !invert;
             }, 1000 / 60); // Change this value to adjust the speed of the flickering
-    
+
             setTimeout(() => {
                 clearInterval(intervalId);
                 this.ctx.filter = 'invert(0)'; // Reset the filter after the flickering ends
@@ -224,14 +231,14 @@ class World {
             // -----
             this.addObjectsToMap(this.level.animatedObjectBack);
             this.addObjectsToMap(this.level.animatedBackgroundFront);
-    
+
             // this.addObjectsToMap(this.level.VehiclesFront);
             this.addObjectsToMap(this.level.playground);
             this.addObjectsToMap(this.level.collectibles_energy);
             this.addObjectsToMap(this.level.collectibles_health);
             this.addToMap(this.character);
             this.addObjectsToMap(this.level.enemies);
-    
+
             this.addObjectsToMap(this.shots);
             // moves camera view back to default
             this.ctx.translate(-this.camera_x, this.camera_y);

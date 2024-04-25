@@ -150,6 +150,7 @@ function loadGame() {
 
 
 function loadCanvas() {
+    initLevel1();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     canvas_is_loaded = true;
@@ -186,6 +187,7 @@ function resetGame() {
 
     // Reset game-related variables and states
     exit_Game = false;
+    character = null;
     canvas = null;
     ctx = null;
     world = null;
