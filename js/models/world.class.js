@@ -1,5 +1,5 @@
 class World {
-    character = new Character();
+    character;
     control = true;
     level = level1;
     canvas;
@@ -21,6 +21,15 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.startLevel();
+    }
+
+
+    startLevel() {
+        console.log(this.level);
+        console.log(world);
+        this.character = new Character();
+        // this.level = level1;
         this.initStatusbar();
         this.draw();
         this.setWorld();
@@ -48,7 +57,7 @@ class World {
 
 
     enterBossArenaEffect() {
-        if (this.character.isInBattleArena && this.character.enteredBattleArena) {
+        if (this.character && this.character.isInBattleArena && this.character.enteredBattleArena) {
             let invert = false;
             const intervalId = setInterval(() => {
                 if (invert) {

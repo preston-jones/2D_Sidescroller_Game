@@ -236,8 +236,8 @@ class Character extends MovableObject {
 
 
     animateCharacter() {
+        console.log("Character-loaded:", this.character_Selection);
         setInterval(() => {
-            console.log("Character-position:" + this.x);
             this.moveCamera();
 
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.is_Dead && !this.is_Hurt) {

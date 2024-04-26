@@ -1,5 +1,5 @@
 // --- SOUND EVENT ---
-function loadBackgroundMusic() {
+function startBackgroundMusic() {
     document.body.addEventListener('click', function () {
         level_bgr_music.play();
         level_bgr_music.muted = true;
@@ -8,7 +8,7 @@ function loadBackgroundMusic() {
 }
 
 
-function startMusicByGamestart() {
+function startSoundByGamestart() {
     level_bgr_music.currentTime = 0;
     level_bgr_music.play();
     soundMuted = true;

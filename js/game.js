@@ -36,7 +36,7 @@ collecting_sound.muted = false;
 let game_over_sound = new Audio('assets/audio/gameover.mp3');
 game_over_sound.muted = false;
 
-
+// ASSETS FOR CHARACTER-SELECTION PAGE
 let female_character_animation_array = [
     'assets/sprites/character/player_female/run/run-1.png',
     'assets/sprites/character/player_female/run/run-2.png',
@@ -67,7 +67,7 @@ async function init() {
     startSoundEvent();
     startMobileControllerEvent();
     startHDRenderingEvent();
-    loadBackgroundMusic();
+    startBackgroundMusic();
 }
 
 
@@ -86,76 +86,22 @@ async function includeHTML() {
 }
 
 
-function selectCharacterEvent() {
-    let animationIndex = 0;
-    let animationInterval;
-
-    animatecharacterSelectionFemale(animationIndex, animationInterval);
-    animatecharacterSelectionMale(animationIndex, animationInterval);
-}
-
-
-function animatecharacterSelectionFemale(animationIndex, animationInterval) {
-    let character_female = document.getElementById('female');
-    document.getElementById('female').addEventListener('mouseover', function () {
-        animationInterval = setInterval(function () {
-            character_female.src = female_character_animation_array[animationIndex];
-            animationIndex = (animationIndex + 1) % female_character_animation_array.length;
-        }, 100); // change interval as needed
-    });
-
-    document.getElementById('female').addEventListener('mouseout', function () {
-        clearInterval(animationInterval);
-        character_female.src = 'assets/sprites/character/player_female/idle/idle-2.png';
-    });
-    character_female.addEventListener('click', function () { selectCharacter(0); });
-}
-
-
-function animatecharacterSelectionMale(animationIndex, animationInterval) {
-    let character_male = document.getElementById('male');
-    document.getElementById('male').addEventListener('mouseover', function () {
-        animationInterval = setInterval(function () {
-            character_male.src = male_character_animation_array[animationIndex];
-            animationIndex = (animationIndex + 1) % male_character_animation_array.length;
-        }, 100); // change interval as needed
-    });
-
-    document.getElementById('male').addEventListener('mouseout', function () {
-        clearInterval(animationInterval);
-        character_male.src = 'assets/sprites/character/player_male/Idle/Idle2.png';
-    });
-    character_male.addEventListener('click', function () { selectCharacter(1); });
-}
-
-
-function selectCharacter(selected_character) {
-    if (selected_character === 0) {
-        character_selected = 'female';
-    }
-    if (selected_character === 1) {
-        character_selected = 'male';
-    }
-    loadGame();
-}
-
-
 function loadGame() {
     hideCharacterSelect();
     closeStartscreen();
-    loadCanvas();
+    initLevel1();
+    initCanvas();
+    showCanvas();
+    startSoundByGamestart();
     pressMobileButtons();
-    loadNavbar();
+    showNavbar();
 }
 
 
-function loadCanvas() {
-    initLevel1();
+function initCanvas() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     canvas_is_loaded = true;
-    document.getElementById('canvas').classList.add('d-block');
-    startMusicByGamestart();
 }
 
 
@@ -164,7 +110,7 @@ function hideCharacterSelect() {
 }
 
 
-function loadNavbar() {
+function showNavbar() {
     document.getElementById('navbar').classList.remove('d-none');
 }
 
@@ -174,23 +120,39 @@ function hideNavbar() {
 }
 
 
-function resetGame() {
+function exitGame() {
     exit_Game = true;
     canvas_is_loaded = false;
-    // Stop all ongoing game loops or intervals
-    clearAllIntervals();
+    resetGame();
+}
 
-    // Clear the canvas if it exists
+
+function resetGame() {
+    clearAllIntervals();
+    clearCanvas();
+    resetGameVariables();
+    stopAllSound();
+
+    hideCanvas();
+    hideNavbar();
+    showStartScreen();
+    disableSound();
+}
+
+
+function clearCanvas() {
     if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+}
 
-    // Reset game-related variables and states
+
+function resetGameVariables() {
     exit_Game = false;
-    character = null;
-    canvas = null;
-    ctx = null;
-    world = null;
+    world.character = null;
+    world.level = null;
+    world.canvas = null;
+    world.ctx = null;
     canvas_is_loaded = false;
     isGameOver = false;
     musicOff = false;
@@ -198,9 +160,10 @@ function resetGame() {
     mobileController = false;
     HD_Rendering = false;
     character_selected = null;
-    level = null;
+}
 
-    // Stop all sounds
+
+function stopAllSound() {
     level_bgr_music.pause();
     boss_fight_music.pause();
     victory_music.pause();
@@ -212,35 +175,21 @@ function resetGame() {
     explosion_sound.pause();
     collecting_sound.pause();
     game_over_sound.pause();
-
-    // Reset other game settings
-    hideCanvas();
-    hideNavbar();
-    loadStartScreen();
-    disableSound();
 }
 
-
+// SHOW AND HIDE PAGES OF THE MAIN MENU
 function clearAllIntervals() {
-    // location.reload(true);
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
 
 
-function loadCharacterSelect() {
-    document.getElementById('startscreen').classList.add('d-none');
-    document.getElementById('character-select').classList.remove('d-none');
-    selectCharacterEvent();
-}
-
-
-function loadSettings() {
+function showSettingsPage() {
     document.getElementById('startscreen').classList.add('d-none');
     document.getElementById('settings').classList.remove('d-none');
 }
 
 
-function loadControl() {
+function showControlPage() {
     document.getElementById('startscreen').classList.add('d-none');
     document.getElementById('control').classList.remove('d-none');
 }
@@ -248,17 +197,17 @@ function loadControl() {
 
 function backToStartScreen(current_page) {
     document.getElementById(current_page).classList.add('d-none');
-    loadStartScreen();
+    showStartScreen();
 }
 
 
-function loadCredits() {
+function showCreditsPage() {
     document.getElementById('startscreen').classList.add('d-none');
     document.getElementById('credits').classList.remove('d-none');
 }
 
 
-function loadStartScreen() {
+function showStartScreen() {
     document.getElementById('startscreen').classList.remove('d-none');
 }
 
@@ -295,46 +244,6 @@ function hideCanvas() {
 }
 
 
-// Keyboard(classname).UP(Key of Variable in this class)
-window.addEventListener("keydown", (e) => {
-    if (e.code == "ArrowDown") {
-        keyboard.DOWN = true;
-    }
-    if (e.code == "ArrowLeft") {
-        keyboard.LEFT = true;
-    }
-    if (e.code == "ArrowRight") {
-        keyboard.RIGHT = true;
-    }
-    if (e.code == "Space") {
-        keyboard.SPACE = true;
-    }
-    if (e.code == "KeyC") {
-        keyboard.C = true;
-    }
-    if (e.code == "Enter") {
-        keyboard.ENTER = true;
-    }
-});
-
-
-window.addEventListener("keyup", (e) => {
-    if (e.code == "ArrowDown") {
-        keyboard.DOWN = false;
-    }
-    if (e.code == "ArrowLeft") {
-        keyboard.LEFT = false;
-    }
-    if (e.code == "ArrowRight") {
-        keyboard.RIGHT = false;
-    }
-    if (e.code == "Space") {
-        keyboard.SPACE = false;
-    }
-    if (e.code == "KeyC") {
-        keyboard.C = false;
-    }
-    if (e.code == "Enter") {
-        keyboard.ENTER = false;
-    }
-});
+function showCanvas() {
+    document.getElementById('canvas').classList.add('d-block');
+}

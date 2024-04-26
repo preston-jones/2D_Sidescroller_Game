@@ -46,7 +46,7 @@ class Cop extends MovableObject {
 
 
     animateCop(images_arr) {
-        console.log(this.speed);
+        console.log('Cop Speed:', this.speed);
         this.animateEnemy(images_arr, this.IMAGES_ENEMY_EXPLOTION);
     }
 

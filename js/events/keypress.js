@@ -1,3 +1,48 @@
+// Keyboard(classname).UP(Key of Variable in this class)
+window.addEventListener("keydown", (e) => {
+    if (e.code == "ArrowDown") {
+        keyboard.DOWN = true;
+    }
+    if (e.code == "ArrowLeft") {
+        keyboard.LEFT = true;
+    }
+    if (e.code == "ArrowRight") {
+        keyboard.RIGHT = true;
+    }
+    if (e.code == "Space") {
+        keyboard.SPACE = true;
+    }
+    if (e.code == "KeyC") {
+        keyboard.C = true;
+    }
+    if (e.code == "Enter") {
+        keyboard.ENTER = true;
+    }
+});
+
+
+window.addEventListener("keyup", (e) => {
+    if (e.code == "ArrowDown") {
+        keyboard.DOWN = false;
+    }
+    if (e.code == "ArrowLeft") {
+        keyboard.LEFT = false;
+    }
+    if (e.code == "ArrowRight") {
+        keyboard.RIGHT = false;
+    }
+    if (e.code == "Space") {
+        keyboard.SPACE = false;
+    }
+    if (e.code == "KeyC") {
+        keyboard.C = false;
+    }
+    if (e.code == "Enter") {
+        keyboard.ENTER = false;
+    }
+});
+
+
 function startMobileControllerEvent() {
     let menu_controller_button = document.getElementById('menu_control_mode_icon_container');
     let controller_btn = document.getElementById('controller_button');
