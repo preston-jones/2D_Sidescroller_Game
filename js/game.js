@@ -95,6 +95,8 @@ function loadGame() {
     startSoundByGamestart();
     pressMobileButtons();
     showNavbar();
+    toggleAnimatedBackground();
+    toggleHeader();
 }
 
 
@@ -132,11 +134,12 @@ function resetGame() {
     clearCanvas();
     resetGameVariables();
     stopAllSound();
-
     hideCanvas();
     hideNavbar();
     showStartScreen();
     disableSound();
+    toggleAnimatedBackground();
+    toggleHeader();
 }
 
 
@@ -180,7 +183,7 @@ function stopAllSound() {
 // SHOW AND HIDE PAGES OF THE MAIN MENU
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
-  }
+}
 
 
 function showSettingsPage() {
@@ -219,6 +222,7 @@ function closeStartscreen() {
 
 function disableAnimatedFullscreenBackground() {
     document.body.classList.remove('animated_background');
+    document.getElementById('fullscreen').classList.remove('animated_background');
     document.getElementById('fullscreen').classList.add('static_background');
 }
 
@@ -226,16 +230,30 @@ function disableAnimatedFullscreenBackground() {
 function enableAnimatedFullscreenBackground() {
     document.body.classList.add('animated_background');
     document.getElementById('fullscreen').classList.remove('static_background');
+    if (isInFullscreen) {
+        document.getElementById('fullscreen').classList.add('animated_background');
+    }
 }
 
 
-function ccc() {
+function toggleAnimatedBackground() {
     if (canvas_is_loaded && isInFullscreen) {
         disableAnimatedFullscreenBackground();
+        console.log('animated Bgr OFF');
     }
     else {
         enableAnimatedFullscreenBackground();
-    
+        console.log('animated Bgr ON');
+    }
+}
+
+
+function toggleHeader() {
+    if (canvas_is_loaded && isInFullscreen) {
+        hideHeader();
+    }
+    else {
+        showHeader();
     }
 }
 

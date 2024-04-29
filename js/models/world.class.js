@@ -210,21 +210,8 @@ class World {
     }
 
 
-    // exitGame() {
-    //     if (exit_Game) {
-    //         // Clear the canvas
-    //         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    //         // Reset the canvas, world, and ctx variables
-    //         canvas = null;
-    //         world = null;
-    //         ctx = null;
-    //     }
-    // }
-
-
     draw() {
-        if (!exit_Game && canvas) {
+        if (!exit_Game && canvas && this.ctx) {
             this.enterBossArenaEffect();
             this.ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears the canvas
             // moves camera view

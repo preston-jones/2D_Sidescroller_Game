@@ -13,22 +13,22 @@ function toggleFullScreen() {
     let fullscreen = document.getElementById('fullscreen');
     if (!document.fullscreenElement) {
         enterFullscreen(fullscreen);
+        isInFullscreen = true;
         document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
         document.getElementById('settings_button_menu_fullscreen').innerHTML = `ON`;
     }
     else if (document.fullscreenElement) {
         closeFullscreen(fullscreen);
+        isInFullscreen = false;
         document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
         document.getElementById('settings_button_menu_fullscreen').innerHTML = `OFF`;
     }
+    toggleHeader ();
+    toggleAnimatedBackground();
 }
 
 
 function enterFullscreen(element) {
-    if (canvas_is_loaded) {
-        hideHeader();
-        // disableAnimatedFullscreenBackground();
-    }
     document.getElementById('startscreen').classList.add('fullscreen_startscreen');
     document.getElementById('canvas').classList.add('fullscreen');
     document.getElementById('fullscreen').classList.add('center', 'animated_background');
@@ -46,10 +46,6 @@ function enterFullscreen(element) {
 
 
 function closeFullscreen(element) {
-    if (canvas_is_loaded) {
-        showHeader();
-        // enableAnimatedFullscreenBackground();
-    }
     document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
     document.getElementById('canvas').classList.remove('fullscreen');
     document.getElementById('fullscreen').classList.remove('center', 'animated_background');
