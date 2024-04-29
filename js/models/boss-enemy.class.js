@@ -101,7 +101,6 @@ class BossEnemy extends MovableObject {
                 this.playAnimation(images_arr);
             }
             if (this.is_Dead) {
-                console.log('Enemy is dead, playing death animation');
                 this.playAnimation_Enemy_DEAD(array);
                 explosion_sound.play();
                 clearInterval(animateInterval);
@@ -120,7 +119,6 @@ class BossEnemy extends MovableObject {
 
 
     attackCharacter() {
-        console.log('ATTACK!!!');
         if (world && world.character) {
             let characterX = world.character.x;
             let characterY = world.character.y;

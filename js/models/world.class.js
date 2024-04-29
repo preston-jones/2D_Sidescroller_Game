@@ -26,8 +26,6 @@ class World {
 
 
     startLevel() {
-        console.log(this.level);
-        console.log(world);
         this.character = new Character();
         // this.level = level1;
         this.initStatusbar();
@@ -139,7 +137,6 @@ class World {
                 if (this.characterShot && this.characterShot.isColliding(enemy)) {
                     this.characterShot.impact = true;
                     this.characterShot.animateImpact();
-                    console.log('Enemy is Hit');
                     enemy.hit();
                     this.characterShot = null;
                 }
@@ -201,8 +198,6 @@ class World {
 
     drawYouWin() {
         if (this.level.boss_dead) {
-            console.log(this.level.boss_dead);
-            console.log(this.level.youWin);
             this.addObjectsToMap(this.level.youWin);
         }
     }

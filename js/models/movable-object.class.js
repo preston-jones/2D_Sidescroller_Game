@@ -79,7 +79,6 @@ class MovableObject extends DrawableObject {
 
     hit() {
         if (this instanceof Character) {
-            console.log('Character is Hit');
             let currentTime = new Date().getTime();
             if (!this.is_Dead && !this.inCollision && !this.is_Hurt && currentTime - this.lastHitTime > this.hitCooldown) {
                 this.health -= 1;
@@ -154,7 +153,6 @@ class MovableObject extends DrawableObject {
 
 
     shotImpact() {
-        console.log('BOOOOOM');
         impact = true;
     }
 
@@ -188,7 +186,6 @@ class MovableObject extends DrawableObject {
             this.playAnimation(images_arr);
         }
         if (this.is_Dead) {
-            console.log('Enemy is dead, playing death animation');
             this.playAnimation_Enemy_DEAD(array);
             explosion_sound.play();
             clearInterval(animateInterval);
@@ -210,7 +207,6 @@ class MovableObject extends DrawableObject {
 
     moveEnemy(moveInterval) {
         if (world && world.character.x >= 60) {
-            console.log('Enemys start moving');
             if (!this.is_Dead) {
                 this.moveToLeft(this.speed);
             }

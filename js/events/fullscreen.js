@@ -15,29 +15,23 @@ function toggleFullScreen() {
         enterFullscreen(fullscreen);
         document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
         document.getElementById('settings_button_menu_fullscreen').innerHTML = `ON`;
-
-        if (canvas_is_loaded) {
-            hideHeader();
-            disableAnimatedFullscreenBackground();
-        }
     }
     else if (document.fullscreenElement) {
         closeFullscreen(fullscreen);
         document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
         document.getElementById('settings_button_menu_fullscreen').innerHTML = `OFF`;
-
-        if (canvas_is_loaded) {
-            showHeader();
-            enableAnimatedFullscreenBackground();
-        }
     }
 }
 
 
 function enterFullscreen(element) {
+    if (canvas_is_loaded) {
+        hideHeader();
+        // disableAnimatedFullscreenBackground();
+    }
     document.getElementById('startscreen').classList.add('fullscreen_startscreen');
     document.getElementById('canvas').classList.add('fullscreen');
-    document.getElementById('fullscreen').classList.add('center');
+    document.getElementById('fullscreen').classList.add('center', 'animated_background');
     document.getElementById('menu_fullscreen_icon').src = 'assets/img/icons/collapse.png';
     document.getElementById('fullscreen_button').src = 'assets/img/icons/collapse.png';
 
@@ -52,9 +46,13 @@ function enterFullscreen(element) {
 
 
 function closeFullscreen(element) {
+    if (canvas_is_loaded) {
+        showHeader();
+        // enableAnimatedFullscreenBackground();
+    }
     document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
     document.getElementById('canvas').classList.remove('fullscreen');
-    document.getElementById('fullscreen').classList.remove('center');
+    document.getElementById('fullscreen').classList.remove('center', 'animated_background');
     document.getElementById('menu_fullscreen_icon').src = 'assets/img/icons/expand.png';
     document.getElementById('fullscreen_button').src = 'assets/img/icons/expand.png';
 

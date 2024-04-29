@@ -189,9 +189,9 @@ function showSettingsPage() {
 }
 
 
-function showControlPage() {
+function showHowtoplayPage() {
     document.getElementById('startscreen').classList.add('d-none');
-    document.getElementById('control').classList.remove('d-none');
+    document.getElementById('how-to-play').classList.remove('d-none');
 }
 
 
@@ -226,6 +226,17 @@ function disableAnimatedFullscreenBackground() {
 function enableAnimatedFullscreenBackground() {
     document.body.classList.add('animated_background');
     document.getElementById('fullscreen').classList.remove('static_background');
+}
+
+
+function ccc() {
+    if (canvas_is_loaded && isInFullscreen) {
+        disableAnimatedFullscreenBackground();
+    }
+    else {
+        enableAnimatedFullscreenBackground();
+    
+    }
 }
 
 

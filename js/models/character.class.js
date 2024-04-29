@@ -236,7 +236,6 @@ class Character extends MovableObject {
 
 
     animateCharacter() {
-        console.log("Character-loaded:", this.character_Selection);
         setInterval(() => {
             this.moveCamera();
 
