@@ -145,14 +145,13 @@ function hideNavbar() {
 
 
 function showStoryPage() {
-    enableFadeInAnimation('story');
+    closeStartscreen();
     document.getElementById('story').classList.remove('d-none');
 }
 
 
 function hideStoryPage() {
     // disableFadeOutAnimation('story');
-    enableFadeOutAnimation('story')
     document.getElementById('story').classList.add('d-none');
     showCanvas();
 }

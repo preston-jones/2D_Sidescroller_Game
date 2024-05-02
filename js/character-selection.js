@@ -1,5 +1,5 @@
 function showCharacterSelectPage() {
-    document.getElementById('startscreen').classList.add('d-none');
+    document.getElementById('story').classList.add('d-none');
     document.getElementById('character-select').classList.remove('d-none');
     characterAnimation();
 }
@@ -54,6 +54,5 @@ function selectCharacter(selected_character) {
         character_selected = 'male';
     }
     hideCharacterSelect();
-    showStoryPage();
-    // loadGame();
+    loadGame();
 }

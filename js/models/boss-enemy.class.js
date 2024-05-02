@@ -51,13 +51,13 @@ class BossEnemy extends MovableObject {
 
 
     boss(images_arr) {
-        let flyInterval = setInterval(() => {
-                this.playAnimation(images_arr);
-            }, 150);
+        let waitInterval = setInterval(() => {
+            this.playAnimation(images_arr);
+        }, 150);
 
         let startInterval = setInterval(() => {
             if (world && world.character.x >= 1949) {
-                clearInterval(flyInterval);
+                clearInterval(waitInterval);
                 this.playBossFightMusic();
                 world.character.isInBattleArena = true;
                 world.character.enteredBattleArena = true;
@@ -79,17 +79,17 @@ class BossEnemy extends MovableObject {
 
 
     animateBossEnemy(images_arr, array) {
-        this.StayRightAnimation();
-        let moveInterval = setInterval(() => {
+        // this.StayRightAnimation();
+        let moveLeftInterval = setInterval(() => {
             if (!this.is_Dead) {
                 if (this.isOnRight) {
                     setTimeout(() => {
-                        this.StayLeftAnimation();
+                        this.moveLeftAnimation(moveLeftInterval);
                     }, 2000);
                 }
                 if (!this.isOnRight) {
-                    setTimeout(() => {
-                        this.StayRightAnimation();
+                    let moveRightInterval = setTimeout(() => {
+                        this.moveRightAnimation(moveRightInterval);
                     }, 2000);
                 }
             }
@@ -139,15 +139,17 @@ class BossEnemy extends MovableObject {
                 // this.moveUp = true;
             }
         }
+        this.hasAttacked = true;
         setTimeout(() => {
-            this.hasAttacked = true;
+            this.hasAttacked = false;
         }, 250);
     }
 
 
-    StayRightAnimation() {
+    moveRightAnimation(moveRightInterval) {
         if (!this.hasAttacked && !world.character.is_Dead) {
             setTimeout(() => {
+                clearInterval(moveRightInterval);
                 this.attackCharacter();
             }, 3000);
         }
@@ -196,9 +198,10 @@ class BossEnemy extends MovableObject {
     }
 
 
-    StayLeftAnimation() {
+    moveLeftAnimation(moveLeftInterval) {
         if (!this.hasAttacked && !world.character.is_Dead) {
             setTimeout(() => {
+                clearInterval(moveLeftInterval);
                 this.attackCharacter();
             }, 3000);
         }

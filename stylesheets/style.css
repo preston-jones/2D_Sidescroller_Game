@@ -144,15 +144,30 @@ canvas {
 }
 
 .navbar {
-    position: absolute;
+    /* position: absolute; */
     z-index: 99;
-    top: 24px;
+    /* top: 24px; */
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-content: center;
     width: 100%;
+    padding: 8px 16px;
+}
+
+.navbar_buttons_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 24px;
-    padding-right: 16px;
+}
+
+#navbar_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+    height: 100%;
+    width: 180px;
 }
 
 #headline_startscreen {

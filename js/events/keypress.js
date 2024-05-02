@@ -109,6 +109,7 @@ function pressMobileButtons() {
         keyboard.SPACE = false;
     });
     document.getElementById('shoot').addEventListener('touchstart', (e) => {
+        console.log(e);
         e.preventDefault();
         keyboard.C = true;
     });
