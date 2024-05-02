@@ -1,4 +1,8 @@
 class CollectibleEnergy extends DrawableObject {
+    offset_left = -5;
+    offset_top = 0;
+    offset_right = 5;
+    offset_bottom = 0;
 
     IMAGES_ENERGY = [
         'assets/collectibles/energy/energy-1.png',

@@ -4,6 +4,10 @@ class DrawableObject {
     currentImage = 0;
     x;
     y;
+    offset_left = 0;
+    offset_top = 0;
+    offset_right = 0;
+    offset_bottom = 0;
     height;
     width;
     prevImageSrc;
@@ -39,26 +43,30 @@ class DrawableObject {
     }
 
 
-    drawFrame(ctx) {
-        if (this instanceof Shot || this instanceof CollectibleEnergy || this instanceof CollectibleHealth || this instanceof Drone || this instanceof Cop || this instanceof Bootleg) {
+    drawRealFrame(ctx) {
+        if (this instanceof Shot || this instanceof CollectibleEnergy || this instanceof CollectibleHealth || this instanceof Drone || this instanceof Cop || this instanceof Bootleg || this instanceof BossEnemy || this instanceof Character) {
             ctx.lineWidth = '1';
             ctx.beginPath();
-            ctx.strokeStyle = 'white';
+            ctx.strokeStyle = 'yellow';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-        if (this instanceof BossEnemy) {
+    }
+
+
+    drawFrame(ctx) {
+        if (this instanceof Shot || this instanceof CollectibleEnergy || this instanceof CollectibleHealth) {
             ctx.lineWidth = '1';
             ctx.beginPath();
-            ctx.strokeStyle = 'white';
-            ctx.rect(this.x, (this.y), this.width, this.height);
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.x + this.offset_left, this.y + this.offset_top, this.width + this.offset_right, this.height + this.offset_bottom);
             ctx.stroke();
         }
-        if (this instanceof Character) {
+        if (this instanceof Drone || this instanceof Cop || this instanceof Bootleg || this instanceof BossEnemy || this instanceof Character) {
             ctx.lineWidth = '1';
             ctx.beginPath();
-            ctx.strokeStyle = 'white';
-            ctx.rect((this.x - 20), (this.y + 10), this.width, this.height);
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.x + this.offset_left, this.y + this.offset_top, this.width + this.offset_right, this.height + this.offset_bottom);
             ctx.stroke();
         }
     }

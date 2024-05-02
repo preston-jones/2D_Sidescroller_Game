@@ -1,5 +1,5 @@
 /* Smartphones Width------------------------------ */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 912px) {
     /* body {
         background-color: rgb(20, 20, 20);
         background-image: none;
@@ -36,37 +36,42 @@
 
     .submenu_container {
         width: 100%;
+        justify-content: space-evenly;
     }
 
     .fullscreen {
-        position: static !important;
+        position: static;
     }
 }
 
-@media only screen and (max-height: 600px) {
+
+@media only screen and (max-width: 720px) {
+    .fullscreen {
+        position: inherit;
+    }
+}
+
+
+/* @media only screen and (max-height: 384px) {
+    .fullscreen {
+        position: inherit;
+    }
+} */
+
+
+@media only screen and (max-height: 420px) {
     #header {
         margin: 24px 0 0 0;
     }
 
     #headline_logo {
-        margin-top: 0;
-    }
-}
-
-
-@media only screen and (max-height: 360px) {
-    #header {
-        margin: 24px 0 0 0;
-    }
-
-    #headline_logo {
-        width: 320px;
+        width: 360px;
         text-align: center;
         margin-top: 0;
     }
 
     .startscreen_button {
-        font-size: 42px;
+        font-size: 48px;
     }
 
     .submenu_container {
@@ -82,6 +87,7 @@
 
     .back_button {
         font-size: 24px;
+        margin-bottom: 16px;
     }
 
     .character_select_img {
@@ -102,8 +108,18 @@
     }
 }
 
+@media only screen and (max-height: 320px) {
+    #header {
+        margin: 8px 0 0 0;
+    }
+
+    .back_button {
+        margin-bottom: 8px;
+    }
+}
+
 /* Smartphones Width------------------------------ */
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 420px) {
     #rotate_device {
         display: flex !important;
     }

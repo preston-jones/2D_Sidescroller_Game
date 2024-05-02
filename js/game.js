@@ -87,11 +87,13 @@ async function includeHTML() {
 
 
 function loadGame() {
-    hideCharacterSelect();
+    // hideCharacterSelect();
+    // closeStartscreen();
+    hideStoryPage();
     closeStartscreen();
     initLevel1();
     initCanvas();
-    showCanvas();
+
     startSoundByGamestart();
     pressMobileButtons();
     showNavbar();
@@ -104,6 +106,26 @@ function initCanvas() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     canvas_is_loaded = true;
+}
+
+
+function enableFadeInAnimation(element) {
+    document.getElementById(element).classList.add('fade_in');
+}
+
+
+function disableFadeInAnimation(element) {
+    document.getElementById(element).classList.remove('fade_in');
+}
+
+
+function enableFadeOutAnimation(element) {
+    document.getElementById(element).classList.add('fade_out');
+}
+
+
+function disableFadeOutAnimation(element) {
+    document.getElementById(element).classList.remove('fade_out');
 }
 
 
@@ -122,6 +144,20 @@ function hideNavbar() {
 }
 
 
+function showStoryPage() {
+    enableFadeInAnimation('story');
+    document.getElementById('story').classList.remove('d-none');
+}
+
+
+function hideStoryPage() {
+    // disableFadeOutAnimation('story');
+    enableFadeOutAnimation('story')
+    document.getElementById('story').classList.add('d-none');
+    showCanvas();
+}
+
+
 function exitGame() {
     exit_Game = true;
     canvas_is_loaded = false;
@@ -131,6 +167,7 @@ function exitGame() {
 
 function resetGame() {
     clearAllIntervals();
+    disableFadeInAnimation('canvas');
     clearCanvas();
     resetGameVariables();
     stopAllSound();
@@ -249,7 +286,7 @@ function toggleAnimatedBackground() {
 
 
 function toggleHeader() {
-    if (canvas_is_loaded && isInFullscreen) {
+    if (canvas_is_loaded && isInFullscreen || canvas_is_loaded && window.innerHeight < 420) {
         hideHeader();
     }
     else {
@@ -275,4 +312,5 @@ function hideCanvas() {
 
 function showCanvas() {
     document.getElementById('canvas').classList.add('d-block');
+    enableFadeInAnimation('canvas');
 }

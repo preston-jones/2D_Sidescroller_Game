@@ -7,46 +7,17 @@ function initLevel1() {
             new Cop(),
             new Cop(),
             new Cop(),
-            new Cop(),
             new Bootleg(),
             new Bootleg(),
             new Bootleg(),
-            new Drone(300, 800),
-            new Drone(1000, 1800),
+            new Drone(300, 700),
+            new Drone(800, 1200),
+            new Drone(1000, 1500),
             new BossEnemy()
         ],
         [
-            new VehiclesFront('right', 0, 80, 30, 10),
-            new VehiclesFront('left', 400, 100, 30, 10)
-        ],
-        [
-            new VehiclesBack('right', 0, 80, 30, 10),
-            new VehiclesBack('left', 400, 100, 30, 10),
-            new VehiclesBack('right', 5, 120, 30, 10),
-            new VehiclesBack('left', 800, 140, 30, 10),
-            new VehiclesBack('right', 5, 130, 30, 10),
-            new VehiclesBack('left', 1900, 110, 30, 10),
-
-            new VehiclesBack('right', 3500, 80, 30, 10),
-            new VehiclesBack('left', 1400, 100, 30, 10),
-            new VehiclesBack('right', -50, 120, 30, 10),
-            new VehiclesBack('left', 1800, 140, 30, 10),
-            new VehiclesBack('right', -100, 130, 30, 10),
-            new VehiclesBack('left', 1900, 110, 30, 10),
-
-            new VehiclesBack('right', 0, 80, 30, 10),
-            new VehiclesBack('left', 450, 90, 30, 10),
-            new VehiclesBack('right', 55, 30, 30, 10),
-            new VehiclesBack('left', 850, 40, 30, 10),
-            new VehiclesBack('right', 5, 13, 30, 10),
-            new VehiclesBack('left', 1900, 110, 30, 10),
-
-            new VehiclesBack('right', 3700, 80, 30, 10),
-            new VehiclesBack('left', 1300, 100, 30, 10),
-            new VehiclesBack('right', -59, 120, 30, 10),
-            new VehiclesBack('left', 1700, 140, 30, 10),
-            new VehiclesBack('right', -100, 130, 30, 10),
-            new VehiclesBack('left', 1400, 110, 30, 10)
+            new VehiclesFront('left', 200, 30),
+            new VehiclesFront('left', 500, 20)
         ],
         [
             new BackgroundStatic('assets/environment/background/skyline-a.png', -58, -25, 120, 190),

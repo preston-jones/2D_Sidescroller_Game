@@ -68,6 +68,7 @@ body {
     justify-content: center;
     gap: 8px;
     width: 100%;
+    text-align: center;
 }
 
 .control_keys_container {
@@ -219,6 +220,10 @@ canvas {
     image-rendering: pixelated;
 }
 
+#story {
+    
+}
+
 #header {
     display: flex;
     flex-direction: column;
@@ -284,6 +289,34 @@ h1 {
 
     100% {
         transform: rotate(-45deg);
+    }
+}
+
+.fade_in {
+    animation: fade_in_animation 1s linear forwards;
+}
+
+@keyframes fade_in_animation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade_out {
+    animation: fade_out_animation 1s linear forwards;
+}
+
+@keyframes fade_out_animation {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }
 
@@ -407,17 +440,13 @@ h1 {
 /* FULLSCREEN */
 
 .fullscreen {
-    /* height: 100vh;
-    width: auto;
-    border: none;
-    aspect-ratio: 16/9; */
-
     left: 0;
     height: 100vh;
     width: auto;
     border: none;
-    aspect-ratio: 16 / 9;
-    position: inherit;
+    /* aspect-ratio: 16 / 9; */
+    aspect-ratio: 720 / 384;
+    position: static;
 }
 
 #fullscreen {

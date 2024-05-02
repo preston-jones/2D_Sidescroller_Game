@@ -1,9 +1,11 @@
 class Cop extends MovableObject {
-
-    x;
     y = 10;
     width = 60;
     height = 50;
+    offset_left = 10;
+    offset_top = 0;
+    offset_right = -20;
+    offset_bottom = -0;
     speed = 1.5;
     health = 1;
 
@@ -37,7 +39,7 @@ class Cop extends MovableObject {
     constructor() {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
         this.x = 800 + Math.random() * 2000;
-        this.speed = (1 + Math.random() * 0.9).toFixed(2);
+        this.speed = (1 + Math.random() * 0.7).toFixed(2);
         this.loadImages(this.IMAGES_RUN);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();

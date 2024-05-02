@@ -1,5 +1,9 @@
 class CollectibleHealth extends DrawableObject {
-
+    offset_left = -5;
+    offset_top = 0;
+    offset_right = 5;
+    offset_bottom = 0;
+    
     IMAGES_HEALTH = [
         'assets/collectibles/health/heart-1.png',
         'assets/collectibles/health/heart-2.png',

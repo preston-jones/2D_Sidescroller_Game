@@ -1,7 +1,4 @@
 class MovableObject extends DrawableObject {
-
-    offsetY = 0;
-    offsetX = 0;
     speed;
     otherDirection = false;
     speedY = 0;
@@ -59,21 +56,17 @@ class MovableObject extends DrawableObject {
     }
 
 
-    // isColliding(obj) {
-    //     return (this.x < obj.x + obj.width) &&
-    //         (this.x + this.width > obj.x) &&
-    //         (this.y < obj.y + obj.height) &&
-    //         (this.y + this.height > obj.y);
-    // }
-
-
     isColliding(obj) {
-        return (this.x + this.offsetX + this.width) >= obj.x &&
-            (this.x + this.offsetX) <= (obj.x + obj.width) &&
-            (this.y + this.offsetY + this.height) >= obj.y &&
-            (this.y + this.offsetY) <= (obj.y + obj.height);
-        // && 
-        // obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+        // if (this instanceof Character && obj instanceof Collectable) {
+        //     return this.x + this.width + this.offset_right > obj.x + obj.offset_left &&
+        //         this.y + this.height + this.offset_bottom > obj.y + obj.offset_top &&
+        //         this.x + this.offset_left < obj.x + obj.width + obj.offset_right &&
+        //         this.y + this.offset_top < obj.y + obj.height + obj.offset_bottom;
+        // }
+        return this.x + this.width + this.offset_right > obj.x + obj.offset_left &&
+            this.y + this.height + this.offset_bottom > obj.y + obj.offset_top &&
+            this.x + this.offset_left < obj.x + obj.width + obj.offset_right &&
+            this.y + this.offset_top < obj.y + obj.height + obj.offset_bottom;
     }
 
 

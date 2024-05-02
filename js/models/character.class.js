@@ -5,8 +5,10 @@ class Character extends MovableObject {
     x = 58;
     // x = 1800;
     y = 75;
-    offsetX = -20;
-    offsetY = -15;
+    offset_left = 15;
+    offset_top = 10;
+    offset_right = -30;
+    offset_bottom = -10;
     speed = 2;
     health = 10;
     health_MAX = 10;
@@ -285,9 +287,11 @@ class Character extends MovableObject {
 
 
     playAnimation_DOWN() {
-        this.offsetY = 0;
+        this.offset_top = 10;
+        this.offset_bottom = -10;
         if (this.world.keyboard.DOWN && !this.is_Dead && !this.is_Hurt) {
-            this.offsetY = 20;
+            this.offset_top = 25;
+            this.offset_bottom = -25;
             this.playAnimation(this.IMAGES_CROUCH);
         }
     }

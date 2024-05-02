@@ -218,12 +218,10 @@ class World {
             this.addObjectsToMap(this.level.backgroundImageStatic);
             this.addObjectsToMap(this.level.animatedBackgroundBack);
             this.drawFireworks();
+            this.addObjectsToMap(this.level.animatedObjectFront);
             this.ctx.translate(this.camera_x, this.camera_y);
             // -----
-            this.addObjectsToMap(this.level.animatedObjectBack);
             this.addObjectsToMap(this.level.animatedBackgroundFront);
-
-            // this.addObjectsToMap(this.level.VehiclesFront);
             this.addObjectsToMap(this.level.playground);
             this.addObjectsToMap(this.level.collectibles_energy);
             this.addObjectsToMap(this.level.collectibles_health);
@@ -259,7 +257,8 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        // movableObject.drawFrame(this.ctx);
+        movableObject.drawFrame(this.ctx);
+        // movableObject.drawRealFrame(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

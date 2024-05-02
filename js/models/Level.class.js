@@ -1,7 +1,6 @@
 class Level {
     enemies;
     animatedObjectFront;
-    animatedObjectBack;
     backgroundImageStatic;
     animatedBackgroundBack;
     animatedBackgroundFront;
@@ -20,11 +19,10 @@ class Level {
     // level_end_bottom_y = 99;
     boss_dead = false;
 
-    constructor(enemies, animatedObjectFront, animatedObjectBack, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy, collectibles_health, gameOver, youWin, fireworks) {
+    constructor(enemies, animatedObjectFront, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy, collectibles_health, gameOver, youWin, fireworks) {
 
         this.enemies = enemies;
         this.animatedObjectFront = animatedObjectFront;
-        this.animatedObjectBack = animatedObjectBack;
         this.backgroundImageStatic = backgroundImageStatic;
         this.animatedBackgroundBack = animatedBackgroundBack;
         this.animatedBackgroundFront = animatedBackgroundFront;

@@ -1,9 +1,11 @@
 class Bootleg extends MovableObject {
-
-    x;
     y = 10;
     width = 60;
     height = 50;
+    offset_left = 5;
+    offset_top = 0;
+    offset_right = -10;
+    offset_bottom = 0;
     speed = 0.15;
     health = 3;
 

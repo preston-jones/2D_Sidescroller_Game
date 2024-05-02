@@ -53,5 +53,7 @@ function selectCharacter(selected_character) {
     if (selected_character === 1) {
         character_selected = 'male';
     }
-    loadGame();
+    hideCharacterSelect();
+    showStoryPage();
+    // loadGame();
 }
