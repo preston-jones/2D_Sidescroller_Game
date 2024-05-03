@@ -3,16 +3,20 @@ class Statusbar extends DrawableObject {
     health;
 
     IMAGES_HEALTH = [
-        'assets/statusbar/heart.png'
+        'assets/statusbar/healthbar/health_1.png',
+        'assets/statusbar/healthbar/health_2.png',
+        'assets/statusbar/healthbar/health_3.png',
+        'assets/statusbar/healthbar/health_4.png',
+        'assets/statusbar/healthbar/health_5.png',
+        'assets/statusbar/healthbar/health_6.png',
     ];
     IMAGES_ENERGY = [
         'assets/statusbar/energy.png'
     ];
 
 
-    constructor(img, status, x, y, width, height) {
+    constructor(img, x, y, width, height) {
         super().loadImage(img);
-        this.health = status;
         this.x = x;
         this.y = y;
         this.width = width;

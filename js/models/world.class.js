@@ -37,20 +37,8 @@ class World {
 
 
     initStatusbar() {
-        this.statusbar_HEALTH = [
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 30, 4, 15, 15),
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 40, 4, 15, 15),
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 50, 4, 15, 15)
-        ];
-        this.statusbar_ENERGY = [
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 20, 10, 10),
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 22, 20, 10, 10),
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 32, 20, 10, 10),
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 42, 20, 10, 10),
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 52, 20, 10, 10)
-        ];
+        this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 0, 0, 15, 15);
+        this.statusbar_ENERGY = new Statusbar('assets/statusbar/healthbar/health_1.png', 0, 20, 15, 15);
     }
 
 
@@ -113,11 +101,21 @@ class World {
 
 
     checkHealthStatus() {
-        if (this.character.health === 8) { this.statusbar_HEALTH.splice(-1); }
-        if (this.character.health === 6) { this.statusbar_HEALTH.splice(-1); }
-        if (this.character.health === 4) { this.statusbar_HEALTH.splice(-1); }
-        if (this.character.health === 2) { this.statusbar_HEALTH.splice(-1); }
-        if (this.character.health === 0) { this.statusbar_HEALTH = []; }
+        if (this.character.health === 8) { updateHealthStatus(2);}
+        if (this.character.health === 6) { updateHealthStatus(3);}
+        if (this.character.health === 4) { updateHealthStatus(4);}
+        if (this.character.health === 2) { updateHealthStatus(5);}
+        if (this.character.health === 0) { updateHealthStatus(6);}
+    }
+
+
+    updateEnergyStatus() {
+        this.statusbar_ENERGY = new Statusbar('assets/statusbar/healthbar/health_1.png', 0, 20, 15, 15);
+    }
+
+
+    updateHealthStatus(index) {
+        this.statusbar_HEALTH = new Statusbar(`assets/statusbar/healthbar/health_${index}.png`, 0, 0, 15, 15);
     }
 
 
@@ -146,7 +144,7 @@ class World {
             if (this.character.isColliding(energy)) {
                 collecting_sound.play();
                 this.character.energy = 10;
-                this.refillEnergyStatus();
+                this.updateEnergyStatus();
                 let index = this.level.collectibles_energy.indexOf(energy);
                 if (index > -1) {
                     this.level.collectibles_energy.splice(index, 1);
@@ -157,35 +155,13 @@ class World {
             if (this.character.isColliding(health)) {
                 collecting_sound.play();
                 this.character.health = 10;
-                this.refillHealthStatus();
+                this.updateHealthStatus();
                 let index = this.level.collectibles_health.indexOf(health);
                 if (index > -1) {
                     this.level.collectibles_health.splice(index, 1);
                 }
             }
         });
-    }
-
-
-    refillEnergyStatus() {
-        this.statusbar_ENERGY = [
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 12, 20, 10, 10),
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 22, 20, 10, 10),
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 32, 20, 10, 10),
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 42, 20, 10, 10),
-            new Statusbar('assets/statusbar/energy.png', this.character.energy, 52, 20, 10, 10)
-        ];
-    }
-
-
-    refillHealthStatus() {
-        this.statusbar_HEALTH = [
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 10, 4, 15, 15),
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 20, 4, 15, 15),
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 30, 4, 15, 15),
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 40, 4, 15, 15),
-            new Statusbar('assets/statusbar/heart.png', this.character.energy, 50, 4, 15, 15)
-        ];
     }
 
 
@@ -232,8 +208,8 @@ class World {
             // moves camera view back to default
             this.ctx.translate(-this.camera_x, this.camera_y);
             // -----
-            this.addObjectsToMap(this.statusbar_HEALTH);
-            this.addObjectsToMap(this.statusbar_ENERGY);
+            this.addToMap(this.statusbar_HEALTH);
+            this.addToMap(this.statusbar_ENERGY);
             this.drawGameOver();
             this.drawYouWin();
             // Draw wird immer wieder aufgerufen
