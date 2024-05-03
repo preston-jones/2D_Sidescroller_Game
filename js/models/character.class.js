@@ -3,7 +3,7 @@ class Character extends MovableObject {
     width = 60;
     height = 50;
     x = 58;
-    x = 1800;
+    // x = 1800;
     y = 75;
     offset_left = 15;
     offset_top = 10;
@@ -322,7 +322,7 @@ class Character extends MovableObject {
             level_bgr_music.pause();
             this.playAnimation(this.IMAGES_DEAD);
             if (this.isDeadCounter) {
-                death_sound.play();
+                gameover_sound.play();
                 this.isDeadCounter = false;
             }
         }

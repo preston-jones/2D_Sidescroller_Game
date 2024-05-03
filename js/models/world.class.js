@@ -37,8 +37,8 @@ class World {
 
 
     initStatusbar() {
-        this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 0, 0, 15, 15);
-        this.statusbar_ENERGY = new Statusbar('assets/statusbar/healthbar/health_1.png', 0, 20, 15, 15);
+        this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11);
+        this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15);
     }
 
 
@@ -92,30 +92,22 @@ class World {
 
 
     checkEnergyStatus() {
-        if (this.character.energy == 8) { this.statusbar_ENERGY.splice(-1); }
-        if (this.character.energy == 6) { this.statusbar_ENERGY.splice(-1); }
-        if (this.character.energy == 4) { this.statusbar_ENERGY.splice(-1); }
-        if (this.character.energy == 2) { this.statusbar_ENERGY.splice(-1); }
-        if (this.character.energy == 0) { this.statusbar_ENERGY = []; }
+        if (this.character.energy === 10) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15);}
+        if (this.character.energy === 8) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_2.png', 10, 20, 55, 15);}
+        if (this.character.energy === 6) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_3.png', 10, 20, 55, 15);}
+        if (this.character.energy === 4) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_4.png', 10, 20, 55, 15);}
+        if (this.character.energy === 2) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_5.png', 10, 20, 55, 15);}
+        if (this.character.energy === 0) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_6.png', 10, 20, 55, 15);}
     }
 
 
     checkHealthStatus() {
-        if (this.character.health === 8) { updateHealthStatus(2);}
-        if (this.character.health === 6) { updateHealthStatus(3);}
-        if (this.character.health === 4) { updateHealthStatus(4);}
-        if (this.character.health === 2) { updateHealthStatus(5);}
-        if (this.character.health === 0) { updateHealthStatus(6);}
-    }
-
-
-    updateEnergyStatus() {
-        this.statusbar_ENERGY = new Statusbar('assets/statusbar/healthbar/health_1.png', 0, 20, 15, 15);
-    }
-
-
-    updateHealthStatus(index) {
-        this.statusbar_HEALTH = new Statusbar(`assets/statusbar/healthbar/health_${index}.png`, 0, 0, 15, 15);
+        if (this.character.health === 10) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11);}
+        if (this.character.health === 8) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_2.png', 10, 7, 55, 11);}
+        if (this.character.health === 6) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_3.png', 10, 7, 55, 11);}
+        if (this.character.health === 4) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_4.png', 10, 7, 55, 11);}
+        if (this.character.health === 2) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_5.png', 10, 7, 55, 11);}
+        if (this.character.health === 0) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11);}
     }
 
 
@@ -144,7 +136,7 @@ class World {
             if (this.character.isColliding(energy)) {
                 collecting_sound.play();
                 this.character.energy = 10;
-                this.updateEnergyStatus();
+                this.checkEnergyStatus();
                 let index = this.level.collectibles_energy.indexOf(energy);
                 if (index > -1) {
                     this.level.collectibles_energy.splice(index, 1);
@@ -155,7 +147,7 @@ class World {
             if (this.character.isColliding(health)) {
                 collecting_sound.play();
                 this.character.health = 10;
-                this.updateHealthStatus();
+                this.checkHealthStatus();
                 let index = this.level.collectibles_health.indexOf(health);
                 if (index > -1) {
                     this.level.collectibles_health.splice(index, 1);

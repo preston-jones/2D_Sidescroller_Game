@@ -11,7 +11,7 @@ class Statusbar extends DrawableObject {
         'assets/statusbar/healthbar/health_6.png',
     ];
     IMAGES_ENERGY = [
-        'assets/statusbar/energy.png'
+        'assets/statusbar/energybar/energy_1.png'
     ];
 
 

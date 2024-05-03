@@ -47,9 +47,9 @@ function disableSound() {
     jump_sound.muted = true;
     shoot_sound.muted = true;
     hurt_sound.muted = true;
-    death_sound.muted = true;
+    gameover_sound.muted = true;
     explosion_sound.muted = true;
-    game_over_sound.muted = true;
+    game_over_music.muted = true;
     boss_fight_music.muted = true;
     collecting_sound.muted = true;
     fireworks_sound.muted = true;
@@ -63,9 +63,9 @@ function enableSound() {
     jump_sound.muted = false;
     shoot_sound.muted = false;
     hurt_sound.muted = false;
-    death_sound.muted = false;
+    gameover_sound.muted = false;
     explosion_sound.muted = false;
-    game_over_sound.muted = false;
+    game_over_music.muted = false;
     boss_fight_music.muted = false;
     collecting_sound.muted = false;
     fireworks_sound.muted = false;

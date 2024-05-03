@@ -50,7 +50,7 @@ class Game_over extends DrawableObject {
             this.playAnimation(this.GAME_OVER)
             if (world && world.character.is_Dead && !world.level.boss_dead) {
                 setTimeout(() => {
-                    game_over_sound.play();
+                    game_over_music.play();
                 }, 2000);
             }
         }, 100);

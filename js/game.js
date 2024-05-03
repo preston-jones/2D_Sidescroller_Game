@@ -27,14 +27,14 @@ let shoot_sound = new Audio('assets/audio/shoot.mp3');
 shoot_sound.muted = false;
 let hurt_sound = new Audio('assets/audio/hurt.mp3');
 hurt_sound.muted = false;
-let death_sound = new Audio('assets/audio/death.mp3');
-death_sound.muted = false;
+let gameover_sound = new Audio('assets/audio/gameover.mp3');
+gameover_sound.muted = false;
 let explosion_sound = new Audio('assets/audio/explosion.mp3');
 explosion_sound.muted = false;
 let collecting_sound = new Audio('assets/audio/collecting.mp3');
 collecting_sound.muted = false;
-let game_over_sound = new Audio('assets/audio/gameover.mp3');
-game_over_sound.muted = false;
+let game_over_music = new Audio('assets/audio/gameover_music.mp3');
+game_over_music.muted = false;
 
 // ASSETS FOR CHARACTER-SELECTION PAGE
 let female_character_animation_array = [
@@ -210,10 +210,10 @@ function stopAllSound() {
     jump_sound.pause();
     shoot_sound.pause();
     hurt_sound.pause();
-    death_sound.pause();
+    gameover_sound.pause();
     explosion_sound.pause();
     collecting_sound.pause();
-    game_over_sound.pause();
+    game_over_music.pause();
 }
 
 // SHOW AND HIDE PAGES OF THE MAIN MENU
