@@ -187,6 +187,7 @@ class World {
             this.addObjectsToMap(this.level.animatedBackgroundBack);
             this.drawFireworks();
             this.addObjectsToMap(this.level.animatedObjectFront);
+            // moves camera
             this.ctx.translate(this.camera_x, this.camera_y);
             // -----
             this.addObjectsToMap(this.level.animatedBackgroundFront);
@@ -195,7 +196,6 @@ class World {
             this.addObjectsToMap(this.level.collectibles_health);
             this.addToMap(this.character);
             this.addObjectsToMap(this.level.enemies);
-
             this.addObjectsToMap(this.shots);
             // moves camera view back to default
             this.ctx.translate(-this.camera_x, this.camera_y);
