@@ -137,7 +137,7 @@ function disableFadeInAnimation(element) {
 
 
 /**
- * 
+ * enable fade out animation
  * @param {string} element - The element to be animated
  */
 function enableFadeOutAnimation(element) {
@@ -146,7 +146,7 @@ function enableFadeOutAnimation(element) {
 
 
 /**
- * 
+ * disable fade out animation
  * @param {string} element - The element to be unanimated
  */
 function disableFadeOutAnimation(element) {
