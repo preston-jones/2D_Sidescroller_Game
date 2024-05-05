@@ -1,23 +1,37 @@
 class VehiclesFront extends MovableObject {
-    height = 60;
-    width = 163;
-    speed = 1;
-    direction = 'right';
-    IMAGE_VEHICLES = [
-        'assets/sprites/vehicles/v-truck.png'
-    ];
+    height;
+    width;
+    speed = 2;
+    direction;
     currentImage = 0;
 
-    constructor(x, y) {
-        super().loadImage('assets/sprites/vehicles/v-truck.png');
+    constructor(image, x, y, width, height, speed, direction) {
+        super().loadImage(image);
         this.x = x;
         this.y = y;
-        this.loadImages(this.IMAGE_VEHICLES);
-        this.animateVehicle(this.IMAGE_VEHICLES);
+        this.width = width;
+        this.height = height;
+        this.speed = speed;
+        this.direction = direction; // -1 for left, 1 for right
+        this.animateVehicle(y);
     }
 
 
-    animateVehicle(images_arr) {
-        this.animateEnemy(images_arr, this.IMAGES_ENEMY_EXPLOTION);
+    animateVehicle(y) {
+        setInterval(() => {
+            if (this.x >= 2300) {
+                this.direction = -1;
+            } else if (this.x <= -200) {
+                this.direction = 1;
+            }
+
+            if (this.direction === 1) {
+                this.moveToRight(this.speed);
+                this.y = y;  
+            } else {
+                this.moveToLeft(this.speed);
+                this.y = 10;                
+            }
+        }, 1000 / 60);
     }
 }

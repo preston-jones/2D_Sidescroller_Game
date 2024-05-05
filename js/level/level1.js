@@ -16,8 +16,7 @@ function initLevel1() {
             new BossEnemy()
         ],
         [
-            new VehiclesFront('left', 200, 30),
-            new VehiclesFront('left', 500, 20)
+            new VehiclesFront('assets/sprites/vehicles/v-truck.png', 1000, 50, 163, 60, 0.5, -1)
         ],
         [
             new BackgroundStatic('assets/environment/background/skyline-a.png', -58, -25, 120, 190),

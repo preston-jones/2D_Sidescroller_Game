@@ -57,12 +57,6 @@ class MovableObject extends DrawableObject {
 
 
     isColliding(obj) {
-        // if (this instanceof Character && obj instanceof Collectable) {
-        //     return this.x + this.width + this.offset_right > obj.x + obj.offset_left &&
-        //         this.y + this.height + this.offset_bottom > obj.y + obj.offset_top &&
-        //         this.x + this.offset_left < obj.x + obj.width + obj.offset_right &&
-        //         this.y + this.offset_top < obj.y + obj.height + obj.offset_bottom;
-        // }
         return this.x + this.width + this.offset_right > obj.x + obj.offset_left &&
             this.y + this.height + this.offset_bottom > obj.y + obj.offset_top &&
             this.x + this.offset_left < obj.x + obj.width + obj.offset_right &&
@@ -124,6 +118,9 @@ class MovableObject extends DrawableObject {
         if (this instanceof Character) {
             this.otherDirection = true;
         }
+        if (this instanceof VehiclesFront) {
+            this.otherDirection = false;
+        }
     }
 
 
@@ -131,6 +128,9 @@ class MovableObject extends DrawableObject {
         this.x += speed;
         if (this instanceof Character) {
             this.otherDirection = false;
+        }
+        if (this instanceof VehiclesFront) {
+            this.otherDirection = true;
         }
     }
 

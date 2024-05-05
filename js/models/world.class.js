@@ -27,7 +27,6 @@ class World {
 
     startLevel() {
         this.character = new Character();
-        // this.level = level1;
         this.initStatusbar();
         this.draw();
         this.setWorld();
@@ -92,26 +91,33 @@ class World {
 
 
     checkEnergyStatus() {
-        if (this.character.energy === 10) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15);}
-        if (this.character.energy === 8) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_2.png', 10, 20, 55, 15);}
-        if (this.character.energy === 6) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_3.png', 10, 20, 55, 15);}
-        if (this.character.energy === 4) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_4.png', 10, 20, 55, 15);}
-        if (this.character.energy === 2) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_5.png', 10, 20, 55, 15);}
-        if (this.character.energy === 0) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_6.png', 10, 20, 55, 15);}
+        if (this.character.energy === 10) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15); }
+        if (this.character.energy === 8) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_2.png', 10, 20, 55, 15); }
+        if (this.character.energy === 6) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_3.png', 10, 20, 55, 15); }
+        if (this.character.energy === 4) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_4.png', 10, 20, 55, 15); }
+        if (this.character.energy === 2) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_5.png', 10, 20, 55, 15); }
+        if (this.character.energy === 0) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_6.png', 10, 20, 55, 15); }
     }
 
 
     checkHealthStatus() {
-        if (this.character.health === 10) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11);}
-        if (this.character.health === 8) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_2.png', 10, 7, 55, 11);}
-        if (this.character.health === 6) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_3.png', 10, 7, 55, 11);}
-        if (this.character.health === 4) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_4.png', 10, 7, 55, 11);}
-        if (this.character.health === 2) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_5.png', 10, 7, 55, 11);}
-        if (this.character.health === 0) {this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11);}
+        if (this.character.health === 10) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11); }
+        if (this.character.health === 8) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_2.png', 10, 7, 55, 11); }
+        if (this.character.health === 6) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_3.png', 10, 7, 55, 11); }
+        if (this.character.health === 4) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_4.png', 10, 7, 55, 11); }
+        if (this.character.health === 2) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_5.png', 10, 7, 55, 11); }
+        if (this.character.health === 0) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11); }
     }
 
 
     checkCollisions() {
+        this.checkCollisionWithEnemy();
+        this.checkCollisionOfShot();
+        this.checkCollisionWithCollectibles();
+    }
+
+
+    checkCollisionWithEnemy() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 if (!this.character.inCollision) {
@@ -122,6 +128,10 @@ class World {
                 this.character.inCollision = false; // Reset inCollision when the collision ends
             }
         });
+    }
+
+
+    checkCollisionOfShot() {
         if (this.characterShot instanceof MovableObject) {
             this.level.enemies.forEach((enemy) => {
                 if (this.characterShot && this.characterShot.isColliding(enemy)) {
@@ -132,6 +142,10 @@ class World {
                 }
             });
         }
+    }
+
+
+    checkCollisionWithCollectibles() {
         this.level.collectibles_energy.forEach((energy) => {
             if (this.character.isColliding(energy)) {
                 collecting_sound.play();
@@ -186,10 +200,10 @@ class World {
             this.addObjectsToMap(this.level.backgroundImageStatic);
             this.addObjectsToMap(this.level.animatedBackgroundBack);
             this.drawFireworks();
-            this.addObjectsToMap(this.level.animatedObjectFront);
             // moves camera
             this.ctx.translate(this.camera_x, this.camera_y);
             // -----
+            this.addObjectsToMap(this.level.animatedObjectFront);
             this.addObjectsToMap(this.level.animatedBackgroundFront);
             this.addObjectsToMap(this.level.playground);
             this.addObjectsToMap(this.level.collectibles_energy);
