@@ -38,15 +38,11 @@ class BossEnemy extends MovableObject {
 
     constructor() {
         super().loadImage(this.IMAGES_FLY[0]);
-        // this.x = 1880; // left corner
         this.x = 2120;
-        // this.y = 65;
         this.otherDirection = true;
         this.loadImages(this.IMAGES_FLY);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.boss(this.IMAGES_FLY);
-        // this.animateBossEnemy(this.IMAGES_FLY);
-
     }
 
 

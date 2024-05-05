@@ -61,6 +61,9 @@ let male_character_animation_array = [
 ];
 
 
+/**
+ * Initialize the game
+ */
 async function init() {
     await includeHTML();
     startFullscreenEvent();
@@ -71,6 +74,9 @@ async function init() {
 }
 
 
+/**
+ * Include HTML templates
+ */
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
     for (let i = 0; i < includeElements.length; i++) {
@@ -86,14 +92,14 @@ async function includeHTML() {
 }
 
 
+/**
+ * Load the game
+ */
 function loadGame() {
-    // hideCharacterSelect();
-    // closeStartscreen();
     hideStoryPage();
-    closeStartscreen();
+    hideStartscreen();
     initLevel1();
     initCanvas();
-
     startSoundByGamestart();
     pressMobileButtons();
     showNavbar();
@@ -102,6 +108,9 @@ function loadGame() {
 }
 
 
+/**
+ * Initialize canvas & game world
+ */
 function initCanvas() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
@@ -109,47 +118,78 @@ function initCanvas() {
 }
 
 
+/**
+ * 
+ * @param {string} element - The element to be animated
+ */
 function enableFadeInAnimation(element) {
     document.getElementById(element).classList.add('fade_in');
 }
 
 
+/**
+ * 
+ * @param {string} element - The element to be unanimated
+ */
 function disableFadeInAnimation(element) {
     document.getElementById(element).classList.remove('fade_in');
 }
 
 
+/**
+ * 
+ * @param {string} element - The element to be animated
+ */
 function enableFadeOutAnimation(element) {
     document.getElementById(element).classList.add('fade_out');
 }
 
 
+/**
+ * 
+ * @param {string} element - The element to be unanimated
+ */
 function disableFadeOutAnimation(element) {
     document.getElementById(element).classList.remove('fade_out');
 }
 
 
+/**
+ * hide the character selection page
+ */
 function hideCharacterSelect() {
     document.getElementById('character-select').classList.add('d-none');
 }
 
 
+/**
+ * show the navigation bar
+ */
 function showNavbar() {
     document.getElementById('navbar').classList.remove('d-none');
 }
 
 
+/**
+ * hide the navigation bar
+ */
 function hideNavbar() {
     document.getElementById('navbar').classList.add('d-none');
 }
 
 
+/**
+ * show story page
+ */
 function showStoryPage() {
-    closeStartscreen();
+    hideStartscreen();
     document.getElementById('story').classList.remove('d-none');
 }
 
 
+/**
+ * hide story page
+ */
 function hideStoryPage() {
     // disableFadeOutAnimation('story');
     document.getElementById('story').classList.add('d-none');
@@ -157,6 +197,9 @@ function hideStoryPage() {
 }
 
 
+/**
+ * exit the game
+ */
 function exitGame() {
     exit_Game = true;
     canvas_is_loaded = false;
@@ -164,6 +207,9 @@ function exitGame() {
 }
 
 
+/**
+ * reset the game
+ */
 function resetGame() {
     clearAllIntervals();
     disableFadeInAnimation('canvas');
@@ -179,6 +225,9 @@ function resetGame() {
 }
 
 
+/**
+ * clear the canvas
+ */
 function clearCanvas() {
     if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -186,6 +235,9 @@ function clearCanvas() {
 }
 
 
+/**
+ * reset the game variables
+ */
 function resetGameVariables() {
     exit_Game = false;
     world.character = null;
@@ -202,6 +254,9 @@ function resetGameVariables() {
 }
 
 
+/**
+ * stop all sound by pause
+ */
 function stopAllSound() {
     level_bgr_music.pause();
     boss_fight_music.pause();
@@ -216,46 +271,70 @@ function stopAllSound() {
     game_over_music.pause();
 }
 
-// SHOW AND HIDE PAGES OF THE MAIN MENU
+
+/**
+ * clear all intervals of the game
+ */
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
 
+/**
+ * show settings page
+ */
 function showSettingsPage() {
     document.getElementById('startscreen').classList.add('d-none');
     document.getElementById('settings').classList.remove('d-none');
 }
 
-
+/**
+ * show how to play page
+ */
 function showHowtoplayPage() {
     document.getElementById('startscreen').classList.add('d-none');
     document.getElementById('how-to-play').classList.remove('d-none');
 }
 
 
+/**
+ * 
+ * @param {string} current_page - The current page to be hidden
+ */
 function backToStartScreen(current_page) {
     document.getElementById(current_page).classList.add('d-none');
     showStartScreen();
 }
 
 
+/**
+ * show credits page
+ */
 function showCreditsPage() {
     document.getElementById('startscreen').classList.add('d-none');
     document.getElementById('credits').classList.remove('d-none');
 }
 
 
+/**
+ * show start screen
+ */
 function showStartScreen() {
     document.getElementById('startscreen').classList.remove('d-none');
 }
 
 
-function closeStartscreen() {
+/**
+ * hide start screen
+ */
+function hideStartscreen() {
     document.getElementById('startscreen').classList.add('d-none');
 }
 
 
+/**
+ * disable the animated background
+ */
 function disableAnimatedFullscreenBackground() {
     document.body.classList.remove('animated_background');
     document.getElementById('fullscreen').classList.remove('animated_background');
@@ -263,6 +342,9 @@ function disableAnimatedFullscreenBackground() {
 }
 
 
+/**
+ * enable the animated background
+ */
 function enableAnimatedFullscreenBackground() {
     document.body.classList.add('animated_background');
     document.getElementById('fullscreen').classList.remove('static_background');
@@ -272,18 +354,22 @@ function enableAnimatedFullscreenBackground() {
 }
 
 
+/**
+ * toggle the animated background
+ */
 function toggleAnimatedBackground() {
     if (canvas_is_loaded && isInFullscreen) {
         disableAnimatedFullscreenBackground();
-        console.log('animated Bgr OFF');
     }
     else {
         enableAnimatedFullscreenBackground();
-        console.log('animated Bgr ON');
     }
 }
 
 
+/**
+ * toggle visibility of the page header
+ */
 function toggleHeader() {
     if (canvas_is_loaded && isInFullscreen || canvas_is_loaded && window.innerHeight < 420) {
         hideHeader();
@@ -294,21 +380,33 @@ function toggleHeader() {
 }
 
 
+/**
+ * hide the page header
+ */
 function hideHeader() {
     document.getElementById('header').classList.add('d-none');
 }
 
 
+/**
+ * show the page header
+ */
 function showHeader() {
     document.getElementById('header').classList.remove('d-none');
 }
 
 
+/**
+ * hide the canvas
+ */
 function hideCanvas() {
     document.getElementById('canvas').classList.remove('d-block');
 }
 
 
+/**
+ * show the canvas
+ */
 function showCanvas() {
     document.getElementById('canvas').classList.add('d-block');
     enableFadeInAnimation('canvas');
