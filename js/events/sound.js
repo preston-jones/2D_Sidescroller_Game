@@ -1,4 +1,9 @@
 // --- SOUND EVENT ---
+
+
+/**
+ * Function to show the character selection page
+ */
 function startBackgroundMusic() {
     document.body.addEventListener('click', function () {
         level_bgr_music.play();

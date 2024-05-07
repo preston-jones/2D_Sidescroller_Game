@@ -1,6 +1,10 @@
 // --- FULLSCREEN EVENT ---
 let canvas_is_loaded = false;
 
+
+/**
+ * Function to start the fullscreen event
+ */
 function startFullscreenEvent() {
     let menu_fullscreen_button = document.getElementById('menu_fullscreen_button_container');
     let fullscreen_btn = document.getElementById('fullscreen_button');
@@ -9,6 +13,9 @@ function startFullscreenEvent() {
 }
 
 
+/**
+ * Function to start the fullscreen event
+ */
 function toggleFullScreen() {
     let fullscreen = document.getElementById('fullscreen');
     if (!document.fullscreenElement) {

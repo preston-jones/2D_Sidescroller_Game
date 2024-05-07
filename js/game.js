@@ -11,7 +11,7 @@ let HD_Rendering = false;
 let character_selected;
 let exit_Game = false;
 
-// SOUND FILES
+// Game sounds
 let level_bgr_music = new Audio('assets/audio/cyber_runner.mp3');
 level_bgr_music.muted = false;
 level_bgr_music.loop = true;
@@ -36,7 +36,7 @@ collecting_sound.muted = false;
 let game_over_music = new Audio('assets/audio/gameover_music.mp3');
 game_over_music.muted = false;
 
-// ASSETS FOR CHARACTER-SELECTION PAGE
+// Array of images for character animations
 let female_character_animation_array = [
     'assets/sprites/character/player_female/run/run-1.png',
     'assets/sprites/character/player_female/run/run-2.png',
@@ -62,7 +62,7 @@ let male_character_animation_array = [
 
 
 /**
- * Initialize the game
+ * Function to initialize the game
  */
 async function init() {
     await includeHTML();
@@ -119,7 +119,7 @@ function initCanvas() {
 
 
 /**
- * 
+ * Enable fade in animation
  * @param {string} element - The element to be animated
  */
 function enableFadeInAnimation(element) {
@@ -128,7 +128,7 @@ function enableFadeInAnimation(element) {
 
 
 /**
- * 
+ * Disable fade in animation
  * @param {string} element - The element to be unanimated
  */
 function disableFadeInAnimation(element) {

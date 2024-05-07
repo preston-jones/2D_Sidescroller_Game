@@ -1,4 +1,9 @@
-// Keyboard(classname).UP(Key of Variable in this class)
+// --- KEYPRESS EVENT ---
+
+
+/**
+ * Function to show the character selection page
+ */
 window.addEventListener("keydown", (e) => {
     if (e.code == "ArrowDown") {
         keyboard.DOWN = true;

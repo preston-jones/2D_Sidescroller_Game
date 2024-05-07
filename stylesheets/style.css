@@ -308,7 +308,7 @@ h1 {
 }
 
 .fade_in {
-    animation: fade_in_animation 1s linear forwards;
+    animation: fade_in_animation 225ms linear forwards;
 }
 
 @keyframes fade_in_animation {

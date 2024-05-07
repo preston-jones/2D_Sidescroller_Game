@@ -1,5 +1,9 @@
 let level1;
 
+
+/**
+ * Function to initialize the first level of the game. Contains all the objects and elements of the first level.
+ */
 function initLevel1() {
     level1 = new Level(
         [
