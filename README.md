@@ -7,5 +7,7 @@ The Game Art Design is in the Style of an retro 8-Bit Pixel-Art Arcade Game.
 Have Fun and enjoy a little Time Trip, back at the Arcade-Game-Era.
 
 Credits:
-Game by prestonjones-developer.de
-The Game Assets (Graphics) are created by Luis Zuno (@ansimuz).
+
+- Game made by (myself) www.prestonjones-developer.de
+
+- The Game Assets (Graphics) are created by Luis Zuno (@ansimuz).
