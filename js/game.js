@@ -298,7 +298,7 @@ function showHowtoplayPage() {
 
 
 /**
- * 
+ * Function for the "back to menu" button. Hides the current page and shows the start screen.
  * @param {string} current_page - The current page to be hidden
  */
 function backToStartScreen(current_page) {
@@ -337,7 +337,7 @@ function hideStartscreen() {
  */
 function disableAnimatedFullscreenBackground() {
     document.body.classList.remove('animated_background');
-    document.getElementById('fullscreen').classList.remove('animated_background');
+    document.getElementById('fullscreen').classList.remove('center', 'animated_background');
     document.getElementById('fullscreen').classList.add('static_background');
 }
 
@@ -349,7 +349,7 @@ function enableAnimatedFullscreenBackground() {
     document.body.classList.add('animated_background');
     document.getElementById('fullscreen').classList.remove('static_background');
     if (isInFullscreen) {
-        document.getElementById('fullscreen').classList.add('animated_background');
+        document.getElementById('fullscreen').classList.add('center', 'animated_background');
     }
 }
 

@@ -14,33 +14,81 @@ function startFullscreenEvent() {
 
 
 /**
- * Function to start the fullscreen event
+ * Function to toggle the fullscreen mode
  */
 function toggleFullScreen() {
     let fullscreen = document.getElementById('fullscreen');
     if (!document.fullscreenElement) {
-        enterFullscreen(fullscreen);
-        isInFullscreen = true;
-        document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
-        document.getElementById('settings_button_menu_fullscreen').innerHTML = `ON`;
+        turnFullscreenOn(fullscreen);
     }
     else if (document.fullscreenElement) {
-        closeFullscreen(fullscreen);
-        isInFullscreen = false;
-        document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
-        document.getElementById('settings_button_menu_fullscreen').innerHTML = `OFF`;
+        turnFullscreenOff();
     }
     toggleHeader ();
     toggleAnimatedBackground();
 }
 
 
+/**
+ * Function to turn the fullscreen mode on.
+ * @param {string} fullscreen - The element to be set to fullscreen.
+ */
+function turnFullscreenOn(fullscreen) {
+    enterFullscreen(fullscreen);
+    isInFullscreen = true;
+    loadFullscreenMenuButtonHTMLTemplate();
+}
+
+
+/**
+ * Function to turn the fullscreen mode off.
+ */
+function turnFullscreenOff() {
+    closeFullscreen();
+    isInFullscreen = false;
+    loadFullscreenMenuButtonHTMLTemplate();
+}
+
+
+/**
+ * Sets the fullscreen button to ON or OFF depending on the current state of the fullscreen mode,
+ * by loading the corresponding HTML template.
+ */
+function loadFullscreenMenuButtonHTMLTemplate() {
+    if (isInFullscreen) {
+        document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
+        document.getElementById('settings_button_menu_fullscreen').innerHTML = `ON`;
+    }
+    else {
+        document.getElementById('settings_button_menu_fullscreen').innerHTML = ``;
+        document.getElementById('settings_button_menu_fullscreen').innerHTML = `OFF`;
+    }
+}
+
+
+/**
+ * Toggles the Src. of the Fullscreen icon in the menu settings and the navbar.
+ */
+function toggleFullscreenIcon() {
+    if (isInFullscreen) {
+        document.getElementById('menu_fullscreen_icon').src = 'assets/img/icons/expand.png';
+        document.getElementById('fullscreen_button').src = 'assets/img/icons/expand.png';
+    }
+    else {
+        document.getElementById('menu_fullscreen_icon').src = 'assets/img/icons/collapse.png';
+        document.getElementById('fullscreen_button').src = 'assets/img/icons/collapse.png';
+    }
+}
+
+
+/**
+ * Function to enter fullscreen mode.
+ * @param {string} element - The element to be set to fullscreen.
+ */
 function enterFullscreen(element) {
     document.getElementById('startscreen').classList.add('fullscreen_startscreen');
     document.getElementById('canvas').classList.add('fullscreen');
-    document.getElementById('fullscreen').classList.add('center', 'animated_background');
-    document.getElementById('menu_fullscreen_icon').src = 'assets/img/icons/collapse.png';
-    document.getElementById('fullscreen_button').src = 'assets/img/icons/collapse.png';
+    toggleFullscreenIcon();
 
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -52,12 +100,14 @@ function enterFullscreen(element) {
 }
 
 
-function closeFullscreen(element) {
+/**
+ * Function to close fullscreen mode.
+ * doesn't require a parameter for the fullscreen element, as it closes the fullscreen mode of the whole document.
+ */
+function closeFullscreen() {
     document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
     document.getElementById('canvas').classList.remove('fullscreen');
-    document.getElementById('fullscreen').classList.remove('center', 'animated_background');
-    document.getElementById('menu_fullscreen_icon').src = 'assets/img/icons/expand.png';
-    document.getElementById('fullscreen_button').src = 'assets/img/icons/expand.png';
+    toggleFullscreenIcon();
 
     if (document.exitFullscreen) {
         document.exitFullscreen();
