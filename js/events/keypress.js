@@ -1,6 +1,5 @@
 // --- KEYPRESS EVENT ---
 
-
 /**
  * Function to show the character selection page
  */
