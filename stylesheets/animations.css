@@ -1,0 +1,51 @@
+.cursor {
+    animation: blink-animation 1s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+.rotate_img_animation {
+    animation: rotate-animation 3s linear infinite;
+}
+
+@keyframes rotate-animation {
+    0% {
+        transform: rotate(45deg);
+    }
+
+    100% {
+        transform: rotate(-45deg);
+    }
+}
+
+.fade_in {
+    animation: fade_in_animation 225ms linear forwards;
+}
+
+@keyframes fade_in_animation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade_out {
+    animation: fade_out_animation 1s linear forwards;
+}
+
+@keyframes fade_out_animation {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
