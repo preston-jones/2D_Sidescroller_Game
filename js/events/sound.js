@@ -1,7 +1,7 @@
 // --- SOUND EVENT ---
 
 /**
- * Function to show the character selection page
+ * Function to start the sound event for the audio button.
  */
 function startBackgroundMusic() {
     document.body.addEventListener('click', function () {
@@ -12,6 +12,9 @@ function startBackgroundMusic() {
 }
 
 
+/**
+ * Starts the background music and the game sounds when the game starts.
+ */
 function startSoundByGamestart() {
     level_bgr_music.currentTime = 0;
     level_bgr_music.play();
@@ -20,6 +23,9 @@ function startSoundByGamestart() {
 }
 
 
+/**
+ * Starts the click event for the toggleSound() function.
+ */
 function startSoundEvent() {
     let menu_audio_button = document.getElementById('menu_audio_icon_container');
     let audio_btn = document.getElementById('audio_button');
@@ -28,6 +34,12 @@ function startSoundEvent() {
 }
 
 
+/**
+ * Function to toggle the sound button.
+ * Changes the icon src. of the sound button in the menu settings and the navbar.
+ * Sets the sound button to ON or OFF, depending on the current state of the sound mode
+ * by loading the corresponding HTML template.
+ */
 function toggleSound() {
     if (soundMuted) {
         document.getElementById('menu_audio_icon').src = 'assets/img/icons/audio_on.png';
@@ -46,6 +58,9 @@ function toggleSound() {
 }
 
 
+/**
+ * Disables all sounds of the game.
+ */
 function disableSound() {
     level_bgr_music.muted = true;
     jump_sound.muted = true;
@@ -62,6 +77,9 @@ function disableSound() {
 }
 
 
+/**
+ * Enables all sounds of the game.
+ */
 function enableSound() {
     level_bgr_music.muted = false;
     jump_sound.muted = false;
