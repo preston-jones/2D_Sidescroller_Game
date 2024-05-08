@@ -1,7 +1,8 @@
 // --- KEYPRESS EVENT ---
 
 /**
- * Function to show the character selection page
+ * Function to start the keydown event for the keyboard.
+ * @param {object} e - The event object
  */
 window.addEventListener("keydown", (e) => {
     if (e.code == "ArrowDown") {
@@ -25,6 +26,10 @@ window.addEventListener("keydown", (e) => {
 });
 
 
+/**
+ * Function to start the keyup event for the keyboard.
+ * @param {object} e - The event object
+ */
 window.addEventListener("keyup", (e) => {
     if (e.code == "ArrowDown") {
         keyboard.DOWN = false;
@@ -47,15 +52,25 @@ window.addEventListener("keyup", (e) => {
 });
 
 
+/**
+ * Function to start the click event for the toggleMobileControllerButton() function.
+ */
 function startMobileControllerEvent() {
     let menu_controller_button = document.getElementById('menu_control_mode_icon_container');
     let controller_btn = document.getElementById('controller_button');
-    menu_controller_button.addEventListener('click', toggleMobileController);
-    controller_btn.addEventListener('click', toggleMobileController);
+    menu_controller_button.addEventListener('click', toggleMobileControllerButton);
+    controller_btn.addEventListener('click', toggleMobileControllerButton);
 }
 
 
-function toggleMobileController() {
+/**
+ * Function to toggle the HD mobile controller button.
+ * Changes the icon src. of the mobile controller button in the menu settings and the navbar.
+ * Adds the 'showMobileController' class to the gamepad_overlay element.
+ * Sets the control mode button to GAMEPAD or KEYBOARD, depending on the current state of the mobile controller mode
+ * by loading the corresponding HTML template.
+ */
+function toggleMobileControllerButton() {
     if (!mobileController) {
         document.getElementById('gamepad_overlay').classList.add('showMobileController');
         document.getElementById('controller_button').src = 'assets/img/icons/keyboard.png';
@@ -79,6 +94,10 @@ function toggleMobileController() {
 }
 
 
+/**
+ * Function to start the touchstart and touchend event for the mobile controller buttons.
+ * @param {object} e - The event object
+ */
 function pressMobileButtons() {
     document.getElementById('arrow_left').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -121,5 +140,4 @@ function pressMobileButtons() {
         e.preventDefault();
         keyboard.C = false;
     });
-
 }
