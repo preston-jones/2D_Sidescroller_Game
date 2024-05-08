@@ -1,0 +1,32 @@
+/* FULLSCREEN */
+
+.fullscreen {
+    left: 0;
+    height: 100vh;
+    width: auto;
+    border: none;
+    /* aspect-ratio: 16 / 9; */
+    aspect-ratio: 720 / 384;
+    position: static;
+}
+
+#fullscreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
+
+.center {
+    justify-content: center !important;
+}
+
+.fullscreen_startscreen {
+    width: 100% !important;
+    height: 100% !important;
+    background-size: contain !important;
+    border: none;
+}

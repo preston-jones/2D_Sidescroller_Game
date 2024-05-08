@@ -88,16 +88,6 @@ body {
     opacity: inherit;
 }
 
-.cursor {
-    animation: blink-animation 1s steps(2, start) infinite;
-}
-
-@keyframes blink-animation {
-    to {
-        visibility: hidden;
-    }
-}
-
 canvas {
     /* width: 768px; */
     width: 720px;
@@ -283,10 +273,6 @@ h1 {
     background-color: #1a1a1a;
 }
 
-.rotate_img_animation {
-    animation: rotate-animation 3s linear infinite;
-}
-
 #rotate_img {
     transform: rotate(45deg);
     width: 210px;
@@ -295,44 +281,6 @@ h1 {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-}
-
-@keyframes rotate-animation {
-    0% {
-        transform: rotate(45deg);
-    }
-
-    100% {
-        transform: rotate(-45deg);
-    }
-}
-
-.fade_in {
-    animation: fade_in_animation 225ms linear forwards;
-}
-
-@keyframes fade_in_animation {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-.fade_out {
-    animation: fade_out_animation 1s linear forwards;
-}
-
-@keyframes fade_out_animation {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
 }
 
 .d-none {
@@ -362,69 +310,6 @@ h1 {
     filter: drop-shadow(1px 0 10px #FC0);
 }
 
-#gamepad_overlay {
-    position: absolute;
-    top: 0;
-    z-index: 20;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-.gamepad_overlay_left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    height: 100%;
-    /* width: 20%; */
-    padding: 100px 8px 20px 15px;
-}
-
-.gamepad_overlay_middle {
-    height: 100%;
-    width: 60%;
-}
-
-.gamepad_overlay_right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 18px;
-    height: 100%;
-    width: 18%;
-    padding: 100px 20px 30px 8px;
-}
-
-.gamepad_cross_container {
-    display: flex;
-}
-
-.gamepad_button_a_container {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-}
-
-.gamepad_button_b_container {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-}
-
-.gamepad_img {
-    object-fit: contain;
-    width: 60px;
-    height: 60px;
-    opacity: 0.7;
-}
-
-.showMobileController {
-    display: flex !important;
-}
-
 .credits {
     display: flex;
     justify-content: center;
@@ -450,39 +335,6 @@ h1 {
     height: 32px;
     object-fit: contain;
     margin-right: 8px;
-}
-
-/* FULLSCREEN */
-
-.fullscreen {
-    left: 0;
-    height: 100vh;
-    width: auto;
-    border: none;
-    /* aspect-ratio: 16 / 9; */
-    aspect-ratio: 720 / 384;
-    position: static;
-}
-
-#fullscreen {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    background-color: transparent;
-}
-
-.center {
-    justify-content: center !important;
-}
-
-.fullscreen_startscreen {
-    width: 100% !important;
-    height: 100% !important;
-    background-size: contain !important;
-    border: none;
 }
 
 /* Settings Buttons */
