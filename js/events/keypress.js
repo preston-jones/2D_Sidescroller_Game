@@ -66,24 +66,24 @@ function startMobileControllerEvent() {
 /**
  * Function to toggle the HD mobile controller button.
  * Changes the icon src. of the mobile controller button in the menu settings and the navbar.
- * Adds the 'showMobileController' class to the gamepad_overlay element.
- * Sets the control mode button to GAMEPAD or KEYBOARD, depending on the current state of the mobile controller mode
+ * Adds the 'show_mobile_controller' class to the mobile_controller_overlay element.
+ * Sets the control mode button to MOBILE CONTROLLER or KEYBOARD, depending on the current state of the mobile controller mode
  * by loading the corresponding HTML template.
  */
 function toggleMobileControllerButton() {
     if (!mobileController) {
-        document.getElementById('gamepad_overlay').classList.add('showMobileController');
+        document.getElementById('mobile_controller_overlay').classList.add('show_mobile_controller');
         document.getElementById('controller_button').src = 'assets/img/icons/keyboard.png';
 
         document.getElementById('menu_control_icon').src = 'assets/img/icons/controller_mobile.png';
         document.getElementById('settings_button_menu_control_mode').innerHTML = ``;
-        document.getElementById('settings_button_menu_control_mode').innerHTML = `GAMEPAD`;
+        document.getElementById('settings_button_menu_control_mode').innerHTML = `MOBILE CONTROLLER`;
 
         mobileController = true;
     }
     else {
-        document.getElementById('gamepad_overlay').classList.remove('showMobileController');
-        document.getElementById('controller_button').src = 'assets/img/icons/controller_mobile.png';
+        document.getElementById('mobile_controller_overlay').classList.remove('show_mobile_controller');
+        document.getElementById('controller_button').src = 'assets/img/icons/controller_mobile.png'; /*change controller_mobile.png into mobile_controller*/
 
         document.getElementById('menu_control_icon').src = 'assets/img/icons/keyboard.png';
         document.getElementById('settings_button_menu_control_mode').innerHTML = ``;

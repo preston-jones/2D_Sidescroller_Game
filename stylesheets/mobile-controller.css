@@ -1,6 +1,6 @@
 /* MOBILE-CONTROLLER */
 
-#gamepad_overlay {
+#mobile_controller_overlay {
     position: absolute;
     top: 0;
     z-index: 20;
@@ -10,7 +10,7 @@
     height: 100%;
 }
 
-.gamepad_overlay_left {
+.mobile_controller_overlay_left {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,12 +20,12 @@
     padding: 100px 8px 20px 15px;
 }
 
-.gamepad_overlay_middle {
+.mobile_controller_overlay_middle {
     height: 100%;
     width: 60%;
 }
 
-.gamepad_overlay_right {
+.mobile_controller_overlay_right {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,29 +36,29 @@
     padding: 100px 20px 30px 8px;
 }
 
-.gamepad_cross_container {
+.mobile_controller_cross_container {
     display: flex;
 }
 
-.gamepad_button_a_container {
+.mobile_controller_button_a_container {
     display: flex;
     justify-content: flex-start;
     width: 100%;
 }
 
-.gamepad_button_b_container {
+.mobile_controller_button_b_container {
     display: flex;
     justify-content: flex-end;
     width: 100%;
 }
 
-.gamepad_img {
+.mobile_controller_img {
     object-fit: contain;
     width: 60px;
     height: 60px;
     opacity: 0.7;
 }
 
-.showMobileController {
+.show_mobile_controller {
     display: flex !important;
 }
