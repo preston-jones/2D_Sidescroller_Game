@@ -52,6 +52,9 @@ class MovableObject extends DrawableObject {
     jump() {
         if (this.y === world.level.level_end_bottom_y) {
             this.speedY = 11;
+            if (this instanceof Character) {
+                jump_sound.play();
+            }
         }
     }
 

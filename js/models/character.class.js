@@ -248,7 +248,6 @@ class Character extends MovableObject {
                 this.moveToLeft(1.7);
             }
             if (this.world.keyboard.SPACE && !this.is_Dead && !this.is_Hurt) {
-                jump_sound.play();
                 this.jump();
             }
             if (this.world.keyboard.DOWN && this.y > world.level.level_end_bottom_y && !this.is_Dead && !this.is_Hurt) {
@@ -298,12 +297,10 @@ class Character extends MovableObject {
 
 
     playAnimation_SHOOT() {
-        this.playAnimation(this.IMAGES_SHOOT);
-        shoot_sound.play();
-        if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
-            this.playAnimation(this.IMAGES_RUN_SHOOT);
-            shoot_sound.play();
-        }
+            this.playAnimation(this.IMAGES_SHOOT);
+            if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
+                this.playAnimation(this.IMAGES_RUN_SHOOT);
+            }
     }
 
 

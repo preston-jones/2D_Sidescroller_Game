@@ -19,10 +19,10 @@ window.addEventListener("keydown", (e) => {
     }
     if (e.code == "Space") {
         keyboard.SPACE = true;
-        console.log(keyboard.SPACE);
     }
     if (e.code == "KeyC") {
         keyboard.C = true;
+        world.shoot();
     }
     if (e.code == "Enter") {
         keyboard.ENTER = true;
@@ -49,10 +49,10 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.code == "Space") {
         keyboard.SPACE = false;
-        console.log(keyboard.SPACE);
     }
     if (e.code == "KeyC") {
         keyboard.C = false;
+        world.shotFired = false;
     }
     if (e.code == "Enter") {
         keyboard.ENTER = false;
@@ -125,42 +125,36 @@ function pressMobileButtons() {
     });
     document.getElementById('arrow_down').addEventListener('touchstart', (e) => {
         e.preventDefault();
-        console.log(e);
         keyboard.DOWN = true;
     });
     document.getElementById('arrow_down').addEventListener('touchend', (e) => {
         e.preventDefault();
-        console.log(e);
         keyboard.DOWN = false;
     });
     document.getElementById('arrow_up').addEventListener('touchstart', (e) => {
         e.preventDefault();
-        console.log(e);
         keyboard.SPACE = true;
     });
     document.getElementById('arrow_up').addEventListener('touchend', (e) => {
         e.preventDefault();
-        console.log(e);
         keyboard.SPACE = false;
     });
     document.getElementById('jump').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.SPACE = true;
-        console.log(keyboard.SPACE);
     });
     document.getElementById('jump').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.SPACE = false;
-        console.log(keyboard.SPACE);
     });
     document.getElementById('shoot').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.C = true;
-        console.log(keyboard.C);
+        world.shoot();
     });
     document.getElementById('shoot').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.C = false;
-        console.log(keyboard.C);
+        world.shotFired = false;
     });
 }

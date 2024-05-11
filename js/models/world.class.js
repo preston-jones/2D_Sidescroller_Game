@@ -21,6 +21,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.shotFired = false;
         this.startLevel();
     }
 
@@ -31,7 +32,6 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        this.shoot();
     }
 
 
@@ -76,17 +76,17 @@ class World {
 
 
     shoot() {
-        setInterval(() => {
-            if (this.keyboard.C && this.character.energy > 0 && !this.is_Hurt && !this.character.is_Dead) {
-                this.character.playAnimation_SHOOT();
+            if (this.keyboard.C && !this.shotFired && this.character.energy > 0 && !this.is_Hurt && !this.character.is_Dead) {
+                shoot_sound.play();
                 this.characterShot = [];
                 this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
                 this.shots.push(this.characterShot);
                 this.character.energy -= 1;
+                this.character.playAnimation_SHOOT();
                 this.checkEnergyStatus();
                 this.checkCollisions();
+                this.shotFired = true;
             }
-        }, 100);
     }
 
 
@@ -239,7 +239,7 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
+        // movableObject.drawFrame(this.ctx);
         // movableObject.drawRealFrame(this.ctx);
 
         if (movableObject.otherDirection) {
