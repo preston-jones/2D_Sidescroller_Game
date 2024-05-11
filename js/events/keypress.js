@@ -14,8 +14,12 @@ window.addEventListener("keydown", (e) => {
     if (e.code == "ArrowRight") {
         keyboard.RIGHT = true;
     }
+    if (e.code == "ArrowUp") {
+        keyboard.UP = true;
+    }
     if (e.code == "Space") {
         keyboard.SPACE = true;
+        console.log(keyboard.SPACE);
     }
     if (e.code == "KeyC") {
         keyboard.C = true;
@@ -40,8 +44,12 @@ window.addEventListener("keyup", (e) => {
     if (e.code == "ArrowRight") {
         keyboard.RIGHT = false;
     }
+    if (e.code == "ArrowUp") {
+        keyboard.UP = false;
+    }
     if (e.code == "Space") {
         keyboard.SPACE = false;
+        console.log(keyboard.SPACE);
     }
     if (e.code == "KeyC") {
         keyboard.C = false;
@@ -117,27 +125,42 @@ function pressMobileButtons() {
     });
     document.getElementById('arrow_down').addEventListener('touchstart', (e) => {
         e.preventDefault();
+        console.log(e);
         keyboard.DOWN = true;
     });
     document.getElementById('arrow_down').addEventListener('touchend', (e) => {
         e.preventDefault();
+        console.log(e);
         keyboard.DOWN = false;
+    });
+    document.getElementById('arrow_up').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        console.log(e);
+        keyboard.SPACE = true;
+    });
+    document.getElementById('arrow_up').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        console.log(e);
+        keyboard.SPACE = false;
     });
     document.getElementById('jump').addEventListener('touchstart', (e) => {
         e.preventDefault();
         keyboard.SPACE = true;
+        console.log(keyboard.SPACE);
     });
     document.getElementById('jump').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.SPACE = false;
+        console.log(keyboard.SPACE);
     });
     document.getElementById('shoot').addEventListener('touchstart', (e) => {
-        console.log(e);
         e.preventDefault();
         keyboard.C = true;
+        console.log(keyboard.C);
     });
     document.getElementById('shoot').addEventListener('touchend', (e) => {
         e.preventDefault();
         keyboard.C = false;
+        console.log(keyboard.C);
     });
 }
