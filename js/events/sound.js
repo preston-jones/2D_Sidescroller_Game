@@ -1,5 +1,31 @@
 // --- SOUND EVENT ---
 
+// Game sounds
+let level_bgr_music = new Audio('assets/audio/cyber_runner.mp3');
+level_bgr_music.muted = false;
+level_bgr_music.loop = true;
+let boss_fight_music = new Audio('assets/audio/Boss_fight.mp3');
+boss_fight_music.muted = false;
+let victory_music = new Audio('assets/audio/victory_music.mp3');
+victory_music.muted = false;
+let fireworks_sound = new Audio('assets/audio/fireworks.mp3');
+fireworks_sound.muted = false;
+let jump_sound = new Audio('assets/audio/jump.mp3');
+jump_sound.muted = false;
+let shoot_sound = new Audio('assets/audio/shoot.mp3');
+shoot_sound.muted = false;
+let hurt_sound = new Audio('assets/audio/hurt.mp3');
+hurt_sound.muted = false;
+let gameover_sound = new Audio('assets/audio/gameover.mp3');
+gameover_sound.muted = false;
+let explosion_sound = new Audio('assets/audio/explosion.mp3');
+explosion_sound.muted = false;
+let collecting_sound = new Audio('assets/audio/collecting.mp3');
+collecting_sound.muted = false;
+let game_over_music = new Audio('assets/audio/gameover_music.mp3');
+game_over_music.muted = false;
+
+
 /**
  * Function to start the sound event for the audio button.
  */

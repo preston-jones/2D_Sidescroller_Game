@@ -19,6 +19,7 @@ class World {
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
+        this.ctx.filter = 'invert(0)';
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.shotFired = false;
@@ -239,8 +240,8 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        // movableObject.drawFrame(this.ctx);
-        // movableObject.drawRealFrame(this.ctx);
+        movableObject.drawFrame(this.ctx);
+        movableObject.drawRealFrame(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
@@ -261,5 +262,4 @@ class World {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore(); //resets the settings of ctx to default
     }
-
 }

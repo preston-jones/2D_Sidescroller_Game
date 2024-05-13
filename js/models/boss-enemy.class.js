@@ -42,11 +42,11 @@ class BossEnemy extends MovableObject {
         this.otherDirection = true;
         this.loadImages(this.IMAGES_FLY);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
-        this.boss(this.IMAGES_FLY);
+        this.animateBossEnemy(this.IMAGES_FLY);
     }
 
 
-    boss(images_arr) {
+    animateBossEnemy(images_arr) {
         let waitInterval = setInterval(() => {
             this.playAnimation(images_arr);
         }, 150);
@@ -54,101 +54,124 @@ class BossEnemy extends MovableObject {
         let startInterval = setInterval(() => {
             if (world && world.character.x >= 1949) {
                 clearInterval(waitInterval);
-                this.playBossFightMusic();
+                clearInterval(startInterval);
+                this.stopLevelBackgroundMusic();
+                this.startBossFightMusic();
                 world.character.isInBattleArena = true;
                 world.character.enteredBattleArena = true;
-                this.animateBossEnemy(this.IMAGES_FLY, this.IMAGES_ENEMY_EXPLOTION);
-                clearInterval(startInterval);
+                this.animateBossFight();
             }
         }, 100);
     }
 
 
-    playBossFightMusic() {
+    stopLevelBackgroundMusic() {
         level_bgr_music.pause();
         level_bgr_music.currentTime = 0;
-        level_bgr_music = boss_fight_music;
-        level_bgr_music.loop = true;
-        boss_fight_music.loop = true;
-        level_bgr_music.play();
+        level_bgr_music.muted = true;
     }
 
 
-    animateBossEnemy(images_arr, array) {
-        // this.StayRightAnimation();
-        let moveLeftInterval = setInterval(() => {
-            if (!this.is_Dead) {
-                if (this.isOnRight) {
-                    setTimeout(() => {
-                        this.moveLeftAnimation(moveLeftInterval);
-                    }, 2000);
-                }
-                if (!this.isOnRight) {
-                    let moveRightInterval = setTimeout(() => {
-                        this.moveRightAnimation(moveRightInterval);
-                    }, 2000);
-                }
-            }
-            if (this.is_Dead) {
-                this.stay();
-            }
-        }, 1000 / 50);
+    startBossFightMusic() {
+        boss_fight_music.currentTime = 0;
+        boss_fight_music.loop = true;
+        boss_fight_music.muted = false;
+        boss_fight_music.play();
+    }
 
-        let animateInterval = setInterval(() => {
-            if (!this.is_Dead) {
-                this.playAnimation(images_arr);
-            }
-            if (this.is_Dead) {
-                this.playAnimation_Enemy_DEAD(array);
-                explosion_sound.play();
-                clearInterval(animateInterval);
-                setTimeout(() => {
-                    // Assuming world.enemies is the array holding all enemy objects
-                    let index = world.level.enemies.indexOf(this);
-                    if (index > -1) {
-                        world.level.enemies.splice(index, 1);
-                    }
-                }, 100); // Adjust the timeout to match the length of the death animation
-                world.level.boss_dead = true;
-            }
 
-        }, 150);
+    stopBossFightMusic() {
+        boss_fight_music.pause();
+        boss_fight_music.muted = true;
+    }
+
+
+    animateBossFight() {
+        let moveInterval;
+        let animateInterval;
+        console.log('MOVE');
+        if (!this.is_Dead) {
+            animateInterval = setInterval(() => {
+                this.playAnimation(this.IMAGES_FLY);
+                this.checkDeathOfBossfight(animateInterval);
+            }, 150);
+            moveInterval = setInterval(() => {
+                if (this.x <= 2044) {
+                    this.moveLeftAnimation();
+                }
+                if (this.x > 2044) {
+                    this.moveRightAnimation();
+                }
+            }, 1000 / 50);
+        }
+
+        setTimeout(() => {
+            clearInterval(moveInterval);
+            clearInterval(animateInterval);
+            this.attackCharacter();
+        }, 6000);
     }
 
 
     attackCharacter() {
-        if (world && world.character) {
-            let characterX = world.character.x;
-            let characterY = world.character.y;
+        let attackAnimationInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_FLY);
+            // CHECK FOR BOSS IS DEAD!!!
+        }, 150);
 
-            // Move quickly to the character's position
-            if (this.x < characterX) {
+        let attackCharacterInterval = setInterval(() => {
+            if (this.x < world.character.x) {
                 this.otherDirection = false;
-                this.x += 2 * this.speed; // Move twice as fast
-            } else if (this.x > characterX) {
+                this.x += 6 * this.speed; // Move twice as fast
+            } else if (this.x > world.character.x) {
                 this.otherDirection = true;
-                this.x -= 2 * this.speed; // Move twice as fast
+                this.x -= 6 * this.speed; // Move twice as fast
             }
             // Move down towards the character's position
-            if (this.y < characterY) {
-                this.y += 2 * this.speed; // Move twice as fast
+            if (this.y < world.character.y) {
+                this.y += 6 * this.speed; // Move twice as fast
                 // this.moveUp = true;
             }
-        }
-        this.hasAttacked = true;
-        setTimeout(() => {
-            this.hasAttacked = false;
-        }, 250);
+            if (this.isColliding(world.character)) {
+                clearInterval(attackCharacterInterval);
+                clearInterval(attackAnimationInterval);
+                setTimeout(() => {
+                    this.animateBossFight();
+                }, 25);
+            }
+        }, 1000 / 25);
+
+        console.log('STOP');
     }
 
 
-    moveRightAnimation(moveRightInterval) {
-        // if (!this.hasAttacked && !world.character.is_Dead) {
-        //     setTimeout(() => {
-        //         clearInterval(moveRightInterval);
-        //         this.attackCharacter();
-        //     }, 3000);
-        // }
+    checkDeathOfBossfight(animateInterval) {
+        if (this.is_Dead) {
+            this.stopBossFightMusic();
+            this.bossEnemyIsDead(this.IMAGES_ENEMY_EXPLOTION, animateInterval);
+        }
+        if (world.character.is_Dead) {
+            this.stopBossFightMusic();
+        }
+    }
+
+
+    bossEnemyIsDead(array, animateInterval) {
+        this.playAnimation_Enemy_DEAD(array);
+        explosion_sound.play();
+        clearInterval(animateInterval);
+        setTimeout(() => {
+            // Assuming world.enemies is the array holding all enemy objects
+            let index = world.level.enemies.indexOf(this);
+            if (index > -1) {
+                world.level.enemies.splice(index, 1);
+            }
+        }, 100); // Adjust the timeout to match the length of the death animation
+        world.level.boss_dead = true;
+    }
+
+
+    moveRightAnimation() {
         if (!this.moveRight) {
             this.x -= this.speed;
             if (this.x <= 2100) {
@@ -156,7 +179,7 @@ class BossEnemy extends MovableObject {
             }
         } else {
             this.x += this.speed;
-            if (this.x >= 2110) { // replace 2200 with the desired right boundary
+            if (this.x >= 2110) { // right boundary
                 this.moveRight = false;
                 this.isOnRight = true;
                 this.isOnLeft = false;
@@ -194,13 +217,7 @@ class BossEnemy extends MovableObject {
     }
 
 
-    moveLeftAnimation(moveLeftInterval) {
-        // if (!this.hasAttacked && !world.character.is_Dead) {
-        //     setTimeout(() => {
-        //         clearInterval(moveLeftInterval);
-        //         this.attackCharacter();
-        //     }, 3000);
-        // }
+    moveLeftAnimation() {
         if (!this.moveRight) {
             this.x -= this.speed;
             if (this.x <= 1880) {
@@ -211,11 +228,42 @@ class BossEnemy extends MovableObject {
             }
         } else {
             this.x += this.speed;
-            if (this.x >= 1890) { // replace 2200 with the desired right boundary
+            if (this.x >= 1890) { // left boundary
                 this.moveRight = false;
             }
         }
 
+        if (this.isUp) {
+            if (!this.moveUp) {
+                this.y -= 0.3;
+                if (this.y <= 0) {
+                    this.moveUp = true;
+                }
+            } else {
+                this.y += this.speed;
+                if (this.y >= 20) {
+                    this.moveUp = false;
+                }
+            }
+        }
+        if (!this.isUp) {
+            if (!this.moveUp) {
+                this.y -= 0.3;
+                if (this.y <= 60) {
+                    this.moveUp = true;
+                }
+            } else {
+                this.y += this.speed;
+                if (this.y >= 70) {
+                    this.moveUp = false;
+                }
+            }
+        }
+        this.hasAttacked = false;
+    }
+
+
+    moveUpAnimation() {
         if (this.isUp) {
             if (!this.moveUp) {
                 this.y -= 0.3;
