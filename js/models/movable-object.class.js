@@ -86,8 +86,17 @@ class MovableObject extends DrawableObject {
                 this.lastHit = new Date().getTime();
             }
         }
-        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone || this instanceof BossEnemy) {
+        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone) {
             this.health -= 1;
+            this.enemyHitAnimation();
+            if (this.health < 0) {
+                this.health = 0;
+                this.is_Dead = true;
+            }
+        }
+        if (this instanceof BossEnemy) {
+            this.health -= 1;
+            world.checkBossEnemyHealthStatus(this.health);
             this.enemyHitAnimation();
             if (this.health < 0) {
                 this.health = 0;

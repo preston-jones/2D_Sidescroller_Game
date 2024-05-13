@@ -19,6 +19,7 @@ class You_win extends DrawableObject {
 
     animateYouWin() {
         setInterval(() => {
+            game_over_music.currentTime = 0;
             this.playAnimation(this.YOU_WIN)
             if (world && world.level.boss_dead && !world.character.is_Dead) {
                 level_bgr_music.pause();

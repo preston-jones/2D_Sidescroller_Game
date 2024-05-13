@@ -15,6 +15,7 @@ class World {
     GAME_INTERVALS = [];
     statusbar_HEALTH;
     statusbar_ENERGY;
+    bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11);
 
 
     constructor(canvas, keyboard) {
@@ -111,6 +112,16 @@ class World {
     }
 
 
+    checkBossEnemyHealthStatus(bossEnemyHealth) {
+        if (bossEnemyHealth === 10) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 8) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_2.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 6) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_3.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 4) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_4.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 2) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_5.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 0) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_6.png', 235, 7, 55, 11); }
+    }
+
+
     checkCollisions() {
         this.checkCollisionWithEnemy();
         this.checkCollisionOfShot();
@@ -193,6 +204,18 @@ class World {
     }
 
 
+    drawBossEnemyHealthbar() {
+        if (!this.level.boss_dead && this.character.isInBattleArena) {
+            this.initBossEnemyHealthbar();
+        }
+    }
+
+
+    initBossEnemyHealthbar() {
+        this.addToMap(this.bossEnemy_HEALTHBAR);
+    }
+    
+
     draw() {
         if (!exit_Game && canvas && this.ctx) {
             this.enterBossArenaEffect();
@@ -217,6 +240,7 @@ class World {
             // -----
             this.addToMap(this.statusbar_HEALTH);
             this.addToMap(this.statusbar_ENERGY);
+            this.drawBossEnemyHealthbar();
             this.drawGameOver();
             this.drawYouWin();
             // Draw wird immer wieder aufgerufen
