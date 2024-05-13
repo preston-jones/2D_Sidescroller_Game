@@ -6,6 +6,7 @@ level_bgr_music.muted = false;
 level_bgr_music.loop = true;
 let boss_fight_music = new Audio('assets/audio/Boss_fight.mp3');
 boss_fight_music.muted = false;
+boss_fight_music.loop = true;
 let victory_music = new Audio('assets/audio/victory_music.mp3');
 victory_music.muted = false;
 let fireworks_sound = new Audio('assets/audio/fireworks.mp3');

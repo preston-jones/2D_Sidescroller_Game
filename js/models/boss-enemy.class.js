@@ -74,9 +74,10 @@ class BossEnemy extends MovableObject {
 
     startBossFightMusic() {
         boss_fight_music.currentTime = 0;
-        boss_fight_music.loop = true;
-        boss_fight_music.muted = false;
         boss_fight_music.play();
+        if (boss_fight_music.muted) {
+            boss_fight_music.muted = true;
+        }
     }
 
 
@@ -89,7 +90,6 @@ class BossEnemy extends MovableObject {
     animateBossFight() {
         let moveInterval;
         let animateInterval;
-        console.log('MOVE');
         if (!this.is_Dead) {
             animateInterval = setInterval(() => {
                 this.playAnimation(this.IMAGES_FLY);
@@ -108,15 +108,15 @@ class BossEnemy extends MovableObject {
         setTimeout(() => {
             clearInterval(moveInterval);
             clearInterval(animateInterval);
-            this.attackCharacter();
+            this.attackCharacter(animateInterval);
         }, 6000);
     }
 
 
-    attackCharacter() {
+    attackCharacter(animateInterval) {
         let attackAnimationInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_FLY);
-            // CHECK FOR BOSS IS DEAD!!!
+            this.checkDeathOfBossfight(animateInterval);
         }, 150);
 
         let attackCharacterInterval = setInterval(() => {
@@ -140,8 +140,6 @@ class BossEnemy extends MovableObject {
                 }, 25);
             }
         }, 1000 / 25);
-
-        console.log('STOP');
     }
 
 
