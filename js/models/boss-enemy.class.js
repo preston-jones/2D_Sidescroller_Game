@@ -143,12 +143,12 @@ class BossEnemy extends MovableObject {
 
 
     moveRightAnimation(moveRightInterval) {
-        if (!this.hasAttacked && !world.character.is_Dead) {
-            setTimeout(() => {
-                clearInterval(moveRightInterval);
-                this.attackCharacter();
-            }, 3000);
-        }
+        // if (!this.hasAttacked && !world.character.is_Dead) {
+        //     setTimeout(() => {
+        //         clearInterval(moveRightInterval);
+        //         this.attackCharacter();
+        //     }, 3000);
+        // }
         if (!this.moveRight) {
             this.x -= this.speed;
             if (this.x <= 2100) {
@@ -195,12 +195,12 @@ class BossEnemy extends MovableObject {
 
 
     moveLeftAnimation(moveLeftInterval) {
-        if (!this.hasAttacked && !world.character.is_Dead) {
-            setTimeout(() => {
-                clearInterval(moveLeftInterval);
-                this.attackCharacter();
-            }, 3000);
-        }
+        // if (!this.hasAttacked && !world.character.is_Dead) {
+        //     setTimeout(() => {
+        //         clearInterval(moveLeftInterval);
+        //         this.attackCharacter();
+        //     }, 3000);
+        // }
         if (!this.moveRight) {
             this.x -= this.speed;
             if (this.x <= 1880) {
