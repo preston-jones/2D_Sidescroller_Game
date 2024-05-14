@@ -238,9 +238,11 @@ class World {
 
 
     drawGameTip() {
-        ctx.font = "48px VT323";
-        ctx.textBaseline = "middle";
-        ctx.fillText("Hello world", 0, 100);
+        if (world && world.character.x <= 100) {
+            this.ctx.font = "16px VT323";
+            this.ctx.fillStyle = 'white';
+            this.ctx.fillText("Best Played In Fullscreen Mode", 50, 60);
+        }
     }
 
 
@@ -266,7 +268,7 @@ class World {
             // moves camera view back to default
             this.ctx.translate(-this.camera_x, this.camera_y);
             // -----
-            drawGameTip();
+            this.drawGameTip();
             this.addToMap(this.statusbar_HEALTH);
             this.addToMap(this.statusbar_ENERGY);
             this.drawBossEnemyHealthbar();
