@@ -8,7 +8,7 @@ class Level {
     collectibles_energy;
     collectibles_health;
     gameOver;
-    youWin;
+    victory;
     fireworks;
 
     level_start_x = -1;
@@ -19,7 +19,7 @@ class Level {
     // level_end_bottom_y = 99;
     boss_dead = false;
 
-    constructor(enemies, animatedObjectFront, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy, collectibles_health, gameOver, youWin, fireworks) {
+    constructor(enemies, animatedObjectFront, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy, collectibles_health, gameOver, victory, fireworks) {
 
         this.enemies = enemies;
         this.animatedObjectFront = animatedObjectFront;
@@ -30,7 +30,7 @@ class Level {
         this.collectibles_energy = collectibles_energy;
         this.collectibles_health = collectibles_health;
         this.gameOver = gameOver;
-        this.youWin = youWin;
+        this.victory = victory;
         this.fireworks = fireworks;
     }
 }

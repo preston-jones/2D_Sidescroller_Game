@@ -88,6 +88,8 @@ function toggleFullscreenIcon() {
 function enterFullscreen(element) {
     document.getElementById('startscreen').classList.add('fullscreen_startscreen');
     document.getElementById('canvas').classList.add('fullscreen');
+
+    newGameButtonAddFullscreenClass();
     toggleFullscreenIcon();
 
     if (element.requestFullscreen) {
@@ -107,6 +109,8 @@ function enterFullscreen(element) {
 function closeFullscreen() {
     document.getElementById('startscreen').classList.remove('fullscreen_startscreen');
     document.getElementById('canvas').classList.remove('fullscreen');
+
+    newGameButtonRemoveFullscreenClass();
     toggleFullscreenIcon();
 
     if (document.exitFullscreen) {

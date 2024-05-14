@@ -114,11 +114,7 @@ class BossEnemy extends MovableObject {
 
     checkDeathOfBossfight() {
         if (this.is_Dead) {
-            stopBossFightMusic();
             this.bossEnemyIsDead(this.IMAGES_ENEMY_EXPLOTION);
-        }
-        if (world.character.is_Dead) {
-            stopBossFightMusic();
         }
     }
 

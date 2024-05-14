@@ -47,6 +47,7 @@ async function init() {
     startMobileControllerEvent();
     startHDRenderingEvent();
     startBackgroundMusic();
+    newGameButtonHover();
 }
 
 
@@ -187,6 +188,7 @@ function exitGame() {
  * reset the game
  */
 function resetGame() {
+    hideNewGameButton();
     clearAllIntervals();
     disableFadeInAnimation('canvas');
     clearCanvas();

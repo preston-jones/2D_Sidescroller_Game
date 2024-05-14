@@ -361,6 +361,9 @@ h1 {
 }
 
 .newgame_button_container {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -368,16 +371,41 @@ h1 {
     height: 100%;
 }
 
+#newgame_button_inner_container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.newgame_button_inner_container_fullscreen_off {
+    width: 720px;
+    height: 384px;
+}
+
+.newgame_button_inner_container_fullscreen_on {
+    width: 100%;
+    height: 100%;
+}
+
+.newgame_button_fullscreen_off {
+    width: auto;
+    height: 50px;
+}
+
+.newgame_button_fullscreen_on {
+    width: auto;
+    height: 10%;
+}
+
 #newgame_button {
     z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;
-    height: 20%;
     object-fit: contain;
+    margin-bottom: 15%;
 }
 
 #newgame_button:hover {
-    filter: invert();
+    cursor: pointer;
 }

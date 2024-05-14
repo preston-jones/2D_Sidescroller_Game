@@ -69,7 +69,7 @@ function initLevel1() {
             new Game_over(0, -45, 300, 200)
         ],
         [
-            new You_win(45, 0, 200, 100)
+            new Victory(45, 0, 200, 100)
         ],
         [
             new Fireworks(-30, -25, 250, 200),

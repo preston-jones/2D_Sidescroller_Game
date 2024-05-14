@@ -19,6 +19,7 @@
     <script src="js/events/sound.js"></script>
     <script src="js/events/keypress.js"></script>
     <script src="js/events/hd-rendering.js"></script>
+    <script src="js/events/newGame-button.js"></script>
     <script src="js/models/world.class.js"></script>
 
     <script src="js/game.js"></script>
@@ -30,7 +31,7 @@
     <script src="js/models/collectible-energy.class.js"></script>
     <script src="js/models/collectible-health.class.js"></script>
     <script src="js/models/game-over.class.js"></script>
-    <script src="js/models/you-win.class.js"></script>
+    <script src="js/models/victory.class.js"></script>
     <script src="js/models/fireworks.class.js"></script>
     <script src="js/models/cop.class.js"></script>
     <script src="js/models/bootleg.class.js"></script>
@@ -67,9 +68,14 @@
             </div>
             <div id="story" class="d-none submenu_container" w3-include-html="assets/templates/story.html">
             </div>
-            <div id="mobile_controller_overlay" class="d-none" w3-include-html="assets/templates/mobile_controller-overlay.html"></div>
+            <div id="mobile_controller_overlay" class="d-none"
+                w3-include-html="assets/templates/mobile_controller-overlay.html"></div>
+            <div class="newgame_button_container d-none" id="newgame_button_container">
+                <div id="newgame_button_inner_container" class="newgame_button_inner_container_fullscreen_off">
+                    <img id="newgame_button" class="newgame_button_fullscreen_off" onclick="exitGame()" src="assets/img/icons/newGame_Button_reversed.png" alt="">
+                </div>
+            </div>
             <canvas id="canvas" class="d-none"></canvas>
-            <div class="newgame_button_container"><img id="newgame_button" onclick="exitGame()" src="assets/img/icons/newGame_Button.png" alt=""></div>
         </div>
     </div>
 </body>

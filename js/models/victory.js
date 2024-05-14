@@ -1,15 +1,15 @@
-class You_win extends DrawableObject {
+class Victory extends DrawableObject {
 
-    YOU_WIN = [
-        'assets/you_win/you_win_1.png',
-        'assets/you_win/you_win_2.png',
-        'assets/you_win/you_win_3.png',
+    VICTORY = [
+        'assets/victory/victory_1.png',
+        'assets/victory/victory_2.png',
+        'assets/victory/victory_3.png',
     ];
 
 
     constructor(x, y, width, height) {
-        super().loadImage('assets/you_win/you_win_1.png');
-        this.loadImages(this.YOU_WIN);
+        super().loadImage('assets/victory/victory_1.png');
+        this.loadImages(this.VICTORY);
         this.x = x;
         this.y = y;
         this.width = width;
@@ -20,10 +20,12 @@ class You_win extends DrawableObject {
     animateVictory() {
         resetMusicTime(victory_music);
         setInterval(() => {
-            this.playAnimation(this.YOU_WIN)
+            this.playAnimation(this.VICTORY)
             if (world && world.level.boss_dead && !world.character.is_Dead) {
+                stopBossFightMusic();
                 stopLevelBackgroundMusic();
                 startVictorySound();
+                showNewGameButton();
             }
         }, 100);
     }

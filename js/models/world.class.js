@@ -40,9 +40,9 @@ class World {
     initStatusbar() {
         this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11);
         this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15);
-        this.statusbar_HEALTH.onClick = function() {
+        this.statusbar_HEALTH.onClick = function () {
             console.log('clicked on healthbar');
-          };
+        };
     }
 
 
@@ -211,9 +211,9 @@ class World {
     }
 
 
-    drawYouWin() {
+    drawVictory() {
         if (this.level.boss_dead) {
-            this.addObjectsToMap(this.level.youWin);
+            this.addObjectsToMap(this.level.victory);
         }
     }
 
@@ -234,6 +234,13 @@ class World {
 
     initBossEnemyHealthbar() {
         this.addToMap(this.bossEnemy_HEALTHBAR);
+    }
+
+
+    drawGameTip() {
+        ctx.font = "48px VT323";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Hello world", 0, 100);
     }
 
 
@@ -259,11 +266,12 @@ class World {
             // moves camera view back to default
             this.ctx.translate(-this.camera_x, this.camera_y);
             // -----
+            drawGameTip();
             this.addToMap(this.statusbar_HEALTH);
             this.addToMap(this.statusbar_ENERGY);
             this.drawBossEnemyHealthbar();
             this.drawGameOver();
-            this.drawYouWin();
+            this.drawVictory();
             // Draw wird immer wieder aufgerufen
             let self = this;
             requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded

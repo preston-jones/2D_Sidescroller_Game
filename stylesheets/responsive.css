@@ -58,6 +58,11 @@
     }
 } */
 
+@media only screen and (max-height: 920px) {
+    #newgame_button {
+        margin-bottom: 7%;
+    }
+}
 
 @media only screen and (max-height: 420px) {
     #header {
