@@ -237,7 +237,7 @@ class World {
     }
 
 
-    drawGameTip() {
+    drawTextOnGameStart() {
         if (world && world.character.x <= 100) {
             this.ctx.font = "16px VT323";
             this.ctx.fillStyle = 'white';
@@ -268,7 +268,7 @@ class World {
             // moves camera view back to default
             this.ctx.translate(-this.camera_x, this.camera_y);
             // -----
-            this.drawGameTip();
+            this.drawTextOnGameStart();
             this.addToMap(this.statusbar_HEALTH);
             this.addToMap(this.statusbar_ENERGY);
             this.drawBossEnemyHealthbar();
