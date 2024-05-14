@@ -43,7 +43,7 @@ function startBackgroundMusic() {
  * Starts the background music and the game sounds when the game starts.
  */
 function startSoundByGamestart() {
-    level_bgr_music.currentTime = 0;
+    resetMusicTime(level_bgr_music)
     level_bgr_music.play();
     soundMuted = true;
     toggleSound();
@@ -120,4 +120,77 @@ function enableSound() {
     fireworks_sound.muted = false;
     victory_music.muted = false;
     soundMuted = false;
+}
+
+
+/**
+ * Function to start the Game Over sound.
+ */
+function startGameOverSound() {
+    gameover_sound.play();
+    setTimeout(() => {
+        resetMusicTime(game_over_music);
+        game_over_music.play();
+        game_over_music.loop = true;
+    }, 2000);
+}
+
+
+/**
+ * Function to start the Victory sound.
+ */
+function startVictorySound() {
+    victory_music.play();
+    fireworks_sound.play();
+    victory_music.loop = true;
+    fireworks_sound.loop = true;
+}
+
+
+/**
+ * Starts the Level Background Music.
+ */
+function startLevelBackgroundMusic() {
+    resetMusicTime(level_bgr_music);
+    level_bgr_music.play();
+    level_bgr_music.muted = false;
+}
+
+
+/**
+ * Stops the Level Background Music.
+ */
+function stopLevelBackgroundMusic() {
+    level_bgr_music.pause();
+    level_bgr_music.muted = true;
+}
+
+
+/**
+ * Resets the time of the music file to 0.
+ * @param {Audio} musicFile - The music file to reset the time.
+ */
+function resetMusicTime(musicFile) {
+    musicFile.currentTime = 0;
+}
+
+
+/**
+ * Starts the Bossfight Music.
+ */
+function startBossFightMusic() {
+    resetMusicTime(boss_fight_music)
+    boss_fight_music.play();
+    if (boss_fight_music.muted) {
+        boss_fight_music.muted = true;
+    }
+}
+
+
+/**
+ * Stops the Bossfight Music.
+ */
+function stopBossFightMusic() {
+    boss_fight_music.pause();
+    boss_fight_music.muted = true;
 }

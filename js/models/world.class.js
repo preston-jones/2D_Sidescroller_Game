@@ -40,6 +40,9 @@ class World {
     initStatusbar() {
         this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11);
         this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15);
+        this.statusbar_HEALTH.onClick = function() {
+            console.log('clicked on healthbar');
+          };
     }
 
 
@@ -78,17 +81,17 @@ class World {
 
 
     shoot() {
-            if (this.keyboard.C && !this.shotFired && this.character.energy > 0 && !this.is_Hurt && !this.character.is_Dead) {
-                shoot_sound.play();
-                this.characterShot = [];
-                this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
-                this.shots.push(this.characterShot);
-                this.character.energy -= 1;
-                this.character.playAnimation_SHOOT();
-                this.checkEnergyStatus();
-                this.checkCollisions();
-                this.shotFired = true;
-            }
+        if (this.keyboard.C && !this.shotFired && this.character.energy > 0 && !this.is_Hurt && !this.character.is_Dead) {
+            shoot_sound.play();
+            this.characterShot = [];
+            this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
+            this.shots.push(this.characterShot);
+            this.character.energy -= 1;
+            this.character.playAnimation_SHOOT();
+            this.checkEnergyStatus();
+            this.checkCollisions();
+            this.shotFired = true;
+        }
     }
 
 
@@ -108,7 +111,10 @@ class World {
         if (this.character.health === 6) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_3.png', 10, 7, 55, 11); }
         if (this.character.health === 4) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_4.png', 10, 7, 55, 11); }
         if (this.character.health === 2) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_5.png', 10, 7, 55, 11); }
-        if (this.character.health === 0) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11); }
+        if (this.character.health === 0) {
+            this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11);
+            this.healthStatusBlinkAnimation();
+        }
     }
 
 
@@ -119,6 +125,20 @@ class World {
         if (bossEnemyHealth === 4) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_4.png', 235, 7, 55, 11); }
         if (bossEnemyHealth === 2) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_5.png', 235, 7, 55, 11); }
         if (bossEnemyHealth === 0) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_6.png', 235, 7, 55, 11); }
+    }
+
+
+    healthStatusBlinkAnimation() {
+        let blinkTimes = 0;
+        this.isInverted = false;
+        this.blinkInterval = setInterval(() => {
+            this.isInverted = blinkTimes % 2 === 0;
+            blinkTimes++;
+            if (blinkTimes >= 5 || this.character.health > 0) {
+                clearInterval(this.blinkInterval);
+                this.isInverted = false;
+            }
+        }, 50);
     }
 
 
@@ -185,6 +205,7 @@ class World {
 
     drawGameOver() {
         if (this.character.is_Dead) {
+            console.log('Game Over');
             this.addObjectsToMap(this.level.gameOver);
         }
     }
@@ -214,7 +235,7 @@ class World {
     initBossEnemyHealthbar() {
         this.addToMap(this.bossEnemy_HEALTHBAR);
     }
-    
+
 
     draw() {
         if (!exit_Game && canvas && this.ctx) {

@@ -2,15 +2,15 @@ class Character extends MovableObject {
 
     width = 60;
     height = 50;
-    // x = 58;
-    x = 1750;
+    x = 58;
+    // x = 1750;
     y = 75;
     offset_left = 15;
     offset_top = 10;
     offset_right = -30;
     offset_bottom = -10;
     speed = 2;
-    health = 10;
+    health = 2;
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
@@ -297,10 +297,10 @@ class Character extends MovableObject {
 
 
     playAnimation_SHOOT() {
-            this.playAnimation(this.IMAGES_SHOOT);
-            if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_RUN_SHOOT);
-            }
+        this.playAnimation(this.IMAGES_SHOOT);
+        if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGES_RUN_SHOOT);
+        }
     }
 
 
@@ -314,12 +314,11 @@ class Character extends MovableObject {
 
 
     playAnimation_DEAD() {
-        let index = world.level.enemies.findIndex(enemy => enemy instanceof BossEnemy); // MERKEN und LERNEN!!!
         if (this.is_Dead) {
-            level_bgr_music.pause();
+            stopLevelBackgroundMusic();
             this.playAnimation(this.IMAGES_DEAD);
             if (this.isDeadCounter) {
-                gameover_sound.play();
+                startGameOverSound();
                 this.isDeadCounter = false;
             }
         }

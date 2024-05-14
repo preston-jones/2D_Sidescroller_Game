@@ -14,19 +14,16 @@ class You_win extends DrawableObject {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.animateYouWin();
+        this.animateVictory();
     }
 
-    animateYouWin() {
+    animateVictory() {
+        resetMusicTime(victory_music);
         setInterval(() => {
-            game_over_music.currentTime = 0;
             this.playAnimation(this.YOU_WIN)
             if (world && world.level.boss_dead && !world.character.is_Dead) {
-                level_bgr_music.pause();
-                victory_music.play();
-                fireworks_sound.play();
-                victory_music.loop = true;
-                fireworks_sound.loop = true;
+                stopLevelBackgroundMusic();
+                startVictorySound();
             }
         }, 100);
     }

@@ -66,7 +66,7 @@ function initLevel1() {
             new CollectibleHealth(1800, 112, 15, 15)
         ],
         [
-            new Game_over(0, -20, 300, 200)
+            new Game_over(0, -45, 300, 200)
         ],
         [
             new You_win(45, 0, 200, 100)

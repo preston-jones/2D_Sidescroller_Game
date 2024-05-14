@@ -16,6 +16,10 @@ class BossEnemy extends MovableObject {
     isUp = true;
     isAttacking = false; // Initialize isAttacking to false
     hasAttacked = false; // Initialize hasAttacked to false
+    moveInterval;
+    animateInterval;
+    attackAnimationInterval;
+    attackCharacterInterval;
 
     IMAGES_FLY = [
         'assets/sprites/enemies/Wasp/wasp1.png',
@@ -55,8 +59,8 @@ class BossEnemy extends MovableObject {
             if (world && world.character.x >= 1949) {
                 clearInterval(waitInterval);
                 clearInterval(startInterval);
-                this.stopLevelBackgroundMusic();
-                this.startBossFightMusic();
+                stopLevelBackgroundMusic();
+                startBossFightMusic();
                 world.character.isInBattleArena = true;
                 world.character.enteredBattleArena = true;
                 this.animateBossFight();
@@ -65,37 +69,13 @@ class BossEnemy extends MovableObject {
     }
 
 
-    stopLevelBackgroundMusic() {
-        level_bgr_music.pause();
-        level_bgr_music.currentTime = 0;
-        level_bgr_music.muted = true;
-    }
-
-
-    startBossFightMusic() {
-        boss_fight_music.currentTime = 0;
-        boss_fight_music.play();
-        if (boss_fight_music.muted) {
-            boss_fight_music.muted = true;
-        }
-    }
-
-
-    stopBossFightMusic() {
-        boss_fight_music.pause();
-        boss_fight_music.muted = true;
-    }
-
-
     animateBossFight() {
-        let moveInterval;
-        let animateInterval;
         if (!this.is_Dead) {
-            animateInterval = setInterval(() => {
+            this.animateInterval = setInterval(() => {
                 this.playAnimation(this.IMAGES_FLY);
-                this.checkDeathOfBossfight(animateInterval);
+                this.checkDeathOfBossfight();
             }, 150);
-            moveInterval = setInterval(() => {
+            this.moveInterval = setInterval(() => {
                 if (this.x <= 2044) {
                     this.moveLeftAnimation();
                 }
@@ -106,20 +86,19 @@ class BossEnemy extends MovableObject {
         }
 
         setTimeout(() => {
-            clearInterval(moveInterval);
-            clearInterval(animateInterval);
-            this.attackCharacter(animateInterval);
+            clearInterval(this.moveInterval);
+            clearInterval(this.animateInterval);
+            this.attackCharacter();
         }, 6000);
     }
 
 
-    attackCharacter(animateInterval) {
-        let attackAnimationInterval = setInterval(() => {
+    attackCharacter() {
+        this.attackAnimationInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_FLY);
-            this.checkDeathOfBossfight(animateInterval);
         }, 150);
 
-        let attackCharacterInterval = setInterval(() => {
+        this.attackCharacterInterval = setInterval(() => {
             if (this.x < world.character.x) {
                 this.otherDirection = false;
                 this.x += 6 * this.speed; // Move twice as fast
@@ -133,8 +112,8 @@ class BossEnemy extends MovableObject {
                 // this.moveUp = true;
             }
             if (this.isColliding(world.character)) {
-                clearInterval(attackCharacterInterval);
-                clearInterval(attackAnimationInterval);
+                clearInterval(this.attackCharacterInterval);
+                clearInterval(this.attackAnimationInterval);
                 setTimeout(() => {
                     this.animateBossFight();
                 }, 25);
@@ -143,23 +122,23 @@ class BossEnemy extends MovableObject {
     }
 
 
-    checkDeathOfBossfight(animateInterval) {
+    checkDeathOfBossfight() {
         if (this.is_Dead) {
-            this.stopBossFightMusic();
-            this.bossEnemyIsDead(this.IMAGES_ENEMY_EXPLOTION, animateInterval);
+            stopBossFightMusic();
+            this.bossEnemyIsDead(this.IMAGES_ENEMY_EXPLOTION);
         }
         if (world.character.is_Dead) {
-            this.stopBossFightMusic();
+            stopBossFightMusic();
         }
     }
 
 
-    bossEnemyIsDead(array, animateInterval) {
+    bossEnemyIsDead(array) {
         this.playAnimation_Enemy_DEAD(array);
         explosion_sound.play();
-        clearInterval(animateInterval);
+        clearInterval(this.animateInterval);
         setTimeout(() => {
-            // Assuming world.enemies is the array holding all enemy objects
+            // world.enemies is the array holding all enemy objects.
             let index = world.level.enemies.indexOf(this);
             if (index > -1) {
                 world.level.enemies.splice(index, 1);
