@@ -51,13 +51,13 @@ class BossEnemy extends MovableObject {
 
 
     animateBossEnemy(images_arr) {
-        let waitInterval = setInterval(() => {
+        this.animateInterval = setInterval(() => {
             this.playAnimation(images_arr);
+            this.checkDeathOfBossfight();
         }, 150);
 
         let startInterval = setInterval(() => {
             if (world && world.character.x >= 1949) {
-                clearInterval(waitInterval);
                 clearInterval(startInterval);
                 stopLevelBackgroundMusic();
                 startBossFightMusic();
@@ -71,10 +71,6 @@ class BossEnemy extends MovableObject {
 
     animateBossFight() {
         if (!this.is_Dead) {
-            this.animateInterval = setInterval(() => {
-                this.playAnimation(this.IMAGES_FLY);
-                this.checkDeathOfBossfight();
-            }, 150);
             this.moveInterval = setInterval(() => {
                 if (this.x <= 2044) {
                     this.moveLeftAnimation();
@@ -87,17 +83,12 @@ class BossEnemy extends MovableObject {
 
         setTimeout(() => {
             clearInterval(this.moveInterval);
-            clearInterval(this.animateInterval);
             this.attackCharacter();
         }, 6000);
     }
 
 
     attackCharacter() {
-        this.attackAnimationInterval = setInterval(() => {
-            this.playAnimation(this.IMAGES_FLY);
-        }, 150);
-
         this.attackCharacterInterval = setInterval(() => {
             if (this.x < world.character.x) {
                 this.otherDirection = false;
@@ -113,7 +104,6 @@ class BossEnemy extends MovableObject {
             }
             if (this.isColliding(world.character)) {
                 clearInterval(this.attackCharacterInterval);
-                clearInterval(this.attackAnimationInterval);
                 setTimeout(() => {
                     this.animateBossFight();
                 }, 25);
