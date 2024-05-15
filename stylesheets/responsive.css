@@ -38,17 +38,6 @@
         width: 100%;
         justify-content: space-evenly;
     }
-
-    .fullscreen {
-        position: static;
-    }
-}
-
-
-@media only screen and (max-width: 720px) {
-    .fullscreen {
-        position: inherit;
-    }
 }
 
 /* for the new game button in fullscreen mode */

@@ -25,6 +25,60 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
+.container {
+    /* width: 854px; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* gap: 64px; */
+}
+
+canvas {
+    /* width: 768px; */
+    width: 720px;
+    height: 384px;
+    border: 2px solid #E7D63F;
+}
+
+/* GLOBAL */
+h1 {
+    font-size: 100px;
+    font-family: 'Arial', sans-serif;
+    color: #e7d63f;
+    margin: 0;
+    text-shadow: -9px -7px 2px #3b3b3b;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.hd_rendering {
+    image-rendering: pixelated;
+}
+
+.hyperlink {
+    text-decoration: none;
+    color: unset;
+}
+
+.hyperlink:hover {
+    transform: scale(1.05);
+    cursor: crosshair;
+    filter: drop-shadow(1px 0 10px #FC0);
+}
+
+/* BACKGROUND */
 .animated_background {
     background-image: url('../assets/img/main_bgr.gif');
     background-repeat: no-repeat;
@@ -36,22 +90,22 @@ body {
     background-color: rgba(15, 15, 15, 0.156);
 }
 
-.container {
-    /* width: 854px; */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    /* gap: 64px; */
-}
-
+/* HEADER */
 #headline_logo {
     width: 480px;
     text-align: center;
     margin-top: 64px;
 }
 
+#header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 24px 0 24px 0;
+}
+
+/* MENU and SUBMENU */
 .headline_submenu {
     width: 640px;
     text-align: center;
@@ -59,6 +113,18 @@ body {
     display: flex;
     justify-content: center;
     font-size: 48px;
+}
+
+.submenu_container {
+    z-index: 50;
+    width: 768px;
+    height: 384px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 32px;
+    gap: 16px;
 }
 
 .menu_content_container {
@@ -71,6 +137,7 @@ body {
     text-align: center;
 }
 
+/* HOW TO PLAY PAGE */
 .control_keys_container {
     display: flex;
     justify-content: center;
@@ -88,26 +155,7 @@ body {
     opacity: inherit;
 }
 
-canvas {
-    /* width: 768px; */
-    width: 720px;
-    height: 384px;
-    /* image-rendering: pixelated; */
-    border: 2px solid #E7D63F;
-}
-
-.submenu_container {
-    z-index: 50;
-    width: 768px;
-    height: 384px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 32px;
-    gap: 16px;
-}
-
+/* CHARACTER SELECTION PAGE */
 .character_select_container {
     display: flex;
     justify-content: center;
@@ -133,6 +181,7 @@ canvas {
     cursor: crosshair;
 }
 
+/* NAVBAR */
 .navbar {
     /* position: absolute; */
     z-index: 99;
@@ -160,6 +209,22 @@ canvas {
     width: 180px;
 }
 
+.nav_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 32px;
+    object-fit: contain;
+}
+
+.nav_button:hover {
+    transform: scale(1.05);
+    cursor: crosshair;
+    filter: drop-shadow(1px 0 10px #FC0);
+}
+
+/* STARTSCREEN */
 #headline_startscreen {
     width: 280px;
     margin-bottom: 72px;
@@ -184,6 +249,22 @@ canvas {
     font-weight: 400;
 }
 
+.startscreen_button_arrow {
+    visibility: hidden;
+}
+
+.startscreen_button:hover .startscreen_button_arrow {
+    visibility: visible;
+}
+
+.startscreen_button:hover {
+    transform: scale(1.05);
+    cursor: crosshair;
+    text-shadow: #FC0 1px 0 10px;
+    font-weight: 700;
+}
+
+/* BACK TO MENU BUTTON */
 .back_button::before {
     content: "<Back to Menu>";
 }
@@ -206,41 +287,7 @@ canvas {
     font-weight: 700;
 }
 
-.startscreen_button_arrow {
-    visibility: hidden;
-}
-
-.startscreen_button:hover .startscreen_button_arrow {
-    visibility: visible;
-}
-
-.startscreen_button:hover {
-    transform: scale(1.05);
-    cursor: crosshair;
-    text-shadow: #FC0 1px 0 10px;
-    font-weight: 700;
-}
-
-.hd_rendering {
-    image-rendering: pixelated;
-}
-
-#header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    margin: 24px 0 24px 0;
-}
-
-h1 {
-    font-size: 100px;
-    font-family: 'Arial', sans-serif;
-    color: #e7d63f;
-    margin: 0;
-    text-shadow: -9px -7px 2px #3b3b3b;
-}
-
+/* ROTATE DEVICE */
 .rotate_text {
     display: flex;
     justify-content: center;
@@ -279,48 +326,11 @@ h1 {
     margin: 0 auto;
 }
 
-.d-none {
-    display: none !important;
-}
-
-.d-flex {
-    display: flex !important;
-}
-
-.d-block {
-    display: block !important;
-}
-
-.nav_button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: auto;
-    height: 32px;
-    object-fit: contain;
-}
-
-.nav_button:hover {
-    transform: scale(1.05);
-    cursor: crosshair;
-    filter: drop-shadow(1px 0 10px #FC0);
-}
-
+/* CREDITS SELECTION PAGE */
 .credits {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.hyperlink {
-    text-decoration: none;
-    color: unset;
-}
-
-.hyperlink:hover {
-    transform: scale(1.05);
-    cursor: crosshair;
-    filter: drop-shadow(1px 0 10px #FC0);
 }
 
 .icon {
@@ -333,7 +343,7 @@ h1 {
     margin-right: 8px;
 }
 
-/* Settings Buttons */
+/* SETTINGS BUTTONS */
 .settings_button_container {
     display: flex;
     justify-content: center;
@@ -356,6 +366,7 @@ h1 {
     object-fit: contain;
 }
 
+/* NEW GAME BUTTON */
 .newgame_button_container {
     position: absolute;
     top: 0;

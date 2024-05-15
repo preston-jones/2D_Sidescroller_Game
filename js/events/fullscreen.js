@@ -24,7 +24,7 @@ function toggleFullScreen() {
     else if (document.fullscreenElement) {
         turnFullscreenOff();
     }
-    toggleHeader ();
+    toggleHeader();
     toggleAnimatedBackground();
 }
 

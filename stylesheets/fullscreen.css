@@ -7,7 +7,7 @@
     border: none;
     /* aspect-ratio: 16 / 9; */
     aspect-ratio: 720 / 384;
-    position: static;
+    position: inherit;
 }
 
 #fullscreen {

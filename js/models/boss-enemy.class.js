@@ -72,7 +72,7 @@ class BossEnemy extends MovableObject {
     animateBossFight() {
         if (!this.is_Dead) {
             this.moveInterval = setInterval(() => {
-                if (this.x <= 2044) {
+                if (this.x <= 2044) { /* 2044 is suggested value for the middle of the screen */
                     this.moveLeftAnimation();
                 }
                 if (this.x > 2044) {

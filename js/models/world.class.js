@@ -120,12 +120,13 @@ class World {
 
 
     checkBossEnemyHealthStatus(bossEnemyHealth) {
-        if (bossEnemyHealth <= 10) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth <= 8) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_2.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth <= 6) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_3.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth <= 4) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_4.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth <= 2) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_5.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 0) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_6.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 10 || bossEnemyHealth === 9) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 8 || bossEnemyHealth === 7) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_2.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 6 || bossEnemyHealth === 5) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_3.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 4 || bossEnemyHealth === 3) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_4.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 2) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_5.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 1) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_6.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 0) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_7.png', 235, 7, 55, 11); }
     }
 
 
@@ -245,13 +246,14 @@ class World {
             this.ctx.fillStyle = 'white';
             this.ctx.fillText("Best Played In Fullscreen Mode", 50, 60);
         }
-        if (world && world.character  && this.character.x >= 100) {
+        if (world && world.character && this.character.x >= 100) {
             this.characterHasMoved = true;
         }
     }
 
 
     draw() {
+        toggleHeader(); // This function is called to toggle the header on and off. It is defined in js/events/fullscreen.js. It is called here to check frequently if the header should be displayed or not.
         if (!exit_Game && canvas && this.ctx) {
             this.enterBossArenaEffect();
             this.ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears the canvas
