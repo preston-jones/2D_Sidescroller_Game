@@ -1,5 +1,14 @@
+/**
+ * Victory class
+ * 
+ * Represents the victory screen.
+ * 
+ * @class Victory
+ * @extends {DrawableObject}
+ */
 class Victory extends DrawableObject {
 
+    /* Arrays of the images paths for the animations of this object. */
     VICTORY = [
         'assets/victory/victory_1.png',
         'assets/victory/victory_2.png',
@@ -7,6 +16,14 @@ class Victory extends DrawableObject {
     ];
 
 
+    /**
+     * The constructor of the Victory class.
+     * 
+     * @param {number} x - The x coordinate of the victory object on the canvas.
+     * @param {number} y - The y coordinate of the victory object on the canvas.
+     * @param {number} width - The width of the victory object.
+     * @param {number} height - The height of the victory object.
+     */
     constructor(x, y, width, height) {
         super().loadImage('assets/victory/victory_1.png');
         this.loadImages(this.VICTORY);
@@ -17,6 +34,10 @@ class Victory extends DrawableObject {
         this.animateVictory();
     }
 
+
+    /**
+     * Animates the victory screen.
+     */
     animateVictory() {
         resetMusicTime(victory_music);
         setInterval(() => {
@@ -29,5 +50,4 @@ class Victory extends DrawableObject {
             }
         }, 100);
     }
-
 }

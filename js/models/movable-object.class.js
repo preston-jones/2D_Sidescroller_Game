@@ -1,3 +1,10 @@
+/**
+ * MovableObject class
+ * 
+ * The MovableObject class is a class that is used to create objects that can be moved on the canvas.
+ * 
+ * @class MovableObject
+ */
 class MovableObject extends DrawableObject {
     speed;
     otherDirection = false;
@@ -18,11 +25,19 @@ class MovableObject extends DrawableObject {
     hitCooldown = 1000; // Cooldown period in milliseconds
 
 
+    /**
+     * This function checks if the object is above the ground.
+     * 
+     * @returns {boolean} - Returns true if the object is above the ground, otherwise false.
+     */
     isAboveGround() {
         return this.y < world.level.level_end_bottom_y;
     }
 
 
+    /**
+     * This function applies gravity to the object.
+     */
     applyGravity() {
         setInterval(() => {
             if (world && !world.isOnPlatform) {
@@ -49,6 +64,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * This function makes the object jump.
+     */
     jump() {
         if (this.y === world.level.level_end_bottom_y) {
             this.speedY = 11;
@@ -59,6 +77,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * This function checks if the object is colliding with another object.
+     * 
+     * @param {MovableObject} obj - The object to check for collision with.
+     */
     isColliding(obj) {
         return this.x + this.width + this.offset_right > obj.x + obj.offset_left &&
             this.y + this.height + this.offset_bottom > obj.y + obj.offset_top &&
@@ -67,6 +90,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * This function checks if the object is hit by another object.
+     * If the object is an instance of Character or an enemy, the object loses health points.
+     * It also checks if the object is dead.
+     */
     hit() {
         if (this instanceof Character) {
             let currentTime = new Date().getTime();
@@ -106,6 +134,10 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * This function plays the hurt animation of the enemy object.
+     * The enemy object blinks 5 times.
+     */
     enemyHitAnimation() {
         let blinkTimes = 0;
         this.isInverted = false; // Add this line
@@ -120,11 +152,21 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * This function checks if the object is dead.
+     * 
+     * @returns {boolean} - Returns true if the object is dead, otherwise false.
+     */
     isDead() {
         return this.health == 0;
     }
 
 
+    /**
+     * Function to move the object to the left.
+     * 
+     * @param {number} speed - The speed at which the object moves to the left.
+     */
     moveToLeft(speed) {
         this.x -= speed;
         if (this instanceof Character) {
@@ -136,6 +178,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Function to move the object to the right.
+     * 
+     * @param {number} speed - The speed at which the object moves to the right.
+     */
     moveToRight(speed) {
         this.x += speed;
         if (this instanceof Character) {
@@ -147,26 +194,47 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Function to let the object stay at the same position.
+     * This function is used to stop the movement of the object.
+     */
     stay() {
         this.x = this.x;
     }
 
 
+    /**
+     * Function to move the object down.
+     */
     moveDown(speed) {
         this.y -= speed;
     }
 
 
+    /**
+     * Function to set the impact variable to true when the object is hit by a shot.
+     */
     shotImpact() {
         impact = true;
     }
 
 
+    /**
+     * Function to play the death animation of the enemy object.
+     * 
+     * @param {string[]} array - The array of images to play the death animation.
+     */
     playAnimation_Enemy_DEAD(array) {
         this.playAnimation(array);
     }
 
 
+    /**
+     * Function to move the enemy object and play the animation.
+     * 
+     * @param {string[]} images_arr - The array of images to play the animation.
+     * @param {string[]} array - The array of images to play the explosion animation when the enemy object is dead.
+     */
     animateEnemy(images_arr, array) {
         let moveInterval = setInterval(() => {
             this.moveEnemy(moveInterval);
@@ -186,6 +254,14 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Function to animate the enemy object.
+     * If the enemy object is dead, the death animation is played and the function to erase the object from the canvas is called.
+     * 
+     * @param {string[]} images_arr - The array of images to play the animation.
+     * @param {string[]} array - The array of images to play the explosion animation when the enemy object is dead.
+     * @param {number} animateInterval - The interval at which the animation is played.
+     */
     enemyAnimation(images_arr, array, animateInterval) {
         if (!this.is_Dead) {
             this.playAnimation(images_arr);
@@ -201,6 +277,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Function to erase the enemy object from the canvas.
+     */
     eraseEnemy() {
         // Assuming world.enemies is the array holding all enemy objects
         let index = world.level.enemies.indexOf(this);
@@ -210,6 +289,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * Function to move the enemy object.
+     * 
+     * @param {number} moveInterval - The interval at which the enemy object is moved.
+     */
     moveEnemy(moveInterval) {
         if (world && world.character.x >= 60) {
             if (!this.is_Dead) {
@@ -221,5 +305,4 @@ class MovableObject extends DrawableObject {
             }
         }
     }
-
 }

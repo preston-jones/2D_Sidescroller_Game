@@ -65,6 +65,11 @@ class BossEnemy extends MovableObject {
     }
 
 
+    /**
+     * The method to animate the boss enemy object.
+     * 
+     * @param {Array} images_arr The array of the images paths for the animations of this object.
+     */
     animateBossEnemy(images_arr) {
         this.animateInterval = setInterval(() => {
             this.playAnimation(images_arr);
@@ -84,14 +89,17 @@ class BossEnemy extends MovableObject {
     }
 
 
+    /**
+     * The method to animate the boss enemy object during the boss fight.
+     */
     animateBossFight() {
         if (!this.is_Dead) {
             this.moveInterval = setInterval(() => {
                 if (this.x <= 2044) { /* 2044 is suggested value for the middle of the screen */
-                    this.moveLeftAnimation();
+                    this.moveEnemyBossLeft();
                 }
                 if (this.x > 2044) {
-                    this.moveRightAnimation();
+                    this.moveEnemyBossRight();
                 }
             }, 1000 / 50);
         }
@@ -103,6 +111,10 @@ class BossEnemy extends MovableObject {
     }
 
 
+
+    /**
+     * Function of the object BossEnemiy to attack the character object.
+     */
     attackCharacter() {
         this.attackCharacterInterval = setInterval(() => {
             if (this.x < world.character.x) {
@@ -127,6 +139,9 @@ class BossEnemy extends MovableObject {
     }
 
 
+    /**
+     * The method to check the death of the boss enemy object.
+     */
     checkDeathOfBossfight() {
         if (this.is_Dead) {
             this.bossEnemyIsDead(this.IMAGES_ENEMY_EXPLOTION);
@@ -134,6 +149,10 @@ class BossEnemy extends MovableObject {
     }
 
 
+    /**
+     * The method to play the animation of the boss enemy object when it is dead.
+     * It also removes the object from the world.
+     */
     bossEnemyIsDead(array) {
         this.playAnimation_Enemy_DEAD(array);
         explosion_sound.play();
@@ -149,7 +168,10 @@ class BossEnemy extends MovableObject {
     }
 
 
-    moveRightAnimation() {
+    /**
+     * Function to move the boss enemy object to the right.
+     */
+    moveEnemyBossRight() {
         if (!this.moveRight) {
             this.x -= this.speed;
             if (this.x <= 2100) {
@@ -194,8 +216,11 @@ class BossEnemy extends MovableObject {
         this.hasAttacked = false;
     }
 
-
-    moveLeftAnimation() {
+    /**
+     * Function to move the boss enemy object to the left.
+     * This function is cakked after the boss enemy is attacking the character.
+     */
+    moveEnemyBossLeft() {
         if (!this.moveRight) {
             this.x -= this.speed;
             if (this.x <= 1880) {
@@ -241,7 +266,12 @@ class BossEnemy extends MovableObject {
     }
 
 
-    moveUpAnimation() {
+
+    /**
+     * Function to move the boss enemy object up.
+     * This function is used after the boss enemy is attacking the character.
+     */
+    moveEnemyBossUp() {
         if (this.isUp) {
             if (!this.moveUp) {
                 this.y -= 0.3;

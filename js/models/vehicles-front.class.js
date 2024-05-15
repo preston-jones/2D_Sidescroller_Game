@@ -1,3 +1,11 @@
+/**
+ * VehiclesFront class
+ * 
+ * Class for the vehicle object that moves in the background of the game.
+ * 
+ * @class VehiclesFront
+ * @extends MovableObject
+ */
 class VehiclesFront extends MovableObject {
     height;
     width;
@@ -5,6 +13,18 @@ class VehiclesFront extends MovableObject {
     direction;
     currentImage = 0;
 
+
+    /**
+     * The constructor of the VehiclesFront class.
+     * 
+     * @param {string} image - The image path of the vehicle.
+     * @param {number} x - The x coordinate of the vehicle.
+     * @param {number} y - The y coordinate of the vehicle.
+     * @param {number} width - The width of the vehicle.
+     * @param {number} height - The height of the vehicle.
+     * @param {number} speed - The speed of the vehicle.
+     * @param {number} direction - The direction of the vehicle.
+     */
     constructor(image, x, y, width, height, speed, direction) {
         super().loadImage(image);
         this.x = x;
@@ -17,6 +37,11 @@ class VehiclesFront extends MovableObject {
     }
 
 
+    /**
+     * Animates the vehicle.
+     * 
+     * @param {number} y - The y coordinate of the vehicle.
+     */
     animateVehicle(y) {
         setInterval(() => {
             if (this.x >= 2300) {

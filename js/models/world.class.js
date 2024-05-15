@@ -1,3 +1,12 @@
+/**
+ * World class
+ * 
+ * This class is responsible for the game world.
+ * It contains all the objects that are part of the game world.
+ * 
+ * @class World
+ * @extends {MovableObject}
+ */
 class World {
     character;
     control = true;
@@ -17,8 +26,16 @@ class World {
     statusbar_ENERGY;
     bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11);
     characterHasMoved = false;
+    invert;
+    filterEffectInterval;
 
 
+    /**
+     * The constructor of the World class.
+     * 
+     * @param {HTMLCanvasElement} canvas - The canvas element.
+     * @param {Keyboard} keyboard - The keyboard object.
+     */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.ctx.filter = 'invert(0)';
@@ -29,6 +46,10 @@ class World {
     }
 
 
+    /**
+     * Starts the game level.
+     * Creates a new character object.
+     */
     startLevel() {
         this.character = new Character();
         this.initStatusbar();
@@ -38,42 +59,70 @@ class World {
     }
 
 
+    /**
+     * Initializes the statusbar objects.
+     * Creates the health and energy statusbars.
+     */
     initStatusbar() {
         this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11);
         this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15);
-        this.statusbar_HEALTH.onClick = function () {
-            console.log('clicked on healthbar');
-        };
     }
 
 
+    /**
+     * Launches the flickering filter effect when the character enters the boss arena.
+     */
     enterBossArenaEffect() {
         if (this.character && this.character.isInBattleArena && this.character.enteredBattleArena) {
-            let invert = false;
-            const intervalId = setInterval(() => {
-                if (invert) {
-                    this.ctx.filter = 'hue-rotate(90deg)';
-                }
-                else {
-                    this.ctx.filter = 'hue-rotate(-0.25turn)';
-                }
-                invert = !invert;
-            }, 1000 / 60); // Change this value to adjust the speed of the flickering
+            this.setContextFilter();
 
             setTimeout(() => {
-                clearInterval(intervalId);
-                this.ctx.filter = 'invert(0)'; // Reset the filter after the flickering ends
+                clearInterval(this.filterEffectInterval);
+                this.resetContextFilter();
                 this.character.enteredBattleArena = false;
-            }, 1000); // Stop the flickering after 1 second
+            }, 1000); // Stop the flickering filter effect after 1 second.
         }
     }
 
 
+    /**
+     * Set the flickering filter effect.
+     * The filter effect is set to flicker between two filter effects.
+     */
+    setContextFilter() {
+        this.invert = false;
+        this.filterEffectInterval = setInterval(() => {
+            if (this.invert) {
+                this.ctx.filter = 'hue-rotate(90deg)';
+            }
+            else {
+                this.ctx.filter = 'hue-rotate(-0.25turn)';
+            }
+            this.invert = !invert;
+        }, 1000 / 60); // Change this value to adjust the speed of the flickering
+    }
+
+
+    /**
+     * Reset the filter after the flickering filter effect ends.
+     */
+    resetContextFilter() {
+        this.ctx.filter = 'invert(0)';
+    }
+
+
+    /**
+     * Copies the world object to the character object.
+     * This is done to make the world object accessible in the character object.
+     */
     setWorld() {
         this.character.world = this;
     }
 
 
+    /**
+     * Starts an interval to check for collisions.
+     */
     run() {
         setInterval(() => {
             this.checkCollisions();
@@ -81,6 +130,11 @@ class World {
     }
 
 
+    /**
+     * Checks if the character is allowed to shoot.
+     * Its then creates a new shot object and adds it to the shots array.
+     * The character's energy is reduced by 1.
+     */
     shoot() {
         if (this.keyboard.C && !this.shotFired && this.character.energy > 0 && !this.is_Hurt && !this.character.is_Dead) {
             shoot_sound.play();
@@ -96,6 +150,11 @@ class World {
     }
 
 
+    /**
+     * Checks the energy status of the character.
+     * The energy status is checked to determine which energy statusbar image to display.
+     * The energy statusbar image is then updated.
+     */
     checkEnergyStatus() {
         if (this.character.energy === 10) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15); }
         if (this.character.energy === 8) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_2.png', 10, 20, 55, 15); }
@@ -106,6 +165,11 @@ class World {
     }
 
 
+    /**
+     * Checks the health status of the character.
+     * The health status is checked to determine which health statusbar image to display.
+     * The health statusbar image is then updated.
+     */
     checkHealthStatus() {
         if (this.character.health === 10) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11); }
         if (this.character.health === 8) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_2.png', 10, 7, 55, 11); }
@@ -119,6 +183,11 @@ class World {
     }
 
 
+    /**
+     * Checks the health status of the boss enemy.
+     * The health status is checked to determine which boss enemy health statusbar image to display.
+     * The boss enemy health statusbar image is then updated.
+     */
     checkBossEnemyHealthStatus(bossEnemyHealth) {
         if (bossEnemyHealth === 10 || bossEnemyHealth === 9) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11); }
         if (bossEnemyHealth === 8 || bossEnemyHealth === 7) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_2.png', 235, 7, 55, 11); }
@@ -130,20 +199,10 @@ class World {
     }
 
 
-    healthStatusBlinkAnimation() {
-        let blinkTimes = 0;
-        this.isInverted = false;
-        this.blinkInterval = setInterval(() => {
-            this.isInverted = blinkTimes % 2 === 0;
-            blinkTimes++;
-            if (blinkTimes >= 5 || this.character.health > 0) {
-                clearInterval(this.blinkInterval);
-                this.isInverted = false;
-            }
-        }, 50);
-    }
-
-
+    /**
+     * Checks the collision of the enemies, shots and collectibles.
+     * The collision is checked to determine if the character is colliding with an enemy, shot or collectible.
+     */
     checkCollisions() {
         this.checkCollisionWithEnemy();
         this.checkCollisionOfShot();
@@ -151,6 +210,10 @@ class World {
     }
 
 
+    /**
+     * Checks the collision of the character with an enemy.
+     * If the character is colliding with an enemy, the hit() function of the character is called.
+     */
     checkCollisionWithEnemy() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
@@ -165,6 +228,11 @@ class World {
     }
 
 
+    /**
+     * Checks the collision of the character shot with an enemy.
+     * If the character shot is colliding with an enemy, the function for the impact animation is called and the enemy's health is reduced.
+     * The character shot is then removed from the shots array.
+     */
     checkCollisionOfShot() {
         if (this.characterShot instanceof MovableObject) {
             this.level.enemies.forEach((enemy) => {
@@ -180,6 +248,13 @@ class World {
     }
 
 
+
+    /**
+     * Checks the collision of the character with a collectible.
+     * If the character is colliding with a collectible, the collectible is removed from the collectibles array.
+     * The character's health or energy is then restored to the maximum value.
+     * The health or energy statusbar is then updated.
+     */
     checkCollisionWithCollectibles() {
         this.level.collectibles_energy.forEach((energy) => {
             if (this.character.isColliding(energy)) {
@@ -206,6 +281,10 @@ class World {
     }
 
 
+    /**
+     * This function draws the game over screen.
+     * The game over screen is displayed when the character is dead.
+     */
     drawGameOver() {
         if (this.character.is_Dead) {
             console.log('Game Over');
@@ -214,6 +293,10 @@ class World {
     }
 
 
+    /**
+     * This function draws the victory screen.
+     * The victory screen is displayed when the boss enemy is dead.
+     */
     drawVictory() {
         if (this.level.boss_dead) {
             this.addObjectsToMap(this.level.victory);
@@ -221,6 +304,10 @@ class World {
     }
 
 
+    /**
+     *  This function draws the fireworks.
+     * The fireworks are displayed when the boss enemy is dead.
+     */
     drawFireworks() {
         if (this.level.boss_dead) {
             this.addObjectsToMap(this.level.fireworks);
@@ -228,6 +315,10 @@ class World {
     }
 
 
+    /**
+     * This function checks if the character enters the battle arena and if the boss enemy is dead.
+     * If so, it calls the function to draw the boss enemy healthbar.
+     */
     drawBossEnemyHealthbar() {
         if (!this.level.boss_dead && this.character.isInBattleArena) {
             this.initBossEnemyHealthbar();
@@ -235,11 +326,21 @@ class World {
     }
 
 
+    /**
+     * This function draws the health statusbar of the boss enemy.
+     * The health statusbar is displayed when the character enters the battle arena.
+     */
     initBossEnemyHealthbar() {
         this.addToMap(this.bossEnemy_HEALTHBAR);
     }
 
 
+    /**
+     * This Function draws a text on the canvas.
+     * The text is displayed when the character is at the beginning of the game.
+     * The text is displayed to inform the player that the game is best played in fullscreen mode.
+     * The text is displayed until the character moves to the right.
+     */
     drawTextOnGameStart() {
         if (world && this.ctx && !isInFullscreen && world.character && world.character.x <= 100 && !this.characterHasMoved) {
             this.ctx.font = "16px VT323";
@@ -252,6 +353,10 @@ class World {
     }
 
 
+    /**
+     * Function to draw all objects on the canvas.
+     * This function is called recursively to draw all objects on the canvas.
+     */
     draw() {
         toggleHeader(); // This function is called to toggle the header on and off. It is defined in js/events/fullscreen.js. It is called here to check frequently if the header should be displayed or not.
         if (!exit_Game && canvas && this.ctx) {
@@ -290,12 +395,25 @@ class World {
     }
 
 
+    /**
+     * Adds all object of an array to the map.
+     * The objects are then drawn on the canvas.
+     * 
+     * @param {MovableObject} object - The object to add to the map.
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
         });
     }
 
+
+    /**
+     * Adds a single object to the map.
+     * The object is then drawn on the canvas.
+     * 
+     * @param {MovableObject} movableObject - The object to add to the map.
+     */
     addToMap(movableObject) {
         if (movableObject.otherDirection) { //checks, if the variable is true
             this.flipImage(movableObject);
@@ -311,6 +429,11 @@ class World {
     }
 
 
+    /**
+     * Flips the image horizontally to let the object face the direction it is moving.
+     * 
+     * @param {MovableObject} movableObject - The object to flip.
+     */
     flipImage(movableObject) {
         this.ctx.save(); //saves current status of ctx (context)
         this.ctx.translate(movableObject.width, 0)  //change methode how to draw images
@@ -319,6 +442,11 @@ class World {
     }
 
 
+    /**
+     * Flips the image back to its original state.
+     * 
+     * @param {MovableObject} movableObject - The object to flip back.
+     */
     flipImageBack(movableObject) {
         //everytime we`ve set the variable to true
         movableObject.x = movableObject.x * -1;

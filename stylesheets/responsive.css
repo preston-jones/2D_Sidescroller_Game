@@ -38,6 +38,10 @@
         width: 100%;
         justify-content: space-evenly;
     }
+
+    .fullsceen {
+        position: inherit;
+    }
 }
 
 /* for the new game button in fullscreen mode */
