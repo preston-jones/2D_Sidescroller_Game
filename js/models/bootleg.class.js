@@ -1,3 +1,29 @@
+/* Bootleg class
+ * 
+ * Bootleg class is a class that extends from MovableObject class
+ * and it is used to create an enemy object that moves in the game.
+ * 
+ * Bootleg class has the following properties:
+ * 
+ * y: number
+ * width: number
+ * height: number
+ * offset_left: number
+ * offset_top: number
+ * offset_right: number
+ * offset_bottom: number
+ * speed: number
+ * health: number
+ * IMAGES_STAY: string[] - array of the images paths for the enemy object for animation.
+ * IMAGES_RUN: string[] - array of the images paths for the enemy object for animation.
+ * IMAGES_ENEMY_EXPLOTION: string[] - array of the images paths for the enemy object for animation.
+ * currentImage: number
+ * 
+ * Bootleg class has the following methods:
+ * 
+ * constructor()
+ * animateBootleg(images_arr: string[]): void
+ */
 class Bootleg extends MovableObject {
     y = 10;
     width = 60;
@@ -31,6 +57,10 @@ class Bootleg extends MovableObject {
 
     currentImage = 0;
 
+
+    /**
+     * The constructor of the Bootleg class.
+     */
     constructor() {
         super().loadImage('assets/sprites/enemies/Bootleg/bootleg-idle.png');
         this.x = 900 + Math.random() * 1100;
@@ -41,6 +71,10 @@ class Bootleg extends MovableObject {
     }
 
 
+    /**
+     * Animates the bootleg enemy object.
+     * @param {string[]} images_arr - The array of images paths for the enemy object for animation.
+     */
     animateBootleg(images_arr) {
         this.otherDirection = true;
         this.animateEnemy(images_arr, this.IMAGES_ENEMY_EXPLOTION);

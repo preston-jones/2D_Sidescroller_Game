@@ -1,4 +1,14 @@
+/**
+ * AnimatedBackground class is a class that represents a static background element on the canvas.
+ * @extends MovableObject
+ */
 class AnimatedBackground extends MovableObject {
+
+    
+    /**
+     * Animates the background when the character moves.
+     * @param {number} x - The x coordinate of the background.
+     */
     animateBackground(x) {
         setInterval(() => {
             if (world && world.character.x > 60 && world.character.x < 1888 && !world.character.is_Dead && !world.character.is_Hurt) {
