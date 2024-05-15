@@ -1,5 +1,14 @@
+/**
+ * Fireworks class
+ * 
+ * Fireworks class creates a fireworks animation on the screen.
+ * 
+ * @class Fireworks
+ * @extends {DrawableObject}
+ */
 class Fireworks extends DrawableObject {
 
+    /* Arrays of the images paths for the animations of this object. */
     FIREWORKS = [
         'assets/fireworks/11646ced-10fd-47b5-b765-df9cabd8cc49-0.png',
         'assets/fireworks/11646ced-10fd-47b5-b765-df9cabd8cc49-1.png',
@@ -45,6 +54,13 @@ class Fireworks extends DrawableObject {
     ];
 
 
+    /**
+     * The constructor of the Fireworks class.
+     * @param {number} x - The x coordinate of the fireworks object on the canvas.
+     * @param {number} y - The y coordinate of the fireworks object on the canvas.
+     * @param {number} width - The width of the fireworks object.
+     * @param {number} height - The height of the fireworks object.
+     */
     constructor(x, y, width, height) {
         super().loadImage('assets/fireworks/11646ced-10fd-47b5-b765-df9cabd8cc49-0.png');
         this.loadImages(this.FIREWORKS);
@@ -55,10 +71,13 @@ class Fireworks extends DrawableObject {
         this.animateFireworks();
     }
 
+
+    /**
+     * Animates the Fireworks object.
+     */
     animateFireworks() {
         setInterval(() => {
             this.playAnimation(this.FIREWORKS)
         }, 100);
     }
-
 }

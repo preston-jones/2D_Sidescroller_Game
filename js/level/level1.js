@@ -1,4 +1,4 @@
-let level1;
+let level1; /* global variable for the first level of the game */
 
 
 /**
@@ -7,13 +7,13 @@ let level1;
 function initLevel1() {
     level1 = new Level(
         [
-            new Cop(),
-            new Cop(),
-            new Cop(),
-            new Cop(),
-            new Bootleg(),
-            new Bootleg(),
-            new Bootleg(),
+            new Cop(800, 2000, 1, 0.7),
+            new Cop(800, 2000, 1, 0.7),
+            new Cop(800, 2000, 1, 0.7),
+            new Cop(800, 2000, 1, 0.7),
+            new Bootleg(900, 1100),
+            new Bootleg(900, 1100),
+            new Bootleg(900, 1100),
             new Drone(300, 700),
             new Drone(800, 1200),
             new Drone(1000, 1500),

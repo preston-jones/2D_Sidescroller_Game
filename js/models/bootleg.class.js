@@ -1,28 +1,11 @@
-/* Bootleg class
+/**
+ * Bootleg class
  * 
  * Bootleg class is a class that extends from MovableObject class
  * and it is used to create an enemy object that moves in the game.
  * 
- * Bootleg class has the following properties:
- * 
- * y: number
- * width: number
- * height: number
- * offset_left: number
- * offset_top: number
- * offset_right: number
- * offset_bottom: number
- * speed: number
- * health: number
- * IMAGES_STAY: string[] - array of the images paths for the enemy object for animation.
- * IMAGES_RUN: string[] - array of the images paths for the enemy object for animation.
- * IMAGES_ENEMY_EXPLOTION: string[] - array of the images paths for the enemy object for animation.
- * currentImage: number
- * 
- * Bootleg class has the following methods:
- * 
- * constructor()
- * animateBootleg(images_arr: string[]): void
+ * @class Bootleg
+ * @extends MovableObject
  */
 class Bootleg extends MovableObject {
     y = 10;
@@ -35,6 +18,7 @@ class Bootleg extends MovableObject {
     speed = 0.15;
     health = 3;
 
+    /* Arrays of the images paths for the animations of this object. */
     IMAGES_STAY = [
         'assets/sprites/enemies/Bootleg/bootleg-idle.png'
     ];
@@ -60,10 +44,12 @@ class Bootleg extends MovableObject {
 
     /**
      * The constructor of the Bootleg class.
+     * @param {number} random_x_min - The minimum x coordinate of the bootleg object on the canvas.
+     *  @param {number} random_x_max - The maximum x coordinate of the bootleg object on the canvas.
      */
-    constructor() {
+    constructor(random_x_min, random_x_max) {
         super().loadImage('assets/sprites/enemies/Bootleg/bootleg-idle.png');
-        this.x = 900 + Math.random() * 1100;
+        this.x = Math.round(random_x_min + Math.random() * random_x_max);
         this.loadImages(this.IMAGES_RUN);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();

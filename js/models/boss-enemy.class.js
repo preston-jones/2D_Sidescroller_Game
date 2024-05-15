@@ -1,3 +1,12 @@
+/**
+ * BossEnemy class
+ * 
+ * BossEnemy class is a class that extends from MovableObject class
+ * and it is used to create the boss enemy object in the game.
+ * 
+ * @class BossEnemy
+ * @extends MovableObject
+ */
 class BossEnemy extends MovableObject {
     y = 16;
     offsetY = 0;
@@ -21,6 +30,8 @@ class BossEnemy extends MovableObject {
     attackAnimationInterval;
     attackCharacterInterval;
 
+
+    /* Arrays of the images paths for the animations of this object. */
     IMAGES_FLY = [
         'assets/sprites/enemies/Wasp/wasp1.png',
         'assets/sprites/enemies/Wasp/wasp2.png',
@@ -40,6 +51,10 @@ class BossEnemy extends MovableObject {
 
     currentImage = 0;
 
+
+    /**
+     * The constructor of the BossEnemy class.
+     */
     constructor() {
         super().loadImage(this.IMAGES_FLY[0]);
         this.x = 2120;

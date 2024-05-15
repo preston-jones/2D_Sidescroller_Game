@@ -1,3 +1,8 @@
+/** 
+ * The DrawableObject class is a class that is used to create objects that can be drawn on the canvas.
+ * 
+ * @class DrawableObject
+ */
 class DrawableObject {
     img;
     imageCache = {};
@@ -13,6 +18,10 @@ class DrawableObject {
     prevImageSrc;
 
 
+    /**
+     * Draws the object on the canvas.
+     * @param {CanvasRenderingContext2D} ctx - The canvas 2d context.
+     */
     draw(ctx) {
         if (!this.img) {
             this.img = new Image();
@@ -31,6 +40,10 @@ class DrawableObject {
     }
 
 
+    /**
+     * Draws the object on the canvas with an invert filter.
+     * @param {CanvasRenderingContext2D} ctx - The canvas 2d context.
+     */
     drawImageWithFilter(ctx) {
         const previousFilter = ctx.filter;
         if (this.isInverted && !this.is_Dead) {
@@ -43,6 +56,13 @@ class DrawableObject {
     }
 
 
+    /**
+     * Draws a yellow frame around the object on the canvas.
+     * The frame is only drawn if the object is an instance of Shot, CollectibleEnergy, CollectibleHealth, Drone, Cop, Bootleg, BossEnemy or Character.
+     * The frame visualizes the actual collision box of the object.
+     * 
+     * @param {CanvasRenderingContext2D} ctx - The canvas 2d context.
+     */
     drawRealFrame(ctx) {
         if (this instanceof Shot || this instanceof CollectibleEnergy || this instanceof CollectibleHealth || this instanceof Drone || this instanceof Cop || this instanceof Bootleg || this instanceof BossEnemy || this instanceof Character) {
             ctx.lineWidth = '1';
@@ -54,6 +74,13 @@ class DrawableObject {
     }
 
 
+    /**
+     * Draws a blue frame around the object on the canvas.
+     * The frame is only drawn if the object is an instance of Shot, CollectibleEnergy, CollectibleHealth, Drone, Cop, Bootleg, BossEnemy or Character.
+     * The frame visualizes the collision box of the object including the offsets.
+     * 
+     * @param {CanvasRenderingContext2D} ctx - The canvas 2d context.
+     */
     drawFrame(ctx) {
         if (this instanceof Shot || this instanceof CollectibleEnergy || this instanceof CollectibleHealth) {
             ctx.lineWidth = '1';
@@ -72,12 +99,20 @@ class DrawableObject {
     }
 
 
+    /**
+     * Loads an image from a given path.
+     * @param {string} path - The path to the image.
+     */
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
 
+    /**
+     * Loads images from an array of paths.
+     * @param {string[]} arr - The array of paths to the images.
+     */
     loadImages(arr) {
         arr.forEach(path => {
             let img = new Image();
@@ -87,6 +122,10 @@ class DrawableObject {
     }
 
 
+    /**
+     * Plays an looped animation of the object.
+     * @param {string[]} arr - The array of paths to the images for the animation.
+     */
     playAnimation(arr) {
         let i = this.currentImage % arr.length;// Modulu Function let i = 0 % 8; 0 geteilt durch 8 = 0, Rest 0
         let path = arr[i];

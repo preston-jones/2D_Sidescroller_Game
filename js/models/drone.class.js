@@ -1,3 +1,12 @@
+/**
+ * Drone class
+ * 
+ * Drone class is a class that extends from MovableObject class
+ * and it is used to create an enemy object that moves in the game.
+ * 
+ * @class Drone
+ * @extends MovableObject
+ */
 class Drone extends MovableObject {
     y = 60;
     width = 40;
@@ -9,6 +18,7 @@ class Drone extends MovableObject {
     speed = 0.5;
     health = 1;
 
+    /* Arrays of the images paths for the animations of this object. */
     IMAGES_STAY = [
         'assets/sprites/enemies/drone/drone-1.png',
     ];
@@ -28,6 +38,12 @@ class Drone extends MovableObject {
     ];
     currentImage = 0;
 
+
+    /**
+     * The constructor of the Drone class.
+     * @param {number} random_x_min - The minimum x coordinate of the drone object on the canvas.
+     * @param {number} random_x_max - The maximum x coordinate of the drone object on the canvas.
+     */
     constructor(random_x_min, random_x_max) {
         super().loadImage('assets/sprites/enemies/drone/drone-1.png');
         this.x = Math.round(random_x_min + Math.random() * random_x_max);
@@ -37,6 +53,10 @@ class Drone extends MovableObject {
     }
 
 
+    /**
+     * Animates the drone enemy object.
+     * @param {string[]} images_arr - The array of images paths for the enemy object for animation.
+     */
     animateDrone(images_arr) {
         this.animateEnemy(images_arr, this.IMAGES_ENEMY_EXPLOTION);
     }

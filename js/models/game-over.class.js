@@ -1,5 +1,14 @@
+/**
+ * Class Game_over
+ * 
+ * Represents the game over screen.
+ * 
+ * @class Game_over
+ * @extends DrawableObject
+ */
 class Game_over extends DrawableObject {
 
+    /* Arrays of the images paths for the animations of this object. */
     GAME_OVER = [
         'assets/gameover/frame_00_delay-0.1s.png',
         'assets/gameover/frame_01_delay-0.1s.png',
@@ -35,6 +44,13 @@ class Game_over extends DrawableObject {
     ];
 
 
+    /**
+     * The constructor of the Game_over class.
+     * @param {number} x - The x coordinate of the game over object on the canvas.
+     * @param {number} y - The y coordinate of the game over object on the canvas.
+     * @param {number} width - The width of the game over object.
+     * @param {number} height - The height of the game over object.
+     */
     constructor(x, y, width, height) {
         super().loadImage('assets/gameover/frame_00_delay-0.1s.png');
         this.loadImages(this.GAME_OVER);
@@ -46,10 +62,12 @@ class Game_over extends DrawableObject {
     }
 
     
+    /**
+     * Animates the Game_over object.
+     */
     animateGameOver() {
         setInterval(() => {
             this.playAnimation(this.GAME_OVER)
         }, 100);
     }
-
 }

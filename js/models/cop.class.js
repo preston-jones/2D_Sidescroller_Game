@@ -1,3 +1,12 @@
+/**
+ * Cop class
+ * 
+ * Cop class is a class that extends from MovableObject class
+ * and it is used to create an enemy object that moves in the game.
+ * 
+ * @class Cop
+ * @extends MovableObject
+ */
 class Cop extends MovableObject {
     y = 10;
     width = 60;
@@ -9,6 +18,7 @@ class Cop extends MovableObject {
     speed = 1.5;
     health = 1;
 
+    /* Arrays of the images paths for the animations of this object. */
     IMAGES_STAY = [
         'assets/sprites/enemies/cop/idle/cop1.png',
         'assets/sprites/enemies/cop/idle/cop2.png',
@@ -36,10 +46,18 @@ class Cop extends MovableObject {
     ];
     currentImage = 0;
 
-    constructor() {
+
+    /**
+     * The constructor of the Cop class.
+     * @param {number} random_x_min - The minimum x coordinate of the cop object on the canvas.
+     * @param {number} random_x_max - The maximum x coordinate of the cop object on the canvas.
+     * @param {number} random_speed_min - The minimum speed of the cop object.
+     * @param {number} random_speed_max - The maximum speed of the cop object.
+     */
+    constructor(random_x_min, random_x_max, random_speed_min, random_speed_max) {
         super().loadImage('assets/sprites/enemies/cop/idle/cop2.png');
-        this.x = 800 + Math.random() * 2000;
-        this.speed = (1 + Math.random() * 0.7).toFixed(2);
+        this.x = Math.round(random_x_min + Math.random() * random_x_max);
+        this.speed = (random_speed_min + Math.random() * random_speed_max).toFixed(2);
         this.loadImages(this.IMAGES_RUN);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
         this.applyGravity();
@@ -47,8 +65,11 @@ class Cop extends MovableObject {
     }
 
 
+    /**
+     * Animates the cop enemy object.
+     * @param {string[]} images_arr - The array of images paths for the enemy object for animation.
+     */
     animateCop(images_arr) {
         this.animateEnemy(images_arr, this.IMAGES_ENEMY_EXPLOTION);
     }
-
 }

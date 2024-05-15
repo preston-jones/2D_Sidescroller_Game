@@ -1,5 +1,13 @@
+/**
+ * Character class
+ * 
+ * Character class is a class that extends from MovableObject class
+ * and it is used to create the character object that is controlled by the player in the game.
+ * 
+ * @class Character
+ * @extends MovableObject
+ */
 class Character extends MovableObject {
-
     width = 60;
     height = 50;
     x = 58;
@@ -17,8 +25,10 @@ class Character extends MovableObject {
     isInBattleArena = false;
     enteredBattleArena = false;
     isDeadCounter = true;
+    world;
+    playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
 
-
+    /* Arrays of the images paths for the animations of this object. */
     IMAGES_STAY = this.characterStay();
     characterStay() {
         if (this.character_Selection === 'female') {
@@ -220,8 +230,9 @@ class Character extends MovableObject {
     }
 
 
-    world;
-    playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
+    /**
+     * The constructor of the Character class.
+     */
     constructor() {
         super().loadImage(this.IMAGES_STAY[0]);
         this.loadImages(this.IMAGES_STAY);
@@ -232,11 +243,15 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.applyGravity();
-        this.animateCharacter();
+        this.moveCharacter();
     }
 
 
-    animateCharacter() {
+    
+    /**
+     * The function to move the character object.
+     */
+    moveCharacter() {
         setInterval(() => {
             this.moveCamera();
 
@@ -263,11 +278,17 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Function to play the running animation of the character object.
+     */
     playAnimation_RUN() {
         this.playAnimation(this.IMAGES_RUN);
     }
 
 
+    /**
+     * Function to play the jump animation of the character object.
+     */
     playAnimation_JUMP() {
         if (this.world.keyboard.RIGHT && !this.is_Dead || this.world.keyboard.LEFT && !this.is_Dead && !this.is_Hurt) {
             if (this.world.keyboard.SPACE && this.y < world.level.level_end_bottom_y) {
@@ -284,6 +305,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Function to play the crouch animation of the character object.
+     */
     playAnimation_DOWN() {
         this.offset_top = 10;
         this.offset_bottom = -10;
@@ -295,6 +319,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Function to play the shoot animation of the character object.
+     */
     playAnimation_SHOOT() {
         this.playAnimation(this.IMAGES_SHOOT);
         if (this.world.keyboard.C && this.world.keyboard.RIGHT || this.world.keyboard.C && this.world.keyboard.LEFT) {
@@ -303,6 +330,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Function to play the is hurt animation of the character object.
+     */
     playAnimation_HURT() {
         hurt_sound.pause();
         if (!this.is_Dead) {
@@ -312,6 +342,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Function to play the is dead animation of the character object.
+     */
     playAnimation_DEAD() {
         if (this.is_Dead) {
             stopBossFightMusic();
@@ -326,11 +359,17 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * Function to play the stay/idle animation of the character object.
+     */
     playAnimation_STAY() {
         this.playAnimation(this.IMAGES_STAY);
     }
 
 
+    /**
+     * Function to move the camera.
+     */
     moveCamera() {
         if (this.x < 60) {
             this.world.camera_x = 0;
