@@ -180,6 +180,7 @@ function hideStoryPage() {
 function exitGame() {
     exit_Game = true;
     canvas_is_loaded = false;
+    characterHasMoved = false;
     resetGame();
 }
 

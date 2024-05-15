@@ -51,13 +51,7 @@
     }
 }
 
-
-/* @media only screen and (max-height: 384px) {
-    .fullscreen {
-        position: inherit;
-    }
-} */
-
+/* for the new game button in fullscreen mode */
 @media only screen and (max-height: 920px) {
     #newgame_button {
         margin-bottom: 7%;

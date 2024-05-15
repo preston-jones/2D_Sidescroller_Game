@@ -225,10 +225,6 @@ canvas {
     image-rendering: pixelated;
 }
 
-#story {
-    
-}
-
 #header {
     display: flex;
     flex-direction: column;

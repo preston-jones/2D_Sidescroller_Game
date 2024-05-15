@@ -16,6 +16,7 @@ class World {
     statusbar_HEALTH;
     statusbar_ENERGY;
     bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11);
+    characterHasMoved = false;
 
 
     constructor(canvas, keyboard) {
@@ -119,11 +120,11 @@ class World {
 
 
     checkBossEnemyHealthStatus(bossEnemyHealth) {
-        if (bossEnemyHealth === 10) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 8) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_2.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 6) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_3.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 4) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_4.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 2) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_5.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth <= 10) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth <= 8) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_2.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth <= 6) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_3.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth <= 4) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_4.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth <= 2) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_5.png', 235, 7, 55, 11); }
         if (bossEnemyHealth === 0) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_6.png', 235, 7, 55, 11); }
     }
 
@@ -170,6 +171,7 @@ class World {
                     this.characterShot.impact = true;
                     this.characterShot.animateImpact();
                     enemy.hit();
+                    console.log(enemy.health);
                     this.characterShot = null;
                 }
             });
@@ -238,10 +240,13 @@ class World {
 
 
     drawTextOnGameStart() {
-        if (world && world.character.x <= 100) {
+        if (world && this.ctx && !isInFullscreen && world.character && world.character.x <= 100 && !this.characterHasMoved) {
             this.ctx.font = "16px VT323";
             this.ctx.fillStyle = 'white';
             this.ctx.fillText("Best Played In Fullscreen Mode", 50, 60);
+        }
+        if (world && world.character  && this.character.x >= 100) {
+            this.characterHasMoved = true;
         }
     }
 
@@ -274,7 +279,7 @@ class World {
             this.drawBossEnemyHealthbar();
             this.drawGameOver();
             this.drawVictory();
-            // Draw wird immer wieder aufgerufen
+            // Draw is called recursively.
             let self = this;
             requestAnimationFrame(function () { //function loads when everithing above requestAnimationFrame() has loaded
                 self.draw();
