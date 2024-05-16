@@ -115,8 +115,8 @@
 
 
 @media only screen and (max-height: 640px) {
-    #header {
-        display: none;
+    #headline_logo {
+        width: 180px;
     }
 }
 
