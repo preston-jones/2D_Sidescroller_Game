@@ -216,9 +216,10 @@ class BossEnemy extends MovableObject {
         this.hasAttacked = false;
     }
 
+
     /**
      * Function to move the boss enemy object to the left.
-     * This function is cakked after the boss enemy is attacking the character.
+     * This function is used after the boss enemy is attacking the character.
      */
     moveEnemyBossLeft() {
         if (!this.moveRight) {
