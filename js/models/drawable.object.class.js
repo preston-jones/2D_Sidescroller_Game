@@ -1,6 +1,4 @@
 /** 
- * DrawableObject class
- * 
  * The DrawableObject class is a class that is used to create objects that can be drawn on the canvas.
  * 
  * @class DrawableObject

@@ -1,6 +1,4 @@
 /**
- * Drone class
- * 
  * Drone class is a class that extends from MovableObject class
  * and it is used to create an enemy object that moves in the game.
  * 

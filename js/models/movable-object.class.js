@@ -1,6 +1,4 @@
 /**
- * MovableObject class
- * 
  * The MovableObject class is a class that is used to create objects that can be moved on the canvas.
  * 
  * @class MovableObject

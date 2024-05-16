@@ -1,6 +1,4 @@
 /**
- * Character class
- * 
  * Character class is a class that extends from MovableObject class
  * and it is used to create the character object that is controlled by the player in the game.
  * 

@@ -1,6 +1,4 @@
 /**
- * Fireworks class
- * 
  * Fireworks class creates a fireworks animation on the screen.
  * 
  * @class Fireworks

@@ -1,5 +1,5 @@
 /**
- * VehiclesFront class
+ * VehiclesFront class.
  * 
  * Class for the vehicle object that moves in the background of the game.
  * 

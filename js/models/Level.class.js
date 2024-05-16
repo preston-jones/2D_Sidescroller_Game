@@ -1,6 +1,4 @@
 /**
- * Level class
- * 
  * Level class is used to store all the variables containing the arrays of objects that are used to create the level.
  * 
  * @class Level

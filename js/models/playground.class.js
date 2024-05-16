@@ -1,6 +1,4 @@
 /**
- * Playground class
- * 
  * Playground class is used to create the ground platform for the game.
  * 
  * @class Playground

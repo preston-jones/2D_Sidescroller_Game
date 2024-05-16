@@ -1,6 +1,4 @@
 /**
- * BossEnemy class
- * 
  * BossEnemy class is a class that extends from MovableObject class
  * and it is used to create the boss enemy object in the game.
  * 

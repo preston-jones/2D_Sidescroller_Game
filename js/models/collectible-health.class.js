@@ -1,6 +1,4 @@
 /**
- * CollectibleHealth class
- * 
  * CollectibleHealth class is a class that extends from DrawableObject class
  * and it is used to create an object that the character can collect in the game.
  * The object recharges the health of the character.
