@@ -3,7 +3,7 @@
 #mobile_controller_overlay {
     position: absolute;
     top: 0;
-    z-index: 20;
+    z-index: 80;
     justify-content: space-between;
     align-items: center;
     width: 100%;

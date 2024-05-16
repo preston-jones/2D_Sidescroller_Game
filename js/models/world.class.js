@@ -26,6 +26,7 @@ class World {
     statusbar_ENERGY;
     bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11);
     characterHasMoved = false;
+    shotFired = false;
 
 
     /**
@@ -39,7 +40,6 @@ class World {
         this.ctx.filter = 'invert(0)';
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.shotFired = false;
         this.startLevel();
     }
 
@@ -54,6 +54,26 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+    }
+
+
+    /**
+     * Copies the world object to the character object.
+     * This is done to make the world object accessible in the character object.
+     */
+    setWorld() {
+        this.character.world = this;
+    }
+
+
+    /**
+     * Starts an interval to check for collisions.
+     */
+    run() {
+        setInterval(() => {
+            this.checkCollisions();
+            this.checkHealthStatus();
+        }, 50);
     }
 
 
@@ -111,31 +131,12 @@ class World {
 
 
     /**
-     * Copies the world object to the character object.
-     * This is done to make the world object accessible in the character object.
-     */
-    setWorld() {
-        this.character.world = this;
-    }
-
-
-    /**
-     * Starts an interval to check for collisions.
-     */
-    run() {
-        setInterval(() => {
-            this.checkCollisions();
-        }, 100);
-    }
-
-
-    /**
      * Checks if the character is allowed to shoot.
      * Its then creates a new shot object and adds it to the shots array.
      * The character's energy is reduced by 1.
      */
     shoot() {
-        if (this.keyboard.C && !this.shotFired && this.character.energy > 0 && !this.is_Hurt && !this.character.is_Dead) {
+        if (this.keyboard.C && this.character.energy > 0 && !this.is_Hurt && !this.character.is_Dead) {
             shoot_sound.play();
             this.characterShot = [];
             this.characterShot = new Shot(this.character.x, this.character.y, this.character.otherDirection);
@@ -144,7 +145,6 @@ class World {
             this.character.playAnimation_SHOOT();
             this.checkEnergyStatus();
             this.checkCollisions();
-            this.shotFired = true;
         }
     }
 
@@ -175,7 +175,7 @@ class World {
         if (this.character.health === 6) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_3.png', 10, 7, 55, 11); }
         if (this.character.health === 4) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_4.png', 10, 7, 55, 11); }
         if (this.character.health === 2) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_5.png', 10, 7, 55, 11); }
-        if (this.character.health === 0) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11);}
+        if (this.character.health === 0) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11); }
     }
 
 
@@ -185,10 +185,10 @@ class World {
      * The boss enemy health statusbar image is then updated.
      */
     checkBossEnemyHealthStatus(bossEnemyHealth) {
-        if (bossEnemyHealth === 10 || bossEnemyHealth === 9) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 8 || bossEnemyHealth === 7) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_2.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 6 || bossEnemyHealth === 5) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_3.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 4 || bossEnemyHealth === 3) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_4.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 6) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 5) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_2.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 4) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_3.png', 235, 7, 55, 11); }
+        if (bossEnemyHealth === 3) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_4.png', 235, 7, 55, 11); }
         if (bossEnemyHealth === 2) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_5.png', 235, 7, 55, 11); }
         if (bossEnemyHealth === 1) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_6.png', 235, 7, 55, 11); }
         if (bossEnemyHealth === 0) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_7.png', 235, 7, 55, 11); }
@@ -233,10 +233,7 @@ class World {
         if (this.characterShot instanceof MovableObject) {
             this.level.enemies.forEach((enemy) => {
                 if (this.characterShot && this.characterShot.isColliding(enemy)) {
-                    this.characterShot.impact = true;
                     this.characterShot.animateImpact();
-                    enemy.hit();
-                    console.log(enemy.health);
                     this.characterShot = null;
                 }
             });
@@ -283,7 +280,6 @@ class World {
      */
     drawGameOver() {
         if (this.character.is_Dead) {
-            console.log('Game Over');
             this.addObjectsToMap(this.level.gameOver);
         }
     }

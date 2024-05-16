@@ -97,40 +97,57 @@ class MovableObject extends DrawableObject {
      */
     hit() {
         if (this instanceof Character) {
-            let currentTime = new Date().getTime();
-            if (!this.is_Dead && !this.inCollision && !this.is_Hurt && currentTime - this.lastHitTime > this.hitCooldown) {
-                this.health -= 1;
-                this.is_Hurt = true;
-                this.inCollision = true;
-                this.lastHitTime = currentTime; // Update lastHitTime
-                world.checkHealthStatus();
-                this.playAnimation_HURT();
-                this.is_Hurt = false;
-            }
-            if (this.health < 0) {
-                this.health = 0;
-                this.is_Dead = true;
-            } else {
-                this.lastHit = new Date().getTime();
-            }
+            this.hitCharacter();
         }
-        if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone) {
+        if (!world.shotFired) {
+            if (this instanceof Cop || this instanceof Bootleg || this instanceof Drone) {
+                this.hitEnemy();
+            }
+            if (this instanceof BossEnemy) {
+                this.hitBossEnemy();
+            }
+            this.shotFired = true;
+        }
+    }
+
+
+    hitCharacter() {
+        let currentTime = new Date().getTime();
+        if (!this.is_Dead && !this.inCollision && !this.is_Hurt && currentTime - this.lastHitTime > this.hitCooldown) {
             this.health -= 1;
-            this.enemyHitAnimation();
-            if (this.health < 0) {
-                this.health = 0;
-                this.is_Dead = true;
-            }
+            this.is_Hurt = true;
+            this.inCollision = true;
+            this.lastHitTime = currentTime; // Update lastHitTime
+            this.playAnimation_HURT();
+            this.is_Hurt = false;
         }
-        if (this instanceof BossEnemy) {
-            this.health -= 1;
-            world.checkBossEnemyHealthStatus(this.health);
-            this.enemyHitAnimation();
-            if (this.health < 0) {
-                this.health = 0;
-                this.is_Dead = true;
-            }
+        if (this.health <= 0) {
+            this.health === 0;
+            this.is_Dead = true;
+        } else {
+            this.lastHit = new Date().getTime();
         }
+    }
+
+
+    hitEnemy() {
+        this.health -= 1;
+        this.enemyHitAnimation();
+        if (this.health <= 0) {
+            this.health === 0;
+            this.is_Dead = true;
+        }
+    }
+
+
+    hitBossEnemy() {
+        this.health -= 1;
+        this.enemyHitAnimation();
+        if (this.health <= 0) {
+            this.health === 0;
+            this.is_Dead = true;
+        }
+        world.checkBossEnemyHealthStatus(this.health);
     }
 
 
@@ -208,14 +225,6 @@ class MovableObject extends DrawableObject {
      */
     moveDown(speed) {
         this.y -= speed;
-    }
-
-
-    /**
-     * Function to set the impact variable to true when the object is hit by a shot.
-     */
-    shotImpact() {
-        impact = true;
     }
 
 

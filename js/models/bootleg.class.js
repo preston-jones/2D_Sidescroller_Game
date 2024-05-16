@@ -16,7 +16,7 @@ class Bootleg extends MovableObject {
     offset_right = -10;
     offset_bottom = 0;
     speed = 0.15;
-    health = 3;
+    health = 2;
 
     /* Arrays of the images paths for the animations of this object. */
     IMAGES_STAY = [

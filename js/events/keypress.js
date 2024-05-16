@@ -72,7 +72,7 @@ function startMobileControllerEvent() {
 
 
 /**
- * Function to toggle the HD mobile controller button.
+ * Function to toggle the mobile controller button.
  * Changes the icon src. of the mobile controller button in the menu settings and the navbar.
  * Adds the 'show_mobile_controller' class to the mobile_controller_overlay element.
  * Sets the control mode button to MOBILE CONTROLLER or KEYBOARD, depending on the current state of the mobile controller mode
@@ -104,57 +104,37 @@ function toggleMobileControllerButton() {
 
 /**
  * Function to start the touchstart and touchend event for the mobile controller buttons.
+ * The mobile controller works with the touch and mouse events.
  * @param {object} e - The event object
  */
 function pressMobileButtons() {
-    document.getElementById('arrow_left').addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        keyboard.LEFT = true;
-    });
-    document.getElementById('arrow_left').addEventListener('touchend', (e) => {
-        e.preventDefault();
-        keyboard.LEFT = false;
-    });
-    document.getElementById('arrow_right').addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        keyboard.RIGHT = true;
-    });
-    document.getElementById('arrow_right').addEventListener('touchend', (e) => {
-        e.preventDefault();
-        keyboard.RIGHT = false;
-    });
-    document.getElementById('arrow_down').addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        keyboard.DOWN = true;
-    });
-    document.getElementById('arrow_down').addEventListener('touchend', (e) => {
-        e.preventDefault();
-        keyboard.DOWN = false;
-    });
-    document.getElementById('arrow_up').addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        keyboard.SPACE = true;
-    });
-    document.getElementById('arrow_up').addEventListener('touchend', (e) => {
-        e.preventDefault();
-        keyboard.SPACE = false;
-    });
-    document.getElementById('jump').addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        keyboard.SPACE = true;
-    });
-    document.getElementById('jump').addEventListener('touchend', (e) => {
-        e.preventDefault();
-        keyboard.SPACE = false;
-    });
-    document.getElementById('shoot').addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        keyboard.C = true;
-        world.shoot();
-    });
-    document.getElementById('shoot').addEventListener('touchend', (e) => {
-        e.preventDefault();
-        keyboard.C = false;
-        world.shotFired = false;
+    const buttons = ['arrow_left', 'arrow_right', 'arrow_down', 'arrow_up', 'jump', 'shoot'];
+    const actions = {
+        'arrow_left': { down: () => keyboard.LEFT = true, up: () => keyboard.LEFT = false },
+        'arrow_right': { down: () => keyboard.RIGHT = true, up: () => keyboard.RIGHT = false },
+        'arrow_down': { down: () => keyboard.DOWN = true, up: () => keyboard.DOWN = false },
+        'arrow_up': { down: () => keyboard.SPACE = true, up: () => keyboard.SPACE = false },
+        'jump': { down: () => keyboard.SPACE = true, up: () => keyboard.SPACE = false },
+        'shoot': { down: () => { keyboard.C = true; world.shoot(); }, up: () => { keyboard.C = false; world.shotFired = false; } }
+    };
+
+    buttons.forEach(button => {
+        const element = document.getElementById(button);
+        element.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            actions[button].down();
+        });
+        element.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            actions[button].up();
+        });
+        element.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            actions[button].down();
+        });
+        element.addEventListener('mouseup', (e) => {
+            e.preventDefault();
+            actions[button].up();
+        });
     });
 }

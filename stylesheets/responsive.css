@@ -17,10 +17,6 @@
         display: none;
     }
 
-    /* .mobile_controller_img {
-        display: flex;
-    } */
-
     #startscreen {
         margin-top: 0;
     }
@@ -117,8 +113,15 @@
     }
 }
 
+
+@media only screen and (max-height: 640px) {
+    #header {
+        display: none;
+    }
+}
+
 /* Smartphones Width------------------------------ */
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 480px) {
     #rotate_device {
         display: flex !important;
     }

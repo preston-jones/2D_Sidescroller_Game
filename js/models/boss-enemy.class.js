@@ -17,7 +17,7 @@ class BossEnemy extends MovableObject {
     offset_right = -20;
     offset_bottom = -10;
     speed = 0.5;
-    health = 10;
+    health = 6;
     moveRight = false;
     moveUp = false;
     isOnRight = false;

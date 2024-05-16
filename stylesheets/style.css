@@ -135,7 +135,7 @@ canvas {
 
 .navbar {
     /* position: absolute; */
-    z-index: 99;
+    z-index: 90;
     /* top: 24px; */
     display: flex;
     justify-content: space-between;
@@ -394,7 +394,7 @@ h1 {
 }
 
 #newgame_button {
-    z-index: 100;
+    z-index: 90;
     display: flex;
     justify-content: center;
     align-items: center;
