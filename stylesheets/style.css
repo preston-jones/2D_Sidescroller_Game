@@ -403,5 +403,5 @@ h1 {
 }
 
 #newgame_button:hover {
-    cursor: pointer;
+    cursor: crosshair;
 }
