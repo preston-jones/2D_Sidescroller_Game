@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: hd-rendering.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: hd-rendering.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// --- HD RENDERING ---
+
+/**
+ * Function to start the HD rendering event.
+ */
+function startHDRenderingEvent() {
+    let menu_rendering_button = document.getElementById('menu_HDrendering_button_container');
+    let rendering_btn = document.getElementById('rendering_button');
+    menu_rendering_button.addEventListener('click', toggleHDRenderingButton);
+    rendering_btn.addEventListener('click', toggleHDRenderingButton);
+}
+
+
+/**
+ * Function to toggle the HD rendering button.
+ * Changes the icon src. of the rendering button in the menu settings and the navbar.
+ * Adds the 'hd_rendering' class to the canvas element, using the css property 'image-rendering: pixelated'.
+ * Sets the hd rendering button to ON or OFF, depending on the current state of the HD rendering mode
+ * by loading the corresponding HTML template.
+ */
+function toggleHDRenderingButton() {
+    if (!HD_Rendering) {
+        document.getElementById('canvas').classList.add('hd_rendering');
+        document.getElementById('rendering_button').src = 'assets/img/icons/hd_render_on.png';
+        document.getElementById('menu_HDrendering_icon').src = 'assets/img/icons/hd_render_on.png';
+        document.getElementById('settings_button_menu_HDrendering').innerHTML = ``;
+        document.getElementById('settings_button_menu_HDrendering').innerHTML = `ON`;
+        HD_Rendering = true;
+    }
+    else {
+        document.getElementById('canvas').classList.remove('hd_rendering');
+        document.getElementById('rendering_button').src = 'assets/img/icons/hd_render_off.png';
+        document.getElementById('menu_HDrendering_icon').src = 'assets/img/icons/hd_render_off.png';
+        document.getElementById('settings_button_menu_HDrendering').innerHTML = ``;
+        document.getElementById('settings_button_menu_HDrendering').innerHTML = `OFF`;
+        HD_Rendering = false;
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#closeFullscreen">closeFullscreen</a></li><li><a href="global.html#disableSound">disableSound</a></li><li><a href="global.html#enableSound">enableSound</a></li><li><a href="global.html#enterFullscreen">enterFullscreen</a></li><li><a href="global.html#hideNewGameButton">hideNewGameButton</a></li><li><a href="global.html#loadFullscreenMenuButtonHTMLTemplate">loadFullscreenMenuButtonHTMLTemplate</a></li><li><a href="global.html#newGameButtonAddFullscreenClass">newGameButtonAddFullscreenClass</a></li><li><a href="global.html#newGameButtonHover">newGameButtonHover</a></li><li><a href="global.html#newGameButtonRemoveFullscreenClass">newGameButtonRemoveFullscreenClass</a></li><li><a href="global.html#pressMobileButtons">pressMobileButtons</a></li><li><a href="global.html#resetMusicTime">resetMusicTime</a></li><li><a href="global.html#showNewGameButton">showNewGameButton</a></li><li><a href="global.html#startBackgroundMusic">startBackgroundMusic</a></li><li><a href="global.html#startBossFightMusic">startBossFightMusic</a></li><li><a href="global.html#startFullscreenEvent">startFullscreenEvent</a></li><li><a href="global.html#startGameOverSound">startGameOverSound</a></li><li><a href="global.html#startHDRenderingEvent">startHDRenderingEvent</a></li><li><a href="global.html#startLevelBackgroundMusic">startLevelBackgroundMusic</a></li><li><a href="global.html#startMobileControllerEvent">startMobileControllerEvent</a></li><li><a href="global.html#startSoundByGamestart">startSoundByGamestart</a></li><li><a href="global.html#startSoundEvent">startSoundEvent</a></li><li><a href="global.html#startVictorySound">startVictorySound</a></li><li><a href="global.html#stopBossFightMusic">stopBossFightMusic</a></li><li><a href="global.html#stopLevelBackgroundMusic">stopLevelBackgroundMusic</a></li><li><a href="global.html#toggleFullScreen">toggleFullScreen</a></li><li><a href="global.html#toggleFullscreenIcon">toggleFullscreenIcon</a></li><li><a href="global.html#toggleHDRenderingButton">toggleHDRenderingButton</a></li><li><a href="global.html#toggleMobileControllerButton">toggleMobileControllerButton</a></li><li><a href="global.html#toggleSound">toggleSound</a></li><li><a href="global.html#turnFullscreenOff">turnFullscreenOff</a></li><li><a href="global.html#turnFullscreenOn">turnFullscreenOn</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu May 16 2024 14:41:24 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
