@@ -26,8 +26,6 @@ class World {
     statusbar_ENERGY;
     bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11);
     characterHasMoved = false;
-    invert;
-    filterEffectInterval;
 
 
     /**
@@ -74,10 +72,9 @@ class World {
      */
     enterBossArenaEffect() {
         if (this.character && this.character.isInBattleArena && this.character.enteredBattleArena) {
-            this.setContextFilter();
-
+            let filterEffectInterval = this.setContextFilter();
             setTimeout(() => {
-                clearInterval(this.filterEffectInterval);
+                clearInterval(filterEffectInterval);
                 this.resetContextFilter();
                 this.character.enteredBattleArena = false;
             }, 1000); // Stop the flickering filter effect after 1 second.
@@ -90,16 +87,18 @@ class World {
      * The filter effect is set to flicker between two filter effects.
      */
     setContextFilter() {
-        this.invert = false;
-        this.filterEffectInterval = setInterval(() => {
-            if (this.invert) {
+        let invert = false;
+        let filterEffectInterval = setInterval(() => {
+            if (invert) {
                 this.ctx.filter = 'hue-rotate(90deg)';
             }
             else {
                 this.ctx.filter = 'hue-rotate(-0.25turn)';
             }
-            this.invert = !invert;
+            invert = !invert;
         }, 1000 / 60); // Change this value to adjust the speed of the flickering
+
+        return filterEffectInterval;
     }
 
 
@@ -176,10 +175,7 @@ class World {
         if (this.character.health === 6) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_3.png', 10, 7, 55, 11); }
         if (this.character.health === 4) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_4.png', 10, 7, 55, 11); }
         if (this.character.health === 2) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_5.png', 10, 7, 55, 11); }
-        if (this.character.health === 0) {
-            this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11);
-            this.healthStatusBlinkAnimation();
-        }
+        if (this.character.health === 0) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11);}
     }
 
 
