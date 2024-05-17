@@ -12,6 +12,9 @@ class Level {
     playground;
     collectibles_energy;
     collectibles_health;
+    statusbar_HEALTH;
+    statusbar_ENERGY;
+    bossEnemy_HEALTHBAR;
     gameOver;
     victory;
     fireworks;
@@ -35,11 +38,14 @@ class Level {
      * @param {object[]} playground - Array of objects containing the ground platform object of the level.
      * @param {object[]} collectibles_energy - Array of objects containing all collectible energy objects in the level.
      * @param {object[]} collectibles_health - Array of objects containing all collectible health objects in the level.
+     * @param {object[]} statusbar_HEALTH - Array of objects containing the health statusbar object of the character.
+     * @param {object[]} statusbar_ENERGY - Array of objects containing the energy statusbar object of the character.
+     * @param {object[]} bossEnemy_HEALTHBAR - Array of objects containing the boss enemy healthbar object of the level.
      * @param {object[]} gameOver - Array of objects containing the game over object of the level.
      * @param {object[]} victory - Array of objects containing the victory object of the level.
      * @param {object[]} fireworks - Array of objects containing the fireworks object of the level.
      */
-    constructor(enemies, animatedObjectFront, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy, collectibles_health, gameOver, victory, fireworks) {
+    constructor(enemies, animatedObjectFront, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy, statusbar_HEALTH, statusbar_ENERGY, bossEnemy_HEALTHBAR, collectibles_health, gameOver, victory, fireworks) {
 
         this.enemies = enemies;
         this.animatedObjectFront = animatedObjectFront;
@@ -49,6 +55,9 @@ class Level {
         this.playground = playground;
         this.collectibles_energy = collectibles_energy;
         this.collectibles_health = collectibles_health;
+        this.statusbar_HEALTH = statusbar_HEALTH;
+        this.statusbar_ENERGY = statusbar_ENERGY;
+        this.bossEnemy_HEALTHBAR = bossEnemy_HEALTHBAR;
         this.gameOver = gameOver;
         this.victory = victory;
         this.fireworks = fireworks;
