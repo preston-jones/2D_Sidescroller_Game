@@ -25,8 +25,8 @@ class BossEnemy extends MovableObject {
     hasAttacked = false; // Initialize hasAttacked to false
     moveInterval;
     animateInterval;
-    attackAnimationInterval;
     attackCharacterInterval;
+    attackCharacterInterval_2;
 
 
     /* Arrays of the images paths for the animations of this object. */
@@ -91,6 +91,21 @@ class BossEnemy extends MovableObject {
      * The method to animate the boss enemy object during the boss fight.
      */
     animateBossFight() {
+        if (!this.is_Dead && !world.character.is_Dead) {
+            this.enemyBossIsNotAttacking();
+            this.enemyBossIsAttacking();
+        }
+        if (!this.is_Dead && world.character.is_Dead) {
+            this.enemyBossIsNotAttacking();
+        }
+    }
+
+
+    /**
+     * This Function moves the boss enemy object when it is not attacking the character.
+     */
+    enemyBossIsNotAttacking() {
+        this.speed = 0.5;
         if (!this.is_Dead) {
             this.moveInterval = setInterval(() => {
                 if (this.x <= 2044) { /* 2044 is suggested value for the middle of the screen */
@@ -101,19 +116,35 @@ class BossEnemy extends MovableObject {
                 }
             }, 1000 / 50);
         }
-
-        setTimeout(() => {
-            clearInterval(this.moveInterval);
-            this.attackCharacter();
-        }, 6000);
     }
 
 
+    /**
+     * This Function calls the different attack patterns of the boss enemy object.
+     */
+    enemyBossIsAttacking() {
+        if (this.health > 3) {
+            setTimeout(() => {
+                clearInterval(this.moveInterval);
+                this.firstAttackCharacter();
+            }, 3000);
+        }
+
+
+        if (this.health <= 3) {
+            setTimeout(() => {
+                clearInterval(this.moveInterval);
+                this.secondAttackCharacter();
+            }, 4000);
+        }
+    }
+
 
     /**
-     * Function of the object BossEnemiy to attack the character object.
+     * Function of the first Attack pattern of the boss enemy object.
      */
-    attackCharacter() {
+    firstAttackCharacter() {
+        this.speed = 1;
         this.attackCharacterInterval = setInterval(() => {
             if (this.x < world.character.x) {
                 this.otherDirection = false;
@@ -129,6 +160,30 @@ class BossEnemy extends MovableObject {
             }
             if (this.isColliding(world.character)) {
                 clearInterval(this.attackCharacterInterval);
+                setTimeout(() => {
+                    this.animateBossFight();
+                }, 25);
+            }
+        }, 1000 / 25);
+    }
+
+
+    /**
+     * Function of the second Attack pattern of the boss enemy object.
+     */
+    secondAttackCharacter() {
+        this.speed = 1;
+        this.attackCharacterInterval_2 = setInterval(() => {
+            // Save the boss's original position
+            const originalX = this.x;
+            const originalY = this.y;
+
+            // Jump to the character's position
+            this.x = world.character.x;
+            this.y = world.character.y;
+
+            if (this.isColliding(world.character)) {
+                clearInterval(this.attackCharacterInterval_2);
                 setTimeout(() => {
                     this.animateBossFight();
                 }, 25);
@@ -211,7 +266,6 @@ class BossEnemy extends MovableObject {
                 }
             }
         }
-        this.hasAttacked = false;
     }
 
 
@@ -261,9 +315,7 @@ class BossEnemy extends MovableObject {
                 }
             }
         }
-        this.hasAttacked = false;
     }
-
 
 
     /**
@@ -297,6 +349,5 @@ class BossEnemy extends MovableObject {
                 }
             }
         }
-        this.hasAttacked = false;
     }
 }

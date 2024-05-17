@@ -72,7 +72,6 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkHealthStatus();
         }, 50);
     }
 
@@ -215,6 +214,7 @@ class World {
             if (this.character.isColliding(enemy)) {
                 if (!this.character.inCollision) {
                     this.character.hit();
+                    this.checkHealthStatus();
                 }
             }
             else {
