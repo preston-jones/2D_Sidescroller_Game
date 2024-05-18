@@ -5,7 +5,6 @@
  * It contains all the objects that are part of the game world.
  * 
  * @class World
- * @extends {MovableObject}
  */
 class World {
     character;
@@ -134,6 +133,27 @@ class World {
     }
 
 
+    updateStatusbarCharacterHealth() {
+        let imgIndex;
+        if (world.character.health === 10) {imgIndex = 'assets/statusbar/energybar/energy_1.png';}
+        else if (this.character.health === 8) {imgIndex = 'assets/statusbar/energybar/energy_2.png';}
+        else if (this.character.health === 6) {imgIndex = 'assets/statusbar/energybar/energy_3.png';}
+        else if (this.character.health === 4) {imgIndex = 'assets/statusbar/energybar/energy_4.png';}
+        else if (this.character.health === 2) {imgIndex = 'assets/statusbar/energybar/energy_5.png';}
+        else if (this.character.health === 0) {imgIndex = 'assets/statusbar/energybar/energy_6.png';}
+    }
+
+
+    setImageIndexForHealthStatusbar() {
+        if (world.character.health === 10) {return 0;}
+        else if (this.character.health === 8) {return 1;}
+        else if (this.character.health === 6) {return 2;}
+        else if (this.character.health === 4) {return 3;}
+        else if (this.character.health === 2) {return 4;}
+        else if (this.character.health === 0) {return 5;}
+    }
+
+
     /**
      * Checks the collision of the enemies, shots and collectibles.
      * The collision is checked to determine if the character is colliding with an enemy, shot or collectible.
@@ -154,13 +174,23 @@ class World {
             if (this.character.isColliding(enemy)) {
                 if (!this.character.inCollision) {
                     this.character.hit();
-                    // this.statusbar_HEALTH.setStatusbarForCharacter('health', this.character.health);
+                    this.checkCharacterHealthStatusbar();
                 }
             }
             else {
                 this.character.inCollision = false; // Reset inCollision when the collision ends
             }
         });
+    }
+
+
+    checkCharacterHealthStatusbar() {
+        if (this.character.health === 10) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(0);}
+        else if (this.character.health === 8) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(1);}
+        else if (this.character.health === 6) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(2);}
+        else if (this.character.health === 4) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(3);}
+        else if (this.character.health === 2) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(4);}
+        else if (this.character.health === 0) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(5);}
     }
 
 
@@ -305,8 +335,8 @@ class World {
             this.ctx.translate(-this.camera_x, this.camera_y);
             // -- space for fix objects in the front
             this.drawTextOnGameStart();
-            this.addObjectsToMap(this.level.statusbar_HEALTH);
-            this.addObjectsToMap(this.level.statusbar_ENERGY);
+            this.addToMap(this.level.statusbar_HEALTH);
+            this.addToMap(this.level.statusbar_ENERGY);
             this.drawBossEnemyHealthbar();
             this.drawGameOver();
             this.drawVictory();

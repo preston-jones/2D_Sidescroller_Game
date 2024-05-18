@@ -10,12 +10,12 @@ class StatusbarEnergy extends DrawableObject {
 
     /* Arrays of the images paths for the statusbar object. */
     IMAGES_ENERGY_STATUSBAR = [
-        'aassets/statusbar/healthbar/health_1.png',
-        'aassets/statusbar/healthbar/health_2.png',
-        'aassets/statusbar/healthbar/health_3.png',
-        'aassets/statusbar/healthbar/health_4.png',
-        'aassets/statusbar/healthbar/health_5.png',
-        'aassets/statusbar/healthbar/health_6.png',
+        'assets/statusbar/energybar/energy_1.png',
+        'assets/statusbar/energybar/energy_2.png',
+        'assets/statusbar/energybar/energy_3.png',
+        'assets/statusbar/energybar/energy_4.png',
+        'assets/statusbar/energybar/energy_5.png',
+        'assets/statusbar/energybar/energy_6.png',
     ];
 
 
@@ -48,8 +48,7 @@ class StatusbarEnergy extends DrawableObject {
     }
 
 
-    setStatusbarForCharacter(statusbarname, value) {
-        this.checkStatusBarName(statusbarname);
+    updateStatusbarCharacterEnergy() {
         this.loadImage(this.statusbar_img[this.setImageIndexForCharacter(value)]);
     }
 }

@@ -45,7 +45,7 @@ class Level {
      * @param {object[]} victory - Array of objects containing the victory object of the level.
      * @param {object[]} fireworks - Array of objects containing the fireworks object of the level.
      */
-    constructor(enemies, animatedObjectFront, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy, statusbar_HEALTH, statusbar_ENERGY, bossEnemy_HEALTHBAR, collectibles_health, gameOver, victory, fireworks) {
+    constructor(enemies, animatedObjectFront, backgroundImageStatic, animatedBackgroundBack, animatedBackgroundFront, playground, collectibles_energy, collectibles_health, statusbar_HEALTH, statusbar_ENERGY, bossEnemy_HEALTHBAR, gameOver, victory, fireworks) {
 
         this.enemies = enemies;
         this.animatedObjectFront = animatedObjectFront;
