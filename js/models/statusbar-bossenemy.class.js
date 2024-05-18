@@ -31,7 +31,6 @@ class StatusbarBossEnemy extends DrawableObject {
      */
     constructor(img, x, y, width, height) {
         super().loadImage(img);
-        this.loadImages(this.IMAGES_HEALTH_STATUSBAR_BOSSENEMY);
         this.x = x;
         this.y = y;
         this.width = width;
@@ -39,19 +38,21 @@ class StatusbarBossEnemy extends DrawableObject {
     }
 
 
-    setImageIndexForBossEnemy(bossEnemyHealth) {
-        if (bossEnemyHealth === 6) {return 0;}
-        else if (bossEnemyHealth === 5) {return 1;}
-        else if (bossEnemyHealth === 4) {return 2;}
-        else if (bossEnemyHealth === 3) {return 3;}
-        else if (bossEnemyHealth === 2) {return 4;}
-        else if (bossEnemyHealth === 1) {return 5;}
-        else if (bossEnemyHealth === 0) {return 6;}
+    getImageIndex(index) {
+        if (index === 6) {return 0;}
+        else if (index === 5) {return 1;}
+        else if (index === 4) {return 2;}
+        else if (index === 3) {return 3;}
+        else if (index === 2) {return 4;}
+        else if (index === 1) {return 5;}
+        else if (index === 0) {return 6;}
     }
 
 
-    setStatusbarForBossEnemy(statusbarname, value) {
-        this.checkStatusBarName(statusbarname);
-        this.loadImage(this.statusbar_img[this.setImageIndexForBossEnemy(value)]);
+    updateStatusbarBossEnemyHealth(bossEnemyHealth) {
+        let imageIndex = this.getImageIndex(bossEnemyHealth);
+        if (imageIndex !== undefined) {
+            this.loadImage(this.IMAGES_HEALTH_STATUSBAR_BOSSENEMY[imageIndex]); 
+        }
     }
 }

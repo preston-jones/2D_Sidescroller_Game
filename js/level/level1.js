@@ -69,9 +69,8 @@ function initLevel1() {
         ,
         new StatusbarEnergy('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15)
         ,
-        [
             new StatusbarBossEnemy('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11)
-        ],
+        ,
         [
             new Game_over(0, -45, 300, 200)
         ],

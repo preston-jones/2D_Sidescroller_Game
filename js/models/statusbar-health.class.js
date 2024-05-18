@@ -37,7 +37,20 @@ class StatusbarHealth extends DrawableObject {
     }
 
 
-    updateStatusbarCharacterHealth(index) {
-        this.loadImage(this.IMAGES_HEALTH_STATUSBAR[index]);
+    getImageIndex(index) {
+        if (index === 10) {return 0;}
+        else if (index === 8) {return 1;}
+        else if (index === 6) {return 2;}
+        else if (index === 4) {return 3;}
+        else if (index === 2) {return 4;}
+        else if (index === 0) {return 5;}
+    }
+
+
+    updateStatusbarCharacterHealth(charackterHealth) {
+        let imageIndex = this.getImageIndex(charackterHealth);
+        if (imageIndex !== undefined) {
+            this.loadImage(this.IMAGES_HEALTH_STATUSBAR[imageIndex]); 
+        }
     }
 }

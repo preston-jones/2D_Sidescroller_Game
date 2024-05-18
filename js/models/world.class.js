@@ -127,30 +127,9 @@ class World {
             this.shots.push(this.characterShot);
             this.character.energy -= 1;
             this.character.playAnimation_SHOOT();
-            // Statusbar.setStatusbarForCharacter('energy', this.character.energy);
+            this.level.statusbar_ENERGY.updateStatusbarCharacterEnergy(this.character.energy);
             this.checkCollisions();
         }
-    }
-
-
-    updateStatusbarCharacterHealth() {
-        let imgIndex;
-        if (world.character.health === 10) {imgIndex = 'assets/statusbar/energybar/energy_1.png';}
-        else if (this.character.health === 8) {imgIndex = 'assets/statusbar/energybar/energy_2.png';}
-        else if (this.character.health === 6) {imgIndex = 'assets/statusbar/energybar/energy_3.png';}
-        else if (this.character.health === 4) {imgIndex = 'assets/statusbar/energybar/energy_4.png';}
-        else if (this.character.health === 2) {imgIndex = 'assets/statusbar/energybar/energy_5.png';}
-        else if (this.character.health === 0) {imgIndex = 'assets/statusbar/energybar/energy_6.png';}
-    }
-
-
-    setImageIndexForHealthStatusbar() {
-        if (world.character.health === 10) {return 0;}
-        else if (this.character.health === 8) {return 1;}
-        else if (this.character.health === 6) {return 2;}
-        else if (this.character.health === 4) {return 3;}
-        else if (this.character.health === 2) {return 4;}
-        else if (this.character.health === 0) {return 5;}
     }
 
 
@@ -174,23 +153,13 @@ class World {
             if (this.character.isColliding(enemy)) {
                 if (!this.character.inCollision) {
                     this.character.hit();
-                    this.checkCharacterHealthStatusbar();
+                    this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(this.character.health);
                 }
             }
             else {
                 this.character.inCollision = false; // Reset inCollision when the collision ends
             }
         });
-    }
-
-
-    checkCharacterHealthStatusbar() {
-        if (this.character.health === 10) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(0);}
-        else if (this.character.health === 8) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(1);}
-        else if (this.character.health === 6) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(2);}
-        else if (this.character.health === 4) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(3);}
-        else if (this.character.health === 2) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(4);}
-        else if (this.character.health === 0) {this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(5);}
     }
 
 
@@ -211,7 +180,6 @@ class World {
     }
 
 
-
     /**
      * Checks the collision of the character with a collectible.
      * If the character is colliding with a collectible, the collectible is removed from the collectibles array.
@@ -223,7 +191,7 @@ class World {
             if (this.character.isColliding(energy)) {
                 collecting_sound.play();
                 this.character.energy = 10;
-                this.checkEnergyStatus();
+                this.level.statusbar_ENERGY.updateStatusbarCharacterEnergy(10);
                 let index = this.level.collectibles_energy.indexOf(energy);
                 if (index > -1) {
                     this.level.collectibles_energy.splice(index, 1);
@@ -234,7 +202,7 @@ class World {
             if (this.character.isColliding(health)) {
                 collecting_sound.play();
                 this.character.health = 10;
-                setStatusbarForCharacter('health', this.health);
+                this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(10);
                 let index = this.level.collectibles_health.indexOf(health);
                 if (index > -1) {
                     this.level.collectibles_health.splice(index, 1);

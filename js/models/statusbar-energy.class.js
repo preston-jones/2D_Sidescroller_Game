@@ -38,17 +38,20 @@ class StatusbarEnergy extends DrawableObject {
     }
 
 
-    setImageIndexForCharacter() {
-        if (world.character.energy === 10) {return 0;}
-        else if (world.character.energy === 8) {return 1;}
-        else if (world.character.energy === 6) {return 2;}
-        else if (world.character.energy === 4) {return 3;}
-        else if (world.character.energy === 2) {return 4;}
-        else if (world.character.energy === 0) {return 5;}
+    getImageIndex(index) {
+        if (index === 10) {return 0;}
+        else if (index === 8) {return 1;}
+        else if (index === 6) {return 2;}
+        else if (index === 4) {return 3;}
+        else if (index === 2) {return 4;}
+        else if (index === 0) {return 5;}
     }
 
 
-    updateStatusbarCharacterEnergy() {
-        this.loadImage(this.statusbar_img[this.setImageIndexForCharacter(value)]);
+    updateStatusbarCharacterEnergy(charackterEnergy) {
+        let imageIndex = this.getImageIndex(charackterEnergy);
+        if (imageIndex !== undefined) {
+            this.loadImage(this.IMAGES_ENERGY_STATUSBAR[imageIndex]); 
+        }
     }
 }

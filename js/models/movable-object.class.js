@@ -145,7 +145,7 @@ class MovableObject extends DrawableObject {
             this.health === 0;
             this.is_Dead = true;
         }
-        // setStatusbarForBossEnemy('boss_health', this.health);
+        world.level.bossEnemy_HEALTHBAR.updateStatusbarBossEnemyHealth(this.health);
     }
 
 
