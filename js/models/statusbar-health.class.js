@@ -20,7 +20,7 @@ class StatusbarHealth extends DrawableObject {
 
 
     /**
-     * The constructor of the Statusbar class.
+     * The constructor of the StatusbarHealth class.
      * 
      * @param {string} img - The image path of the statusbar.
      * @param {number} x - The x coordinate of the statusbar.
@@ -37,6 +37,11 @@ class StatusbarHealth extends DrawableObject {
     }
 
 
+    /**
+     * Function to get the image index of the character health statusbar.
+     * 
+     * @param {number} index - The index of the statusbar.
+     */
     getImageIndex(index) {
         if (index === 10 || index === 9) {return 0;}
         else if (index === 8 || index === 7) {return 1;}
@@ -47,6 +52,11 @@ class StatusbarHealth extends DrawableObject {
     }
 
 
+    /**
+     * Function to update the statusbar of the character health.
+     * 
+     * @param {number} charackterHealth - The health of the character.
+     */
     updateStatusbarCharacterHealth(charackterHealth) {
         let imageIndex = this.getImageIndex(charackterHealth);
         if (imageIndex !== undefined) {

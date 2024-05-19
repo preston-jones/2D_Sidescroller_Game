@@ -21,7 +21,7 @@ class StatusbarBossEnemy extends DrawableObject {
 
 
     /**
-     * The constructor of the Statusbar class.
+     * The constructor of the StatusbarBossEnemy class.
      * 
      * @param {string} img - The image path of the statusbar.
      * @param {number} x - The x coordinate of the statusbar.
@@ -38,6 +38,11 @@ class StatusbarBossEnemy extends DrawableObject {
     }
 
 
+    /**
+     * Function to get the image index of the statusbar.
+     *
+     * @param {number} index - The index of the statusbar.
+     */
     getImageIndex(index) {
         if (index === 30) {return 0;}
         else if (index === 25) {return 1;}
@@ -49,6 +54,11 @@ class StatusbarBossEnemy extends DrawableObject {
     }
 
 
+    /**
+     * Function to update the statusbar of the boss enemy health.
+     * 
+     * @param {number} bossEnemyHealth - The health of the boss enemy.
+     */
     updateStatusbarBossEnemyHealth(bossEnemyHealth) {
         let imageIndex = this.getImageIndex(bossEnemyHealth);
         if (imageIndex !== undefined) {

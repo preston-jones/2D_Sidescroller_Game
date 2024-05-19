@@ -88,6 +88,11 @@ class World {
     }
 
 
+    /**
+     * Resets the collectibles array.
+     * The collectibles array is reset when the character enters the boss arena.
+     * This is done to prevent the collectibles from appearing in the boss arena.
+     */
     resetCollectiblesArray() {
         this.level.collectibles_energy = [];
         this.level.collectibles_health = [];
@@ -282,22 +287,22 @@ class World {
     }
 
 
+    /**
+     * This function draws the collectibles in the boss fight.
+     * The collectibles are displayed when the character's health or energy is low.
+     * The collectibles are displayed randomly in the boss arena.
+     */
     drawBossFightCollectibles() {
             if (this.character.isInBattleArena && this.character.health <= 4 && this.level.collectibles_health.length === 0) {
                 let x_health = Math.floor(Math.random() * (2150 - 1900 + 1)) + 1900;
                 this.level.collectibles_health = [new CollectibleHealth(x_health, 112, 15, 15)];
-                // setTimeout(() => {
-                //     this.addObjectsToMap(this.level.collectibles_health);
-                // }, 3000);
             }
-            if (this.character.isInBattleArena && this.character.energy === 2 && this.level.collectibles_energy.length === 0) {
+            if (this.character.isInBattleArena && this.character.energy <= 2 && this.level.collectibles_energy.length === 0) {
                 let x_energy= Math.floor(Math.random() * (2150 - 1900 + 1)) + 1900;
                 this.level.collectibles_energy = [new CollectibleEnergy(x_energy, 112, 15, 15)];
-                // setTimeout(() => {
-                //     this.addObjectsToMap(this.level.collectibles_energy);
-                // }, 3000);
             }
     }
+
 
     /**
      * Function to draw all objects on the canvas.
@@ -367,8 +372,8 @@ class World {
         }
 
         movableObject.draw(this.ctx);
-        // movableObject.drawFrame(this.ctx);
-        // movableObject.drawRealFrame(this.ctx);
+        // movableObject.drawFrame(this.ctx); //draws the hitbox of the object including the offset parameters
+        // movableObject.drawRealFrame(this.ctx); //draws the hitbox of the object without the offset parameters
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

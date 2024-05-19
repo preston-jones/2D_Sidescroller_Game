@@ -9,16 +9,15 @@ class Character extends MovableObject {
     width = 60;
     height = 50;
     x = 58;
-    // x = 1750;
     y = 75;
     offset_left = 15;
     offset_top = 10;
     offset_right = -30;
     offset_bottom = -10;
     speed = 2;
-    health = 10 //10;
+    health = 10
     health_MAX = 10;
-    energy = 10; // 10;
+    energy = 10;
     energy_MAX = 10;
     character_Selection = character_selected;
     isInBattleArena = false;
@@ -26,6 +25,7 @@ class Character extends MovableObject {
     isDeadCounter = true;
     world;
     playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
+
 
     /* Arrays of the images paths for the animations of this object. */
     IMAGES_STAY = this.characterStay();

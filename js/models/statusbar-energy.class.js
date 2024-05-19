@@ -20,7 +20,7 @@ class StatusbarEnergy extends DrawableObject {
 
 
     /**
-     * The constructor of the Statusbar class.
+     * The constructor of the StatusbarEnergy class.
      * 
      * @param {string} img - The image path of the statusbar.
      * @param {number} x - The x coordinate of the statusbar.
@@ -38,6 +38,11 @@ class StatusbarEnergy extends DrawableObject {
     }
 
 
+    /**
+     * Function to get the image index of the character energy statusbar.
+     *
+     * @param {number} index - The index of the statusbar.
+     */
     getImageIndex(index) {
         if (index === 10) {return 0;}
         else if (index === 8) {return 1;}
@@ -48,6 +53,11 @@ class StatusbarEnergy extends DrawableObject {
     }
 
 
+    /**
+     * Function to update the statusbar of the character energy.
+     * 
+     * @param {number} charackterEnergy - The energy of the character.
+     */
     updateStatusbarCharacterEnergy(charackterEnergy) {
         let imageIndex = this.getImageIndex(charackterEnergy);
         if (imageIndex !== undefined) {
