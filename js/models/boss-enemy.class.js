@@ -15,7 +15,7 @@ class BossEnemy extends MovableObject {
     offset_right = -20;
     offset_bottom = -10;
     speed = 0.7;
-    health = 6;
+    health = 24;
     moveRight = false;
     moveUp = false;
     isOnRight = false;
@@ -119,7 +119,7 @@ class BossEnemy extends MovableObject {
      */
     enemyBossIsNotAttacking() {
         this.loadImages(this.IMAGES_FLY);
-        this.speed = 1;
+        this.speed = 0.9;
         if (!this.is_Dead) {
             this.moveInterval = setInterval(() => {
                 if (this.x <= 2044) { /* 2044 is suggested value for the middle of the screen */
@@ -180,7 +180,7 @@ class BossEnemy extends MovableObject {
                     this.animateBossFight();
                     setTimeout(() => {
                         this.isAttacking = false;
-                    }, 2000);
+                    }, 1000);
                 }, 25);
             }
         }, 1000 / 25);
@@ -208,7 +208,7 @@ class BossEnemy extends MovableObject {
                     this.animateBossFight();
                     setTimeout(() => {
                         this.isAttacking = false;
-                    }, 2000);
+                    }, 1000);
                 }, 25);
             }
         }, 1000 / 25);

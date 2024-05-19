@@ -16,7 +16,7 @@ class Character extends MovableObject {
     offset_right = -30;
     offset_bottom = -10;
     speed = 2;
-    health = 10;
+    health = 9999 //10;
     health_MAX = 10;
     energy = 9999; // 10;
     energy_MAX = 10;

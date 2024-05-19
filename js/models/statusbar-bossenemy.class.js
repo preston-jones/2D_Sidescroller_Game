@@ -39,12 +39,12 @@ class StatusbarBossEnemy extends DrawableObject {
 
 
     getImageIndex(index) {
-        if (index === 6) {return 0;}
-        else if (index === 5) {return 1;}
-        else if (index === 4) {return 2;}
-        else if (index === 3) {return 3;}
-        else if (index === 2) {return 4;}
-        else if (index === 1) {return 5;}
+        if (index === 24) {return 0;}
+        else if (index === 20) {return 1;}
+        else if (index === 16) {return 2;}
+        else if (index === 12) {return 3;}
+        else if (index === 8) {return 4;}
+        else if (index === 4) {return 5;}
         else if (index === 0) {return 6;}
     }
 
