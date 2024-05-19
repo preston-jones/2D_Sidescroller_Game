@@ -187,7 +187,7 @@ class BossEnemy extends MovableObject {
             if (this.isColliding(world.character)) {
                 clearInterval(this.attackCharacterInterval);
                 setTimeout(() => {
-                    this.animateBossFight();
+                    this.startBossFight();
                     setTimeout(() => {
                         this.isAttacking = false;
                     }, 1000);
@@ -214,7 +214,7 @@ class BossEnemy extends MovableObject {
             if (this.isColliding(world.character)) {
                 clearInterval(this.attackCharacterInterval_2);
                 setTimeout(() => {
-                    this.animateBossFight();
+                    this.startBossFight();
                     setTimeout(() => {
                         this.isAttacking = false;
                     }, 1000);
