@@ -38,11 +38,11 @@ class StatusbarHealth extends DrawableObject {
 
 
     getImageIndex(index) {
-        if (index === 10) {return 0;}
-        else if (index === 8) {return 1;}
-        else if (index === 6) {return 2;}
-        else if (index === 4) {return 3;}
-        else if (index === 2) {return 4;}
+        if (index === 10 || index === 9) {return 0;}
+        else if (index === 8 || index === 7) {return 1;}
+        else if (index === 6 || index === 5) {return 2;}
+        else if (index === 4 || index === 3) {return 3;}
+        else if (index === 2 || index === 1) {return 4;}
         else if (index === 0) {return 5;}
     }
 

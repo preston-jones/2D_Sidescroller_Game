@@ -67,6 +67,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.drawBossFightCollectibles();
         }, 50);
     }
 
@@ -82,7 +83,14 @@ class World {
                 this.resetContextFilter();
                 this.character.enteredBattleArena = false;
             }, 1000); // Stop the flickering filter effect after 1 second.
+            this.resetCollectiblesArray();
         }
+    }
+
+
+    resetCollectiblesArray() {
+        this.level.collectibles_energy = [];
+        this.level.collectibles_health = [];
     }
 
 
@@ -127,8 +135,8 @@ class World {
             this.shots.push(this.characterShot);
             this.character.energy -= 1;
             this.character.playAnimation_SHOOT();
-            this.level.statusbar_ENERGY.updateStatusbarCharacterEnergy(this.character.energy);
             this.checkCollisions();
+            this.level.statusbar_ENERGY.updateStatusbarCharacterEnergy(this.character.energy);
         }
     }
 
@@ -273,6 +281,23 @@ class World {
         }
     }
 
+
+    drawBossFightCollectibles() {
+            if (this.character.isInBattleArena && this.character.health <= 4 && this.level.collectibles_health.length === 0) {
+                let x_health = Math.floor(Math.random() * (2150 - 1900 + 1)) + 1900;
+                this.level.collectibles_health = [new CollectibleHealth(x_health, 112, 15, 15)];
+                // setTimeout(() => {
+                //     this.addObjectsToMap(this.level.collectibles_health);
+                // }, 3000);
+            }
+            if (this.character.isInBattleArena && this.character.energy === 2 && this.level.collectibles_energy.length === 0) {
+                let x_energy= Math.floor(Math.random() * (2150 - 1900 + 1)) + 1900;
+                this.level.collectibles_energy = [new CollectibleEnergy(x_energy, 112, 15, 15)];
+                // setTimeout(() => {
+                //     this.addObjectsToMap(this.level.collectibles_energy);
+                // }, 3000);
+            }
+    }
 
     /**
      * Function to draw all objects on the canvas.

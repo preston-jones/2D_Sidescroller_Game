@@ -112,7 +112,12 @@ class MovableObject extends DrawableObject {
     hitCharacter() {
         let currentTime = new Date().getTime();
         if (!this.is_Dead && !this.inCollision && !this.is_Hurt && currentTime - this.lastHitTime > this.hitCooldown) {
-            this.health -= 1;
+            if (this.isInBattleArena) {
+                this.health -= 2.5;
+            }
+            else {
+                this.health -= 1;
+            }
             this.is_Hurt = true;
             this.inCollision = true;
             this.lastHitTime = currentTime; // Update lastHitTime
@@ -141,6 +146,7 @@ class MovableObject extends DrawableObject {
     hitBossEnemy() {
         if (!this.isAttacking && !this.isColliding(world.character)) {
             this.health -= 1;
+            this.speed += 0.05;
             this.enemyHitAnimation();
         }
         if (this.health <= 0) {

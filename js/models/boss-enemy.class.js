@@ -14,8 +14,8 @@ class BossEnemy extends MovableObject {
     offset_top = 5;
     offset_right = -20;
     offset_bottom = -10;
-    speed = 0.7;
-    health = 24;
+    speed = 0.5;
+    health = 30;
     moveRight = false;
     moveUp = false;
     isOnRight = false;
@@ -119,7 +119,7 @@ class BossEnemy extends MovableObject {
      */
     enemyBossIsNotAttacking() {
         this.loadImages(this.IMAGES_FLY);
-        this.speed = 0.9;
+        // this.speed = 2;
         if (!this.is_Dead) {
             this.moveInterval = setInterval(() => {
                 if (this.x <= 2044) { /* 2044 is suggested value for the middle of the screen */
@@ -160,7 +160,7 @@ class BossEnemy extends MovableObject {
      */
     firstAttackCharacter() {
         this.isAttacking = true;
-        this.speed = 0.7;
+        // this.speed = 2;
         this.attackCharacterInterval = setInterval(() => {
             if (this.x < world.character.x) {
                 this.otherDirection = false;
@@ -192,7 +192,7 @@ class BossEnemy extends MovableObject {
      */
     secondAttackCharacter() {
         this.isAttacking = true;
-        this.speed = 0.7;
+        // this.speed = 2;
         this.attackCharacterInterval_2 = setInterval(() => {
             // Save the boss's original position
             const originalX = this.x;
