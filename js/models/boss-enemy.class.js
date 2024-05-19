@@ -14,15 +14,14 @@ class BossEnemy extends MovableObject {
     offset_top = 5;
     offset_right = -20;
     offset_bottom = -10;
-    speed = 0.5;
+    speed = 0.7;
     health = 6;
     moveRight = false;
     moveUp = false;
     isOnRight = false;
     isOnLeft = false;
     isUp = true;
-    isAttacking = false; // Initialize isAttacking to false
-    hasAttacked = false; // Initialize hasAttacked to false
+    isAttacking = false;
     moveInterval;
     animateInterval;
     attackCharacterInterval;
@@ -37,6 +36,14 @@ class BossEnemy extends MovableObject {
         'assets/sprites/enemies/Wasp/wasp4.png',
         'assets/sprites/enemies/Wasp/wasp5.png',
         'assets/sprites/enemies/Wasp/wasp6.png',
+    ];
+    IMAGES_ATTACK = [
+        'assets/sprites/enemies/Wasp/wasp_attack1.png',
+        'assets/sprites/enemies/Wasp/wasp_attack2.png',
+        'assets/sprites/enemies/Wasp/wasp_attack3.png',
+        'assets/sprites/enemies/Wasp/wasp_attack4.png',
+        'assets/sprites/enemies/Wasp/wasp_attack5.png',
+        'assets/sprites/enemies/Wasp/wasp_attack6.png',
     ];
     IMAGES_ENEMY_EXPLOTION = [
         'assets/sprites/misc/enemy-explosion/enemy-explosion-1.png',
@@ -57,9 +64,9 @@ class BossEnemy extends MovableObject {
         super().loadImage(this.IMAGES_FLY[0]);
         this.x = 2120;
         this.otherDirection = true;
-        this.loadImages(this.IMAGES_FLY);
         this.loadImages(this.IMAGES_ENEMY_EXPLOTION);
-        this.animateBossEnemy(this.IMAGES_FLY);
+        this.loadImages(this.IMAGES_FLY);
+        this.animateBossEnemy();
     }
 
 
@@ -68,9 +75,15 @@ class BossEnemy extends MovableObject {
      * 
      * @param {Array} images_arr The array of the images paths for the animations of this object.
      */
-    animateBossEnemy(images_arr) {
+    animateBossEnemy() {
         this.animateInterval = setInterval(() => {
-            this.playAnimation(images_arr);
+            console.log(this.isAttacking);
+            if (this.isAttacking) {
+                this.playAnimation(this.IMAGES_ATTACK);
+            }
+            else {
+                this.playAnimation(this.IMAGES_FLY);
+            }
             this.checkDeathOfBossfight();
         }, 150);
 
@@ -105,7 +118,8 @@ class BossEnemy extends MovableObject {
      * This Function moves the boss enemy object when it is not attacking the character.
      */
     enemyBossIsNotAttacking() {
-        this.speed = 0.5;
+        this.loadImages(this.IMAGES_FLY);
+        this.speed = 1;
         if (!this.is_Dead) {
             this.moveInterval = setInterval(() => {
                 if (this.x <= 2044) { /* 2044 is suggested value for the middle of the screen */
@@ -123,6 +137,7 @@ class BossEnemy extends MovableObject {
      * This Function calls the different attack patterns of the boss enemy object.
      */
     enemyBossIsAttacking() {
+        this.loadImages(this.IMAGES_ATTACK);
         if (this.health > 3) {
             setTimeout(() => {
                 clearInterval(this.moveInterval);
@@ -144,7 +159,8 @@ class BossEnemy extends MovableObject {
      * Function of the first Attack pattern of the boss enemy object.
      */
     firstAttackCharacter() {
-        this.speed = 1;
+        this.isAttacking = true;
+        this.speed = 0.7;
         this.attackCharacterInterval = setInterval(() => {
             if (this.x < world.character.x) {
                 this.otherDirection = false;
@@ -162,6 +178,9 @@ class BossEnemy extends MovableObject {
                 clearInterval(this.attackCharacterInterval);
                 setTimeout(() => {
                     this.animateBossFight();
+                    setTimeout(() => {
+                        this.isAttacking = false;
+                    }, 2000);
                 }, 25);
             }
         }, 1000 / 25);
@@ -172,7 +191,8 @@ class BossEnemy extends MovableObject {
      * Function of the second Attack pattern of the boss enemy object.
      */
     secondAttackCharacter() {
-        this.speed = 1;
+        this.isAttacking = true;
+        this.speed = 0.7;
         this.attackCharacterInterval_2 = setInterval(() => {
             // Save the boss's original position
             const originalX = this.x;
@@ -186,6 +206,9 @@ class BossEnemy extends MovableObject {
                 clearInterval(this.attackCharacterInterval_2);
                 setTimeout(() => {
                     this.animateBossFight();
+                    setTimeout(() => {
+                        this.isAttacking = false;
+                    }, 2000);
                 }, 25);
             }
         }, 1000 / 25);

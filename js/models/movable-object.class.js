@@ -139,8 +139,10 @@ class MovableObject extends DrawableObject {
 
 
     hitBossEnemy() {
-        this.health -= 1;
-        this.enemyHitAnimation();
+        if (!this.isAttacking && !this.isColliding(world.character)) {
+            this.health -= 1;
+            this.enemyHitAnimation();
+        }
         if (this.health <= 0) {
             this.health === 0;
             this.is_Dead = true;
