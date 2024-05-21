@@ -367,7 +367,7 @@ class World {
      * @param {MovableObject} movableObject - The object to add to the map.
      */
     addToMap(movableObject) {
-        if (movableObject.otherDirection) { //checks, if the variable is true
+        if (movableObject && movableObject.otherDirection) { //checks, if the variable is true
             this.flipImage(movableObject);
         }
 
@@ -375,7 +375,7 @@ class World {
         // movableObject.drawFrame(this.ctx); //draws the hitbox of the object including the offset parameters
         // movableObject.drawRealFrame(this.ctx); //draws the hitbox of the object without the offset parameters
 
-        if (movableObject.otherDirection) {
+        if (movableObject && movableObject.otherDirection) {
             this.flipImageBack(movableObject);
         }
     }
