@@ -121,6 +121,7 @@ class BossEnemy extends MovableObject {
             this.enemyBossIsAttacking();
         }
         if (!this.is_Dead && world.character.is_Dead) {
+            this.speed = 0.5;
             this.enemyBossIsNotAttacking();
         }
     }
