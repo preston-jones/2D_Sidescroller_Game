@@ -8,6 +8,6 @@ Have Fun and enjoy a little Time Trip, back at the Arcade-Game-Era.
 
 Credits:
 
-- Game made by (myself) www.prestonjones-developer.de
+- Game made by (myself) www.prestonjones.dev
 
 - The Game Assets (Graphics) are created by Luis Zuno (@ansimuz).
