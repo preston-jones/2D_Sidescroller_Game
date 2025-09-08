@@ -27,7 +27,9 @@
     <script src="js/models/drawable.object.class.js"></script>
     <script src="js/models/movable-object.class.js"></script>
     <script src="js/models/character.class.js"></script>
-    <script src="js/models/statusbar.class.js"></script>
+    <script src="js/models/statusbar-health.class.js"></script>
+    <script src="js/models/statusbar-energy.class.js"></script>
+    <script src="js/models/statusbar-bossenemy.class.js"></script>
     <script src="js/models/collectible-energy.class.js"></script>
     <script src="js/models/collectible-health.class.js"></script>
     <script src="js/models/game-over.class.js"></script>
@@ -72,7 +74,7 @@
                 w3-include-html="assets/templates/mobile_controller-overlay.html"></div>
             <div class="newgame_button_container d-none" id="newgame_button_container">
                 <div id="newgame_button_inner_container" class="newgame_button_inner_container_fullscreen_off">
-                    <img id="newgame_button" class="newgame_button_fullscreen_off" onclick="exitGame()" src="assets/img/icons/newGame_Button_reversed.png" alt="">
+                    <img id="newgame_button" class="newgame_button_fullscreen_off" onclick="newGame()" src="assets/img/icons/newGame_Button_reversed.png" alt="">
                 </div>
             </div>
             <canvas id="canvas" class="d-none"></canvas>

@@ -30,6 +30,8 @@ class DrawableObject {
             if (this instanceof Bootleg) { this.img.src = 'assets/sprites/enemies/Bootleg/bootleg-idle.png'; }
             if (this instanceof Drone) { this.img.src = 'assets/sprites/enemies/drone/drone-1.png'; }
             if (this instanceof BossEnemy) { this.img.src = 'assets/sprites/enemies/Wasp/wasp1.png'; }
+            if (this instanceof CollectibleEnergy) { this.img.src = 'assets/collectibles/energy/energy-1.png'; }
+            if (this instanceof CollectibleHealth) { this.img.src = 'assets/collectibles/health/heart-1.png'; }
             this.img.onload = () => {
                 this.drawImageWithFilter(ctx);
             };

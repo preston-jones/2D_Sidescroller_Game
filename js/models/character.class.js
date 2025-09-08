@@ -15,7 +15,7 @@ class Character extends MovableObject {
     offset_right = -30;
     offset_bottom = -10;
     speed = 2;
-    health = 10;
+    health = 10
     health_MAX = 10;
     energy = 10;
     energy_MAX = 10;
@@ -25,6 +25,7 @@ class Character extends MovableObject {
     isDeadCounter = true;
     world;
     playerShot = new Shot(this.IMAGES_PLAYER_SHOT, this.x, this.y);
+
 
     /* Arrays of the images paths for the animations of this object. */
     IMAGES_STAY = this.characterStay();
@@ -253,17 +254,14 @@ class Character extends MovableObject {
         setInterval(() => {
             this.moveCamera();
 
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.is_Dead && !this.is_Hurt) {
+            if (this.world.keyboard.RIGHT && !this.world.keyboard.DOWN && this.x < this.world.level.level_end_x && !this.is_Dead && !this.is_Hurt) {
                 this.moveToRight(1.7);
             }
-            if (this.world.keyboard.LEFT && this.x > this.world.level.level_start_x && !this.is_Dead && !this.is_Hurt) {
+            if (this.world.keyboard.LEFT && !this.world.keyboard.DOWN && this.x > this.world.level.level_start_x && !this.is_Dead && !this.is_Hurt) {
                 this.moveToLeft(1.7);
             }
             if (this.world.keyboard.SPACE && !this.is_Dead && !this.is_Hurt) {
                 this.jump();
-            }
-            if (this.world.keyboard.DOWN && this.y > world.level.level_end_bottom_y && !this.is_Dead && !this.is_Hurt) {
-                this.moveDown(this.speed);
             }
         }, 1000 / 60);
 
@@ -271,7 +269,7 @@ class Character extends MovableObject {
             this.playAnimation_STAY();
             this.playAnimation_DEAD();
             this.playAnimation_JUMP();
-            this.playAnimation_DOWN();
+            this.playAnimation_CROUCH();
         }, 150);
     }
 
@@ -306,7 +304,7 @@ class Character extends MovableObject {
     /**
      * Function to play the crouch animation of the character object.
      */
-    playAnimation_DOWN() {
+    playAnimation_CROUCH() {
         this.offset_top = 10;
         this.offset_bottom = -10;
         if (this.world.keyboard.DOWN && !this.is_Dead && !this.is_Hurt) {

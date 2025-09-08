@@ -175,6 +175,18 @@ function hideStoryPage() {
 
 
 /**
+ * starts a new game
+ */
+function newGame() {
+    saveCharacterSelection = character_selected;
+    exitGame();
+    resetGame();
+    character_selected = saveCharacterSelection;
+    loadGame();
+}
+
+
+/**
  * exit the game
  */
 function exitGame() {

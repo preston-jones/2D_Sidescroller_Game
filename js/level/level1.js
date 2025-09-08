@@ -65,6 +65,12 @@ function initLevel1() {
             new CollectibleHealth(1400, 112, 15, 15),
             new CollectibleHealth(1800, 112, 15, 15)
         ],
+        new StatusbarHealth('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11)
+        ,
+        new StatusbarEnergy('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15)
+        ,
+            new StatusbarBossEnemy('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11)
+        ,
         [
             new Game_over(0, -45, 300, 200)
         ],

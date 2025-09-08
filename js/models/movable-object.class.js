@@ -19,7 +19,7 @@ class MovableObject extends DrawableObject {
     impact = false;
     lastCollidedWith = null;
     inCollision = false;
-    lastHitTime = 0; // Add this line
+    lastHitTime = 0;
     hitCooldown = 1000; // Cooldown period in milliseconds
 
 
@@ -109,10 +109,20 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * This function checks if the character is hit by an enemy object.
+     * If the character is not in the battle arena, the character loses 1 health point.
+     * If the character is in the battle arena, the character loses 2 health points.
+     */
     hitCharacter() {
         let currentTime = new Date().getTime();
         if (!this.is_Dead && !this.inCollision && !this.is_Hurt && currentTime - this.lastHitTime > this.hitCooldown) {
-            this.health -= 1;
+            if (this.isInBattleArena) {
+                this.health -= 2;
+            }
+            else {
+                this.health -= 1;
+            }
             this.is_Hurt = true;
             this.inCollision = true;
             this.lastHitTime = currentTime; // Update lastHitTime
@@ -128,6 +138,10 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * This function checks if the enemy object is hit by the character.
+     * It then plays the enemy hit animation.
+     */
     hitEnemy() {
         this.health -= 1;
         this.enemyHitAnimation();
@@ -138,14 +152,22 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * This function checks if the boss enemy object is hit by the character.
+     * It then plays the boss enemy hit animation.
+     * If the boss enemy is hit by the character, the speed of the boss enemy increases by 0.05.
+     */
     hitBossEnemy() {
-        this.health -= 1;
-        this.enemyHitAnimation();
+        if (!this.isAttacking && !this.isColliding(world.character)) {
+            this.health -= 1;
+            this.speed += 0.05;
+            this.enemyHitAnimation();
+        }
         if (this.health <= 0) {
             this.health === 0;
             this.is_Dead = true;
         }
-        world.checkBossEnemyHealthStatus(this.health);
+        world.level.bossEnemy_HEALTHBAR.updateStatusbarBossEnemyHealth(this.health);
     }
 
 

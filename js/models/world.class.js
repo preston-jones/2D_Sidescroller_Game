@@ -5,7 +5,6 @@
  * It contains all the objects that are part of the game world.
  * 
  * @class World
- * @extends {MovableObject}
  */
 class World {
     character;
@@ -22,9 +21,6 @@ class World {
     isGameOver = false;
     check;
     GAME_INTERVALS = [];
-    statusbar_HEALTH;
-    statusbar_ENERGY;
-    bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11);
     characterHasMoved = false;
     shotFired = false;
 
@@ -50,7 +46,6 @@ class World {
      */
     startLevel() {
         this.character = new Character();
-        this.initStatusbar();
         this.draw();
         this.setWorld();
         this.run();
@@ -72,18 +67,8 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkHealthStatus();
+            this.drawBossFightCollectibles();
         }, 50);
-    }
-
-
-    /**
-     * Initializes the statusbar objects.
-     * Creates the health and energy statusbars.
-     */
-    initStatusbar() {
-        this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11);
-        this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15);
     }
 
 
@@ -98,7 +83,19 @@ class World {
                 this.resetContextFilter();
                 this.character.enteredBattleArena = false;
             }, 1000); // Stop the flickering filter effect after 1 second.
+            this.resetCollectiblesArray();
         }
+    }
+
+
+    /**
+     * Resets the collectibles array.
+     * The collectibles array is reset when the character enters the boss arena.
+     * This is done to prevent the collectibles from appearing in the boss arena.
+     */
+    resetCollectiblesArray() {
+        this.level.collectibles_energy = [];
+        this.level.collectibles_health = [];
     }
 
 
@@ -143,55 +140,9 @@ class World {
             this.shots.push(this.characterShot);
             this.character.energy -= 1;
             this.character.playAnimation_SHOOT();
-            this.checkEnergyStatus();
             this.checkCollisions();
+            this.level.statusbar_ENERGY.updateStatusbarCharacterEnergy(this.character.energy);
         }
-    }
-
-
-    /**
-     * Checks the energy status of the character.
-     * The energy status is checked to determine which energy statusbar image to display.
-     * The energy statusbar image is then updated.
-     */
-    checkEnergyStatus() {
-        if (this.character.energy === 10) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_1.png', 10, 20, 55, 15); }
-        if (this.character.energy === 8) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_2.png', 10, 20, 55, 15); }
-        if (this.character.energy === 6) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_3.png', 10, 20, 55, 15); }
-        if (this.character.energy === 4) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_4.png', 10, 20, 55, 15); }
-        if (this.character.energy === 2) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_5.png', 10, 20, 55, 15); }
-        if (this.character.energy === 0) { this.statusbar_ENERGY = new Statusbar('assets/statusbar/energybar/energy_6.png', 10, 20, 55, 15); }
-    }
-
-
-    /**
-     * Checks the health status of the character.
-     * The health status is checked to determine which health statusbar image to display.
-     * The health statusbar image is then updated.
-     */
-    checkHealthStatus() {
-        if (this.character.health === 10) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_1.png', 10, 7, 55, 11); }
-        if (this.character.health === 8) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_2.png', 10, 7, 55, 11); }
-        if (this.character.health === 6) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_3.png', 10, 7, 55, 11); }
-        if (this.character.health === 4) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_4.png', 10, 7, 55, 11); }
-        if (this.character.health === 2) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_5.png', 10, 7, 55, 11); }
-        if (this.character.health === 0) { this.statusbar_HEALTH = new Statusbar('assets/statusbar/healthbar/health_6.png', 10, 7, 55, 11); }
-    }
-
-
-    /**
-     * Checks the health status of the boss enemy.
-     * The health status is checked to determine which boss enemy health statusbar image to display.
-     * The boss enemy health statusbar image is then updated.
-     */
-    checkBossEnemyHealthStatus(bossEnemyHealth) {
-        if (bossEnemyHealth === 6) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_1.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 5) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_2.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 4) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_3.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 3) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_4.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 2) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_5.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 1) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_6.png', 235, 7, 55, 11); }
-        if (bossEnemyHealth === 0) { this.bossEnemy_HEALTHBAR = new Statusbar('assets/statusbar/boss_healthbar/boss_healthbar_7.png', 235, 7, 55, 11); }
     }
 
 
@@ -215,6 +166,7 @@ class World {
             if (this.character.isColliding(enemy)) {
                 if (!this.character.inCollision) {
                     this.character.hit();
+                    this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(this.character.health);
                 }
             }
             else {
@@ -241,7 +193,6 @@ class World {
     }
 
 
-
     /**
      * Checks the collision of the character with a collectible.
      * If the character is colliding with a collectible, the collectible is removed from the collectibles array.
@@ -253,7 +204,7 @@ class World {
             if (this.character.isColliding(energy)) {
                 collecting_sound.play();
                 this.character.energy = 10;
-                this.checkEnergyStatus();
+                this.level.statusbar_ENERGY.updateStatusbarCharacterEnergy(10);
                 let index = this.level.collectibles_energy.indexOf(energy);
                 if (index > -1) {
                     this.level.collectibles_energy.splice(index, 1);
@@ -264,7 +215,7 @@ class World {
             if (this.character.isColliding(health)) {
                 collecting_sound.play();
                 this.character.health = 10;
-                this.checkHealthStatus();
+                this.level.statusbar_HEALTH.updateStatusbarCharacterHealth(10);
                 let index = this.level.collectibles_health.indexOf(health);
                 if (index > -1) {
                     this.level.collectibles_health.splice(index, 1);
@@ -313,17 +264,8 @@ class World {
      */
     drawBossEnemyHealthbar() {
         if (!this.level.boss_dead && this.character.isInBattleArena) {
-            this.initBossEnemyHealthbar();
+            this.addToMap(this.level.bossEnemy_HEALTHBAR);
         }
-    }
-
-
-    /**
-     * This function draws the health statusbar of the boss enemy.
-     * The health statusbar is displayed when the character enters the battle arena.
-     */
-    initBossEnemyHealthbar() {
-        this.addToMap(this.bossEnemy_HEALTHBAR);
     }
 
 
@@ -346,6 +288,23 @@ class World {
 
 
     /**
+     * This function draws the collectibles in the boss fight.
+     * The collectibles are displayed when the character's health or energy is low.
+     * The collectibles are displayed randomly in the boss arena.
+     */
+    drawBossFightCollectibles() {
+            if (this.character.isInBattleArena && this.character.health <= 4 && this.level.collectibles_health.length === 0) {
+                let x_health = Math.floor(Math.random() * (2150 - 1900 + 1)) + 1900;
+                this.level.collectibles_health = [new CollectibleHealth(x_health, 112, 15, 15)];
+            }
+            if (this.character.isInBattleArena && this.character.energy <= 2 && this.level.collectibles_energy.length === 0) {
+                let x_energy= Math.floor(Math.random() * (2150 - 1900 + 1)) + 1900;
+                this.level.collectibles_energy = [new CollectibleEnergy(x_energy, 112, 15, 15)];
+            }
+    }
+
+
+    /**
      * Function to draw all objects on the canvas.
      * This function is called recursively to draw all objects on the canvas.
      */
@@ -355,6 +314,7 @@ class World {
             this.enterBossArenaEffect();
             this.ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears the canvas
             // moves camera view
+            // -- space for fix objects in the back
             this.addObjectsToMap(this.level.backgroundImageStatic);
             this.addObjectsToMap(this.level.animatedBackgroundBack);
             this.drawFireworks();
@@ -371,10 +331,10 @@ class World {
             this.addObjectsToMap(this.shots);
             // moves camera view back to default
             this.ctx.translate(-this.camera_x, this.camera_y);
-            // -----
+            // -- space for fix objects in the front
             this.drawTextOnGameStart();
-            this.addToMap(this.statusbar_HEALTH);
-            this.addToMap(this.statusbar_ENERGY);
+            this.addToMap(this.level.statusbar_HEALTH);
+            this.addToMap(this.level.statusbar_ENERGY);
             this.drawBossEnemyHealthbar();
             this.drawGameOver();
             this.drawVictory();
@@ -407,15 +367,15 @@ class World {
      * @param {MovableObject} movableObject - The object to add to the map.
      */
     addToMap(movableObject) {
-        if (movableObject.otherDirection) { //checks, if the variable is true
+        if (movableObject && movableObject.otherDirection) { //checks, if the variable is true
             this.flipImage(movableObject);
         }
 
         movableObject.draw(this.ctx);
-        // movableObject.drawFrame(this.ctx);
-        // movableObject.drawRealFrame(this.ctx);
+        // movableObject.drawFrame(this.ctx); //draws the hitbox of the object including the offset parameters
+        // movableObject.drawRealFrame(this.ctx); //draws the hitbox of the object without the offset parameters
 
-        if (movableObject.otherDirection) {
+        if (movableObject && movableObject.otherDirection) {
             this.flipImageBack(movableObject);
         }
     }
