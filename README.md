@@ -8,7 +8,7 @@
 A retro-style 2D sidescroller browser game built with pure Vanilla JavaScript, HTML5 Canvas, and CSS. Experience a nostalgic journey through the cyberpunk streets with classic arcade gameplay mechanics.
 
 ## [Live Demo](https://preston-jones.github.io/2D_Sidescroller_Game/)
-![gameplay](assets/screenshots/gameplay.JPG)
+![gameplay](assets/screenshots/gameplay.jpg)
 
 ## 🎯 Features
 
@@ -70,7 +70,7 @@ A retro-style 2D sidescroller browser game built with pure Vanilla JavaScript, H
 - **Touch Controls** - On-screen buttons for all actions
 - **Responsive Design** - Optimized for mobile devices
   
-![mobile](assets/screenshots/mobile.JPG)
+![mobile](assets/screenshots/mobile.jpg)
 
 ## 🎨 Credits
 
