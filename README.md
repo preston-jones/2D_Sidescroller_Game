@@ -7,6 +7,9 @@
 
 A retro-style 2D sidescroller browser game built with pure Vanilla JavaScript, HTML5 Canvas, and CSS. Experience a nostalgic journey through the cyberpunk streets with classic arcade gameplay mechanics.
 
+## [Live Demo](https://preston-jones.github.io/2D_Sidescroller_Game/)
+![gameplay](https://github.com/user-attachments/assets/cbd5bf14-132d-40ea-b305-9ede1a2ad528)
+
 ## 🎯 Features
 
 - **🎮 Classic Sidescroller Gameplay** - Run, jump, and shoot your way through the cyberpunk city
@@ -27,6 +30,35 @@ A retro-style 2D sidescroller browser game built with pure Vanilla JavaScript, H
 | CSS3 | Styling & animations | CSS3 |
 | Web Audio API | Sound management | Native |
 
+## 🏗️ Technical Architecture
+
+### Object-Oriented Design
+- **Class-Based Structure** - Modular design with inheritance hierarchy
+- **Core Classes**: `DrawableObject`, `MovableObject`, `Character`, `World`, `Level`
+- **Enemy System**: `Cop`, `Drone`, `BossEnemy` with unique behaviors
+- **Game Objects**: `Shot`, `Collectible`, `Statusbar` for interactive elements
+
+### Collision Detection
+- **Precise Hit Detection** - Pixel-perfect collision algorithms
+- **Physics Integration** - Gravity, jumping mechanics, and object interactions
+- **Boundary Checking** - Level boundaries and platform collision system
+
+### State Management
+- **Game State Control** - Menu, playing, paused, game over states
+- **Character States** - Health, energy, movement, and animation states
+- **World State** - Dynamic environment with scrolling backgrounds and object spawning
+- **Audio State** - Sound effect and music management
+
+## 📊 Browser Compatibility
+
+| Browser | Support | Notes |
+|---------|---------|-------|
+| Chrome | ✅ Full | Recommended for best performance |
+| Firefox | ✅ Full | Excellent compatibility |
+| Safari | ✅ Full | Works on desktop and mobile |
+| Edge | ✅ Full | Modern versions supported |
+| Mobile Browsers | ✅ Touch | Optimized touch controls |
+
 ## 🎮 Game Controls
 
 ### Desktop
@@ -37,20 +69,16 @@ A retro-style 2D sidescroller browser game built with pure Vanilla JavaScript, H
 ### Mobile
 - **Touch Controls** - On-screen buttons for all actions
 - **Responsive Design** - Optimized for mobile devices
+- 
+![mobile](https://github.com/user-attachments/assets/79c7e145-eaac-4b72-9318-e2fa862fc1f1)
 
-## 🏗️ Project Structure
+## 🎨 Credits
 
-```
-2D_Sidescroller_Game/
-├── assets/           # Game assets (sprites, audio, etc.)
-├── js/
-│   ├── models/       # Game object classes
-│   ├── level/        # Level data and configuration
-│   └── events/       # Event handling
-├── stylesheets/      # CSS files for styling
-├── jsdoc/           # Documentation
-└── index.html       # Main game entry point
-```
+- **Game Development**: Preston Jones
+- **Art Assets**: Luis Zuno ([@ansimuz](https://ansimuz.com/))
+- **Inspiration**: Classic 8-bit arcade games
+
+---
 
 ## 🚀 Getting Started
 
@@ -62,7 +90,7 @@ A retro-style 2D sidescroller browser game built with pure Vanilla JavaScript, H
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/cyber-city-game.git
+git clone https://github.com/preston-jones/2D_Sidescroller_Game.git
 ```
 
 2. Navigate to the project directory:
@@ -86,57 +114,6 @@ live-server
 ```
 http://localhost:8000
 ```
-
-## 🎲 How to Play
-
-1. **Select Your Character** - Choose from available character options
-2. **Navigate the City** - Use controls to move through the cyberpunk environment  
-3. **Combat Enemies** - Shoot at various enemy types including drones and cops
-4. **Collect Power-ups** - Gather health and energy items to stay alive
-5. **Face Boss Battles** - Defeat powerful boss enemies to progress
-6. **Reach the Goal** - Complete the level to achieve victory
-
-## 🏆 Game Features Deep Dive
-
-### Character System
-- Multiple character selection options
-- Health and energy management
-- Smooth movement and jump mechanics
-
-### Enemy AI
-- Various enemy types with different behaviors
-- Boss enemies with special attack patterns
-- Collision detection and damage system
-
-### Visual Effects
-- Dynamic background parallax scrolling
-- Particle effects for explosions and collections
-- Screen filters for special events
-
-### Audio System
-- Background music tracks
-- Sound effects for actions and events
-- Audio management with play/pause controls
-
-## 🤝 Contributing
-
-This project was created as part of my Frontend Developer training at Developer Academy Munich. While it's primarily a learning project, feedback and suggestions are always welcome!
-
-## 👨‍💻 Developer
-
-**Preston Jones**
-- Portfolio: [www.prestonjones-developer.de](https://www.prestonjones-developer.de)
-- Training: Frontend Developer @ Developer Academy Munich (2024)
-
-## 🎨 Credits
-
-- **Game Development**: Preston Jones
-- **Art Assets**: Luis Zuno ([@ansimuz](https://ansimuz.com/))
-- **Inspiration**: Classic 8-bit arcade games
-
-## 📄 License
-
-This project is for educational purposes as part of my developer training.
 
 ---
 
