@@ -69,7 +69,7 @@ A retro-style 2D sidescroller browser game built with pure Vanilla JavaScript, H
 ### Mobile
 - **Touch Controls** - On-screen buttons for all actions
 - **Responsive Design** - Optimized for mobile devices
-- 
+  
 ![mobile](assets/screenshots/mobile.JPG)
 
 ## 🎨 Credits
