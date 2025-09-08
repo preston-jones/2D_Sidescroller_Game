@@ -30,10 +30,9 @@ A retro-style 2D sidescroller browser game built with pure Vanilla JavaScript, H
 ## 🎮 Game Controls
 
 ### Desktop
-- **A/D or Arrow Keys** - Move left/right
-- **W or Space** - Jump
-- **S** - Shoot
-- **F** - Fullscreen toggle
+- **Arrow Keys** - Move left/right
+- **Space** - Jump
+- **C** - Shoot
 
 ### Mobile
 - **Touch Controls** - On-screen buttons for all actions
